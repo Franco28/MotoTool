@@ -1,4 +1,4 @@
-# Getting Started
+# Getting Started (Read all please!)
 
 ## First of all, im not responsible of any device damage, you are accepting a licence when you install the Tool and you are using this at your own risk!
 
@@ -59,6 +59,12 @@ This is a pre-release of the Tool, this have new options and functions than Stab
 - You can uninstall it now from the Tool, but ensure that all files were removed on "C:\Program Files\MotoTool\" _(I noticed that Tool won´t be removed)_
 - Go to Control Panel and look for the MotoTool, select it and uninstall it! **_Be careful with this, because will ask you at the end if you want to remove MotorolaDeviceManager_2.5.4_!** 
 
+
+## Downloads
+#### Download MotoTool v1.6.9.9 - Beta (22-04-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/v1.6.9.9) 
+#### Changelog * [Changelog](https://beckhamtool.000webhostapp.com/MotoTool/changelog.txt) 
+
+
 ## Home Tool
 ![Home Tool](https://github.com/Franco28/MotoTool/blob/master/Screens/Tool.png "Tool")
 ![Theme Light](https://github.com/Franco28/MotoTool/blob/master/Screens/ToolLight.png "Theme Light")
@@ -79,19 +85,8 @@ This is a pre-release of the Tool, this have new options and functions than Stab
 ## Tool Updates
 ![ToolUpdates](https://github.com/Franco28/MotoTool/blob/master/Screens/Updates.png "ToolUpdates")
 
-## Downloads
-#### Download MotoTool v1.6.9.9 - Beta (22-04-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/v1.6.9.9) 
-#### Changelog * [Changelog](https://beckhamtool.000webhostapp.com/MotoTool/changelog.txt) 
-
 ## Contact 
 #### [Telegram](https://t.me/francom28) 
 #### [Page](https://beckhamtool.000webhostapp.com/) 
-
-## Built with and needed by
-* [Visual Studio 2019](https://visualstudio.microsoft.com/es/free-developer-offers/)
-* [MotoToolEngine](https://github.com/Franco28/MotoTool/tree/master/MotoToolEngine)
-* [CopyrightTool](https://github.com/Franco28/MotoTool/tree/master/CopyrightBeckham)
-* [AndroidLib](https://github.com/Franco28/MotoTool/tree/master/AndroidLib-Stock)
-* [Setup](https://github.com/Franco28/MotoTool/tree/master/Setup)
 
 #### Thanks to [regaw_leinad](https://forum.xda-developers.com/showthread.php?t=1512685) for this old lib!
