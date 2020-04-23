@@ -48,6 +48,9 @@ _**You must accept this, because will remove unnecesary Moto Device Manager to s
 
 - Firmware option, here Tool will load a tone of firmwares of your device, you can select your device channel. This will download the firmware, dont go back to main Tool screen, because download will be stopped, and firmware deleted. When firmware download finish, this will be extracted into a folder and ready to be flashable! remember to go to MotoFlash option, boot your device into bootloader mode and plug it!, Tool will do everything for you!
 
+![Tool Main](https://github.com/Franco28/MotoTool/blob/master/Screens/mainserver.png "Tool Main")
+_**If you see this screen, please wait, i'm working with your device firmwares_**
+
 - If your device its A/B like doha, evert... etc. now you can use the flash twrp otpion and download TWRP-INSTALLER, then if you want to flash it, go to boot twrp option, plug your device, and in new option "Move files to TWRP" you can drag installer and drop it, this will copy the installer into your device internal storage
 
 ~~## Previews~~
