@@ -1,5 +1,7 @@
 # Getting Started
 
+## First of all, im not responsible of any device damage, you are accepting a licence when you install the Tool and you are using this at your own risk!
+
 ### MotoTool for Motorola Moto Devices (Beckham, Doha, Lake, River, Evert, Sanders, Potter, Lima, Ocean) - (All variants)
 
 ### I'm not going to support firmwares like this:
@@ -49,6 +51,7 @@ _**You must accept this, because will remove unnecesary Moto Device Manager to s
 - If your device its A/B like doha, evert... etc. now you can use the flash twrp otpion and download TWRP-INSTALLER, then if you want to flash it, go to boot twrp option, plug your device, and in new option "Move files to TWRP" you can drag installer and drop it, this will copy the installer into your device internal storage
 
 ~~## Previews~~
+
 ~~### What is this?
 This is a pre-release of the Tool, this have new options and functions than Stable don´t _**(I recommend you to use this Preview, because i fix errors from Stable that i didn´t noticed!)**_, but if you want to use this previews, you are on your own risk of having bugs, and maybe other accidentally errors!~~
 
