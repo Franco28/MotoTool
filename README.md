@@ -65,24 +65,26 @@ This is a pre-release of the Tool, this have new options and functions than Stab
 #### Changelog * [Changelog](https://beckhamtool.000webhostapp.com/MotoTool/changelog.txt) 
 
 
-## Home Tool
+## Screenshots
+
+### Home Tool
 ![Home Tool](https://github.com/Franco28/MotoTool/blob/master/Screens/Tool.png "Tool")
 ![Theme Light](https://github.com/Franco28/MotoTool/blob/master/Screens/ToolLight.png "Theme Light")
 
-## Motorola Firmware Flash 
+### Motorola Firmware Flash 
 ![Motorola Firmware Flash](https://github.com/Franco28/MotoTool/blob/master/Screens/MotoFlash.png "Motorola Firmware Flash")
 
-## Motorola Stock Debloat 
+### Motorola Stock Debloat 
 ![Motorola Stock Debloat](https://github.com/Franco28/MotoTool/blob/master/Screens/Debloat.png "Motorola Stock Debloat")
 ![Motorola Stock Debloat](https://github.com/Franco28/MotoTool/blob/master/Screens/DebloatOthers.png "Motorola Stock Debloat")
 
-## Downloads
+### Downloads
 ![Downloads](https://github.com/Franco28/MotoTool/blob/master/Screens/Download.png "Downloads")
 
-## Firmware Server
+### Firmware Server
 ![Firmware](https://github.com/Franco28/MotoTool/blob/master/Screens/FirmwaresServer.png "Firmware")
 
-## Tool Updates
+### Tool Updates
 ![ToolUpdates](https://github.com/Franco28/MotoTool/blob/master/Screens/Updates.png "ToolUpdates")
 
 ## Contact 
