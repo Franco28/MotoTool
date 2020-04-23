@@ -65,6 +65,9 @@ This is a pre-release of the Tool, this have new options and functions than Stab
 #### Changelog * [Changelog](https://beckhamtool.000webhostapp.com/MotoTool/changelog.txt) 
 
 
+#
+
+
 ## Screenshots
 
 ### Home Tool
@@ -87,8 +90,14 @@ This is a pre-release of the Tool, this have new options and functions than Stab
 ### Tool Updates
 ![ToolUpdates](https://github.com/Franco28/MotoTool/blob/master/Screens/Updates.png "ToolUpdates")
 
+
+#
+
+
 ## Contact 
 #### [Telegram](https://t.me/francom28) 
 #### [Page](https://beckhamtool.000webhostapp.com/) 
+
+#
 
 #### Thanks to [regaw_leinad](https://forum.xda-developers.com/showthread.php?t=1512685) for this old lib!
