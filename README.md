@@ -65,7 +65,7 @@ This is a pre-release of the Tool, this have new options and functions than Stab
 
 ## Downloads
 #### Download MotoTool v1.7.9.9 - Beta (24-04-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/v1.7.9.9) 
-#### Changelog * [Changelog](https://beckhamtool.000webhostapp.com/MotoTool/changelog.txt) 
+#### Changelog * [Changelog](https://MotoToolEngine.000webhostapp.com/MotoTool/changelog.txt) 
 
 
 #
