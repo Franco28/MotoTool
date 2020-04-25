@@ -99,7 +99,6 @@ This is a pre-release of the Tool, this have new options and functions than Stab
 
 ## Contact 
 #### [Telegram](https://t.me/francom28) 
-#### [Page](https://beckhamtool.000webhostapp.com/) 
 
 #
 
