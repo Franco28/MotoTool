@@ -91,10 +91,10 @@ This is a pre-release of the Tool, this have new options and functions than Stab
 ![MoveFilesToTWRP](https://github.com/Franco28/MotoTool/blob/master/Screens/MoveFilesToTWRP.png "MoveFilesToTWRP")
 
 ### Firmware Server AM-RET-TEF-OTHERS
-![Firmware](https://github.com/Franco28/MotoTool/blob/master/Screens/FirmwareAM.png "Firmware")
-![Firmware](https://github.com/Franco28/MotoTool/blob/master/Screens/FirmwareRET.png "Firmware")
-![Firmware](https://github.com/Franco28/MotoTool/blob/master/Screens/FirmwareTEF.png "Firmware")
-![Firmware](https://github.com/Franco28/MotoTool/blob/master/Screens/FirmwareOTHERS.png "Firmware")
+![Firmware](https://github.com/Franco28/MotoTool/blob/master/Screens/FirmwaresAM.png "Firmware")
+![Firmware](https://github.com/Franco28/MotoTool/blob/master/Screens/FirmwaresRET.png "Firmware")
+![Firmware](https://github.com/Franco28/MotoTool/blob/master/Screens/FirmwaresTEF.png "Firmware")
+![Firmware](https://github.com/Franco28/MotoTool/blob/master/Screens/FirmwaresOTHERS.png "Firmware")
 
 ### Tool Lang
 ![ToolLang](https://github.com/Franco28/MotoTool/blob/master/Screens/LangEngine.png "ToolLang")
