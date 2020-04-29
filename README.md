@@ -16,7 +16,7 @@
 - Windows 8+ 64 Bits
 
 ## Install
-- Start the "MotoTool_v1.9.9.9_Setup.exe"
+- Start the "MotoTool_v2.0.0.0_Setup.exe"
 - The installer will create a desktop shortcut and in Windows app will create a folder with the tool inside. 
 - When the installer ends, will ask you ~~if you want to launch the Tool and~~ if you want to isntall MotoDrivers. **Please if you dont have _MotoDrivers installed_ or you dont know, _dont uncheck the option_ and let the install do it ~~(WARNING: Uncheck Launch Tool!)~~**
 ~~NOTE Setup: if you check the box "Launch MotoTool" the Tool will be executed, but setup wont be closed, so restart the Tool for now~~
@@ -64,7 +64,7 @@ This is a pre-release of the Tool, this have new options and functions than Stab
 
 
 ## Downloads
-#### Download MotoTool v1.9.9.9 - Beta (25-04-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/v1.9.9.9) 
+#### Download MotoTool v2.0.0.0 - Beta (29-04-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/v2.0.0.0) 
 #### Changelog * [Changelog](https://MotoToolEngine.000webhostapp.com/MotoTool/changelog.txt) 
 
 
