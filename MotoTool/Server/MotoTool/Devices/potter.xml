@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<potter>
+<devicecodename>potter</devicecodename>
+<blankflashname></blankflashname>
+<twrpname>twrp-3.3.1-19-doha-mauronofrio.img</twrpname>
+<retserver>potter/RET/</retserver>
+<tefserver>potter/TEF/</tefserver>
+<amserver>potter/AM/</amserver>
+<othersserver>potter/OTHERS/</othersserver>
+<fserverMaintenance>TRUE</fserverMaintenance>
+</potter>

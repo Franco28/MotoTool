@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lake>
+<devicecodename>lake</devicecodename>
+<blankflashname>blankflash</blankflashname>
+<twrpname>twrp-3.3.1-0-lake.img</twrpname>
+<retserver>lake/RET/</retserver>
+<tefserver>lake/TEF/</tefserver>
+<amserver>lake/AM/</amserver>
+<othersserver>lake/OTHERS/</othersserver>
+<fserverMaintenance>TRUE</fserverMaintenance>
+</lake>

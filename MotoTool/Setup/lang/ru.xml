@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ru>
+<btnfolder>   Папки</btnfolder>
+<btnadbfolder> adb а также fastboot Папки </btnadbfolder>
+<btnclearfolder>       Очистить все папки</btnclearfolder>
+<btndownloads>   Загрузки</btndownloads>
+<btnfolderpath>     Путь к папке </btnfolderpath>
+<btnmovefilestotwrp>      Переместить файлы в TWRP</btnmovefilestotwrp>
+<btnunins>       Удалить</btnunins>
+<btncheck4updates>        Проверьте наличие обновлений</btncheck4updates>
+<btnrefreshtool>  Обновить инструмент</btnrefreshtool>
+<btnhelp>  Помогите</btnhelp>
+<btnexit>  Выход</btnexit>
+<btnunlock>разблокировка</btnunlock>
+<btnlock>Замок</btnlock>
+<otherslabel>другие</otherslabel>
+<rebotlabel>перезагрузка</rebotlabel>
+<langselect>        язык</langselect>
+<btndownloadtwrppermanent>Скачать</btndownloadtwrppermanent>
+
+<dstatus>Состояние устройства</dstatus>
+<toolwaitdownload>В ожидании загрузки...</toolwaitdownload> 
+<freeram>       Свободная RAM: </freeram>
+<foldersize>       Размер папки: C:\adb </foldersize>
+<username>       пользователь: </username>
+<rtabyeapf>Не забывайте всегда делать резервные копии ваших efs и постоянных папок!</rtabyeapf>
+<interneconnectionok>Интернет-соединение: онлайн</interneconnectionok>
+<interneconnectionoff>Интернет-соединение: автономно</interneconnectionoff>
+<internetchecktitle>Сеть потеряна</internetchecktitle>
+<internetcheck>Сеть потеряна ... Проверьте подключение к интернету!</internetcheck>
+<internetcheckfiles>Сеть потеряна ... не удается подключиться к серверу для загрузки файлов!</internetcheckfiles>
+<dchannel>Канал устройства: </dchannel>
+<dnotcompatibletitle>MotoTool: УСТРОЙСТВО НЕ СОВМЕСТИМО: </dnotcompatibletitle>
+<dnotcompatiblebody> не совместимо Этот MotoTool работает с: </dnotcompatiblebody>
+<device>устройство </device>
+<readfirmware>Пожалуйста, подключите ваше устройство для чтения прошивок!</readfirmware>
+
+<deviceconnectedlistbox> Устройство: онлайн! </deviceconnectedlistbox>
+<devicecodenamelistbox> Кодовое название устройства: </devicecodenamelistbox>
+<connectmodelistbox> Режим: отладка по USB </connectmodelistbox>
+<deviceseriallistbox> Серийный номер: </deviceseriallistbox>
+<batterylistbox> аккумулятор: </batterylistbox>
+<batterytemplistbox> Температура батареи: </batterytemplistbox>
+<batteryhealthlistbox> Здоровье батареи: </batteryhealthlistbox>
+<devicerememberlistbox> Не забывайте всегда включать USB отладку! </devicerememberlistbox>
+<deviceconnectedlistboxoff> Устройство: автономно! </deviceconnectedlistboxoff>
+<devicecodenamelistboxoff> Кодовое название устройства: --- </devicecodenamelistboxoff>
+<connectmodelistboxoff> Режим: --- </connectmodelistboxoff>
+<deviceseriallistboxoff> Серийный номер: --- </deviceseriallistboxoff>
+<batterylistboxoff> аккумулятор: --- </batterylistboxoff>
+<batterytemplistboxoff> Температура батареи: --- </batterytemplistboxoff>
+<batteryhealthlistboxoff> Здоровье батареи: --- </batteryhealthlistboxoff>
+
+<newtoolupdate>Новое обновление MotoTool </newtoolupdate>
+<newtoolupdate2>, пожалуйста, обновите сейчас!</newtoolupdate2>
+<noupdatetitle>Нет доступных обновлений</noupdatetitle>
+<noupdatebody>Нет доступных обновлений, попробуйте позже.</noupdatebody>
+<updateerrortitle>Проверка обновления не удалась</updateerrortitle>
+<updateerrorbody>Не удалось связаться с сервером обновлений. Проверьте подключение к Интернету и повторите попытку позже..</updateerrorbody>
+
+<themeenginetitle>Инструмент тема двигатель</themeenginetitle>
+<themeenginedarkbody>Выбранная тема: {Тьма} </themeenginedarkbody>
+<themeenginelightbody>Выбранная тема: {Светлый} </themeenginelightbody>
+
+<errorstartingadb>Ошибка запуска процесса ADB</errorstartingadb>
+<errorreadingout>Ошибка чтения вывода</errorreadingout>
+
+<bootloaderreadmetitle>Bootloader: ПРОЧИТАЙТЕ МНЕ ПОЖАЛУЙСТА!</bootloaderreadmetitle>
+<bootloaderreadme>Чтобы разблокировать Moto Bootloader: войдите на следующей странице. Следуйте инструкциям на странице. Инструмент откроет консоль CMD, где расположены драйверы. Здесь вы должны ввести командные строки!</bootloaderreadme>
+<lockbootloadertitle>Предупреждение</lockbootloadertitle>
+<lockbootloaderbody1>1°: Хотите заблокировать загрузчик? Это сотрет все ваши данные!</lockbootloaderbody1>
+<lockbootloaderbody2>2°: Вы уверены, что хотите заблокировать загрузчик? Это сотрет все ваши данные!</lockbootloaderbody2>
+<lockbootloaderbody3>Старайтесь не отключать устройство во время процесса!</lockbootloaderbody3>
+<lockingbl>Блокировка загрузчика...</lockingbl>
+<lockingblok>Блокировка загрузчика... OK</lockingblok>
+<lockblcancel>Блокировка загрузчика отменена...</lockblcancel>
+
+<checkingdeviceconnection>Проверка подключения устройства...</checkingdeviceconnection>
+<checkingdeviceconnectionok>Проверка подключения устройства... OK</checkingdeviceconnectionok>
+<devicerebooting>перезагружать...</devicerebooting>
+<connectdevice>пожалуйста подключите Ваше устройство...</connectdevice>
+<connectdevicemototool>Пожалуйста, подключите ваше устройство, чтобы MotoTool мог проверить ваше устройство!</connectdevicemototool>
+<connecttotwrp>Пожалуйста, подключите ваше устройство к загруженному TWRP!</connecttotwrp>
+<motoflashplug>Пожалуйста, подключите ваше устройство! Не забудьте подключить телефон в режиме Fastboot!</motoflashplug>
+
+<flashtwrppermanent>Привет! Эта опция не для устройств A/B !, но вы можете скачать установщик TWRP и прошить его! сначала нужно загрузить TWRP!</flashtwrppermanent>
+<flashtwrpab>Привет! Эта опция не для устройств A/B !, проверьте опцию Boot!</flashtwrpab>
+<twrpnotsupport>Эй, у этого устройства еще нет twrp! :(</twrpnotsupport>
+<twrpbooting>Загрузка в </twrpbooting>
+
+<blankflashnotsupport>Эй, у этого устройства еще нет blankflash! :(. Если вы знаете о существующей blankflash вы можете связаться со мной, и я добавлю его</blankflashnotsupport>
+<blankflashcheck>Пожалуйста, проверьте, загрузилось ли ваше устройство в режим Bootloader!</blankflashcheck>
+
+<cantfindlogo>Не могу найти логотип... </cantfindlogo>
+<logomissing>Отсутствует</logomissing>
+
+<motodrivers>Ошибка при загрузке драйверов Motorola ... Теперь Tool загрузит драйверы и установит их!</motodrivers>
+<motodriversinstall>Пожалуйста, установите следующие драйверы! Инструмент будет закрыт!</motodriversinstall>
+
+<clearfolderstitle>Очистить папки</clearfolderstitle>
+<clearfoldersbody>Все папки очищены! Приложение перезапустится!</clearfoldersbody>
+<openfoldererror>ОШИБКА: открытая папка</openfoldererror>
+<createfoldererror>ОШИБКА: Создание папок</createfoldererror>
+
+<MSGBOXServerNetworkLosttitle>Сервер устройств: сеть потеряна</MSGBOXServerNetworkLosttitle>
+<MSGBOXServerNetworkLost>Не удается подключиться к серверу! Пожалуйста, проверьте ваше интернет-соединение!</MSGBOXServerNetworkLost>
+<MSGBOXFileCorruptedtitle>Файловый движок: файл поврежден</MSGBOXFileCorruptedtitle>
+<MSGBOXFileCorruptedbody>Файл поврежден \: Загрузка снова!</MSGBOXFileCorruptedbody>
+<MSGBOXBootloaderWarning>Устройство не найдено, пожалуйста, подключите телефон и проверьте, включены ли опции разработчика (adb)!</MSGBOXBootloaderWarning>
+<MSGBOXFirmwareMissingtitle>Файловый движок: отсутствует прошивка</MSGBOXFirmwareMissingtitle>
+<MSGBOXFirmwareMissingbody>Opss не может найти прошивку...</MSGBOXFirmwareMissingbody>
+<MsgBoxResultFirmwareInfo>Прошивка уже загружена! Теперь прошивка будет распакована!</MsgBoxResultFirmwareInfo>
+
+<downloadUIdownloading>загрузка: </downloadUIdownloading>
+<downloadUIdownloadcancel>Загрузка была отменена!</downloadUIdownloadcancel>
+<downloadUIdownloadcomplete>Загрузка завершена, </downloadUIdownloadcomplete>
+<downloadUIfilelocate>находится по адресу:</downloadUIfilelocate>
+
+<firmwareselected>ИЗБРАННЫЕ:</firmwareselected>
+<firmwarechannel>Канал выбранного устройства:</firmwarechannel>
+<firmwarealreadydownloaded>Прошивка уже скачана!</firmwarealreadydownloaded>
+<firmwareerror>Не могу найти образы прошивок в папке! прошивка будет загружена снова! </firmwareerror>
+
+<movetotwrpdrag>Перетащите файл сюда!</movetotwrpdrag>
+<movetotwrpfilestitle>Переместить файлы: </movetotwrpfilestitle>
+<movetotwrpcopy>Копирование </movetotwrpcopy>
+<movetotwrpcopy1> в /sdcard...</movetotwrpcopy1>
+<movetotwrpfilescopy>Файл скопирован </movetotwrpfilescopy>
+<movetotwrpfilescopy1> в /sdcard!</movetotwrpfilescopy1>
+
+<motoflashdevicenotcompatibletitle>MotoFlash: Устройство еще не совместимо!</motoflashdevicenotcompatibletitle>
+<motoflashdevicenotcompatible>Привет! я работаю, чтобы сделать ваше устройство совместимым! устройство совместимо на данный момент: Beckham, Doha, Potter а также Sanders</motoflashdevicenotcompatible>
+<motoflashdownload>Пожалуйста, загрузите вашу прошивку! - Канал устройства: </motoflashdownload>
+<motoflashselectoption>Пожалуйста, выберите вариант!</motoflashselectoption>
+<motoflashdetect>Устройство обнаружения...</motoflashdetect>
+<motoflashinstalled>Установлены</motoflashinstalled>
+<motoflashdowngrade>Привет! это еще не готово! скоро будет работать...</motoflashdowngrade>
+
+<clearfolderswarn>Это удалит все файлы из папки C:\\adb\\!</clearfolderswarn>
+<clearfolderscont>Вы хотите продолжить?</clearfolderscont>
+<clearfolderswarns2>Вы хотите очистить все папки? Вы удалите все файлы, кроме важных. Размер папки: </clearfolderswarns2>
+<clearyesbtn>ДА</clearyesbtn>
+
+<debloatothershelp>Пожалуйста, напишите пакет приложения следующим образом: -com.google.android.apps.translate-</debloatothershelp>
+<debloatothers>Moto Debloat другие</debloatothers>
+<debloatothersbox>Ящик не может быть пустым!</debloatothersbox>
+
+<help>Помогите</help>
+<helpsource>           Источник</helpsource>
+<helphowto>           Как это использовать?</helphowto>
+<helpcontact>           контакт</helpcontact>
+<helpsourceinf>Теперь это личное :/</helpsourceinf>
+<helpcoy>© 2019 - 2020 Franco28: Простой студент - Argentina</helpcoy>
+<helptoolcompiled>MotoTool скомпилированный: </helptoolcompiled>
+<helptoolversion>MotoTool Версия: </helptoolversion>
+
+<uninstallwarn>Это удалит весь инструмент!</uninstallwarn>
+<uninscont>Вы хотите удалить инструмент?</uninscont>
+
+<seleclanguilabel>     Выберите язык</seleclanguilabel>
+<seleclanguitoolrestart>MotoTool перезагрузится!</seleclanguitoolrestart>
+
+<unzipuifilepath>Путь файла:</unzipuifilepath>
+<unzipuifildest>Пункт назначения:</unzipuifildest>
+<unzipuifileextract>Извлечение файла:</unzipuifileextract>
+<unzipuiprogressindi>Физическое лицо:</unzipuiprogressindi>
+<unzipuiprogresstotal>Всего:</unzipuiprogresstotal>
+<unzipuifilesize>Размер файла:</unzipuifilesize>
+<unzipuiprogress>Прогресс</unzipuiprogress>
+<unzipexctractok>Почтовый индекс был извлечен хорошо!</unzipexctractok>
+</ru>

@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F5F92F16-C783-4B17-B725-B06F1D725B9C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Franco28Tool.Engine</RootNamespace>
+    <AssemblyName>MotoToolEngine</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\MotoTool#\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\MotoToolEngine.xml</DocumentationFile>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\Setup\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Optimize>true</Optimize>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\Release\MotoToolEngine.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AndroidCtrl, Version=6.7.46.0, Culture=neutral, PublicKeyToken=bd000911f10668f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Setup\AndroidCtrl.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoUpdater.NET, Version=1.6.0.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Setup\AutoUpdater.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\..\..\Setup\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialSkin, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MaterialSkin.2.2.1.2\lib\net461\MaterialSkin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Files\FirmwareFlashRead.cs" />
+    <Compile Include="Files\LoadDeviceServer.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Tool\BrowserCheck.cs" />
+    <Compile Include="Tool\DownloadsMng.cs" />
+    <Compile Include="Tool\LangEngine.cs" />
+    <Compile Include="Tool\Settings.cs" />
+    <Compile Include="Tool\SettingsMng.cs" />
+    <Compile Include="Files\CheckMotoDrivers.cs" />
+    <Compile Include="UI\Dialogs\TWRPPermanent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\TWRPPermanent.Designer.cs">
+      <DependentUpon>TWRPPermanent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Firmwares\Firmwares.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Firmwares\Firmwares.Designer.cs">
+      <DependentUpon>Firmwares.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MotoTool\MotoFlashVisual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MotoTool\MotoFlashVisual.Designer.cs">
+      <DependentUpon>MotoFlashVisual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Tool\ClearAllFolders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Tool\ClearAllFolders.Designer.cs">
+      <DependentUpon>ClearAllFolders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Downloads\DownloadUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Downloads\DownloadUI.Designer.cs">
+      <DependentUpon>DownloadUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Tool\Help.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Tool\Help.Designer.cs">
+      <DependentUpon>Help.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Dialogs\NotiPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\NotiPanel.Designer.cs">
+      <DependentUpon>NotiPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MotoTool\DebloatOthers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MotoTool\DebloatOthers.Designer.cs">
+      <DependentUpon>DebloatOthers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tool\Dialogs.cs" />
+    <Compile Include="UI\Tool\ToolMaintenance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Tool\ToolMaintenance.Designer.cs">
+      <DependentUpon>ToolMaintenance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Utils\LangSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Utils\LangSelect.Designer.cs">
+      <DependentUpon>LangSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tool\Folders.cs" />
+    <Compile Include="Tool\InternetCheck.cs" />
+    <Compile Include="Files\MotoFirmware.cs" />
+    <Compile Include="UI\MotoTool\MotoFlash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MotoTool\MotoFlash.Designer.cs">
+      <DependentUpon>MotoFlash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Dialogs\OkError.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\OkError.Designer.cs">
+      <DependentUpon>OkError.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Dialogs\OkInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\OkInfo.Designer.cs">
+      <DependentUpon>OkInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Dialogs\OkWarn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\OkWarn.Designer.cs">
+      <DependentUpon>OkWarn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tool\Strings.cs" />
+    <Compile Include="UI\Tool\Uninstall.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Tool\Uninstall.Designer.cs">
+      <DependentUpon>Uninstall.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Utils\UnzipUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Utils\UnzipUI.Designer.cs">
+      <DependentUpon>UnzipUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\Logs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Resources\Res.en.resx" />
+    <None Include="Resources\Res.es.resx" />
+    <EmbeddedResource Include="UI\Dialogs\TWRPPermanent.resx">
+      <DependentUpon>TWRPPermanent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Firmwares\Firmwares.resx">
+      <DependentUpon>Firmwares.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MotoTool\MotoFlashVisual.resx">
+      <DependentUpon>MotoFlashVisual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Tool\ClearAllFolders.resx">
+      <DependentUpon>ClearAllFolders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MotoTool\DebloatOthers.resx">
+      <DependentUpon>DebloatOthers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Downloads\DownloadUI.resx">
+      <DependentUpon>DownloadUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Tool\Help.resx">
+      <DependentUpon>Help.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MotoTool\MotoFlash.resx">
+      <DependentUpon>MotoFlash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\NotiPanel.resx">
+      <DependentUpon>NotiPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\OkError.resx">
+      <DependentUpon>OkError.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\OkInfo.resx">
+      <DependentUpon>OkInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\OkWarn.resx">
+      <DependentUpon>OkWarn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Tool\ToolMaintenance.resx">
+      <DependentUpon>ToolMaintenance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Tool\Uninstall.resx">
+      <DependentUpon>Uninstall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Utils\LangSelect.resx">
+      <DependentUpon>LangSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Utils\UnzipUI.resx">
+      <DependentUpon>UnzipUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Resources\downloadstatusbar64-withe.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\downloadstatusbar64-dark.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\userwindow.png" />
+    <None Include="Resources\usericon.png" />
+    <None Include="Resources\update32.png" />
+    <None Include="Resources\unzipside.png" />
+    <None Include="Resources\unlock-icon.png" />
+    <None Include="Resources\unins.png" />
+    <None Include="Resources\trash-icon.png" />
+    <None Include="Resources\the-flash-icon48.png" />
+    <None Include="Resources\the-flash-icon32.png" />
+    <None Include="Resources\system-reboot-icon.png" />
+    <None Include="Resources\stora.png" />
+    <None Include="Resources\Spain-icon.png" />
+    <None Include="Resources\Settings-icon.png" />
+    <None Include="Resources\server.png" />
+    <None Include="Resources\round_swap_vert_white_24dp.png" />
+    <None Include="Resources\round_report_problem_white_24dp.png" />
+    <None Include="Resources\round_http_white_24dp.png" />
+    <None Include="Resources\round_gps_fixed_white_24dp.png" />
+    <None Include="Resources\round_build_white_24dp.png" />
+    <None Include="Resources\round_bookmark_white_24dp.png" />
+    <None Include="Resources\round_bluetooth_white_24dp.png" />
+    <None Include="Resources\round_backup_white_24dp.png" />
+    <None Include="Resources\round_assessment_white_24dp.png" />
+    <None Include="Resources\remove.png" />
+    <None Include="Resources\reload-icon.png" />
+    <None Include="Resources\recover.png" />
+    <None Include="Resources\reboot.png" />
+    <None Include="Resources\ram.png" />
+    <None Include="Resources\plus.png" />
+    <None Include="Resources\Other-winrar-icon.png" />
+    <None Include="Resources\others.png" />
+    <None Include="Resources\Network-Download-icon.png" />
+    <None Include="Resources\movetotwrp.png" />
+    <None Include="Resources\MotoToolMaintenance.png" />
+    <None Include="Resources\moto.ico" />
+    <None Include="Resources\minus.png" />
+    <None Include="Resources\MinimizeLight.png" />
+    <None Include="Resources\MinimizeDark.png" />
+    <None Include="Resources\MenuLigth.png" />
+    <None Include="Resources\MenuFullSideLight.png" />
+    <None Include="Resources\MenuFullSideDark.png" />
+    <None Include="Resources\MenuDark.png" />
+    <None Include="Resources\logout.png" />
+    <None Include="Resources\logout %281%29.png" />
+    <None Include="Resources\lock-icon.png" />
+    <None Include="Resources\Ligth.png" />
+    <None Include="Resources\Light.png" />
+    <None Include="Resources\information.png" />
+    <None Include="Resources\infobtn.png" />
+    <None Include="Resources\icons8-info-64.png" />
+    <None Include="Resources\icons8-info-64 %281%29.png" />
+    <None Include="Resources\icons8-downloads-folder-48.png" />
+    <None Include="Resources\icons8-downloads-folder-32.png" />
+    <None Include="Resources\icons8-downloads-folder-24.png" />
+    <None Include="Resources\icons8-downloads-24.png" />
+    <None Include="Resources\icons8-consola-16.png" />
+    <None Include="Resources\iconfinder_social-56_1591869.png" />
+    <None Include="Resources\iconfinder_settings_115801.png" />
+    <None Include="Resources\iconfinder_ic_round_download_5760405.png" />
+    <None Include="Resources\iconfinder_Grid_1031514.png" />
+    <None Include="Resources\iconfinder_Arrow_doodle_04_3847908.png" />
+    <None Include="Resources\htc-one-flash-icon.png" />
+    <None Include="Resources\help2.png" />
+    <None Include="Resources\help.png" />
+    <None Include="Resources\hdd.png" />
+    <None Include="Resources\Hard-Disk-HDD-3.5-SATA-icon.png" />
+    <None Include="Resources\gitbtn.png" />
+    <None Include="Resources\folderpath.png" />
+    <None Include="Resources\folder-blue-open-icon.png" />
+    <None Include="Resources\folder.png" />
+    <None Include="Resources\flashside.png" />
+    <None Include="Resources\flashlogo2.png" />
+    <None Include="Resources\flashlogo.png" />
+    <None Include="Resources\flash.png" />
+    <None Include="Resources\File-Types-IMG-icon.png" />
+    <None Include="Resources\fdownload.png" />
+    <None Include="Resources\ExitLight.png" />
+    <None Include="Resources\ExitDark.png" />
+    <None Include="Resources\error.png" />
+    <None Include="Resources\edit-tool.png" />
+    <None Include="Resources\debloat_3.png" />
+    <None Include="Resources\debloat_2.png" />
+    <None Include="Resources\debloat.png" />
+    <None Include="Resources\Dark.png" />
+    <None Include="Resources\customer-support.png" />
+    <None Include="Resources\cpu.png" />
+    <None Include="Resources\contactbtn.png" />
+    <None Include="Resources\code.png" />
+    <None Include="Resources\bootloader.png" />
+    <None Include="Resources\baseline_thumb_up_black_24dp.png" />
+    <None Include="Resources\baseline_fingerprint_black_24dp.png" />
+    <None Include="Resources\baseline_favorite_border_black_24dp.png" />
+    <None Include="Resources\baseline_build_black_24dp.png" />
+    <None Include="Resources\baseline_bluetooth_black_24dp.png" />
+    <None Include="Resources\Apps-reboot-icon.png" />
+    <None Include="Resources\Apps-preferences-web-browser-cache-icon.png" />
+    <None Include="Resources\Apps-Google-Translate-icon.png" />
+    <None Include="Resources\Apps-boot-icon.png" />
+    <None Include="Resources\Actions-help-about-icon32.png" />
+    <None Include="Resources\Actions-help-about-icon.png" />
+    <None Include="Resources\zipsmall.png" />
+    <None Include="Resources\warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Utilities-icon.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

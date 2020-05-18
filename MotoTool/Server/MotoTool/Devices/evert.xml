@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<evert>
+<devicecodename>evert</devicecodename>
+<blankflashname>blankflash_from_OPW27.188</blankflashname>
+<twrpname>twrp-3.3.1-0-evert.img</twrpname>
+<retserver>evert/RET/</retserver>
+<tefserver>evert/TEF/</tefserver>
+<amserver>evert/AM/</amserver>
+<othersserver>evert/OTHERS/</othersserver>
+<fserverMaintenance>TRUE</fserverMaintenance>
+</evert>

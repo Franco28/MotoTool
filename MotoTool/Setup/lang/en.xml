@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<en>
+<btnfolder>   Folders</btnfolder>
+<btnadbfolder> adb and fastboot Folder </btnadbfolder>
+<btnclearfolder>       Clear all folders</btnclearfolder>
+<btndownloads>   Downloads</btndownloads>
+<btnfolderpath>     Folder Path </btnfolderpath>
+<btnmovefilestotwrp>      Move files to TWRP</btnmovefilestotwrp>
+<btnunins>       Uninstall</btnunins>
+<btncheck4updates>        Check for updates</btncheck4updates>
+<btnrefreshtool>  Refresh Tool</btnrefreshtool>
+<btnhelp>  Help</btnhelp>
+<btnexit>  Exit</btnexit>
+<btnunlock>Unlock</btnunlock>
+<btnlock>Lock</btnlock>
+<otherslabel>Others</otherslabel>
+<rebotlabel>Reboot</rebotlabel>
+<langselect>        Language</langselect>
+<btndownloadtwrppermanent>Download</btndownloadtwrppermanent>
+
+<dstatus>Device Status</dstatus>
+<toolwaitdownload>Waiting a download...</toolwaitdownload> 
+<freeram>       Free RAM: </freeram>
+<foldersize>       Folder Size: C:\adb </foldersize>
+<username>       User: </username>
+<rtabyeapf>Remember to always Backup your efs and persist folders!</rtabyeapf>
+<interneconnectionok>Internet Connection: Online</interneconnectionok>
+<interneconnectionoff>Internet Connection: Offline</interneconnectionoff>
+<internetchecktitle>Network lost</internetchecktitle>
+<internetcheck>Network lost... Please check your internet connection!</internetcheck>
+<internetcheckfiles>Network lost... can't connect to server to download files!</internetcheckfiles>
+<dchannel>Device Channel: </dchannel>
+<dnotcompatibletitle>MotoTool: DEVICE NOT COMPATIBLE: </dnotcompatibletitle>
+<dnotcompatiblebody> is not compatible. This MotoTool works with: </dnotcompatiblebody>
+<device>Device </device>
+<readfirmware>Please connect your device to read firmwares!</readfirmware>
+
+<deviceconnectedlistbox> Device: Online! </deviceconnectedlistbox>
+<devicecodenamelistbox> Device Codename: </devicecodenamelistbox>
+<connectmodelistbox> Mode: USB debugging </connectmodelistbox>
+<deviceseriallistbox> Serial Number: </deviceseriallistbox>
+<batterylistbox> Battery: </batterylistbox>
+<batterytemplistbox> Battery Temperature: </batterytemplistbox>
+<batteryhealthlistbox> Battery Health: </batteryhealthlistbox>
+<devicerememberlistbox> Remember to always have enable USB DEBUGGING! </devicerememberlistbox>
+<deviceconnectedlistboxoff> Device: Offline! </deviceconnectedlistboxoff>
+<devicecodenamelistboxoff> Device Codename: --- </devicecodenamelistboxoff>
+<connectmodelistboxoff> Mode: --- </connectmodelistboxoff>
+<deviceseriallistboxoff> Serial Number: --- </deviceseriallistboxoff>
+<batterylistboxoff> Battery: --- </batterylistboxoff>
+<batterytemplistboxoff> Battery Temperature: --- </batterytemplistboxoff>
+<batteryhealthlistboxoff> Battery Health: --- </batteryhealthlistboxoff>
+
+<newtoolupdate>New MotoTool Update </newtoolupdate>
+<newtoolupdate2>, please update now!</newtoolupdate2>
+<noupdatetitle>No update available</noupdatetitle>
+<noupdatebody>There is no update available please try again later.</noupdatebody>
+<updateerrortitle>Update check failed</updateerrortitle>
+<updateerrorbody>There is a problem reaching update server please check your internet connection and try again later.</updateerrorbody>
+
+<themeenginetitle>Tool Theme Engine</themeenginetitle>
+<themeenginedarkbody>Selected Theme: {Dark} </themeenginedarkbody>
+<themeenginelightbody>Selected Theme: {Light} </themeenginelightbody>
+
+<errorstartingadb>Error starting adb process</errorstartingadb>
+<errorreadingout>Error Reading Output</errorreadingout>
+
+<bootloaderreadmetitle>Bootloader: README PLEASE!</bootloaderreadmetitle>
+<bootloaderreadme>To Unlock Moto Bootloader: Sign in on the following page. Follow the guide on the page. The Tool will open a CMD Console where drivers are allocated. Here you must enter the commands lines!</bootloaderreadme>
+<lockbootloadertitle>Warning</lockbootloadertitle>
+<lockbootloaderbody1>1°: Do you want to Lock the bootloader? This will erase all your data!</lockbootloaderbody1>
+<lockbootloaderbody2>2°: Are you sure that you want to Lock the bootloader? This will erase all your data!</lockbootloaderbody2>
+<lockbootloaderbody3>Try to not UNPLUG THE DEVICE during the process!</lockbootloaderbody3>
+<lockingbl>Locking bootloader...</lockingbl>
+<lockingblok>Locking bootloader... OK</lockingblok>
+<lockblcancel>Lock Bootloader canceled...</lockblcancel>
+
+<checkingdeviceconnection>Checking device connection...</checkingdeviceconnection>
+<checkingdeviceconnectionok>Checking device connection... OK</checkingdeviceconnectionok>
+<devicerebooting>Rebooting...</devicerebooting>
+<connectdevice>Please connect your device...</connectdevice>
+<connectdevicemototool>Please connect your device, so MotoTool can check your device!</connectdevicemototool>
+<connecttotwrp>Please plug your device on booted TWRP!</connecttotwrp>
+<motoflashplug>Please plug your device! Remember  to plug your phone on Fastboot Mode!</motoflashplug>
+
+<flashtwrppermanent>Hey! This option is not for A/B devices!, but you can download TWRP installer and flash it! first you need to boot TWRP!</flashtwrppermanent>
+<flashtwrpab>Hey! This option is not for A/B devices!, check the Boot option!</flashtwrpab>
+<twrpnotsupport>Hey this device doesn't have twrp yet! :(</twrpnotsupport>
+<twrpbooting>Booting into </twrpbooting>
+
+<blankflashnotsupport>Hey this device doesn't have blankflash yet! :(. If you know about an existing blankflash you can contact me and i'll add it</blankflashnotsupport>
+<blankflashcheck>Please, check if your device has booted up into Bootloader mode!</blankflashcheck>
+
+<cantfindlogo>Can't find logo image... </cantfindlogo>
+<logomissing>Missing</logomissing>
+
+<motodrivers>Error on loading Motorola drivers... Now Tool will download drivers and install it!</motodrivers>
+<motodriversinstall>Please install the following drivers! Tool will be closed!</motodriversinstall>
+
+<clearfolderstitle>Clear folders</clearfolderstitle>
+<clearfoldersbody>All Folders cleared! The app will restart!</clearfoldersbody>
+<openfoldererror>ERROR: Open Folder</openfoldererror>
+<createfoldererror>ERROR: Creating Folders</createfoldererror>
+
+<MSGBOXServerNetworkLosttitle>Device Server: Network Lost</MSGBOXServerNetworkLosttitle>
+<MSGBOXServerNetworkLost>Can't connect to server! Please check your internet connection!</MSGBOXServerNetworkLost>
+<MSGBOXFileCorruptedtitle>Files Engine: File Corrupted</MSGBOXFileCorruptedtitle>
+<MSGBOXFileCorruptedbody>File is corrupted \: Downloading again!</MSGBOXFileCorruptedbody>
+<MSGBOXBootloaderWarning>Device doesn't found, Please plug the phone and check if developer (adb) options are enabled!</MSGBOXBootloaderWarning>
+<MSGBOXFirmwareMissingtitle>Files Engine: Firmware Missing</MSGBOXFirmwareMissingtitle>
+<MSGBOXFirmwareMissingbody>Opss can't find Firmware...</MSGBOXFirmwareMissingbody>
+<MsgBoxResultFirmwareInfo>Firmware it's already downloaded! Now the firmware will be extracted it!</MsgBoxResultFirmwareInfo>
+
+<downloadUIdownloading>Downloading: </downloadUIdownloading>
+<downloadUIdownloadcancel>Download has been canceled!</downloadUIdownloadcancel>
+<downloadUIdownloadcomplete>Download complete, </downloadUIdownloadcomplete>
+<downloadUIfilelocate>is located at:</downloadUIfilelocate>
+
+<firmwareselected>SELECTED:</firmwareselected>
+<firmwarechannel>Selected Device Channel:</firmwarechannel>
+<firmwarealreadydownloaded>Firmware already downloaded!</firmwarealreadydownloaded>
+<firmwareerror>Can't find firmware images on folder! firmware will be downloaded again! </firmwareerror>
+
+<movetotwrpdrag>Drag a file here!</movetotwrpdrag>
+<movetotwrpfilestitle>Move Files: </movetotwrpfilestitle>
+<movetotwrpcopy>Copying </movetotwrpcopy>
+<movetotwrpcopy1> to /sdcard...</movetotwrpcopy1>
+<movetotwrpfilescopy>File copied </movetotwrpfilescopy>
+<movetotwrpfilescopy1> into /sdcard!</movetotwrpfilescopy1>
+
+<motoflashdevicenotcompatibletitle>MotoFlash: Device not compatible yet!</motoflashdevicenotcompatibletitle>
+<motoflashdevicenotcompatible>Hey! im working to make compatible your device! device compatible for now: Beckham, Doha, Potter and Sanders</motoflashdevicenotcompatible>
+<motoflashdownload>Please download your firmware! - Device Channel: </motoflashdownload>
+<motoflashselectoption>Please select an option!</motoflashselectoption>
+<motoflashdetect>Detecting device...</motoflashdetect>
+<motoflashinstalled>Installed</motoflashinstalled>
+<motoflashdowngrade>Hey! this is not ready yet! soon will be working...</motoflashdowngrade>
+
+<clearfolderswarn>This will remove all files from C:\\adb\\ folder!</clearfolderswarn>
+<clearfolderscont>Do you want to continue?</clearfolderscont>
+<clearfolderswarns2>Do you want to clear all the folders? You will remove all files except for the important ones. Folder Size: </clearfolderswarns2>
+<clearyesbtn>YES</clearyesbtn>
+
+<debloatothershelp>Please, write the app package like this: -com.google.android.apps.translate-</debloatothershelp>
+<debloatothers>Moto Debloat Others</debloatothers>
+<debloatothersbox>The box can't be empty!</debloatothersbox>
+
+<help>Help</help>
+<helpsource>           Source</helpsource>
+<helphowto>           How to use it?</helphowto>
+<helpcontact>           Contact</helpcontact>
+<helpsourceinf>Now this is private :/</helpsourceinf>
+<helpcoy>© 2019 - 2020 Franco28: A simple IT student - Argentina</helpcoy>
+<helptoolcompiled>MotoTool Compiled: </helptoolcompiled>
+<helptoolversion>MotoTool Version: </helptoolversion>
+
+<uninstallwarn>This will remove all the Tool!</uninstallwarn>
+<uninscont>Do you want to Uninstall the Tool?</uninscont>
+
+<seleclanguilabel>     Select Language</seleclanguilabel>
+<seleclanguitoolrestart>MotoTool will restart!</seleclanguitoolrestart>
+
+<unzipuifilepath>File Path:</unzipuifilepath>
+<unzipuifildest>Destination:</unzipuifildest>
+<unzipuifileextract>Extracting File:</unzipuifileextract>
+<unzipuiprogressindi>Individual:</unzipuiprogressindi>
+<unzipuiprogresstotal>Total:</unzipuiprogresstotal>
+<unzipuifilesize>File Size:</unzipuifilesize>
+<unzipuiprogress>Progress</unzipuiprogress>
+<unzipexctractok>The zip has been extracted well!</unzipexctractok>
+</en>

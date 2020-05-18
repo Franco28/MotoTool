@@ -1,0 +1,40 @@
+LICENSE AGREEMENT
+
+
+MotoTool is distributed as freeware.
+This means:
+
+1. All copyrights (C) 2019-2020 to MotoTool are exclusively owned by
+Franco28.
+
+2. BeckhamTool may be freely distributed, with exceptions noted below,
+provided the distribution package is not modified. No person or company 
+may charge a fee for the distribution of MotoTool without written 
+permission from the copyright holder. Get MotoTool may not be bundled or 
+distributed with any other package without written permission of
+the copyright holder.
+
+3. MotoTool IS DISTRIBUTED "AS IS". NO WARRANTY OF ANY KIND IS 
+EXPRESSED OR IMPLIED. YOU USE AT YOUR OWN RISK. FRANCO28 WILL NOT BE 
+LIABLE FOR DATA LOSS, DAMAGES, LOSS OF PROFITS OR ANY OTHER KIND OF LOSS WHILE 
+USING OR MISUSING THIS SOFTWARE.
+
+4. You may not use, copy, emulate, clone, rent, lease, sell, modify, decompile, 
+disassemble, otherwise reverse engineer, or transfer the licensed program, or 
+any subset of the licensed program, except as provided for in this agreement. 
+Any such unauthorized use shall result in immediate and automatic termination of 
+this license and may result in criminal and/or civil prosecution.
+
+5. All rights not expressly granted here are reserved by Franco28.
+
+6. Installing and using MotoTool signifies acceptance of
+these terms and conditions of the license.
+
+7. If you do not agree with the terms of this license you must remove 
+MotoTool files from your storage devices and cease to use the product.
+
+8. Current license agreement terminates all previous license agreements for 
+MotoTool.
+
+
+Thank you for using MotoTool!

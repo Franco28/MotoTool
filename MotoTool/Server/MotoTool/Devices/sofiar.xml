@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sofiar>
+<devicecodename>sofiar</devicecodename>
+<blankflashname>unknonwn</blankflashname>
+<twrpname>unknonwn</twrpname>
+<twrpinstallername>unknonwn</twrpinstallername>
+<retserver>sofiar/RET/</retserver>
+<tefserver>sofiar/TEF/</tefserver>
+<amserver>sofiar/AM/</amserver>
+<othersserver>sofiar/OTHERS/</othersserver>
+<fserverMaintenance>TRUE</fserverMaintenance>
+</sofiar>

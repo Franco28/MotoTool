@@ -1,0 +1,22 @@
+# HTID:10676475: DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES BELOW
+php_value display_errors 1
+# DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:10676475:
+
+
+#Error
+ErrorDocument 404 /404.html
+
+
+#Mantenimiento
+#RewriteEngine On
+#RewriteBase /
+#RewriteCond %{REQUEST_URI} !^/maintenance\.html$
+#RewriteRule ^(.*)$ https://beckhamtool.000webhostapp.com/maintenance.html [R=307,L]
+
+
+# DO NOT REMOVE THIS LINE AND THE LINES BELOW SSL_REDIRECT:beckhamtool.000webhostapp.com
+RewriteEngine on
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} ^beckhamtool.000webhostapp.com$
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# DO NOT REMOVE THIS LINE AND THE LINES ABOVE SSL_REDIRECT:beckhamtool.000webhostapp.com

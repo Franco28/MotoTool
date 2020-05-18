@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ocean>
+<devicecodename>ocean</devicecodename>
+<blankflashname>blankflash_from_PDOS29.114-134-2</blankflashname>
+<twrpname>twrp-3.3.1-2-ocean.img</twrpname>
+<twrpinstallername>twrp-installer-3.3.1-2-ocean.zip</twrpinstallername>
+<retserver>ocean/RET/</retserver>
+<tefserver>ocean/TEF/</tefserver>
+<amserver>ocean/AM/</amserver>
+<othersserver>ocean/OTHERS/</othersserver>
+<fserverMaintenance>TRUE</fserverMaintenance>
+</ocean>
