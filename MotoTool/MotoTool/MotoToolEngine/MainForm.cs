@@ -740,34 +740,32 @@ namespace Franco28Tool.Engine
             if (result == DialogResult.Yes)
             {
                 Dialogs.WarningDialog("Bootloader: Warning!", "Try to not UNPLUG THE DEVICE during the process!");
-                TextBoxDebug.Text = "Checking device connection...";
-                if (IDDeviceState.UNKNOWN == state)
+                cAppend("UNLOCK BOOTLOADER: Waiting for device...");
+                if (IDDeviceState.BOOTLOADER == state)
                 {
-                    TextBoxDebug.Text = "Checking device connection... OK";
+                    cAppend("UNLOCK BOOTLOADER: Locking bootloader... {1}");
                     Thread.Sleep(1000);
-                    TextBoxDebug.Text = "Locking bootloader...";
-                    Thread.Sleep(1000);
-                    Fastboot.Instance().Execute("oem lock");
+                    await Task.Run(() => Fastboot.Instance().Execute("oem lock"));
                     Thread.Sleep(500);
                     var result2 = MessageBox.Show("2°: Are you sure that you want to Lock the bootloader? This will erase all your data!", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (result2 == DialogResult.Yes)
                     {
-                        if (IDDeviceState.UNKNOWN == state)
+                        if (IDDeviceState.BOOTLOADER == state)
                         {
                             Thread.Sleep(1000);
-                            TextBoxDebug.Text = "Locking bootloader...";
+                            cAppend("UNLOCK BOOTLOADER: Locking bootloader... {2}");
                             Thread.Sleep(1000);
                             Fastboot.Instance().Execute("oem lock");
-                            TextBoxDebug.Text = "Locking bootloader... OK";
-                            Thread.Sleep(500);
+                            cAppend("UNLOCK BOOTLOADER: Locking bootloader... {1 & 2 OK}");
+                            Thread.Sleep(1000);
+                            cAppend("UNLOCK BOOTLOADER: Rebooting...");
                             await Task.Run(() => Fastboot.Instance().Reboot(IDBoot.REBOOT));
-                            TextBoxDebug.Text = "Rebooting...";
                         }
                         else
                         {
-                            TextBoxDebug.Text = "Checking device connection...";
                             Thread.Sleep(1000);
                             Strings.MSGBOXBootloaderWarning();
+                            cAppend("UNLOCK BOOTLOADER: Your device is in the wrong state. Please put your device in the bootloader mode.\n");
                         }
                     }
                     else
@@ -778,9 +776,9 @@ namespace Franco28Tool.Engine
                 }
                 else
                 {
-                    TextBoxDebug.Text = "Please connect your device...";
                     Thread.Sleep(1000);
                     Strings.MSGBOXBootloaderWarning();
+                    cAppend("UNLOCK BOOTLOADER: Your device is in the wrong state. Please put your device in the bootloader mode.\n");
                 }
             }
         }
@@ -1066,14 +1064,18 @@ namespace Franco28Tool.Engine
 
         private void materialButtonAddNewDevice_Click(object sender, EventArgs e)
         {
+            cAppend("ADD NEW DEVICE: Clearing old device info...");
             oConfigMng.LoadConfig();
             oConfigMng.Config.DeviceCodenmae = "";
+            oConfigMng.Config.DeviceFirmware = "";
+            cAppend("ADD NEW DEVICE: Clearing old device info... {OK}");
             oConfigMng.SaveConfig();
             GetProp();
         }
 
         private void materialButtonRemoveToolDeviceData_Click(object sender, EventArgs e)
         {
+            cAppend("REMOVE DEVICE DATA: Clearing old device info...");
             oConfigMng.LoadConfig();
             oConfigMng.Config.DeviceCodenmae = "";
             oConfigMng.Config.DeviceFirmwareInfo = "";
@@ -1082,6 +1084,7 @@ namespace Franco28Tool.Engine
             oConfigMng.Config.FirmwareExtracted = "";
             oConfigMng.Config.DeviceFirmware = "";
             oConfigMng.SaveConfig();
+            cAppend("REMOVE DEVICE DATA: Clearing old device info... {OK}");
             Dialogs.InfoDialog("MotoTool: Device data", "All device data removed!");
         }
 
@@ -1091,12 +1094,15 @@ namespace Franco28Tool.Engine
             oConfigMng.LoadConfig();
             if (AutoSaveLogs = materialSwitchAutoSaveLogs.Checked == true)
             {
+                cAppend("AUTOSAVELOGS: Enabled");
                 oConfigMng.Config.Autosavelogs = "true";
             }
             else
             {
+                cAppend("AUTOSAVELOGS: Disabled");
                 oConfigMng.Config.Autosavelogs = "false";
             }
+            cAppend("AUTOSAVELOGS: Settings saved!");
             oConfigMng.SaveConfig();
             Invalidate();
         }
@@ -1108,22 +1114,27 @@ namespace Franco28Tool.Engine
 
         public void KillWhenExit()
         {
+            cAppend("EXIT: Stopping adb, fastboot and callback monitor...");
             ADB.ConnectionMonitor.Stop();
             ADB.ConnectionMonitor.Callback -= ConnectionMonitorCallback;
             ADB.Stop();
             Fastboot.Dispose();
             ADB.Dispose();
             oConfigMng.LoadConfig();
+            cAppend("EXIT: Stopping adb, fastboot and callback monitor... {OK}");
             if (oConfigMng.Config.Autosavelogs == "true")
             {
+                cAppend("EXIT: Saving MotoTool logs...");
                 try
                 {
                     string filePath = @"C:\adb\.settings\Logs\ToolLogs.txt";
+                    cAppend("EXIT: Saving MotoTool logs... {OK}");
                     console.SaveFile(filePath, RichTextBoxStreamType.PlainText);
                 }
                 catch (Exception ex)
                 {
                     Logs.DebugErrorLogs(ex);
+                    cAppend("EXIT: Saving MotoTool logs... {ERROR}");
                     Dialogs.ErrorDialog("An error has occured while attempting to save the output...", ex.ToString());
                 }
             }

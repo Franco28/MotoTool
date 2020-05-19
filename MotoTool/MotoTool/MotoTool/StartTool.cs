@@ -16,49 +16,56 @@ namespace MotoTool
         {
             if (InternetCheck.ConnectToInternet() == true)
             {
-                try
+                if (InternetCheck.CheckServerRed(xmlUrl) == true)
                 {
-                    reader = new XmlTextReader(xmlUrl);
-                    reader.MoveToContent();
-                    string elementName = "";
-                    if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "Maintenance"))
+                    try
                     {
-                        while (reader.Read())
+                        reader = new XmlTextReader(xmlUrl);
+                        reader.MoveToContent();
+                        string elementName = "";
+                        if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "Maintenance"))
                         {
-                            if (reader.NodeType == XmlNodeType.Element)
+                            while (reader.Read())
                             {
-                                elementName = reader.Name;
-                            }
-                            else
-                            {
-                                if ((reader.NodeType == XmlNodeType.Text) && (reader.HasValue))
+                                if (reader.NodeType == XmlNodeType.Element)
                                 {
-                                    switch (elementName)
+                                    elementName = reader.Name;
+                                }
+                                else
+                                {
+                                    if ((reader.NodeType == XmlNodeType.Text) && (reader.HasValue))
                                     {
-                                        case "Maintenanceok":
-                                            Maintenanceok = reader.Value;
-                                            break;
+                                        switch (elementName)
+                                        {
+                                            case "Maintenanceok":
+                                                Maintenanceok = reader.Value;
+                                                break;
+                                        }
                                     }
                                 }
                             }
-                        }
 
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Dialogs.ErrorDialog("Startin MotoTool server: ERROR", ex.Message);
+                        Logs.DebugErrorLogs(ex);
+                    }
+                    finally
+                    {
+                        if (reader != null)
+                            reader.Close();
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    Dialogs.ErrorDialog("Check Device Error", ex.Message);
-                    Logs.DebugErrorLogs(ex);
-                }
-                finally
-                {
-                    if (reader != null)
-                        reader.Close();
+                    Dialogs.ErrorDialog("SERVER IS DOWN", "Please MotoTool will be back when server returns back!");
                 }
             }
             else
             {
-                Dialogs.ErrorDialog("Network Lost", "Network lost... Please check your internet connection!");
+                Strings.MSGBOXServerNetworkLost();
             }
         }
     }

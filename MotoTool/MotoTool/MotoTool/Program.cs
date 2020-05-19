@@ -27,7 +27,6 @@ namespace MotoTool
         [STAThread]
         static void Main()
         {
-            string ToolVer = Assembly.GetEntryAssembly().GetName().Version.ToString();
             StartTool.ToolMaintenance();
             string tr = "true";
             string fal = "false";
