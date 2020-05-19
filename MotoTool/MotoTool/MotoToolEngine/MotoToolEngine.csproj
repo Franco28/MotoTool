@@ -125,6 +125,12 @@
     <Compile Include="Tool\Settings.cs" />
     <Compile Include="Tool\SettingsMng.cs" />
     <Compile Include="Files\CheckMotoDrivers.cs" />
+    <Compile Include="UI\Dialogs\TWRPBackup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\TWRPBackup.Designer.cs">
+      <DependentUpon>TWRPBackup.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dialogs\TWRPPermanent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -236,6 +242,9 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <EmbeddedResource Include="UI\Dialogs\TWRPBackup.resx">
+      <DependentUpon>TWRPBackup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\TWRPPermanent.resx">
       <DependentUpon>TWRPPermanent.cs</DependentUpon>
     </EmbeddedResource>
@@ -410,6 +419,15 @@
     <EmbeddedResource Include="Resources\adb\AdbWinUsbApi.dll" />
     <EmbeddedResource Include="Resources\adb\fastboot.exe" />
     <EmbeddedResource Include="Resources\adb\libwinpthread-1.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rt2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bk1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rt1.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

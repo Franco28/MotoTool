@@ -39,13 +39,13 @@ namespace Franco28Tool.Engine
             materialSkinManager.AddFormToManage(this);
             InitializeComponent();
             oConfigMng.LoadConfig();
-            cAppend("Checking MotoTool updates.");
+            cAppend("STARTING: Checking MotoTool updates.");
             cehck4updates();
-            cAppend("Loading tool... Please wait...");
+            cAppend("STARTING: Loading tool... Please wait...");
             ADB.PATH_DIRECTORY = @"C:\adb\";
             Fastboot.PATH_DIRECTORY = @"C:\adb\";
-            cAppend("Settings adb & fastboot path... Please wait...");
-            cAppend("Checking MotoDrivers...");
+            cAppend("STARTING: Settings adb & fastboot path... Please wait...");
+            cAppend("STARTING: Checking MotoDrivers...");
             if (File.Exists(@"C:\Program Files (x86)\Motorola Mobility\Motorola Device Manager\uninstall.exe"))
             {
                 if (File.Exists(@"C:\Program Files\MotoTool\MotorolaDeviceManager_2.5.4.exe"))
@@ -61,11 +61,11 @@ namespace Franco28Tool.Engine
                         int ExitCode = proc.ExitCode;
                     }
                 }
-                cAppend("Checking MotoDrivers... OK");
+                cAppend("STARTING: Checking MotoDrivers... OK");
             }
             else
             {
-                cAppend("Checking MotoDrivers... ERROR");
+                cAppend("STARTING: Checking MotoDrivers... ERROR");
                 CheckMotoDrivers.MotoDrivers();
             }
             updateColorLoad();
@@ -108,52 +108,52 @@ namespace Franco28Tool.Engine
         private async void MainForm_LoadAsync(object sender, EventArgs e)
         {
             oConfigMng.LoadConfig();
-            cAppend("Deploying adb & fastboot...");
+            cAppend("STARTING: Deploying adb & fastboot...");
             await Task.Run(() => CheckandDeploy());
             await Task.Run(() => DeviceDetectionService());
-            cAppend("Deploying adb & fastboot... {OK}");
+            cAppend("STARTING: Deploying adb & fastboot... {OK}");
             oConfigMng.Config.ToolVersion = ToolVer;
             oConfigMng.Config.ToolCompiled = Utils.GetLinkerDateTime(Assembly.GetEntryAssembly(), null).ToString();
-            cAppend("Checking MotoTool ver: " + ToolVer);
+            cAppend("STARTING: Checking MotoTool ver: " + ToolVer);
             if (oConfigMng.Config.ToolTheme == null || oConfigMng.Config.ToolTheme == "")
             {
-                cAppend("Setting first MotoTool Theme... {LIGHT}");
+                cAppend("STARTING: Setting first MotoTool Theme... {LIGHT}");
                 materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
                 materialSkinManager.ColorScheme = new ColorScheme(Primary.Indigo500, Primary.Indigo700, Primary.Indigo100, Accent.Pink200, TextShade.WHITE);
                 oConfigMng.Config.ToolTheme = "light";
             }
-            cAppend("Checking saved device...");
+            cAppend("STARTING: Checking saved device...");
             if (oConfigMng.Config.DeviceCodenmae == null || oConfigMng.Config.DeviceCodenmae == "")
             {
-                cAppend("Checking saved device... {NOT FOUND}");
+                cAppend("STARTING: Checking saved device... {NOT FOUND}");
                 oConfigMng.Config.DeviceCodenmae = "";
             }
             else
             {
-                cAppend("Checking saved device... {" + oConfigMng.Config.DeviceCodenmae + "}");
+                cAppend("STARTING: Checking saved device... {" + oConfigMng.Config.DeviceCodenmae + "}");
             }
-            cAppend("Checking saved device carrier...");
+            cAppend("STARTING: Checking saved device carrier...");
             if (oConfigMng.Config.DeviceFirmware == null || oConfigMng.Config.DeviceFirmware == "")
             {
-                cAppend("Checking saved device carrier... {NOT FOUND}");
+                cAppend("STARTING: Checking saved device carrier... {NOT FOUND}");
                 oConfigMng.Config.DeviceFirmware = "";
             }
             else
             {
-                cAppend("Checking saved device carrier... {" + oConfigMng.Config.DeviceFirmware + "}");
+                cAppend("STARTING: Checking saved device carrier... {" + oConfigMng.Config.DeviceFirmware + "}");
             }
-            cAppend("Checking internet connection...");
+            cAppend("STARTING: Checking internet connection...");
             if (InternetCheck.ConnectToInternet() == true)
             {
-                cAppend("Checking internet connection... {OK}");
+                cAppend("STARTING: Checking internet connection... {OK}");
                 oConfigMng.Config.ToolInternet = "Online";
             }
             else
             {
-                cAppend("Checking internet connection... {ERROR}");
+                cAppend("STARTING: Checking internet connection... {ERROR}");
                 oConfigMng.Config.ToolInternet = "Offline";
             }
-            cAppend("Applying MotoTool settings...");
+            cAppend("STARTING: Applying MotoTool settings...");
             if (oConfigMng.Config.DrawerUseColors == null || oConfigMng.Config.DrawerUseColors == "")
             {
                 oConfigMng.Config.DrawerUseColors = "false";
@@ -183,7 +183,7 @@ namespace Franco28Tool.Engine
             {
                 AutoSaveLogs = materialSwitchAutoSaveLogs.Checked = false;
             }
-            cAppend("Applying MotoTool settings... {OK}");
+            cAppend("STARTING: Applying MotoTool settings... {OK}");
             oConfigMng.SaveConfig();
             cAppend("----------------------------------");
             cAppend("MotoTool was loaded!");
@@ -222,7 +222,7 @@ namespace Franco28Tool.Engine
             labelCPUusage.Text = "      CPU: " + Convert.ToInt64(cpuCounter.NextValue()).ToString() + "%";
             labelFreeSpace.Text = @"      Folder Size: C:\adb: " + Folders.GetDirectorySize(@"C:\adb") + " MB";
             labelUserName.Text = "      User: " + Environment.UserName;
-            TextBoxDebug.Text = "Remember to always Backup your efs and persist folders!";
+            TextBoxDebug.Text = "Remember to always Backup your efs and persist folders! How? Click me!";
             if (oConfigMng.Config.DeviceFirmware == "" || oConfigMng.Config.DeviceFirmware == null)
             {
                 TextBoxDebugInfo.Text = "Device Channel: ---";
@@ -507,6 +507,7 @@ namespace Franco28Tool.Engine
 
         public void qBootExecuteCommand()
         {
+            cAppend("BLANKFLASH CMD: Executing BLANKFLASH FILES...");
             string _batDir = string.Format(@"C:\adb\Others\" + LoadDeviceServer.unbrickname);
             using (Process proc = new Process())
             {
@@ -516,6 +517,7 @@ namespace Franco28Tool.Engine
                 proc.Start();
                 proc.WaitForExit();
                 int ExitCode = proc.ExitCode;
+                cAppend("BLANKFLASH CMD: Executing BLANKFLASH FILES... {OK}");
             }
         }
 
@@ -528,13 +530,13 @@ namespace Franco28Tool.Engine
 
             if (materialSkinManager.Theme == MaterialSkinManager.Themes.DARK)
             {
-                cAppend("Theme changed to: DARK");
+                cAppend("TOOL THEME: Changed to {DARK}");
                 oConfigMng.Config.ToolTheme = "dark";
             }
 
             if (materialSkinManager.Theme == MaterialSkinManager.Themes.LIGHT)
             {
-                cAppend("Theme changed to: LIGHT");
+                cAppend("TOOL THEME: Changed to {LIGHT}");
                 oConfigMng.Config.ToolTheme = "light";
             }
             oConfigMng.SaveConfig();
@@ -551,12 +553,12 @@ namespace Franco28Tool.Engine
 
             if (oConfigMng.Config.ToolTheme == "light")
             {
-                cAppend("Loading MotoTool Theme... {LIGHT}");
+                cAppend("STARTING: Loading MotoTool Theme... {LIGHT}");
                 materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             }
             if (oConfigMng.Config.ToolTheme == "dark")
             {
-                cAppend("Loading MotoTool Theme... {DARK}");
+                cAppend("STARTING: Loading MotoTool Theme... {DARK}");
                 materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             }
             if (oConfigMng.Config.ToolThemeBlueColor == "true")
@@ -613,6 +615,7 @@ namespace Franco28Tool.Engine
                         materialSkinManager.Theme == MaterialSkinManager.Themes.DARK ? Primary.Teal200 : Primary.Indigo100,
                         Accent.Pink200,
                         TextShade.WHITE);
+                    cAppend("TOOL THEME COLOR: Changed to {Blue Color}");
                     oConfigMng.Config.ToolThemeBlueColor = "true";
                     oConfigMng.Config.ToolThemeIndigoColor = "false";
                     oConfigMng.Config.ToolThemeGreenColor = "false";
@@ -625,6 +628,7 @@ namespace Franco28Tool.Engine
                         Primary.Green200,
                         Accent.Red100,
                         TextShade.WHITE);
+                    cAppend("TOOL THEME COLOR: Changed to {Green Color}");
                     oConfigMng.Config.ToolThemeBlueColor = "false";
                     oConfigMng.Config.ToolThemeIndigoColor = "false";
                     oConfigMng.Config.ToolThemeGreenColor = "true";
@@ -637,6 +641,7 @@ namespace Franco28Tool.Engine
                         Primary.BlueGrey500,
                         Accent.LightBlue200,
                         TextShade.WHITE);
+                    cAppend("TOOL THEME COLOR: Changed to {Indigo Color}");
                     oConfigMng.Config.ToolThemeBlueColor = "false";
                     oConfigMng.Config.ToolThemeIndigoColor = "true";
                     oConfigMng.Config.ToolThemeGreenColor = "false";
@@ -652,10 +657,12 @@ namespace Franco28Tool.Engine
             oConfigMng.LoadConfig();
             if (DrawerUseColors = materialSwitchDrawerUseColors.Checked == true)
             {
+                cAppend("TOOL SETTINGS: Drawer Use Colors changed to {ENABLED}");
                 oConfigMng.Config.DrawerUseColors = "true";
             }
             else
             {
+                cAppend("TOOL SETTINGS: Drawer Use Colors changed to {DISABLED}");
                 oConfigMng.Config.DrawerUseColors = "false";
             }
             oConfigMng.SaveConfig();
@@ -668,10 +675,12 @@ namespace Franco28Tool.Engine
             oConfigMng.LoadConfig();
             if (DrawerHighlightWithAccent = materialSwitchDrawerHighlightWithAccent.Checked == true)
             {
+                cAppend("TOOL SETTINGS: Drawer Highlight With Accent changed to {ENABLED}");
                 oConfigMng.Config.DrawerHighlightWithAccent = "true";
             }
             else
             {
+                cAppend("TOOL SETTINGS: Drawer Highlight With Accent changed to {DISABLED}");
                 oConfigMng.Config.DrawerHighlightWithAccent = "false";
             }
             oConfigMng.SaveConfig();
@@ -684,10 +693,12 @@ namespace Franco28Tool.Engine
             oConfigMng.LoadConfig();
             if (DrawerBackgroundWithAccent = materialSwitchDrawerBackgroundWithAccent.Checked == true)
             {
+                cAppend("TOOL SETTINGS: Drawer Background With Accent changed to {ENABLED}");
                 oConfigMng.Config.DrawerBackgroundWithAccent = "true";
             }
             else
             {
+                cAppend("TOOL SETTINGS: Drawer Background With Accent changed to {DISABLED}");
                 oConfigMng.Config.DrawerBackgroundWithAccent = "false";
             }
             oConfigMng.SaveConfig();
@@ -700,10 +711,12 @@ namespace Franco28Tool.Engine
             oConfigMng.LoadConfig();
             if (DrawerShowIconsWhenHidden = materialSwitchDrawerShowIconsWhenHidden.Checked == true)
             {
+                cAppend("TOOL SETTINGS: Drawer Show Icons When Hidden changed to {ENABLED}");
                 oConfigMng.Config.DrawerShowIconsWhenHidden = "true";
             }
             else
             {
+                cAppend("TOOL SETTINGS: Drawer Show Icons When Hidden changed to {DISABLED}");
                 oConfigMng.Config.DrawerShowIconsWhenHidden = "false";
             }
             oConfigMng.SaveConfig();
@@ -731,6 +744,7 @@ namespace Franco28Tool.Engine
             startInfo.FileName = "cmd.exe";
             process.StartInfo = startInfo;
             process.Start();
+            cAppend("CMD UNLOCK: Started CMD!");
         }
 
         private async void materialButtonLock_ClickAsync(object sender, EventArgs e)
@@ -993,6 +1007,12 @@ namespace Franco28Tool.Engine
             }
         }
 
+        private void HowToBackupEfsAndPersist(object sender, EventArgs e)
+        {
+            var bk = new TWRPBackup();
+            bk.ShowDialog();
+        }
+
         private void materialButtonCheckUpdates_Click(object sender, EventArgs e)
         {
             AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
@@ -1000,6 +1020,7 @@ namespace Franco28Tool.Engine
 
         private void materialButtonCMD_Click(object sender, EventArgs e)
         {
+            cAppend("CMD: Started!");
             Directory.SetCurrentDirectory(@"C:\\adb\\");
             Process process = new Process();
             ProcessStartInfo startInfo = new ProcessStartInfo();

@@ -173,6 +173,16 @@ namespace Franco28Tool.Engine.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bk1 {
+            get {
+                object obj = ResourceManager.GetObject("bk1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap bootloader {
             get {
                 object obj = ResourceManager.GetObject("bootloader", resourceCulture);
@@ -936,6 +946,26 @@ namespace Franco28Tool.Engine.Properties {
         internal static System.Drawing.Bitmap round_swap_vert_white_24dp {
             get {
                 object obj = ResourceManager.GetObject("round_swap_vert_white_24dp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap rt1 {
+            get {
+                object obj = ResourceManager.GetObject("rt1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap rt2 {
+            get {
+                object obj = ResourceManager.GetObject("rt2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

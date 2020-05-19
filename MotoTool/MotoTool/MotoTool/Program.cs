@@ -3,7 +3,6 @@ using AndroidCtrl.ADB;
 using AndroidCtrl.Fastboot;
 using Franco28Tool.Engine;
 using System;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace MotoTool

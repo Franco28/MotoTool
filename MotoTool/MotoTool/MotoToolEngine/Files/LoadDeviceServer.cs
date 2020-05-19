@@ -22,7 +22,7 @@ namespace Franco28Tool.Engine
         {
             if (InternetCheck.ConnectToInternet() == true)
             {
-                if (InternetCheck.CheckServerRed(FirmwareServerPath + device) == true)
+                if (InternetCheck.CheckServerRed(FirmwareServerPath + device) == false)
                 {
                     try
                     {

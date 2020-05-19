@@ -16,7 +16,7 @@ namespace MotoTool
         {
             if (InternetCheck.ConnectToInternet() == true)
             {
-                if (InternetCheck.CheckServerRed(xmlUrl) == true)
+                if (InternetCheck.CheckServerRed(xmlUrl) == false)
                 {
                     try
                     {
@@ -49,7 +49,7 @@ namespace MotoTool
                     }
                     catch (Exception ex)
                     {
-                        Dialogs.ErrorDialog("Startin MotoTool server: ERROR", ex.Message);
+                        Dialogs.ErrorDialog("Starting MotoTool server: ERROR", ex.Message);
                         Logs.DebugErrorLogs(ex);
                     }
                     finally

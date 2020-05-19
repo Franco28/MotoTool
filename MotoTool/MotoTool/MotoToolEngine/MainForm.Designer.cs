@@ -201,7 +201,7 @@ namespace Franco28Tool.Engine
             this.panelDownload.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelDownload.Location = new System.Drawing.Point(0, 0);
             this.panelDownload.Name = "panelDownload";
-            this.panelDownload.Size = new System.Drawing.Size(1015, 225);
+            this.panelDownload.Size = new System.Drawing.Size(1015, 242);
             this.panelDownload.TabIndex = 78;
             // 
             // console
@@ -211,7 +211,7 @@ namespace Franco28Tool.Engine
             this.console.Location = new System.Drawing.Point(3, 70);
             this.console.Name = "console";
             this.console.ReadOnly = true;
-            this.console.Size = new System.Drawing.Size(1009, 155);
+            this.console.Size = new System.Drawing.Size(1009, 169);
             this.console.TabIndex = 58;
             this.console.Text = "";
             // 
@@ -507,6 +507,7 @@ namespace Franco28Tool.Engine
             // TextBoxDebug
             // 
             this.TextBoxDebug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.TextBoxDebug.Cursor = System.Windows.Forms.Cursors.Hand;
             this.TextBoxDebug.Depth = 0;
             this.TextBoxDebug.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.TextBoxDebug.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
@@ -515,6 +516,7 @@ namespace Franco28Tool.Engine
             this.TextBoxDebug.Name = "TextBoxDebug";
             this.TextBoxDebug.Size = new System.Drawing.Size(476, 36);
             this.TextBoxDebug.TabIndex = 80;
+            this.TextBoxDebug.Click += new System.EventHandler(this.HowToBackupEfsAndPersist);
             // 
             // TextBoxDebugInfo
             // 
@@ -538,10 +540,10 @@ namespace Franco28Tool.Engine
             this.labelFreeSpace.Image = ((System.Drawing.Image)(resources.GetObject("labelFreeSpace.Image")));
             this.labelFreeSpace.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelFreeSpace.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelFreeSpace.Location = new System.Drawing.Point(5, 83);
+            this.labelFreeSpace.Location = new System.Drawing.Point(2, 83);
             this.labelFreeSpace.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelFreeSpace.Name = "labelFreeSpace";
-            this.labelFreeSpace.Size = new System.Drawing.Size(526, 36);
+            this.labelFreeSpace.Size = new System.Drawing.Size(529, 36);
             this.labelFreeSpace.TabIndex = 48;
             this.labelFreeSpace.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -571,10 +573,10 @@ namespace Franco28Tool.Engine
             this.labelFreeRam.Image = ((System.Drawing.Image)(resources.GetObject("labelFreeRam.Image")));
             this.labelFreeRam.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelFreeRam.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelFreeRam.Location = new System.Drawing.Point(5, 3);
+            this.labelFreeRam.Location = new System.Drawing.Point(3, 3);
             this.labelFreeRam.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelFreeRam.Name = "labelFreeRam";
-            this.labelFreeRam.Size = new System.Drawing.Size(318, 36);
+            this.labelFreeRam.Size = new System.Drawing.Size(320, 36);
             this.labelFreeRam.TabIndex = 47;
             this.labelFreeRam.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -589,10 +591,10 @@ namespace Franco28Tool.Engine
             this.labelUserName.Image = ((System.Drawing.Image)(resources.GetObject("labelUserName.Image")));
             this.labelUserName.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelUserName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelUserName.Location = new System.Drawing.Point(5, 47);
+            this.labelUserName.Location = new System.Drawing.Point(2, 47);
             this.labelUserName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelUserName.Name = "labelUserName";
-            this.labelUserName.Size = new System.Drawing.Size(1007, 36);
+            this.labelUserName.Size = new System.Drawing.Size(1011, 36);
             this.labelUserName.TabIndex = 49;
             this.labelUserName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
