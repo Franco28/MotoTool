@@ -113,13 +113,14 @@ namespace Franco28Tool.Engine
             this.materialButton23.Depth = 0;
             this.materialButton23.DrawShadows = true;
             this.materialButton23.HighEmphasis = false;
-            this.materialButton23.Icon = ((System.Drawing.Image)(resources.GetObject("materialButton23.Icon")));
+            this.materialButton23.Icon = null;
             this.materialButton23.Location = new System.Drawing.Point(4, 6);
             this.materialButton23.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton23.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton23.Name = "materialButton23";
             this.materialButton23.Size = new System.Drawing.Size(39, 36);
             this.materialButton23.TabIndex = 114;
+            this.materialButton23.Text = "X";
             this.materialButton23.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialButton23.UseAccentColor = false;
             this.materialButton23.UseVisualStyleBackColor = true;

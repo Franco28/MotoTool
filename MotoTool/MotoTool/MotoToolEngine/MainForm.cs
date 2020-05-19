@@ -38,13 +38,13 @@ namespace Franco28Tool.Engine
             materialSkinManager.EnforceBackcolorOnAllComponents = true;
             materialSkinManager.AddFormToManage(this);
             InitializeComponent();
+            oConfigMng.LoadConfig();
             cAppend("Checking MotoTool updates.");
             cehck4updates();
             cAppend("Loading tool... Please wait...");
             ADB.PATH_DIRECTORY = @"C:\adb\";
             Fastboot.PATH_DIRECTORY = @"C:\adb\";
             cAppend("Settings adb & fastboot path... Please wait...");
-            oConfigMng.LoadConfig();
             cAppend("Checking MotoDrivers...");
             if (File.Exists(@"C:\Program Files (x86)\Motorola Mobility\Motorola Device Manager\uninstall.exe"))
             {
@@ -216,6 +216,7 @@ namespace Franco28Tool.Engine
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            AvoidFlick();
             oConfigMng.LoadConfig();
             labelFreeRam.Text = "      Free RAM: " + Convert.ToInt64(ramCounter.NextValue()).ToString() + " MB";
             labelCPUusage.Text = "      CPU: " + Convert.ToInt64(cpuCounter.NextValue()).ToString() + "%";
@@ -250,10 +251,6 @@ namespace Franco28Tool.Engine
                     LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
                 }
             }
-            if (oConfigMng.Config.ToolInternet == "Online")
-            {
-                DisplayWarning("Network lost... Please check your internet connection!");
-            }
             Firmwares.CreateFirmwareFolder();
         }
 
@@ -268,24 +265,6 @@ namespace Franco28Tool.Engine
             panelDownload.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
-        }
-
-        private void DisplayWarning(string errortext)
-        {
-            var t = new Timer();
-            var noti = new NotiPanel();
-            t.Interval = 3000;
-            if (InternetCheck.ConnectToInternet() == false)
-            {
-                noti.label2.Text = errortext;
-                openChildFormWarningNoti(noti);
-            }
-            t.Tick += (s, e) =>
-            {
-                t.Stop();
-                noti.Hide();
-            };
-            t.Start();
         }
 
         public async void canceltoolload()
@@ -1040,7 +1019,8 @@ namespace Franco28Tool.Engine
 
         private void materialButtonHelp_Click(object sender, EventArgs e)
         {
-            openChildForm(new Help());
+            var help = new Help();
+            help.ShowDialog();
         }
 
         private void materialButtonOpenFirmwareFolder_Click(object sender, EventArgs e)
