@@ -1,4 +1,6 @@
 
+using AndroidCtrl.ADB;
+using AndroidCtrl.Fastboot;
 using Franco28Tool.Engine;
 using System;
 using System.Reflection;
@@ -20,13 +22,15 @@ namespace MotoTool
               System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
         }
 
+        private static SettingsMng oConfigMng = new SettingsMng();
+
         [STAThread]
         static void Main()
         {
             string ToolVer = Assembly.GetEntryAssembly().GetName().Version.ToString();
             StartTool.ToolMaintenance();
-            string tr = "TRUE";
-            string fal = "FALSE";
+            string tr = "true";
+            string fal = "false";
             try
             {
                 if (StartTool.Maintenanceok == tr)
@@ -38,6 +42,7 @@ namespace MotoTool
                 if (StartTool.Maintenanceok == fal)
                 {
                     Folders.create_main_folders();
+                    Extract.ExtractAll();
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
                     Application.Run(new MainForm());
@@ -47,9 +52,19 @@ namespace MotoTool
             {
                 Logs.DebugErrorLogs(er);
                 Dialogs.ErrorDialog(@"FATAL ERROR: You can see logs on C:\adb\.settings\logs\", "Error: " + er);
-                Folders.OpenFolder(@"adb\.settings\logs");
-                Application.ExitThread();
+                PanicKill();
             }
+        }
+
+        public static void PanicKill()
+        {
+            oConfigMng.SaveConfig();
+            ADB.ConnectionMonitor.Stop();
+            ADB.Stop();
+            Fastboot.Dispose();
+            ADB.Dispose();
+            Application.ExitThread();
+            Application.Exit();
         }
     }
 }

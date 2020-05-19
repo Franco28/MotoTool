@@ -1,0 +1,15 @@
+C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\Setup\MotoTool.exe.config
+C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\Setup\MotoTool.exe.manifest
+C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\Setup\MotoTool.application
+C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\Setup\MotoTool.exe
+C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\Setup\MotoTool.pdb
+C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoTool\MotoTool\obj\x64\Debug\MotoTool.csprojAssemblyReference.cache
+C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoTool\MotoTool\obj\x64\Debug\MotoTool.Properties.Resources.resources
+C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoTool\MotoTool\obj\x64\Debug\MotoTool.csproj.GenerateResource.cache
+C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoTool\MotoTool\obj\x64\Debug\MotoTool.csproj.CoreCompileInputs.cache
+C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoTool\MotoTool\obj\x64\Debug\MotoTool.TrustInfo.xml
+C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoTool\MotoTool\obj\x64\Debug\MotoTool.exe.manifest
+C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoTool\MotoTool\obj\x64\Debug\MotoTool.application
+C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoTool\MotoTool\obj\x64\Debug\MotoTool.csproj.CopyComplete
+C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoTool\MotoTool\obj\x64\Debug\MotoTool.exe
+C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoTool\MotoTool\obj\x64\Debug\MotoTool.pdb

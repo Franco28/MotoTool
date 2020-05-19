@@ -116,12 +116,17 @@
     <DelaySign>false</DelaySign>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MaterialSkin, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialSkin.2.2.1.2\lib\net461\MaterialSkin.dll</HintPath>
-    </Reference>
-    <Reference Include="MotoToolEngine, Version=2.0.0.1, Culture=neutral, processorArchitecture=AMD64">
+    <Reference Include="AndroidCtrl, Version=0.0.0.16, Culture=neutral, PublicKeyToken=bd000911f10668f4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Setup\MotoToolEngine.dll</HintPath>
+      <HintPath>..\..\Setup\AndroidCtrl.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoUpdater.NET, Version=1.6.0.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Setup\AutoUpdater.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialSkin, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Setup\MaterialSkin.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -139,10 +144,11 @@
     <Compile Include="StartTool.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
-    <None Include="Resources\Res.en.resx" />
-    <None Include="Resources\Res.es.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -163,101 +169,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="moto.ico" />
-    <None Include="Resources\round_report_problem_white_24dp.png" />
-    <None Include="Resources\round_http_white_24dp.png" />
-    <None Include="Resources\round_gps_fixed_white_24dp.png" />
-    <None Include="Resources\round_build_white_24dp.png" />
-    <None Include="Resources\round_bookmark_white_24dp.png" />
-    <None Include="Resources\round_bluetooth_white_24dp.png" />
-    <None Include="Resources\round_backup_white_24dp.png" />
-    <None Include="Resources\round_assessment_white_24dp.png" />
-    <None Include="Resources\plus.png" />
-    <None Include="Resources\minus.png" />
-    <None Include="Resources\baseline_thumb_up_black_24dp.png" />
-    <None Include="Resources\baseline_fingerprint_black_24dp.png" />
-    <None Include="Resources\baseline_favorite_border_black_24dp.png" />
-    <None Include="Resources\baseline_build_black_24dp.png" />
-    <None Include="Resources\baseline_bluetooth_black_24dp.png" />
-    <None Include="Resources\round_swap_vert_white_24dp.png" />
-    <None Include="Resources\moto.ico" />
-    <None Include="Resources\infobtn.png" />
-    <None Include="Resources\flashlogo.png" />
-    <None Include="Resources\debloat.png" />
-    <None Include="Resources\debloat_2.png" />
-    <None Include="Resources\debloat_3.png" />
-    <None Include="Resources\flashlogo2.png" />
-    <None Include="Resources\fdownload.png" />
-    <None Include="Resources\contactbtn.png" />
-    <None Include="Resources\gitbtn.png" />
-    <None Include="Resources\movetotwrp.png" />
-    <None Include="Resources\MotoToolMaintenance.png" />
-    <None Include="Resources\update32.png" />
-    <None Include="Resources\Dark.png" />
-    <None Include="Resources\folder.png" />
-    <None Include="Resources\folderpath.png" />
-    <None Include="Resources\server.png" />
-    <None Include="Resources\flash.png" />
-    <None Include="Resources\zipsmall.png" />
-    <None Include="Resources\flashside.png" />
-    <None Include="Resources\bootloader.png" />
-    <None Include="Resources\recover.png" />
-    <None Include="Resources\reboot.png" />
-    <None Include="Resources\others.png" />
-    <None Include="Resources\userwindow.png" />
-    <None Include="Resources\cpu.png" />
-    <None Include="Resources\ram.png" />
-    <None Include="Resources\stora.png" />
-    <None Include="Resources\remove.png" />
-    <None Include="Resources\unzipside.png" />
-    <None Include="Resources\usericon.png" />
-    <None Include="Resources\unins.png" />
-    <None Include="Resources\Light.png" />
-    <None Include="Resources\MenuFullSideLight.png" />
-    <None Include="Resources\MenuFullSideDark.png" />
-    <None Include="Resources\MenuLigth.png" />
-    <None Include="Resources\MenuDark.png" />
-    <None Include="Resources\ExitDark.png" />
-    <None Include="Resources\MinimizeDark.png" />
-    <None Include="Resources\ExitLight.png" />
-    <None Include="Resources\MinimizeLight.png" />
-    <None Include="Resources\Ligth.png" />
-    <None Include="Resources\warning.png" />
-    <None Include="Resources\Utilities-icon.png" />
-    <None Include="Resources\unlock-icon.png" />
-    <None Include="Resources\trash-icon.png" />
-    <None Include="Resources\the-flash-icon48.png" />
-    <None Include="Resources\the-flash-icon32.png" />
-    <None Include="Resources\system-reboot-icon.png" />
-    <None Include="Resources\Spain-icon.png" />
-    <None Include="Resources\Settings-icon.png" />
-    <None Include="Resources\reload-icon.png" />
-    <None Include="Resources\Other-winrar-icon.png" />
-    <None Include="Resources\Network-Download-icon.png" />
-    <None Include="Resources\lock-icon.png" />
-    <None Include="Resources\icons8-info-64.png" />
-    <None Include="Resources\icons8-info-64 %281%29.png" />
-    <None Include="Resources\icons8-downloads-folder-48.png" />
-    <None Include="Resources\icons8-downloads-folder-32.png" />
-    <None Include="Resources\icons8-downloads-folder-24.png" />
-    <None Include="Resources\icons8-downloads-24.png" />
-    <None Include="Resources\icons8-consola-16.png" />
-    <None Include="Resources\htc-one-flash-icon.png" />
-    <None Include="Resources\help2.png" />
-    <None Include="Resources\help.png" />
-    <None Include="Resources\hdd.png" />
-    <None Include="Resources\Hard-Disk-HDD-3.5-SATA-icon.png" />
-    <None Include="Resources\folder-blue-open-icon.png" />
-    <None Include="Resources\File-Types-IMG-icon.png" />
-    <None Include="Resources\error.png" />
-    <None Include="Resources\edit-tool.png" />
-    <None Include="Resources\customer-support.png" />
-    <None Include="Resources\code.png" />
-    <None Include="Resources\Apps-reboot-icon.png" />
-    <None Include="Resources\Apps-preferences-web-browser-cache-icon.png" />
-    <None Include="Resources\Apps-Google-Translate-icon.png" />
-    <None Include="Resources\Apps-boot-icon.png" />
-    <None Include="Resources\Actions-help-about-icon32.png" />
-    <None Include="Resources\Actions-help-about-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
@@ -270,6 +181,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MotoToolEngine\MotoToolEngine.csproj">
+      <Project>{F5F92F16-C783-4B17-B725-B06F1D725B9C}</Project>
+      <Name>MotoToolEngine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

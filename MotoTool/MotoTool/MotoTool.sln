@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30001.183
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotoTool", "MotoTool\MotoTool.csproj", "{B265B459-B4B6-44BC-BDB1-B401C58DC48F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotoToolEngine", "MotoToolEngine\MotoToolEngine\MotoToolEngine.csproj", "{F5F92F16-C783-4B17-B725-B06F1D725B9C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotoToolEngine", "MotoToolEngine\MotoToolEngine.csproj", "{F5F92F16-C783-4B17-B725-B06F1D725B9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

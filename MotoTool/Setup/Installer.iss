@@ -1,10 +1,9 @@
 ; -- MotoTool-Installer.iss  (C) 2019 - 2020 --
 ; -- This is only for Motorola Moto Devices  --
 
-#define MyAppName "MotoTool"
-#define MyAppVersion "2.0.0.1"
-#define MyAppExeName "MotoTool.exe"
-#define VCLStylesSkinPath "{localappdata}\VCLStylesSkin"
+#define appname "MotoTool"
+#define appver "2.0.0.1"
+#define appexename "MotoTool.exe"
 
 [Setup]
 AppName=MotoTool
@@ -27,7 +26,7 @@ LicenseFile=license.txt
 OutputDir=C:\adb\
 OutputBaseFilename=MotoTool_v2.0.0.1_Setup
 SolidCompression=yes
-TouchDate=2020-05-17
+TouchDate=2020-05-19
 UninstallDisplayIcon={app}\moto.ico
 UserInfoPage=no
 WizardStyle=modern
@@ -37,16 +36,17 @@ Source: "remove.bat"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs crea
 Source: "moto.ico"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "MotoTool.exe.config"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "MotoTool.exe.manifest"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "MotoTool.exe"; DestDir: "{app}"
+Source: "MotoTool.exe"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "MotoTool.application"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "AndroidLib.dll"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "AndroidLib.pdb"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "Ionic.Zip.dll"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "MotoToolEngine.dll"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "MotoToolEngine.pdb"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "MaterialSkin.dll"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "MotoToolEngine.dll.config"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "AutoUpdater.NET.dll"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "AutoUpdater.NET.pdb"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "AndroidCtrl.dll"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "AndroidCtrl.pdb"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "MaterialSkin.dll"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Ionic.Zip.dll"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "flash"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "flash/*"; DestDir: "{app}/flash/"; Flags: ignoreversion recursesubdirs createallsubdirs
 
