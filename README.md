@@ -11,10 +11,6 @@
 - "XT1684_POTTER_RETEU_**SS**_8.1.0_OPS28.85-17-6-2_cid50_subsidy-DEFAULT_regulatory-DEFAULT_CFC"
 - "XT1685_POTTER_RETEU_**DS**_8.1.0_OPS28.85-17-6-2_cid50_subsidy-DEFAULT_regulatory-DEFAULT_CFC"
 
-### New MotoTool, soon...
-![Tool Soon](https://github.com/Franco28/MotoTool/blob/master/Screens/ToolSoon.png "Tool Soon")
-![Tool Soon](https://github.com/Franco28/MotoTool/blob/master/Screens/Tool2Soon.png "Tool Soon")
-
 #### * [Downloads](https://github.com/Franco28/MotoTool#downloads-1) 
 #### * [Contact](https://github.com/Franco28/MotoTool#contact) 
 
@@ -60,11 +56,6 @@ _**If you see this screen, please wait, i'm working with your device firmwares_*
 
 - If your device its A/B like doha, evert... etc. now you can use the flash twrp otpion and download TWRP-INSTALLER, then if you want to flash it, go to boot twrp option, plug your device, and in new option "Move files to TWRP" you can drag installer and drop it, this will copy the installer into your device internal storage
 
-~~## Previews~~
-
-~~### What is this?
-This is a pre-release of the Tool, this have new options and functions than Stable don´t _**(I recommend you to use this Preview, because i fix errors from Stable that i didn´t noticed!)**_, but if you want to use this previews, you are on your own risk of having bugs, and maybe other accidentally errors!~~
-
 ## Uninstall
 - You can uninstall it now from the Tool, but ensure that all files were removed on "C:\Program Files\MotoTool\" _(I noticed that Tool won´t be removed)_
 - Go to Control Panel and look for the MotoTool, select it and uninstall it! **_Be careful with this, because will ask you at the end if you want to remove MotorolaDeviceManager_2.5.4_!** 
@@ -103,11 +94,12 @@ This is a pre-release of the Tool, this have new options and functions than Stab
 ![Firmware](https://github.com/Franco28/MotoTool/blob/master/Screens/FirmwaresTEF.png "Firmware")
 ![Firmware](https://github.com/Franco28/MotoTool/blob/master/Screens/FirmwaresOTHERS.png "Firmware")
 
-### Tool Lang
-![ToolLang](https://github.com/Franco28/MotoTool/blob/master/Screens/LangEngine.png "ToolLang")
-
 ### Tool Updates
 ![ToolUpdates](https://github.com/Franco28/MotoTool/blob/master/Screens/Updates.png "ToolUpdates")
+
+### Tool Settings
+![Tool Settings](https://github.com/Franco28/MotoTool/blob/master/Screens/ToolSettings.png "Tool Settings")
+![Tool Settings](https://github.com/Franco28/MotoTool/blob/master/Screens/Tool2Settings1.png "Tool Settings")
 
 
 #
