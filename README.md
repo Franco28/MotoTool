@@ -62,7 +62,7 @@ _**If you see this screen, please wait, i'm working with your device firmwares_*
 
 
 ## Downloads
-#### Download MotoTool v2.0.0.0 - Beta (29-04-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/v2.0.0.0) 
+#### Download MotoTool v2.0.0.1 - Beta (20-05-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/v2.0.0.1) 
 #### Changelog * [Changelog](https://MotoToolEngine.000webhostapp.com/MotoTool/changelog.txt) 
 
 
@@ -99,7 +99,7 @@ _**If you see this screen, please wait, i'm working with your device firmwares_*
 
 ### Tool Settings
 ![Tool Settings](https://github.com/Franco28/MotoTool/blob/master/Screens/ToolSettings.png "Tool Settings")
-![Tool Settings](https://github.com/Franco28/MotoTool/blob/master/Screens/Tool2Settings1.png "Tool Settings")
+![Tool Settings](https://github.com/Franco28/MotoTool/blob/master/Screens/Tool2SettingsTheme.png "Tool Settings")
 
 
 #
