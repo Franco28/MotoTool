@@ -9,8 +9,10 @@ v2.0.0.1
 - New Tool UI
 - Changed the way to use Fastboot and ADB
 - Fixed lot of internal errors
+- Fixe UI bugs
 - Added new console panel
 - Added new settings (auto save logs, add new device, remove device data)
+- Added new device: Sofiar
 
 --------------
 v2.0.0.0
