@@ -5,6 +5,8 @@
 ### MotoTool for Motorola Moto Devices (Beckham, Doha, Lake, River, Evert, Sanders, Potter, Lima, Ocean, Sofiar) - (All variants)
 ### Moto Flash and download firmwares (Beckham, Doha, Sanders, Potter, Sofiar) - (All variants)
 
+### if you want a new device or add new firmwares, request it and i'll add it, if not ill drop the device from MotoTool! 
+
 ### I'm not going to support firmwares like this:
 - "XT1684_POTTER_RETEU_**SS**_8.1.0_OPS28.85-17-6-2_cid50_subsidy-DEFAULT_regulatory-DEFAULT_CFC"
 - "XT1685_POTTER_RETEU_**DS**_8.1.0_OPS28.85-17-6-2_cid50_subsidy-DEFAULT_regulatory-DEFAULT_CFC"
