@@ -2,7 +2,10 @@
 
 ## First of all, im not responsible of any device damage, you are accepting a licence when you install the Tool and you are using this at your own risk!
 
-### MotoTool for Motorola Moto Devices (Beckham, Doha, Lake, River, Evert, Sanders, Potter, Lima, Ocean) - (All variants)
+### MotoTool for Motorola Moto Devices (Beckham, Doha, Lake, River, Evert, Sanders, Potter, Lima, Ocean, Sofiar) - (All variants)
+### Moto Flash and download firmwares (Beckham, Doha, Sanders, Potter, Sofiar) - (All variants)
+
+### if you want a new device or add new firmwares, request it and i'll add it, if not ill drop the device from MotoTool! 
 
 ### I'm not going to support firmwares like this:
 - "XT1684_POTTER_RETEU_**SS**_8.1.0_OPS28.85-17-6-2_cid50_subsidy-DEFAULT_regulatory-DEFAULT_CFC"
@@ -113,6 +116,7 @@ This is a pre-release of the Tool, this have new options and functions than Stab
 ## Contact 
 #### [Telegram](https://t.me/francom28) 
 
-#
-
-#### Thanks to [regaw_leinad](https://forum.xda-developers.com/showthread.php?t=1512685) for this old lib!
+## Credits
+#### Thanks to [k1ll3r8e](https://forum.xda-developers.com/showthread.php?t=2772502) for this Android lib!
+#### Thanks to [rbsoft](https://github.com/ravibpatel/AutoUpdater.NET) for this Update lib!
+#### Thanks to [leocb](https://github.com/leocb/MaterialSkin) for this MaterialSkin lib!
