@@ -31,6 +31,7 @@ namespace Franco28Tool.Engine
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MotoFlash));
             this.panelMain = new System.Windows.Forms.Panel();
+            this.materialButtonExit = new MaterialSkin.Controls.MaterialButton();
             this.listBoxDeviceStatus = new System.Windows.Forms.ListBox();
             this.consoleMotoFlash = new System.Windows.Forms.RichTextBox();
             this.materialButtonDowngradeMoto = new MaterialSkin.Controls.MaterialButton();
@@ -40,7 +41,6 @@ namespace Franco28Tool.Engine
             this.materialSwitchFlashAllExceptModem = new MaterialSkin.Controls.MaterialSwitch();
             this.materialButtonFlashMoto = new MaterialSkin.Controls.MaterialButton();
             this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialButtonExit = new MaterialSkin.Controls.MaterialButton();
             this.panelMain.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -64,6 +64,26 @@ namespace Franco28Tool.Engine
             this.panelMain.Size = new System.Drawing.Size(995, 413);
             this.panelMain.TabIndex = 0;
             // 
+            // materialButtonExit
+            // 
+            this.materialButtonExit.AutoSize = false;
+            this.materialButtonExit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButtonExit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.materialButtonExit.Depth = 0;
+            this.materialButtonExit.DrawShadows = true;
+            this.materialButtonExit.HighEmphasis = false;
+            this.materialButtonExit.Icon = ((System.Drawing.Image)(resources.GetObject("materialButtonExit.Icon")));
+            this.materialButtonExit.Location = new System.Drawing.Point(7, 3);
+            this.materialButtonExit.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButtonExit.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButtonExit.Name = "materialButtonExit";
+            this.materialButtonExit.Size = new System.Drawing.Size(39, 30);
+            this.materialButtonExit.TabIndex = 131;
+            this.materialButtonExit.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButtonExit.UseAccentColor = true;
+            this.materialButtonExit.UseVisualStyleBackColor = true;
+            this.materialButtonExit.Click += new System.EventHandler(this.materialButtonExit_Click);
+            // 
             // listBoxDeviceStatus
             // 
             this.listBoxDeviceStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -75,7 +95,6 @@ namespace Franco28Tool.Engine
             this.listBoxDeviceStatus.ItemHeight = 16;
             this.listBoxDeviceStatus.Items.AddRange(new object[] {
             " Device: Offline!",
-            " Device Codename: ---",
             " Mode: ---"});
             this.listBoxDeviceStatus.Location = new System.Drawing.Point(57, 42);
             this.listBoxDeviceStatus.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -83,17 +102,17 @@ namespace Franco28Tool.Engine
             this.listBoxDeviceStatus.Name = "listBoxDeviceStatus";
             this.listBoxDeviceStatus.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.listBoxDeviceStatus.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listBoxDeviceStatus.Size = new System.Drawing.Size(926, 68);
+            this.listBoxDeviceStatus.Size = new System.Drawing.Size(926, 52);
             this.listBoxDeviceStatus.TabIndex = 91;
             // 
             // consoleMotoFlash
             // 
             this.consoleMotoFlash.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.consoleMotoFlash.Location = new System.Drawing.Point(57, 116);
+            this.consoleMotoFlash.Location = new System.Drawing.Point(57, 100);
             this.consoleMotoFlash.Name = "consoleMotoFlash";
             this.consoleMotoFlash.ReadOnly = true;
-            this.consoleMotoFlash.Size = new System.Drawing.Size(926, 122);
+            this.consoleMotoFlash.Size = new System.Drawing.Size(926, 138);
             this.consoleMotoFlash.TabIndex = 90;
             this.consoleMotoFlash.Text = "";
             // 
@@ -217,26 +236,6 @@ namespace Franco28Tool.Engine
             this.materialLabel9.TabIndex = 83;
             this.materialLabel9.Text = "Moto Flash";
             this.materialLabel9.UseAccent = true;
-            // 
-            // materialButtonExit
-            // 
-            this.materialButtonExit.AutoSize = false;
-            this.materialButtonExit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButtonExit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.materialButtonExit.Depth = 0;
-            this.materialButtonExit.DrawShadows = true;
-            this.materialButtonExit.HighEmphasis = false;
-            this.materialButtonExit.Icon = ((System.Drawing.Image)(resources.GetObject("materialButtonExit.Icon")));
-            this.materialButtonExit.Location = new System.Drawing.Point(7, 3);
-            this.materialButtonExit.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButtonExit.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButtonExit.Name = "materialButtonExit";
-            this.materialButtonExit.Size = new System.Drawing.Size(39, 30);
-            this.materialButtonExit.TabIndex = 131;
-            this.materialButtonExit.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButtonExit.UseAccentColor = true;
-            this.materialButtonExit.UseVisualStyleBackColor = true;
-            this.materialButtonExit.Click += new System.EventHandler(this.materialButtonExit_Click);
             // 
             // MotoFlash
             // 

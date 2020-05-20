@@ -81,6 +81,7 @@ namespace Franco28Tool.Engine
             this.materialTabSelector2 = new MaterialSkin.Controls.MaterialTabSelector();
             this.materialTabControl3 = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.materialButtonAddNewDeviceManual = new MaterialSkin.Controls.MaterialButton();
             this.materialLabel15 = new MaterialSkin.Controls.MaterialLabel();
             this.materialSwitchAutoSaveLogs = new MaterialSkin.Controls.MaterialSwitch();
             this.materialButtonRemoveToolDeviceData = new MaterialSkin.Controls.MaterialButton();
@@ -208,10 +209,10 @@ namespace Franco28Tool.Engine
             // 
             this.console.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.console.Location = new System.Drawing.Point(3, 70);
+            this.console.Location = new System.Drawing.Point(3, 67);
             this.console.Name = "console";
             this.console.ReadOnly = true;
-            this.console.Size = new System.Drawing.Size(1009, 169);
+            this.console.Size = new System.Drawing.Size(1009, 172);
             this.console.TabIndex = 58;
             this.console.Text = "";
             // 
@@ -241,15 +242,14 @@ namespace Franco28Tool.Engine
             this.listBoxDeviceStatus.ItemHeight = 16;
             this.listBoxDeviceStatus.Items.AddRange(new object[] {
             " Device: Offline!",
-            " Device Codename: ---",
             " Mode: ---"});
-            this.listBoxDeviceStatus.Location = new System.Drawing.Point(148, 3);
+            this.listBoxDeviceStatus.Location = new System.Drawing.Point(148, 9);
             this.listBoxDeviceStatus.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.listBoxDeviceStatus.MultiColumn = true;
             this.listBoxDeviceStatus.Name = "listBoxDeviceStatus";
             this.listBoxDeviceStatus.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.listBoxDeviceStatus.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listBoxDeviceStatus.Size = new System.Drawing.Size(864, 68);
+            this.listBoxDeviceStatus.Size = new System.Drawing.Size(864, 52);
             this.listBoxDeviceStatus.TabIndex = 55;
             // 
             // materialLabel12
@@ -594,7 +594,7 @@ namespace Franco28Tool.Engine
             this.labelUserName.Location = new System.Drawing.Point(2, 47);
             this.labelUserName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelUserName.Name = "labelUserName";
-            this.labelUserName.Size = new System.Drawing.Size(1011, 36);
+            this.labelUserName.Size = new System.Drawing.Size(1010, 36);
             this.labelUserName.TabIndex = 49;
             this.labelUserName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -888,6 +888,7 @@ namespace Franco28Tool.Engine
             // tabPage11
             // 
             this.tabPage11.BackColor = System.Drawing.Color.White;
+            this.tabPage11.Controls.Add(this.materialButtonAddNewDeviceManual);
             this.tabPage11.Controls.Add(this.materialLabel15);
             this.tabPage11.Controls.Add(this.materialSwitchAutoSaveLogs);
             this.tabPage11.Controls.Add(this.materialButtonRemoveToolDeviceData);
@@ -908,6 +909,28 @@ namespace Franco28Tool.Engine
             this.tabPage11.Size = new System.Drawing.Size(1005, 374);
             this.tabPage11.TabIndex = 1;
             this.tabPage11.Text = "Tool Settings";
+            // 
+            // materialButtonAddNewDeviceManual
+            // 
+            this.materialButtonAddNewDeviceManual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.materialButtonAddNewDeviceManual.AutoSize = false;
+            this.materialButtonAddNewDeviceManual.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButtonAddNewDeviceManual.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.materialButtonAddNewDeviceManual.Depth = 0;
+            this.materialButtonAddNewDeviceManual.DrawShadows = true;
+            this.materialButtonAddNewDeviceManual.HighEmphasis = false;
+            this.materialButtonAddNewDeviceManual.Icon = ((System.Drawing.Image)(resources.GetObject("materialButtonAddNewDeviceManual.Icon")));
+            this.materialButtonAddNewDeviceManual.Location = new System.Drawing.Point(732, 44);
+            this.materialButtonAddNewDeviceManual.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButtonAddNewDeviceManual.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButtonAddNewDeviceManual.Name = "materialButtonAddNewDeviceManual";
+            this.materialButtonAddNewDeviceManual.Size = new System.Drawing.Size(225, 36);
+            this.materialButtonAddNewDeviceManual.TabIndex = 68;
+            this.materialButtonAddNewDeviceManual.Text = "Add new device manual";
+            this.materialButtonAddNewDeviceManual.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButtonAddNewDeviceManual.UseAccentColor = false;
+            this.materialButtonAddNewDeviceManual.UseVisualStyleBackColor = true;
+            this.materialButtonAddNewDeviceManual.Click += new System.EventHandler(this.materialButtonAddNewDeviceManual_Click);
             // 
             // materialLabel15
             // 
@@ -982,7 +1005,7 @@ namespace Franco28Tool.Engine
             this.materialButtonAddNewDevice.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonAddNewDevice.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonAddNewDevice.Name = "materialButtonAddNewDevice";
-            this.materialButtonAddNewDevice.Size = new System.Drawing.Size(290, 36);
+            this.materialButtonAddNewDevice.Size = new System.Drawing.Size(172, 36);
             this.materialButtonAddNewDevice.TabIndex = 18;
             this.materialButtonAddNewDevice.Text = "Add new device";
             this.materialButtonAddNewDevice.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -1481,5 +1504,6 @@ namespace Franco28Tool.Engine
         private RichTextBox console;
         private MaterialLabel materialLabel15;
         private MaterialSwitch materialSwitchAutoSaveLogs;
+        private MaterialButton materialButtonAddNewDeviceManual;
     }
 }

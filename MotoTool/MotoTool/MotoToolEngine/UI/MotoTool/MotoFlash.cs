@@ -79,7 +79,6 @@ namespace Franco28Tool.Engine
                 {
                     cAppend("Device adb connected!");
                     devicecheck.Add(" Device: Online! - ADB");
-                    devicecheck.Add(" Device Codename: " + LoadDeviceServer.devicecodename);
                     devicecheck.Add(" Mode: " + state);
                     listBoxDeviceStatus.DataSource = devicecheck;
                 });
@@ -90,7 +89,6 @@ namespace Franco28Tool.Engine
                 {
                     cAppend("Device fastboot connected!");
                     devicecheck.Add(" Device: Online! - FASTBOOT");
-                    devicecheck.Add(" Device Codename: " + LoadDeviceServer.devicecodename);
                     devicecheck.Add(" Mode: " + state);
                     listBoxDeviceStatus.DataSource = devicecheck;
                 });

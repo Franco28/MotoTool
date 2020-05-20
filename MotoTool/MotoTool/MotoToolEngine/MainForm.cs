@@ -243,7 +243,6 @@ namespace Franco28Tool.Engine
                 {
                     LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
                 }
-                Firmwares.CreateFirmwareFolder();
             }
         }
 
@@ -309,7 +308,6 @@ namespace Franco28Tool.Engine
                 {
                     cAppend("Device adb connected!");
                     devicecheck.Add(" Device: Online! - ADB");
-                    devicecheck.Add(" Device Codename: " + LoadDeviceServer.devicecodename);
                     devicecheck.Add(" Mode: " + state);
                     listBoxDeviceStatus.DataSource = devicecheck;
                     GetProp();
@@ -321,7 +319,6 @@ namespace Franco28Tool.Engine
                 {
                     cAppend("Device fastboot connected!");
                     devicecheck.Add(" Device: Online! - FASTBOOT");
-                    devicecheck.Add(" Device Codename: " + LoadDeviceServer.devicecodename);
                     devicecheck.Add(" Mode: " + state);
                     listBoxDeviceStatus.DataSource = devicecheck;
                     GetProp();
@@ -831,18 +828,24 @@ namespace Franco28Tool.Engine
             }
             else
             {
-                if (state == IDDeviceState.UNKNOWN)
+                if (state == IDDeviceState.DEVICE)
                 {
                     cAppend("FLASH TWRP: Waiting for device...");
                     await Task.Run(() => ADB.WaitForDevice());
                     cAppend("FLASH TWRP: Rebooting into bootloader mode.");
                     await Task.Run(() => ADB.Instance().Reboot(IDBoot.BOOTLOADER));
                 }
+                else
+                {
+                    Thread.Sleep(1000);
+                    Strings.MSGBOXBootloaderWarning();
+                    cAppend("FLASH TWRP: Your device is in the wrong state. Please put your device in bootloader mode. " + state);
+                }
                 if (state == IDDeviceState.FASTBOOT || state == IDDeviceState.BOOTLOADER)
                 {
                     cAppend("FLASH TWRP: Flashing TWRP...");
                     await Task.Run(() => Fastboot.Instance().Flash(IDDevicePartition.RECOVERY, LoadDeviceServer.twrpname));
-                    cAppend("FLASH TWRP: Done flashing TWRP.\n");
+                    cAppend("FLASH TWRP: Done flashing TWRP.");
                 }
                 else
                 {
@@ -881,21 +884,30 @@ namespace Franco28Tool.Engine
             }
             else
             {
-                if (state == IDDeviceState.FASTBOOT || state == IDDeviceState.BOOTLOADER)
+                if (state == IDDeviceState.DEVICE)
                 {
                     cAppend("BOOT TWRP: Waiting for device...");
                     await Task.Run(() => ADB.WaitForDevice());
                     cAppend("BOOT TWRP: Rebooting into bootloader mode.");
                     await Task.Run(() => ADB.Instance().Reboot(IDBoot.BOOTLOADER));
-                    cAppend("BOOT TWRP: Botting TWRP...");
-                    await Task.Run(() => Fastboot.Instance().Flash(IDDevicePartition.BOOT, LoadDeviceServer.twrpname));
-                    cAppend("BOOT TWRP: Done booted TWRP.\n");
                 }
                 else
                 {
                     Thread.Sleep(1000);
                     Strings.MSGBOXBootloaderWarning();
-                    cAppend("FLASH TWRP: Your device is in the wrong state. Please put your device in bootloader mode. " + state);
+                    cAppend("BOOT TWRP: Your device is in the wrong state. Please put your device in bootloader mode. " + state);
+                }
+                if (state == IDDeviceState.FASTBOOT || state == IDDeviceState.BOOTLOADER)
+                {
+                    cAppend("BOOT TWRP: Booting TWRP...");
+                    await Task.Run(() => Fastboot.Instance().Boot(LoadDeviceServer.twrpname));
+                    cAppend("BOOT TWRP: Done! TWRP was booted.");
+                }
+                else
+                {
+                    Thread.Sleep(1000);
+                    Strings.MSGBOXBootloaderWarning();
+                    cAppend("BOOT TWRP: Your device is in the wrong state. Please put your device in bootloader mode. " + state);
                 }
             }
         }
@@ -930,7 +942,7 @@ namespace Franco28Tool.Engine
             {
                 Thread.Sleep(1000);
                 Strings.MSGBOXBootloaderWarning();
-                cAppend("REBOOT RECOVERY: Your device is in the wrong state.\n");
+                cAppend("REBOOT RECOVERY: Your device is in the wrong state. " + state);
             }
         }
 
@@ -996,7 +1008,7 @@ namespace Franco28Tool.Engine
             }
             else
             {
-                if (state == IDDeviceState.DEVICE || state == IDDeviceState.RECOVERY || state == IDDeviceState.FASTBOOT)
+                if (state == IDDeviceState.DEVICE || state == IDDeviceState.FASTBOOT || state == IDDeviceState.BOOTLOADER)
                 {
                     cAppend("FLASH LOGO: Waiting for device...");
                     await Task.Run(() => ADB.WaitForDevice());
@@ -1102,6 +1114,12 @@ namespace Franco28Tool.Engine
             GetProp();
         }
 
+        private void materialButtonAddNewDeviceManual_Click(object sender, EventArgs e)
+        {
+            var andm = new AddNewDevice();
+            andm.ShowDialog();
+        }
+
         private void materialButtonRemoveToolDeviceData_Click(object sender, EventArgs e)
         {
             cAppend("REMOVE DEVICE DATA: Clearing old device info...");
@@ -1147,6 +1165,7 @@ namespace Franco28Tool.Engine
             ADB.ConnectionMonitor.Stop();
             ADB.ConnectionMonitor.Callback -= ConnectionMonitorCallback;
             ADB.Stop();
+            Fastboot.ForceStop();
             Fastboot.Dispose();
             ADB.Dispose();
             oConfigMng.LoadConfig();

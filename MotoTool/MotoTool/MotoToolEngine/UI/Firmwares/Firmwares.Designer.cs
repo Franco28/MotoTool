@@ -32,6 +32,7 @@ namespace Franco28Tool.Engine
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Firmwares));
             this.label2 = new MaterialSkin.Controls.MaterialLabel();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.panelDownload = new System.Windows.Forms.Panel();
             this.materialTabSelector3 = new MaterialSkin.Controls.MaterialTabSelector();
             this.materialTabControl4 = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPageAM = new System.Windows.Forms.TabPage();
@@ -88,7 +89,7 @@ namespace Franco28Tool.Engine
             this.materialButtonATTMX = new MaterialSkin.Controls.MaterialButton();
             this.materialButtonFirmwareServer = new MaterialSkin.Controls.MaterialButton();
             this.materialButton23 = new MaterialSkin.Controls.MaterialButton();
-            this.panelDownload = new System.Windows.Forms.Panel();
+            this.console = new System.Windows.Forms.RichTextBox();
             this.panelMain.SuspendLayout();
             this.materialTabControl4.SuspendLayout();
             this.tabPageAM.SuspendLayout();
@@ -116,6 +117,7 @@ namespace Franco28Tool.Engine
             // 
             // panelMain
             // 
+            this.panelMain.Controls.Add(this.console);
             this.panelMain.Controls.Add(this.panelDownload);
             this.panelMain.Controls.Add(this.materialTabSelector3);
             this.panelMain.Controls.Add(this.materialTabControl4);
@@ -127,6 +129,14 @@ namespace Franco28Tool.Engine
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(926, 515);
             this.panelMain.TabIndex = 67;
+            // 
+            // panelDownload
+            // 
+            this.panelDownload.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelDownload.Location = new System.Drawing.Point(0, 403);
+            this.panelDownload.Name = "panelDownload";
+            this.panelDownload.Size = new System.Drawing.Size(926, 112);
+            this.panelDownload.TabIndex = 135;
             // 
             // materialTabSelector3
             // 
@@ -173,7 +183,7 @@ namespace Franco28Tool.Engine
             this.tabPageAM.Location = new System.Drawing.Point(4, 25);
             this.tabPageAM.Name = "tabPageAM";
             this.tabPageAM.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAM.Size = new System.Drawing.Size(918, 276);
+            this.tabPageAM.Size = new System.Drawing.Size(918, 309);
             this.tabPageAM.TabIndex = 0;
             this.tabPageAM.Text = "AM";
             // 
@@ -352,7 +362,7 @@ namespace Franco28Tool.Engine
             this.tabPageRET.Location = new System.Drawing.Point(4, 25);
             this.tabPageRET.Name = "tabPageRET";
             this.tabPageRET.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRET.Size = new System.Drawing.Size(918, 276);
+            this.tabPageRET.Size = new System.Drawing.Size(918, 309);
             this.tabPageRET.TabIndex = 1;
             this.tabPageRET.Text = "RET";
             // 
@@ -675,7 +685,7 @@ namespace Franco28Tool.Engine
             this.tabPageTEF.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tabPageTEF.Location = new System.Drawing.Point(4, 25);
             this.tabPageTEF.Name = "tabPageTEF";
-            this.tabPageTEF.Size = new System.Drawing.Size(918, 276);
+            this.tabPageTEF.Size = new System.Drawing.Size(918, 309);
             this.tabPageTEF.TabIndex = 2;
             this.tabPageTEF.Text = "TEF";
             this.tabPageTEF.UseVisualStyleBackColor = true;
@@ -1315,11 +1325,11 @@ namespace Franco28Tool.Engine
             this.materialButtonFirmwareServer.DrawShadows = true;
             this.materialButtonFirmwareServer.HighEmphasis = false;
             this.materialButtonFirmwareServer.Icon = ((System.Drawing.Image)(resources.GetObject("materialButtonFirmwareServer.Icon")));
-            this.materialButtonFirmwareServer.Location = new System.Drawing.Point(451, 3);
+            this.materialButtonFirmwareServer.Location = new System.Drawing.Point(488, 3);
             this.materialButtonFirmwareServer.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonFirmwareServer.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonFirmwareServer.Name = "materialButtonFirmwareServer";
-            this.materialButtonFirmwareServer.Size = new System.Drawing.Size(214, 30);
+            this.materialButtonFirmwareServer.Size = new System.Drawing.Size(177, 30);
             this.materialButtonFirmwareServer.TabIndex = 131;
             this.materialButtonFirmwareServer.Text = "Firmware Server";
             this.materialButtonFirmwareServer.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -1347,13 +1357,16 @@ namespace Franco28Tool.Engine
             this.materialButton23.UseVisualStyleBackColor = true;
             this.materialButton23.Click += new System.EventHandler(this.MaterialButtonClose_Click);
             // 
-            // panelDownload
+            // console
             // 
-            this.panelDownload.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelDownload.Location = new System.Drawing.Point(0, 403);
-            this.panelDownload.Name = "panelDownload";
-            this.panelDownload.Size = new System.Drawing.Size(926, 112);
-            this.panelDownload.TabIndex = 135;
+            this.console.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.console.Location = new System.Drawing.Point(50, 4);
+            this.console.Name = "console";
+            this.console.ReadOnly = true;
+            this.console.Size = new System.Drawing.Size(431, 32);
+            this.console.TabIndex = 136;
+            this.console.Text = "";
             // 
             // Firmwares
             // 
@@ -1443,5 +1456,6 @@ namespace Franco28Tool.Engine
         private MaterialSkin.Controls.MaterialButton materialButtonFirmwareServer;
         private MaterialSkin.Controls.MaterialButton materialButton23;
         private System.Windows.Forms.Panel panelDownload;
+        private System.Windows.Forms.RichTextBox console;
     }
 }

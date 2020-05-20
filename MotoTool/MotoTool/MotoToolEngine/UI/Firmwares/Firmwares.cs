@@ -74,6 +74,15 @@ namespace Franco28Tool.Engine
             materialButtonTMO.Enabled = false;
         }
 
+        public void cAppend(string message)
+        {
+            this.Invoke((Action)delegate
+            {
+                console.AppendText(string.Format("\n{0} : {1}", DateTime.Now, message));
+                console.ScrollToCaret();
+            });
+        }
+
         private void Firmwares_Load(object sender, EventArgs e)
         {
             oConfigMng.LoadConfig();
@@ -86,18 +95,21 @@ namespace Franco28Tool.Engine
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             }
-
+            cAppend("FIRMWARE STARTING: Checking internet connection...");
             if (InternetCheck.ConnectToInternet() == true)
             {
+                cAppend("FIRMWARE STARTING: Checking internet connection... {OK}");
                 label2.Text = " Internet Connection: Online";
             }
             else
             {
+                cAppend("FIRMWARE STARTING: Checking internet connection... {ERROR}");
                 label2.Text = " Internet Connection: Offline";
             }
 
             if (oConfigMng.Config.DeviceCodenmae == "")
             {
+                cAppend("FIRMWARE STARTING: Please connect your device, so MotoTool can read firmwares!");
                 Dialogs.WarningDialog("Device Check", "Please connect your device, so MotoTool can read firmwares!");
                 return;
             }
@@ -106,13 +118,20 @@ namespace Franco28Tool.Engine
             {
                 LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
                 string tr = "true";
+                cAppend("FIRMWARE STARTING: Checking server...");
                 if (LoadDeviceServer.fserverMaintenance == tr)
                 {
+                    cAppend("FIRMWARE STARTING: Firmware server is on maintenance! Please this will be back soon...");
                     Dialogs.WarningDialog("Firmware server is on maintenance", "Please this will be back soon...");
                     return;
+                } 
+                else
+                {
+                    cAppend("FIRMWARE STARTING: Checking server... {OK}");
                 }
             }
 
+            cAppend("FIRMWARE STARTING: Checking device info... ");
             if (oConfigMng.Config.DeviceCodenmae == "lima")
             {
                 materialButtonRETAIL.Enabled = true;
@@ -131,6 +150,7 @@ namespace Franco28Tool.Engine
                 materialButtonOPENLA.Enabled = true;
                 materialButtonOPENPE.Enabled = true;
                 materialButtonEEGB.Enabled = true;
+                cAppend("FIRMWARE STARTING: Checking device info... {"+ oConfigMng.Config.DeviceCodenmae + "}");
             }
             if (oConfigMng.Config.DeviceCodenmae == "sofiar")
             {
@@ -142,6 +162,7 @@ namespace Franco28Tool.Engine
                 materialButtonRETLA.Enabled = true;
                 materialButtonRETAR.Enabled = true;
                 materialButtonRETEU.Enabled = true;
+                cAppend("FIRMWARE STARTING: Checking device info... {" + oConfigMng.Config.DeviceCodenmae + "}");
             }
             if (oConfigMng.Config.DeviceCodenmae == "beckham")
             {
@@ -171,6 +192,7 @@ namespace Franco28Tool.Engine
                 materialButtonTIGCO.Enabled = true;
                 materialButtonTIMBR.Enabled = true;
                 materialButtonUSC.Enabled = true;
+                cAppend("FIRMWARE STARTING: Checking device info... {" + oConfigMng.Config.DeviceCodenmae + "}");
             }
             if (oConfigMng.Config.DeviceCodenmae == "doha")
             {
@@ -193,6 +215,7 @@ namespace Franco28Tool.Engine
                 materialButtonATTMX.Enabled = true;
                 materialButtonOPENCL.Enabled = true;
                 materialButtonOPENMX.Enabled = true;
+                cAppend("FIRMWARE STARTING: Checking device info... {" + oConfigMng.Config.DeviceCodenmae + "}");
             }
             if (oConfigMng.Config.DeviceCodenmae == "evert" &&
                 oConfigMng.Config.DeviceCodenmae == "potter" &&
@@ -225,6 +248,7 @@ namespace Franco28Tool.Engine
                     materialButtonTIMBR.Enabled = true;
                     materialButtonTIGCO.Enabled = true;
                     materialButtonENTCL.Enabled = true;
+                    cAppend("FIRMWARE STARTING: Checking device info... {" + oConfigMng.Config.DeviceCodenmae + "}");
                 }
                 if (oConfigMng.Config.DeviceCodenmae == "potter")
                 {
@@ -241,6 +265,7 @@ namespace Franco28Tool.Engine
                     materialButtonRETMX.Enabled = true;
                     materialButtonTIMBR.Enabled = true;
                     materialButtonTIGCO.Enabled = true;
+                    cAppend("FIRMWARE STARTING: Checking device info... {" + oConfigMng.Config.DeviceCodenmae + "}");
                 }
                 if (oConfigMng.Config.DeviceCodenmae == "lake")
                 {
@@ -262,6 +287,7 @@ namespace Franco28Tool.Engine
                     materialButtonTIMBR.Enabled = true;
                     materialButtonWOMCL.Enabled = true;
                     materialButtonTIGCO.Enabled = true;
+                    cAppend("FIRMWARE STARTING: Checking device info... {" + oConfigMng.Config.DeviceCodenmae + "}");
                 }
             }
             if (oConfigMng.Config.DeviceCodenmae == "river")
@@ -286,6 +312,7 @@ namespace Franco28Tool.Engine
                 materialButtonTIMBR.Enabled = true;
                 materialButtonNIIPE.Enabled = true;
                 materialButtonTIGCO.Enabled = true;
+                cAppend("FIRMWARE STARTING: Checking device info... {" + oConfigMng.Config.DeviceCodenmae + "}");
             }
             if (oConfigMng.Config.DeviceCodenmae == "sanders")
             {
@@ -302,10 +329,11 @@ namespace Franco28Tool.Engine
                 materialButtonTEFBR.Enabled = true;
                 materialButtonOPENMX.Enabled = true;
                 materialButtonTIMBR.Enabled = true;
+                cAppend("FIRMWARE STARTING: Checking device info... {" + oConfigMng.Config.DeviceCodenmae + "}");
             }
         }
 
-        public static void CreateFirmwareFolder()
+        public void CreateFirmwareFolder()
         {
             oConfigMng.LoadConfig();
 
@@ -315,7 +343,9 @@ namespace Franco28Tool.Engine
             }
             if (oConfigMng.Config.DeviceFirmware == oConfigMng.Config.DeviceFirmware)
             {
+                cAppend(@"Creating firmware folder: C:\\adb\\Firmware\\" + oConfigMng.Config.DeviceFirmware);
                 MotoFirmware.CreateFolders(@"C:\\adb\\Firmware\\" + oConfigMng.Config.DeviceFirmware);
+                cAppend(@"Setting firmware folder: C:\\adb\\Firmware\\" + oConfigMng.Config.DeviceFirmware);
                 Directory.SetCurrentDirectory(@"C:\\adb\\Firmware\\" + oConfigMng.Config.DeviceFirmware);
             }
         }
@@ -323,10 +353,12 @@ namespace Franco28Tool.Engine
         private void materialButtonFirmwareServer_Click(object sender, EventArgs e)
         {
             oConfigMng.LoadConfig();
+            cAppend("FIRMWARE: Opening " + oConfigMng.Config.DeviceFirmware + " firmware server...");
             if (oConfigMng.Config.DeviceFirmware == oConfigMng.Config.DeviceFirmware)
             {
                 materialButtonFirmwareServer.Enabled = true;
                 MotoFirmware.FirmwareServer(oConfigMng.Config.DeviceCodenmae + "/official/", oConfigMng.Config.DeviceFirmware);
+                cAppend("FIRMWARE: Opening " + oConfigMng.Config.DeviceFirmware + " firmware server... {OK}");
             }
         }
 
@@ -351,13 +383,16 @@ namespace Franco28Tool.Engine
             var dld = new DownloadUI();
             try
             {
+                cAppend("FIRMWARE DOWNLOAD: Checking firmware files...");
                 if (File.Exists(firmwarezip) && oConfigMng.Config.FirmwareExtracted == "0")
                 {
+                    cAppend("FIRMWARE DOWNLOAD: Firmware already exist, now it will be exctracted");
                     DirectoryInfo di = Directory.CreateDirectory(DownloadsMng.filename);
                     var unzip = new UnzipUI();
                     unzip.textBox_FilePath.Text = DownloadsMng.SAVEPathname;
                     unzip.textBox_ExtractionFolder.Text = firmwarepath;
                     unzip.Text = "Unzip: " + DownloadsMng.filename;
+                    cAppend("FIRMWARE DOWNLOAD EXTRACTING: Firmware " + DownloadsMng.filename);
                     if (unzip.textBox_FilePath.Text != string.Empty && unzip.textBox_ExtractionFolder.Text != string.Empty)
                     {
                         unzip.extractFile.RunWorkerAsync();
@@ -369,12 +404,14 @@ namespace Franco28Tool.Engine
                     unzip.Show();
                     if (File.Exists(DownloadsMng.SAVEPathname))
                     {
+                        cAppend("FIRMWARE DOWNLOAD: Removing " + DownloadsMng.SAVEPathname);
                         File.Delete(DownloadsMng.SAVEPathname);
                     }
                     return;
                 }                
                 if (oConfigMng.Config.FirmwareExtracted == "1")
                 {
+                    cAppend("FIRMWARE DOWNLOAD: Firmware already " + DownloadsMng.SAVEPathname);
                     return;
                 }
             }
@@ -388,10 +425,12 @@ namespace Franco28Tool.Engine
                 DirectoryInfo files = new DirectoryInfo(firmwarepath + @"\");
                 if (!File.Exists(files + "*.img") || !File.Exists("*.bin"))
                 {
+                    cAppend("Can't find firmware images on folder! firmware will be downloaded again! \nFirmware: " + DownloadsMng.filename);
                     Dialogs.ErrorDialog(DownloadsMng.filename, "Can't find firmware images on folder! firmware will be downloaded again! \nFirmware: " + DownloadsMng.filename);
                     openChildForm(dld);
                     return;
                 }
+                cAppend("Firmware already downloaded! \nFirmware: " + DownloadsMng.filename);
                 Dialogs.InfoDialog(DownloadsMng.filename, "Firmware already downloaded! \nFirmware: " + DownloadsMng.filename);
                 return;
             }
@@ -409,18 +448,23 @@ namespace Franco28Tool.Engine
         {
             if (oConfigMng.Config.DeviceCodenmae == "")
             {
+                cAppend("Please connect your device to read firmwares!");
                 Dialogs.WarningDialog("Device Check", "Please connect your device to read firmwares!");
                 return;
             }
             if (oConfigMng.Config.DeviceCodenmae == oConfigMng.Config.DeviceCodenmae)
             {
+                cAppend("Loading device...");
                 LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
+                cAppend("Loading device... {OK}");
                 string tr = "true";
                 var main = new ToolMaintenance();
                 if (LoadDeviceServer.fserverMaintenance == tr)
                 {
+                    cAppend("Firmware is on maintenance!");
                     openChildForm(main);
                 }
+                cAppend("Selected Device Channel: {" + oConfigMng.Config.DeviceFirmware + "}" + "\nDownloading " + oConfigMng.Config.DeviceFirmware + " Firmware");
                 Dialogs.InfoDialog("Device Channel", "Selected Device Channel: {" + oConfigMng.Config.DeviceFirmware + "}" + "\nDownloading " + oConfigMng.Config.DeviceFirmware + " Firmware");
                 oConfigMng.Config.FirmwareExtracted = "0";
                 oConfigMng.SaveConfig();
@@ -432,6 +476,7 @@ namespace Franco28Tool.Engine
         {
             oConfigMng.LoadConfig();
             DownloadsMng.TOOLDOWNLOAD(LoadDeviceServer.amserver, oConfigMng.Config.DeviceFirmware + ".xml", oConfigMng.Config.DeviceFirmware);
+            cAppend("Device channel selected: " + oConfigMng.Config.DeviceFirmware);
             DCSelected();
         }
 
@@ -488,6 +533,7 @@ namespace Franco28Tool.Engine
         {
             oConfigMng.LoadConfig();
             DownloadsMng.TOOLDOWNLOAD(LoadDeviceServer.retserver, oConfigMng.Config.DeviceFirmware + ".xml", oConfigMng.Config.DeviceFirmware);
+            cAppend("Device channel selected: " + oConfigMng.Config.DeviceFirmware);
             DCSelected();
         }
 
@@ -593,6 +639,7 @@ namespace Franco28Tool.Engine
         {
             oConfigMng.LoadConfig();
             DownloadsMng.TOOLDOWNLOAD(LoadDeviceServer.tefserver, oConfigMng.Config.DeviceFirmware + ".xml", oConfigMng.Config.DeviceFirmware);
+            cAppend("Device channel selected: " + oConfigMng.Config.DeviceFirmware);
             DCSelected();
         }
 
@@ -642,6 +689,7 @@ namespace Franco28Tool.Engine
         {
             oConfigMng.LoadConfig();
             DownloadsMng.TOOLDOWNLOAD(LoadDeviceServer.othersserver, oConfigMng.Config.DeviceFirmware + ".xml", oConfigMng.Config.DeviceFirmware);
+            cAppend("Device channel selected: " + oConfigMng.Config.DeviceFirmware);
             DCSelected();
         }
 
@@ -794,6 +842,22 @@ namespace Franco28Tool.Engine
 
         private void MaterialButtonClose_Click(object sender, EventArgs e)
         {
+            if (oConfigMng.Config.Autosavelogs == "true")
+            {
+                cAppend("EXIT: Saving Firmware logs...");
+                try
+                {
+                    string filePath = @"C:\adb\.settings\Logs\FirmwareLogs.txt";
+                    cAppend("EXIT: Saving Firmware logs... {OK}");
+                    console.SaveFile(filePath, RichTextBoxStreamType.PlainText);
+                }
+                catch (Exception ex)
+                {
+                    Logs.DebugErrorLogs(ex);
+                    cAppend("EXIT: Saving Firmware logs... {ERROR}");
+                    Dialogs.ErrorDialog("An error has occured while attempting to save the output...", ex.ToString());
+                }
+            }
             var download = new DownloadUI();
             if (download.webClient != null)
             {
