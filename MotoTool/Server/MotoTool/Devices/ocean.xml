@@ -8,5 +8,5 @@
 <tefserver>ocean/TEF/</tefserver>
 <amserver>ocean/AM/</amserver>
 <othersserver>ocean/OTHERS/</othersserver>
-<fserverMaintenance>TRUE</fserverMaintenance>
+<fserverMaintenance>true</fserverMaintenance>
 </ocean>

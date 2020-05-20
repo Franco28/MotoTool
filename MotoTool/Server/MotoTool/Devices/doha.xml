@@ -8,5 +8,5 @@
 <tefserver>doha/TEF/</tefserver>
 <amserver>doha/AM/</amserver>
 <othersserver>doha/OTHERS/</othersserver>
-<fserverMaintenance>FALSE</fserverMaintenance>
+<fserverMaintenance>false</fserverMaintenance>
 </doha>

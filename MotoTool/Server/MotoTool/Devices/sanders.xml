@@ -7,5 +7,5 @@
 <tefserver>sanders/TEF/</tefserver>
 <amserver>sanders/AM/</amserver>
 <othersserver>sanders/OTHERS/</othersserver>
-<fserverMaintenance>FALSE</fserverMaintenance>
+<fserverMaintenance>false</fserverMaintenance>
 </sanders>

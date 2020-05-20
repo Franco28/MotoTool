@@ -233,7 +233,7 @@ namespace Franco28Tool.Engine
             }
             else
             {
-                this.Text = "MotoTool v" + oConfigMng.Config.ToolVersion + " - " + oConfigMng.Config.DeviceCodenmae;
+                this.Text = "MotoTool v" + oConfigMng.Config.ToolVersion + " - " + oConfigMng.Config.DeviceCodenmae + " - " + oConfigMng.Config.DeviceFirmware;
                 TextBoxDebugInfo.Text = "Device Channel: " + oConfigMng.Config.DeviceFirmware;
                 materialButtonBlankFlash.Enabled = true;
                 materialButtonFlashLogo.Enabled = true;

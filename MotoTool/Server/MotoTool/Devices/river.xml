@@ -8,5 +8,5 @@
 <tefserver>river/TEF/</tefserver>
 <amserver>river/AM/</amserver>
 <othersserver>river/OTHERS/</othersserver>
-<fserverMaintenance>TRUE</fserverMaintenance>
+<fserverMaintenance>true</fserverMaintenance>
 </river>

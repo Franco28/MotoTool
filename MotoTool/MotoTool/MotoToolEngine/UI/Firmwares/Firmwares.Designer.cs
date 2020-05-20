@@ -30,7 +30,9 @@ namespace Franco28Tool.Engine
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Firmwares));
-            this.panelDownload = new System.Windows.Forms.Panel();
+            this.label2 = new MaterialSkin.Controls.MaterialLabel();
+            this.panelMain = new System.Windows.Forms.Panel();
+            this.materialTabSelector3 = new MaterialSkin.Controls.MaterialTabSelector();
             this.materialTabControl4 = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPageAM = new System.Windows.Forms.TabPage();
             this.materialButtonAMXCO = new MaterialSkin.Controls.MaterialButton();
@@ -84,27 +86,62 @@ namespace Franco28Tool.Engine
             this.materialButtonBWACA = new MaterialSkin.Controls.MaterialButton();
             this.materialButtonNIIPE = new MaterialSkin.Controls.MaterialButton();
             this.materialButtonATTMX = new MaterialSkin.Controls.MaterialButton();
-            this.panelMain = new System.Windows.Forms.Panel();
-            this.materialButton23 = new MaterialSkin.Controls.MaterialButton();
-            this.label2 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialTabSelector3 = new MaterialSkin.Controls.MaterialTabSelector();
             this.materialButtonFirmwareServer = new MaterialSkin.Controls.MaterialButton();
+            this.materialButton23 = new MaterialSkin.Controls.MaterialButton();
+            this.panelDownload = new System.Windows.Forms.Panel();
+            this.panelMain.SuspendLayout();
             this.materialTabControl4.SuspendLayout();
             this.tabPageAM.SuspendLayout();
             this.tabPageRET.SuspendLayout();
             this.tabPageTEF.SuspendLayout();
             this.tabPageOTHERS.SuspendLayout();
-            this.panelMain.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panelDownload
+            // label2
             // 
-            this.panelDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelDownload.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelDownload.Location = new System.Drawing.Point(0, 408);
-            this.panelDownload.Name = "panelDownload";
-            this.panelDownload.Size = new System.Drawing.Size(926, 107);
-            this.panelDownload.TabIndex = 66;
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Depth = 0;
+            this.label2.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.label2.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label2.HighEmphasis = true;
+            this.label2.Location = new System.Drawing.Point(672, 4);
+            this.label2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(250, 25);
+            this.label2.TabIndex = 129;
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label2.UseAccent = true;
+            // 
+            // panelMain
+            // 
+            this.panelMain.Controls.Add(this.panelDownload);
+            this.panelMain.Controls.Add(this.materialTabSelector3);
+            this.panelMain.Controls.Add(this.materialTabControl4);
+            this.panelMain.Controls.Add(this.materialButtonFirmwareServer);
+            this.panelMain.Controls.Add(this.materialButton23);
+            this.panelMain.Controls.Add(this.label2);
+            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMain.Location = new System.Drawing.Point(0, 0);
+            this.panelMain.Name = "panelMain";
+            this.panelMain.Size = new System.Drawing.Size(926, 515);
+            this.panelMain.TabIndex = 67;
+            // 
+            // materialTabSelector3
+            // 
+            this.materialTabSelector3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.materialTabSelector3.BaseTabControl = this.materialTabControl4;
+            this.materialTabSelector3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.materialTabSelector3.Depth = 0;
+            this.materialTabSelector3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialTabSelector3.Location = new System.Drawing.Point(0, 39);
+            this.materialTabSelector3.Margin = new System.Windows.Forms.Padding(0);
+            this.materialTabSelector3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialTabSelector3.Name = "materialTabSelector3";
+            this.materialTabSelector3.Size = new System.Drawing.Size(926, 24);
+            this.materialTabSelector3.TabIndex = 133;
             // 
             // materialTabControl4
             // 
@@ -114,13 +151,13 @@ namespace Franco28Tool.Engine
             this.materialTabControl4.Controls.Add(this.tabPageTEF);
             this.materialTabControl4.Controls.Add(this.tabPageOTHERS);
             this.materialTabControl4.Depth = 0;
-            this.materialTabControl4.Location = new System.Drawing.Point(0, 76);
+            this.materialTabControl4.Location = new System.Drawing.Point(0, 63);
             this.materialTabControl4.Margin = new System.Windows.Forms.Padding(0);
             this.materialTabControl4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialTabControl4.Name = "materialTabControl4";
             this.materialTabControl4.SelectedIndex = 0;
-            this.materialTabControl4.Size = new System.Drawing.Size(926, 335);
-            this.materialTabControl4.TabIndex = 64;
+            this.materialTabControl4.Size = new System.Drawing.Size(926, 338);
+            this.materialTabControl4.TabIndex = 132;
             // 
             // tabPageAM
             // 
@@ -136,7 +173,7 @@ namespace Franco28Tool.Engine
             this.tabPageAM.Location = new System.Drawing.Point(4, 25);
             this.tabPageAM.Name = "tabPageAM";
             this.tabPageAM.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAM.Size = new System.Drawing.Size(918, 306);
+            this.tabPageAM.Size = new System.Drawing.Size(918, 276);
             this.tabPageAM.TabIndex = 0;
             this.tabPageAM.Text = "AM";
             // 
@@ -315,7 +352,7 @@ namespace Franco28Tool.Engine
             this.tabPageRET.Location = new System.Drawing.Point(4, 25);
             this.tabPageRET.Name = "tabPageRET";
             this.tabPageRET.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRET.Size = new System.Drawing.Size(918, 306);
+            this.tabPageRET.Size = new System.Drawing.Size(918, 276);
             this.tabPageRET.TabIndex = 1;
             this.tabPageRET.Text = "RET";
             // 
@@ -638,7 +675,7 @@ namespace Franco28Tool.Engine
             this.tabPageTEF.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tabPageTEF.Location = new System.Drawing.Point(4, 25);
             this.tabPageTEF.Name = "tabPageTEF";
-            this.tabPageTEF.Size = new System.Drawing.Size(918, 306);
+            this.tabPageTEF.Size = new System.Drawing.Size(918, 276);
             this.tabPageTEF.TabIndex = 2;
             this.tabPageTEF.Text = "TEF";
             this.tabPageTEF.UseVisualStyleBackColor = true;
@@ -801,7 +838,7 @@ namespace Franco28Tool.Engine
             this.tabPageOTHERS.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tabPageOTHERS.Location = new System.Drawing.Point(4, 25);
             this.tabPageOTHERS.Name = "tabPageOTHERS";
-            this.tabPageOTHERS.Size = new System.Drawing.Size(918, 306);
+            this.tabPageOTHERS.Size = new System.Drawing.Size(918, 309);
             this.tabPageOTHERS.TabIndex = 3;
             this.tabPageOTHERS.Text = "Others";
             this.tabPageOTHERS.UseVisualStyleBackColor = true;
@@ -1268,70 +1305,6 @@ namespace Franco28Tool.Engine
             this.materialButtonATTMX.UseVisualStyleBackColor = true;
             this.materialButtonATTMX.Click += new System.EventHandler(this.materialButtonATTMX_Click);
             // 
-            // panelMain
-            // 
-            this.panelMain.Controls.Add(this.materialButtonFirmwareServer);
-            this.panelMain.Controls.Add(this.materialButton23);
-            this.panelMain.Controls.Add(this.label2);
-            this.panelMain.Controls.Add(this.materialTabSelector3);
-            this.panelMain.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelMain.Location = new System.Drawing.Point(0, 0);
-            this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(926, 73);
-            this.panelMain.TabIndex = 67;
-            // 
-            // materialButton23
-            // 
-            this.materialButton23.AutoSize = false;
-            this.materialButton23.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButton23.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.materialButton23.Depth = 0;
-            this.materialButton23.DrawShadows = true;
-            this.materialButton23.HighEmphasis = false;
-            this.materialButton23.Icon = ((System.Drawing.Image)(resources.GetObject("materialButton23.Icon")));
-            this.materialButton23.Location = new System.Drawing.Point(4, 3);
-            this.materialButton23.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButton23.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButton23.Name = "materialButton23";
-            this.materialButton23.Size = new System.Drawing.Size(39, 30);
-            this.materialButton23.TabIndex = 130;
-            this.materialButton23.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButton23.UseAccentColor = true;
-            this.materialButton23.UseVisualStyleBackColor = true;
-            this.materialButton23.Click += new System.EventHandler(this.MaterialButtonClose_Click);
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Depth = 0;
-            this.label2.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.label2.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label2.HighEmphasis = true;
-            this.label2.Location = new System.Drawing.Point(672, 4);
-            this.label2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(250, 25);
-            this.label2.TabIndex = 129;
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label2.UseAccent = true;
-            // 
-            // materialTabSelector3
-            // 
-            this.materialTabSelector3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.materialTabSelector3.BaseTabControl = this.materialTabControl4;
-            this.materialTabSelector3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.materialTabSelector3.Depth = 0;
-            this.materialTabSelector3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialTabSelector3.Location = new System.Drawing.Point(0, 35);
-            this.materialTabSelector3.Margin = new System.Windows.Forms.Padding(0);
-            this.materialTabSelector3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialTabSelector3.Name = "materialTabSelector3";
-            this.materialTabSelector3.Size = new System.Drawing.Size(926, 36);
-            this.materialTabSelector3.TabIndex = 128;
-            // 
             // materialButtonFirmwareServer
             // 
             this.materialButtonFirmwareServer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1354,6 +1327,34 @@ namespace Franco28Tool.Engine
             this.materialButtonFirmwareServer.UseVisualStyleBackColor = true;
             this.materialButtonFirmwareServer.Click += new System.EventHandler(this.materialButtonFirmwareServer_Click);
             // 
+            // materialButton23
+            // 
+            this.materialButton23.AutoSize = false;
+            this.materialButton23.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButton23.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.materialButton23.Depth = 0;
+            this.materialButton23.DrawShadows = true;
+            this.materialButton23.HighEmphasis = false;
+            this.materialButton23.Icon = ((System.Drawing.Image)(resources.GetObject("materialButton23.Icon")));
+            this.materialButton23.Location = new System.Drawing.Point(4, 3);
+            this.materialButton23.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButton23.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButton23.Name = "materialButton23";
+            this.materialButton23.Size = new System.Drawing.Size(39, 30);
+            this.materialButton23.TabIndex = 130;
+            this.materialButton23.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButton23.UseAccentColor = true;
+            this.materialButton23.UseVisualStyleBackColor = true;
+            this.materialButton23.Click += new System.EventHandler(this.MaterialButtonClose_Click);
+            // 
+            // panelDownload
+            // 
+            this.panelDownload.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelDownload.Location = new System.Drawing.Point(0, 403);
+            this.panelDownload.Name = "panelDownload";
+            this.panelDownload.Size = new System.Drawing.Size(926, 112);
+            this.panelDownload.TabIndex = 135;
+            // 
             // Firmwares
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1362,8 +1363,6 @@ namespace Franco28Tool.Engine
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(926, 515);
             this.Controls.Add(this.panelMain);
-            this.Controls.Add(this.panelDownload);
-            this.Controls.Add(this.materialTabControl4);
             this.ForeColor = System.Drawing.Color.Black;
             this.MaximizeBox = false;
             this.Name = "Firmwares";
@@ -1373,38 +1372,31 @@ namespace Franco28Tool.Engine
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " ";
             this.Load += new System.EventHandler(this.Firmwares_Load);
+            this.panelMain.ResumeLayout(false);
             this.materialTabControl4.ResumeLayout(false);
             this.tabPageAM.ResumeLayout(false);
             this.tabPageRET.ResumeLayout(false);
             this.tabPageTEF.ResumeLayout(false);
             this.tabPageOTHERS.ResumeLayout(false);
-            this.panelMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panelDownload;
+        private MaterialSkin.Controls.MaterialLabel label2;
+        private System.Windows.Forms.Panel panelMain;
+        private MaterialSkin.Controls.MaterialTabSelector materialTabSelector3;
         private MaterialSkin.Controls.MaterialTabControl materialTabControl4;
         private System.Windows.Forms.TabPage tabPageAM;
-        private MaterialSkin.Controls.MaterialButton materialButtonAMXM;
-        private System.Windows.Forms.TabPage tabPageRET;
-        private System.Windows.Forms.TabPage tabPageTEF;
-        private System.Windows.Forms.TabPage tabPageOTHERS;
         private MaterialSkin.Controls.MaterialButton materialButtonAMXCO;
         private MaterialSkin.Controls.MaterialButton materialButtonAMZ;
         private MaterialSkin.Controls.MaterialButton materialButtonAMXCL;
         private MaterialSkin.Controls.MaterialButton materialButtonAMXPE;
         private MaterialSkin.Controls.MaterialButton materialButtonAMXLA;
         private MaterialSkin.Controls.MaterialButton materialButtonAMXBR;
-        private MaterialSkin.Controls.MaterialButton materialButtonRETEU;
-        private MaterialSkin.Controls.MaterialButton materialButtonRETLA;
-        private MaterialSkin.Controls.MaterialButton materialButtonRETAR;
-        private MaterialSkin.Controls.MaterialButton materialButtonRETCA;
-        private MaterialSkin.Controls.MaterialButton materialButtonRETAPAC;
-        private MaterialSkin.Controls.MaterialButton materialButtonRETBR;
-        private MaterialSkin.Controls.MaterialButton materialButtonRETAIL;
+        private MaterialSkin.Controls.MaterialButton materialButtonAMXM;
+        private System.Windows.Forms.TabPage tabPageRET;
         private MaterialSkin.Controls.MaterialButton materialButtonRETLA1ST;
         private MaterialSkin.Controls.MaterialButton materialButtonRETRU;
         private MaterialSkin.Controls.MaterialButton materialButtonRETCL;
@@ -1412,12 +1404,28 @@ namespace Franco28Tool.Engine
         private MaterialSkin.Controls.MaterialButton materialButtonRETIN;
         private MaterialSkin.Controls.MaterialButton materialButtonRETUS;
         private MaterialSkin.Controls.MaterialButton materialButtonRETMX;
-        private MaterialSkin.Controls.MaterialButton materialButtonTEFBR;
+        private MaterialSkin.Controls.MaterialButton materialButtonRETEU;
+        private MaterialSkin.Controls.MaterialButton materialButtonRETLA;
+        private MaterialSkin.Controls.MaterialButton materialButtonRETAR;
+        private MaterialSkin.Controls.MaterialButton materialButtonRETCA;
+        private MaterialSkin.Controls.MaterialButton materialButtonRETAPAC;
+        private MaterialSkin.Controls.MaterialButton materialButtonRETBR;
+        private MaterialSkin.Controls.MaterialButton materialButtonRETAIL;
+        private System.Windows.Forms.TabPage tabPageTEF;
         private MaterialSkin.Controls.MaterialButton materialButtonTEFMX;
         private MaterialSkin.Controls.MaterialButton materialButtonTEFES;
         private MaterialSkin.Controls.MaterialButton materialButtonTEFCO;
         private MaterialSkin.Controls.MaterialButton materialButtonTEFCL;
         private MaterialSkin.Controls.MaterialButton materialButtonTEFPE;
+        private MaterialSkin.Controls.MaterialButton materialButtonTEFBR;
+        private System.Windows.Forms.TabPage tabPageOTHERS;
+        private MaterialSkin.Controls.MaterialButton materialButtonCC;
+        private MaterialSkin.Controls.MaterialButton materialButtonEEGB;
+        private MaterialSkin.Controls.MaterialButton materialButtonWOMCL;
+        private MaterialSkin.Controls.MaterialButton materialButtonPLUSPL;
+        private MaterialSkin.Controls.MaterialButton materialButtonOPENPE;
+        private MaterialSkin.Controls.MaterialButton materialButtonOPENLA;
+        private MaterialSkin.Controls.MaterialButton materialButtonSprint;
         private MaterialSkin.Controls.MaterialButton materialButtonTIMBR;
         private MaterialSkin.Controls.MaterialButton materialButtonUSC;
         private MaterialSkin.Controls.MaterialButton materialButtonTIGCO;
@@ -1432,17 +1440,8 @@ namespace Franco28Tool.Engine
         private MaterialSkin.Controls.MaterialButton materialButtonBWACA;
         private MaterialSkin.Controls.MaterialButton materialButtonNIIPE;
         private MaterialSkin.Controls.MaterialButton materialButtonATTMX;
-        private MaterialSkin.Controls.MaterialButton materialButtonPLUSPL;
-        private MaterialSkin.Controls.MaterialButton materialButtonOPENPE;
-        private MaterialSkin.Controls.MaterialButton materialButtonOPENLA;
-        private MaterialSkin.Controls.MaterialButton materialButtonSprint;
-        private MaterialSkin.Controls.MaterialButton materialButtonCC;
-        private MaterialSkin.Controls.MaterialButton materialButtonEEGB;
-        private MaterialSkin.Controls.MaterialButton materialButtonWOMCL;
-        private System.Windows.Forms.Panel panelMain;
-        private MaterialSkin.Controls.MaterialLabel label2;
-        private MaterialSkin.Controls.MaterialTabSelector materialTabSelector3;
-        private MaterialSkin.Controls.MaterialButton materialButton23;
         private MaterialSkin.Controls.MaterialButton materialButtonFirmwareServer;
+        private MaterialSkin.Controls.MaterialButton materialButton23;
+        private System.Windows.Forms.Panel panelDownload;
     }
 }

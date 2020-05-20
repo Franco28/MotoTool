@@ -8,5 +8,5 @@
 <tefserver>ginkgo/TEF/</tefserver>
 <amserver>ginkgo/AM/</amserver>
 <othersserver>ginkgo/OTHERS/</othersserver>
-<fserverMaintenance>TRUE</fserverMaintenance>
+<fserverMaintenance>true</fserverMaintenance>
 </ginkgo>

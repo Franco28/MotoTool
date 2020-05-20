@@ -7,5 +7,5 @@
 <tefserver>evert/TEF/</tefserver>
 <amserver>evert/AM/</amserver>
 <othersserver>evert/OTHERS/</othersserver>
-<fserverMaintenance>TRUE</fserverMaintenance>
+<fserverMaintenance>true</fserverMaintenance>
 </evert>

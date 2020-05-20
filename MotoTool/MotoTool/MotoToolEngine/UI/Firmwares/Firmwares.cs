@@ -108,7 +108,8 @@ namespace Franco28Tool.Engine
                 string tr = "true";
                 if (LoadDeviceServer.fserverMaintenance == tr)
                 {
-                    openChildForm2(new ToolMaintenance());
+                    Dialogs.WarningDialog("Firmware server is on maintenance", "Please this will be back soon...");
+                    return;
                 }
             }
 
@@ -130,6 +131,17 @@ namespace Franco28Tool.Engine
                 materialButtonOPENLA.Enabled = true;
                 materialButtonOPENPE.Enabled = true;
                 materialButtonEEGB.Enabled = true;
+            }
+            if (oConfigMng.Config.DeviceCodenmae == "sofiar")
+            {
+                materialButtonAMXLA.Enabled = true;
+                materialButtonAMXCL.Enabled = true;
+                materialButtonAMXCO.Enabled = true;
+                materialButtonATTMX.Enabled = true;
+                materialButtonOPENMX.Enabled = true;
+                materialButtonRETLA.Enabled = true;
+                materialButtonRETAR.Enabled = true;
+                materialButtonRETEU.Enabled = true;
             }
             if (oConfigMng.Config.DeviceCodenmae == "beckham")
             {
@@ -318,19 +330,6 @@ namespace Franco28Tool.Engine
             }
         }
 
-        public void openChildForm2(Form childForm)
-        {
-            if (activeForm != null) activeForm.Close();
-            activeForm = childForm;
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Fill;
-            panelMain.Controls.Add(childForm);
-            panelMain.Tag = childForm;
-            childForm.BringToFront();
-            childForm.Show();
-        }
-
         public void openChildForm(Form childForm)
         {
             if (activeForm != null) activeForm.Close();
@@ -416,7 +415,7 @@ namespace Franco28Tool.Engine
             if (oConfigMng.Config.DeviceCodenmae == oConfigMng.Config.DeviceCodenmae)
             {
                 LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
-                string tr = "TRUE";
+                string tr = "true";
                 var main = new ToolMaintenance();
                 if (LoadDeviceServer.fserverMaintenance == tr)
                 {

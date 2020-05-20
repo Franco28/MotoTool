@@ -131,8 +131,9 @@ namespace Franco28Tool.Engine
         private async void MotoFlash_Load(object sender, EventArgs e)
         {
             oConfigMng.LoadConfig();
-            cAppend("STARTING MOTO FLASH: Detecting device...");
+            cAppend("STARTING MOTO FLASH: Starting DeviceDetectionService...");
             await Task.Run(() => DeviceDetectionService());
+            cAppend("STARTING MOTO FLASH: Starting DeviceDetectionService... {OK}");
             if (oConfigMng.Config.ToolTheme == "light")
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
@@ -155,13 +156,14 @@ namespace Franco28Tool.Engine
                 oConfigMng.Config.DeviceCodenmae != "doha" &&
                 oConfigMng.Config.DeviceCodenmae != "sanders" &&
                 oConfigMng.Config.DeviceCodenmae != "potter" &&
-                oConfigMng.Config.DeviceCodenmae != "ocean")
+                oConfigMng.Config.DeviceCodenmae != "ocean" &&
+                oConfigMng.Config.DeviceCodenmae != "sofiar")
             {
                 cAppend("STARTING MOTO FLASH: Device not compatible yet! Current device: " + oConfigMng.Config.DeviceCodenmae);
                 materialButtonDowngradeMoto.Enabled = false;
                 materialButtonFlashMoto.Enabled = false;
                 groupBox1.Enabled = false;
-                Dialogs.WarningDialog("MotoFlash: Device not compatible yet!", "Hey! im working to make compatible your device! device compatible for now: Beckham, Doha, Potter, Sanders and Ocean");
+                Dialogs.WarningDialog("MotoFlash: Device not compatible yet!", "Hey! im working to make compatible your device! device compatible for now: Beckham, Doha, Potter, Sanders, Ocean and Sofiar");
                 return;
             }
             else
@@ -171,11 +173,13 @@ namespace Franco28Tool.Engine
                 {
                     if (oConfigMng.Config.DeviceFirmware == oConfigMng.Config.DeviceFirmware)
                     {
+                        cAppend("STARTING MOTO FLASH: Setting firmware path: " + firmwarepath);
                         Directory.SetCurrentDirectory(firmwarepath);
                     }
                 }
                 else
                 {
+                    cAppend("STARTING MOTO FLASH: Please download your firmware! - Device Channel: " + "{ " + oConfigMng.Config.DeviceFirmware + "}");
                     materialButtonDowngradeMoto.Enabled = false;
                     materialButtonFlashMoto.Enabled = false;
                     groupBox1.Enabled = false;
@@ -192,6 +196,7 @@ namespace Franco28Tool.Engine
             var devices1 = String.Join("", devices.ToArray());
             cAppend("MOTO FLASH: Flashing... {" + devices1 + "}");
         }
+
 
         private async void flash_Click(object sender, EventArgs e)
         {
@@ -222,7 +227,7 @@ namespace Franco28Tool.Engine
                             cAppend("Device Info: Waiting for device...");
                             await Task.Run(() => ADB.WaitForDevice());
 
-                            if (oConfigMng.Config.DeviceCodenmae == "doha" && oConfigMng.Config.DeviceCodenmae == "ocean" && oConfigMng.Config.DeviceCodenmae == "evert")
+                            if (oConfigMng.Config.DeviceCodenmae == "sofiar" && oConfigMng.Config.DeviceCodenmae == "doha" && oConfigMng.Config.DeviceCodenmae == "ocean" && oConfigMng.Config.DeviceCodenmae == "evert")
                             {
                                 FFlash(FirmwareFlashRead.set_a);
                             }
@@ -310,6 +315,40 @@ namespace Franco28Tool.Engine
                                 FFlash(FirmwareFlashRead.oem_a);
                                 FFlash(FirmwareFlashRead.oem_b);
                             }
+                            if (oConfigMng.Config.DeviceCodenmae == "sofiar")
+                            {
+                                FFlash(FirmwareFlashRead.vbmeta_a);
+                                FFlash(FirmwareFlashRead.vbmeta_b);
+                                FFlash(FirmwareFlashRead.radio_a);
+                                FFlash(FirmwareFlashRead.radio_b);
+                                FFlash(FirmwareFlashRead.bluetooth_a);
+                                FFlash(FirmwareFlashRead.bluetooth_b);
+                                FFlash(FirmwareFlashRead.dsp_a);
+                                FFlash(FirmwareFlashRead.dsp_b);
+                                FFlash(FirmwareFlashRead.logo_a);
+                                FFlash(FirmwareFlashRead.logo_b);
+                                FFlash(FirmwareFlashRead.boot_a);
+                                FFlash(FirmwareFlashRead.boot_b);
+                                FFlash(FirmwareFlashRead.dtbo_a);
+                                FFlash(FirmwareFlashRead.dtbo_b);
+                                FFlash(FirmwareFlashRead.recovery_a);
+                                FFlash(FirmwareFlashRead.recovery_b);
+                                FFlash(FirmwareFlashRead.system_a_0);
+                                FFlash(FirmwareFlashRead.system_a_1);
+                                FFlash(FirmwareFlashRead.system_a_2);
+                                FFlash(FirmwareFlashRead.system_a_3);
+                                FFlash(FirmwareFlashRead.system_a_4);
+                                FFlash(FirmwareFlashRead.system_a_5);
+                                FFlash(FirmwareFlashRead.system_a_6);
+                                FFlash(FirmwareFlashRead.system_a_7);
+                                FFlash(FirmwareFlashRead.system_a_8);
+                                FFlash(FirmwareFlashRead.system_a_9);
+                                FFlash(FirmwareFlashRead.system_a_10);
+                                FFlash(FirmwareFlashRead.system_a_11);
+                                FFlash(FirmwareFlashRead.system_a_12);
+                                FFlash(FirmwareFlashRead.system_a_13);
+                                FFlash(FirmwareFlashRead.system_a_14);
+                            }
                             if (oConfigMng.Config.DeviceCodenmae == "doha")
                             {
                                 FirmwareFlashRead.ReadFirmwareFlashAB(oConfigMng.Config.DeviceCodenmae);
@@ -378,7 +417,10 @@ namespace Franco28Tool.Engine
                         // no modem
                         if (materialSwitchFlashAllExceptModem.Checked == true)
                         {
-                          
+                            cAppend("Moto Flash: Flash No Modem: This option is not ready yet..." );
+                            Dialogs.WarningDialog("Moto Flash: Flash No Modem", "This option is not ready yet...");
+                            materialSwitchFlashAllExceptModem.Checked = false;
+                            return;
                         }
                     }
                     catch (Exception er)
@@ -409,15 +451,26 @@ namespace Franco28Tool.Engine
         private void materialSwitchFlashAll_CheckedChanged(object sender, EventArgs e)
         {
             FlashAll = materialSwitchFlashAll.Checked;
+            if (materialSwitchFlashAll.Checked == true)
+            {
+                FlashAllExceptModem = materialSwitchFlashAllExceptModem.Checked = false;
+                materialSwitchFlashAllExceptModem.Checked = false;
+            }
         }
 
         private void materialSwitchFlashAllExceptModem_CheckedChanged(object sender, EventArgs e)
         {
             FlashAllExceptModem = materialSwitchFlashAllExceptModem.Checked;
+            if (materialSwitchFlashAllExceptModem.Checked == true)
+            {
+                FlashAll = materialSwitchFlashAll.Checked = false;
+                materialSwitchFlashAll.Checked = false;
+            }
         }
 
         private void materialButtonExit_Click(object sender, EventArgs e)
         {
+            oConfigMng.LoadConfig();
             if (oConfigMng.Config.Autosavelogs == "true")
             {
                 cAppend("EXIT: Saving MotoFlash logs...");

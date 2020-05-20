@@ -6,5 +6,5 @@
 <retserver>lima/RET/</retserver>
 <tefserver>lima/TEF/</tefserver>
 <othersserver>lima/OTHERS/</othersserver>
-<fserverMaintenance>FALSE</fserverMaintenance>
+<fserverMaintenance>false</fserverMaintenance>
 </lima>

@@ -7,5 +7,5 @@
 <tefserver>potter/TEF/</tefserver>
 <amserver>potter/AM/</amserver>
 <othersserver>potter/OTHERS/</othersserver>
-<fserverMaintenance>TRUE</fserverMaintenance>
+<fserverMaintenance>true</fserverMaintenance>
 </potter>

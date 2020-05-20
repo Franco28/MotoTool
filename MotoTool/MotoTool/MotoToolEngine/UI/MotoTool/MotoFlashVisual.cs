@@ -89,9 +89,11 @@ namespace Franco28Tool.Engine
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             }
-            cAppend("STARTING FLASH TOOL: Detecting device...");
-            cAppendDebloat("STARTING FLASH TOOL: Detecting device...");
+            cAppend("STARTING FLASH TOOL: Starting DeviceDetectionService...");
+            cAppendDebloat("STARTING FLASH TOOL: Starting DeviceDetectionService...");
             await Task.Run(() => DeviceDetectionService());
+            cAppend("STARTING FLASH TOOL: Starting DeviceDetectionService... {OK}");
+            cAppendDebloat("STARTING FLASH TOOL: Starting DeviceDetectionService... {OK}");
         }
 
         private void SetDeviceList()
@@ -160,19 +162,25 @@ namespace Franco28Tool.Engine
 
         private void MaterialButtonClose_Click(object sender, EventArgs e)
         {
+            oConfigMng.LoadConfig();
             if (oConfigMng.Config.Autosavelogs == "true")
             {
                 cAppend("EXIT: Saving FlashTool logs...");
+                cAppendDebloat("EXIT: Saving FlashTool logs...");
                 try
                 {
-                    string filePath = @"C:\adb\.settings\Logs\FlashTool.txt";
+                    string filePath = @"C:\adb\.settings\Logs\FlashToolMoveFilesToTWRP.txt";
+                    string filePath2 = @"C:\adb\.settings\Logs\FlashToolDebloat.txt";
                     cAppend("EXIT: Saving FlashTool logs... {OK}");
+                    cAppendDebloat("EXIT: Saving FlashTool logs... {OK}");
                     consoleMFTT.SaveFile(filePath, RichTextBoxStreamType.PlainText);
+                    consoleDebloat.SaveFile(filePath2, RichTextBoxStreamType.PlainText);
                 }
                 catch (Exception ex)
                 {
                     Logs.DebugErrorLogs(ex);
                     cAppend("EXIT: Saving FlashTool logs... {ERROR}");
+                    cAppendDebloat("EXIT: Saving FlashTool logs... {ERROR}");
                     Dialogs.ErrorDialog("An error has occured while attempting to save the output...", ex.ToString());
                 }
             }
@@ -208,8 +216,8 @@ namespace Franco28Tool.Engine
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Top;
-            materialCard1.Controls.Add(childForm);
-            materialCard1.Tag = childForm;
+            tabPage2.Controls.Add(childForm);
+            tabPage2.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
         }
@@ -240,6 +248,9 @@ namespace Franco28Tool.Engine
             {
                 if (IDDeviceState.DEVICE == state)
                 {
+                    await Task.Run(() => DeviceDetectionService());
+                    cAppend("MOTO DEBLOAT: Waiting for device...");
+                    await Task.Run(() => ADB.WaitForDevice());
                     cAppendDebloat("MOTO DEBLOAT: Removing app: " + appname + "...");
                     await Task.Run(() => ADB.Instance().Execute("shell pm uninstall -k --user 0 " + appname));
                     cAppendDebloat("MOTO DEBLOAT: Removing app: " + appname + " {OK}");
@@ -288,7 +299,7 @@ namespace Franco28Tool.Engine
         private void materialSwitchGoogleInputmethod_CheckedChanged(object sender, EventArgs e)
         {
             GoogleInputmethod = materialSwitchGoogleInputmethod.Checked;
-            if (materialSwitchGooglePlayMovies.Checked == true)
+            if (materialSwitchGoogleInputmethod.Checked == true)
             {
                 increase();
                 RemoveApp("com.google.android.inputmethod.korean");
