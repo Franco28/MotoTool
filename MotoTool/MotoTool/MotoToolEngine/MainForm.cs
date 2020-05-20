@@ -39,6 +39,8 @@ namespace Franco28Tool.Engine
             materialSkinManager.AddFormToManage(this);
             InitializeComponent();
             oConfigMng.LoadConfig();
+            oConfigMng.Config.ToolVersion = ToolVer;
+            this.Text = "MotoTool v" + oConfigMng.Config.ToolVersion;
             cAppend("STARTING: Checking MotoTool updates.");
             cehck4updates();
             cAppend("STARTING: Loading tool... Please wait...");
@@ -69,7 +71,6 @@ namespace Franco28Tool.Engine
                 CheckMotoDrivers.MotoDrivers();
             }
             updateColorLoad();
-            AvoidFlick();
             InitializeRAMCounter();
             InitialiseCPUCounter();
             updateTimer_Tick();
@@ -112,7 +113,6 @@ namespace Franco28Tool.Engine
             await Task.Run(() => CheckandDeploy());
             await Task.Run(() => DeviceDetectionService());
             cAppend("STARTING: Deploying adb & fastboot... {OK}");
-            oConfigMng.Config.ToolVersion = ToolVer;
             oConfigMng.Config.ToolCompiled = Utils.GetLinkerDateTime(Assembly.GetEntryAssembly(), null).ToString();
             cAppend("STARTING: Checking MotoTool ver: " + ToolVer);
             if (oConfigMng.Config.ToolTheme == null || oConfigMng.Config.ToolTheme == "")
@@ -146,12 +146,12 @@ namespace Franco28Tool.Engine
             if (InternetCheck.ConnectToInternet() == true)
             {
                 cAppend("STARTING: Checking internet connection... {OK}");
-                oConfigMng.Config.ToolInternet = "Online";
+                oConfigMng.Config.ToolInternet = "online";
             }
             else
             {
                 cAppend("STARTING: Checking internet connection... {ERROR}");
-                oConfigMng.Config.ToolInternet = "Offline";
+                oConfigMng.Config.ToolInternet = "offline";
             }
             cAppend("STARTING: Applying MotoTool settings...");
             if (oConfigMng.Config.DrawerUseColors == null || oConfigMng.Config.DrawerUseColors == "")
@@ -204,6 +204,7 @@ namespace Franco28Tool.Engine
             Timer timer = new Timer();
             timer.Interval = (1 * 1000);
             timer.Tick += new EventHandler(timer_Tick);
+            AvoidFlick();
             timer.Start();
         }
 
@@ -216,32 +217,24 @@ namespace Franco28Tool.Engine
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            AvoidFlick();
             oConfigMng.LoadConfig();
             labelFreeRam.Text = "      Free RAM: " + Convert.ToInt64(ramCounter.NextValue()).ToString() + " MB";
             labelCPUusage.Text = "      CPU: " + Convert.ToInt64(cpuCounter.NextValue()).ToString() + "%";
             labelFreeSpace.Text = @"      Folder Size: C:\adb: " + Folders.GetDirectorySize(@"C:\adb") + " MB";
             labelUserName.Text = "      User: " + Environment.UserName;
             TextBoxDebug.Text = "Remember to always Backup your efs and persist folders! How? Click me!";
-            if (oConfigMng.Config.DeviceFirmware == "" || oConfigMng.Config.DeviceFirmware == null)
+            if (oConfigMng.Config.DeviceCodenmae == "" || oConfigMng.Config.DeviceFirmware == "")
             {
                 TextBoxDebugInfo.Text = "Device Channel: ---";
-            }
-            else
-            {
-                TextBoxDebugInfo.Text = "Device Channel: " + oConfigMng.Config.DeviceFirmware;
-            }
-            if (oConfigMng.Config.DeviceCodenmae == "" || oConfigMng.Config.DeviceFirmware == null)
-            {
                 materialButtonBlankFlash.Enabled = false;
                 materialButtonFlashLogo.Enabled = false;
                 materialButtonFlashTWRP.Enabled = false;
                 materialButtonBootTWRP.Enabled = false;
-                this.Text = "MotoTool v" + oConfigMng.Config.ToolVersion;
             }
             else
             {
                 this.Text = "MotoTool v" + oConfigMng.Config.ToolVersion + " - " + oConfigMng.Config.DeviceCodenmae;
+                TextBoxDebugInfo.Text = "Device Channel: " + oConfigMng.Config.DeviceFirmware;
                 materialButtonBlankFlash.Enabled = true;
                 materialButtonFlashLogo.Enabled = true;
                 materialButtonFlashTWRP.Enabled = true;
@@ -250,8 +243,8 @@ namespace Franco28Tool.Engine
                 {
                     LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
                 }
+                Firmwares.CreateFirmwareFolder();
             }
-            Firmwares.CreateFirmwareFolder();
         }
 
         public void openChildFormWarningNoti(Form childForm)
@@ -805,6 +798,7 @@ namespace Franco28Tool.Engine
                 oConfigMng.Config.DeviceCodenmae == "beckham" ||
                 oConfigMng.Config.DeviceCodenmae == "ocean")
             {
+                cAppend("FLASH TWRP: Hey! This option is not for A/B devices!, but you can download TWRP installer and flash it! first you need to boot TWRP!");
                 Dialogs.TWRPPermanent("FLASH: TWRP", "Hey! This option is not for A/B devices!, but you can download TWRP installer and flash it! first you need to boot TWRP!");
                 return;
             }
@@ -814,20 +808,24 @@ namespace Franco28Tool.Engine
                 oConfigMng.Config.DeviceCodenmae == "sofiar" ||
                 oConfigMng.Config.DeviceCodenmae == "sofia")
             {
+                cAppend("FLASH TWRP: Hey! This option is not for A/B devices!, check the Boot option!");
                 Dialogs.InfoDialog("FLASH: TWRP", "Hey! This option is not for A/B devices!, check the Boot option!");
                 return;
             }
             if (oConfigMng.Config.DeviceCodenmae == "")
             {
+                cAppend("FLASH TWRP: Please connect your device, so MotoTool can check your device!");
                 Dialogs.WarningDialog("FLASH: TWRP", "Please connect your device, so MotoTool can check your device!");
                 return;
             }
             if (oConfigMng.Config.DeviceCodenmae == oConfigMng.Config.DeviceCodenmae)
             {
+                cAppend("FLASH TWRP: Loading server for... {" + oConfigMng.Config.DeviceCodenmae + "}");
                 LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
             }
             if (!File.Exists(fileName))
             {
+                cAppend("FLASH TWRP: Downloading TWRP for... {" + oConfigMng.Config.DeviceCodenmae + "}" + " TWRP: " + fileName);
                 downloadcall("/TWRP.xml", "TWRP");
                 return;
             }
@@ -840,7 +838,7 @@ namespace Franco28Tool.Engine
                     cAppend("FLASH TWRP: Rebooting into bootloader mode.");
                     await Task.Run(() => ADB.Instance().Reboot(IDBoot.BOOTLOADER));
                 }
-                if (state == IDDeviceState.FASTBOOT)
+                if (state == IDDeviceState.FASTBOOT || state == IDDeviceState.BOOTLOADER)
                 {
                     cAppend("FLASH TWRP: Flashing TWRP...");
                     await Task.Run(() => Fastboot.Instance().Flash(IDDevicePartition.RECOVERY, LoadDeviceServer.twrpname));
@@ -850,7 +848,7 @@ namespace Franco28Tool.Engine
                 {
                     Thread.Sleep(1000);
                     Strings.MSGBOXBootloaderWarning();
-                    cAppend("FLASH TWRP: Your device is in the wrong state. Please put your device in the bootloader.\n");
+                    cAppend("FLASH TWRP: Your device is in the wrong state. Please put your device in bootloader mode. " + state);
                 }
             }
         }
@@ -859,27 +857,31 @@ namespace Franco28Tool.Engine
         {
             if (oConfigMng.Config.DeviceCodenmae == "lima" || oConfigMng.Config.DeviceCodenmae == "sofiar" || oConfigMng.Config.DeviceCodenmae == "sofia")
             {
+                cAppend("BOOT TWRP: Hey this device doesn't have twrp yet! :(");
                 Dialogs.InfoDialog("BOOT: TWRP", "Hey this device doesn't have twrp yet! :(");
                 return;
             }
             if (oConfigMng.Config.DeviceCodenmae == "")
             {
-                Dialogs.WarningDialog("FLASH: TWRP", "Please connect your device, so MotoTool can check your device!");
+                cAppend("BOOT TWRP: Please connect your device, so MotoTool can check your device!");
+                Dialogs.WarningDialog("BOOT: TWRP", "Please connect your device, so MotoTool can check your device!");
                 return;
             }
             if (oConfigMng.Config.DeviceCodenmae == oConfigMng.Config.DeviceCodenmae)
             {
+                cAppend("BOOT TWRP: Loading server for... {" + oConfigMng.Config.DeviceCodenmae + "}");
                 LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
             }
             string fileName = @"C:\adb\TWRP\" + LoadDeviceServer.twrpname;
             if (!File.Exists(fileName))
             {
+                cAppend("BOOT TWRP: Downloading TWRP for... {" + oConfigMng.Config.DeviceCodenmae + "}" + " TWRP: " + fileName);
                 downloadcall("/TWRP.xml", "TWRP");
                 return;
             }
             else
             {
-                if (state == IDDeviceState.DEVICE || state == IDDeviceState.RECOVERY || state == IDDeviceState.FASTBOOT)
+                if (state == IDDeviceState.FASTBOOT || state == IDDeviceState.BOOTLOADER)
                 {
                     cAppend("BOOT TWRP: Waiting for device...");
                     await Task.Run(() => ADB.WaitForDevice());
@@ -893,14 +895,14 @@ namespace Franco28Tool.Engine
                 {
                     Thread.Sleep(1000);
                     Strings.MSGBOXBootloaderWarning();
-                    cAppend("BOOT TWRP: Your device is in the wrong state. Please put your device in the bootloader.\n");
+                    cAppend("FLASH TWRP: Your device is in the wrong state. Please put your device in bootloader mode. " + state);
                 }
             }
         }
 
         private async void materialButtonRebootBootloader_Click(object sender, EventArgs e)
         {
-            if (IDDeviceState.UNKNOWN == state)
+            if (IDDeviceState.DEVICE == state)
             {
                 cAppend("REBOOT BOOTLOADER: Waiting for device...");
                 await Task.Run(() => ADB.WaitForDevice());
@@ -911,13 +913,13 @@ namespace Franco28Tool.Engine
             {
                 Thread.Sleep(1000);
                 Strings.MSGBOXBootloaderWarning();
-                cAppend("REBOOT BOOTLOADER: Your device is in the wrong state. Please put your device in the bootloader.\n");
+                cAppend("REBOOT BOOTLOADER: Your device is in the wrong state. " + state);
             }
         }
 
         private async void materialButtonRebootRecovery_Click(object sender, EventArgs e)
         {
-            if (IDDeviceState.UNKNOWN == state)
+            if (IDDeviceState.DEVICE == state)
             {
                 cAppend("REBOOT RECOVERY: Waiting for device...");
                 await Task.Run(() => ADB.WaitForDevice());
@@ -940,22 +942,26 @@ namespace Franco28Tool.Engine
                 oConfigMng.Config.DeviceCodenmae == "sofiar" ||
                 oConfigMng.Config.DeviceCodenmae == "sofia")
             {
+                cAppend("BLANKFLASH: " + oConfigMng.Config.DeviceCodenmae + " Hey this device doesn't have blankflash yet! :(. If you know about an existing blankflash you can contact me and i'll add it!");
                 Dialogs.InfoDialog("BLANKFLASH: " + oConfigMng.Config.DeviceCodenmae, "Hey this device doesn't have blankflash yet! :(. If you know about an existing blankflash you can contact me and i'll add it!");
                 return;
             }
             if (oConfigMng.Config.DeviceCodenmae == "")
             {
+                cAppend("BLANKFLASH: " + oConfigMng.Config.DeviceCodenmae + "Please connect your device, so MotoTool can check your device!");
                 Dialogs.WarningDialog("BLANKFLASH: " + oConfigMng.Config.DeviceCodenmae, "Please connect your device, so MotoTool can check your device!");
                 return;
             }
             if (oConfigMng.Config.DeviceCodenmae == oConfigMng.Config.DeviceCodenmae)
             {
+                cAppend("BLANKFLASH: Loading device server for... {" + oConfigMng.Config.DeviceCodenmae + "}");
                 LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
             }
             string blankflashfilepath = @"C:\adb\Others\" + LoadDeviceServer.unbrickname;
             if (!File.Exists(blankflashfilepath) &&
                 !Directory.Exists(@"C:\adb\Others\" + oConfigMng.Config.DeviceBlankFlash))
             {
+                cAppend("BLANKFLASH: Downloading BLANKFLASH for... {" + oConfigMng.Config.DeviceCodenmae + "}" + " BLANKFLASH: " + oConfigMng.Config.DeviceBlankFlash);
                 downloadcall("/BLANKFLASH.xml", "BLANKFLASH");
                 oConfigMng.Config.DeviceBlankFlash = LoadDeviceServer.unbrickname;
                 oConfigMng.SaveConfig();
@@ -979,11 +985,13 @@ namespace Franco28Tool.Engine
             string logopath = @"C:\adb\" + oConfigMng.Config.DeviceFirmware + oConfigMng.Config.DeviceFirmwareInfo;
             if (oConfigMng.Config.DeviceCodenmae == "")
             {
+                cAppend("FLASH LOGO: Please connect your device, so MotoTool can check your device!");
                 Dialogs.WarningDialog("FLASH: LOGO", "Please connect your device, so MotoTool can check your device!");
                 return;
             }
             if (!File.Exists(logopath))
             {
+                cAppend("FLASH LOGO: Can't find logo image... " + "\nDevice: " + oConfigMng.Config.DeviceCodenmae + "\nFirmware: " + oConfigMng.Config.DeviceFirmware);
                 Dialogs.ErrorDialog("LOGO: Missing", "Can't find logo image... " + "\nDevice: " + oConfigMng.Config.DeviceCodenmae + "\nFirmware: " + oConfigMng.Config.DeviceFirmware);
             }
             else
@@ -1002,7 +1010,7 @@ namespace Franco28Tool.Engine
                 {
                     Thread.Sleep(1000);
                     Strings.MSGBOXBootloaderWarning();
-                    cAppend("FLASH LOGO: Your device is in the wrong state. Please put your device in the bootloader.\n");
+                    cAppend("FLASH LOGO: Your device is in the wrong state. Please put your device in bootloader mode. " + state);
                 }
             }
         }

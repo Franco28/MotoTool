@@ -42,10 +42,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.materialButtonDebloatOthers = new MaterialSkin.Controls.MaterialButton();
-            this.materialLabelDebugDebloat = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabelDebug = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            this.labelDebloat = new MaterialSkin.Controls.MaterialLabel();
             this.materialSwitchMotoPRIP = new MaterialSkin.Controls.MaterialSwitch();
             this.materialSwitchMotoOTA = new MaterialSkin.Controls.MaterialSwitch();
             this.materialSwitchMotoPhotoEditor = new MaterialSkin.Controls.MaterialSwitch();
@@ -68,17 +64,18 @@
             this.materialSwitchGoogleLens = new MaterialSkin.Controls.MaterialSwitch();
             this.materialSwitchGoogleMusic = new MaterialSkin.Controls.MaterialSwitch();
             this.materialSwitchGoogleDuo = new MaterialSkin.Controls.MaterialSwitch();
-            this.materialLabel13 = new MaterialSkin.Controls.MaterialLabel();
             this.materialSwitchGoogleTranslate = new MaterialSkin.Controls.MaterialSwitch();
             this.materialSwitchGoogleYouTube = new MaterialSkin.Controls.MaterialSwitch();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
             this.TextBox2 = new System.Windows.Forms.TextBox();
-            this.FileDragLabel = new System.Windows.Forms.Label();
             this.materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel26 = new MaterialSkin.Controls.MaterialLabel();
             this.materialButton23 = new MaterialSkin.Controls.MaterialButton();
             this.label2 = new MaterialSkin.Controls.MaterialLabel();
+            this.panelMoveFilesToTWRP = new System.Windows.Forms.Panel();
+            this.consoleMFTT = new System.Windows.Forms.RichTextBox();
+            this.consoleDebloat = new System.Windows.Forms.RichTextBox();
+            this.materialLabel13 = new MaterialSkin.Controls.MaterialLabel();
             this.panelMain.SuspendLayout();
             this.materialTabControl2.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -87,6 +84,7 @@
             this.tabPage2.SuspendLayout();
             this.materialCard1.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.panelMoveFilesToTWRP.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMain
@@ -262,11 +260,9 @@
             this.materialCard1.AutoSize = true;
             this.materialCard1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard1.Controls.Add(this.consoleDebloat);
+            this.materialCard1.Controls.Add(this.materialLabel13);
             this.materialCard1.Controls.Add(this.materialButtonDebloatOthers);
-            this.materialCard1.Controls.Add(this.materialLabelDebugDebloat);
-            this.materialCard1.Controls.Add(this.materialLabelDebug);
-            this.materialCard1.Controls.Add(this.materialLabel2);
-            this.materialCard1.Controls.Add(this.labelDebloat);
             this.materialCard1.Controls.Add(this.materialSwitchMotoPRIP);
             this.materialCard1.Controls.Add(this.materialSwitchMotoOTA);
             this.materialCard1.Controls.Add(this.materialSwitchMotoPhotoEditor);
@@ -289,7 +285,6 @@
             this.materialCard1.Controls.Add(this.materialSwitchGoogleLens);
             this.materialCard1.Controls.Add(this.materialSwitchGoogleMusic);
             this.materialCard1.Controls.Add(this.materialSwitchGoogleDuo);
-            this.materialCard1.Controls.Add(this.materialLabel13);
             this.materialCard1.Controls.Add(this.materialSwitchGoogleTranslate);
             this.materialCard1.Controls.Add(this.materialSwitchGoogleYouTube);
             this.materialCard1.Depth = 0;
@@ -314,75 +309,17 @@
             this.materialButtonDebloatOthers.DrawShadows = true;
             this.materialButtonDebloatOthers.HighEmphasis = false;
             this.materialButtonDebloatOthers.Icon = null;
-            this.materialButtonDebloatOthers.Location = new System.Drawing.Point(6, 311);
+            this.materialButtonDebloatOthers.Location = new System.Drawing.Point(1, 323);
             this.materialButtonDebloatOthers.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonDebloatOthers.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonDebloatOthers.Name = "materialButtonDebloatOthers";
-            this.materialButtonDebloatOthers.Size = new System.Drawing.Size(983, 29);
+            this.materialButtonDebloatOthers.Size = new System.Drawing.Size(985, 26);
             this.materialButtonDebloatOthers.TabIndex = 169;
             this.materialButtonDebloatOthers.Text = "Debloat Others";
             this.materialButtonDebloatOthers.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialButtonDebloatOthers.UseAccentColor = false;
             this.materialButtonDebloatOthers.UseVisualStyleBackColor = true;
             this.materialButtonDebloatOthers.Click += new System.EventHandler(this.materialButtonDebloatOthers_Click);
-            // 
-            // materialLabelDebugDebloat
-            // 
-            this.materialLabelDebugDebloat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.materialLabelDebugDebloat.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.materialLabelDebugDebloat.Depth = 0;
-            this.materialLabelDebugDebloat.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabelDebugDebloat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabelDebugDebloat.Location = new System.Drawing.Point(638, 284);
-            this.materialLabelDebugDebloat.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabelDebugDebloat.Name = "materialLabelDebugDebloat";
-            this.materialLabelDebugDebloat.Size = new System.Drawing.Size(330, 21);
-            this.materialLabelDebugDebloat.TabIndex = 168;
-            this.materialLabelDebugDebloat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // materialLabelDebug
-            // 
-            this.materialLabelDebug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.materialLabelDebug.AutoSize = true;
-            this.materialLabelDebug.Depth = 0;
-            this.materialLabelDebug.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabelDebug.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabelDebug.HighEmphasis = true;
-            this.materialLabelDebug.Location = new System.Drawing.Point(634, 260);
-            this.materialLabelDebug.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabelDebug.Name = "materialLabelDebug";
-            this.materialLabelDebug.Size = new System.Drawing.Size(58, 24);
-            this.materialLabelDebug.TabIndex = 167;
-            this.materialLabelDebug.Text = "Debug";
-            this.materialLabelDebug.UseAccent = true;
-            // 
-            // materialLabel2
-            // 
-            this.materialLabel2.AutoSize = true;
-            this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabel2.HighEmphasis = true;
-            this.materialLabel2.Location = new System.Drawing.Point(3, 260);
-            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(46, 24);
-            this.materialLabel2.TabIndex = 166;
-            this.materialLabel2.Text = "Apps";
-            this.materialLabel2.UseAccent = true;
-            // 
-            // labelDebloat
-            // 
-            this.labelDebloat.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelDebloat.Depth = 0;
-            this.labelDebloat.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelDebloat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.labelDebloat.Location = new System.Drawing.Point(5, 284);
-            this.labelDebloat.MouseState = MaterialSkin.MouseState.HOVER;
-            this.labelDebloat.Name = "labelDebloat";
-            this.labelDebloat.Size = new System.Drawing.Size(330, 21);
-            this.labelDebloat.TabIndex = 165;
-            this.labelDebloat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // materialSwitchMotoPRIP
             // 
@@ -392,7 +329,7 @@
             this.materialSwitchMotoPRIP.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchMotoPRIP.Depth = 0;
             this.materialSwitchMotoPRIP.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchMotoPRIP.Location = new System.Drawing.Point(385, 162);
+            this.materialSwitchMotoPRIP.Location = new System.Drawing.Point(393, 206);
             this.materialSwitchMotoPRIP.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchMotoPRIP.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchMotoPRIP.MouseState = MaterialSkin.MouseState.HOVER;
@@ -412,7 +349,7 @@
             this.materialSwitchMotoOTA.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchMotoOTA.Depth = 0;
             this.materialSwitchMotoOTA.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchMotoOTA.Location = new System.Drawing.Point(385, 125);
+            this.materialSwitchMotoOTA.Location = new System.Drawing.Point(393, 169);
             this.materialSwitchMotoOTA.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchMotoOTA.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchMotoOTA.MouseState = MaterialSkin.MouseState.HOVER;
@@ -432,7 +369,7 @@
             this.materialSwitchMotoPhotoEditor.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchMotoPhotoEditor.Depth = 0;
             this.materialSwitchMotoPhotoEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchMotoPhotoEditor.Location = new System.Drawing.Point(543, 162);
+            this.materialSwitchMotoPhotoEditor.Location = new System.Drawing.Point(556, 243);
             this.materialSwitchMotoPhotoEditor.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchMotoPhotoEditor.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchMotoPhotoEditor.MouseState = MaterialSkin.MouseState.HOVER;
@@ -452,7 +389,7 @@
             this.materialSwitchMotoARStickers.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchMotoARStickers.Depth = 0;
             this.materialSwitchMotoARStickers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchMotoARStickers.Location = new System.Drawing.Point(543, 199);
+            this.materialSwitchMotoARStickers.Location = new System.Drawing.Point(556, 280);
             this.materialSwitchMotoARStickers.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchMotoARStickers.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchMotoARStickers.MouseState = MaterialSkin.MouseState.HOVER;
@@ -472,7 +409,7 @@
             this.materialSwitchMotoVoiceNormal.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchMotoVoiceNormal.Depth = 0;
             this.materialSwitchMotoVoiceNormal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchMotoVoiceNormal.Location = new System.Drawing.Point(385, 199);
+            this.materialSwitchMotoVoiceNormal.Location = new System.Drawing.Point(393, 243);
             this.materialSwitchMotoVoiceNormal.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchMotoVoiceNormal.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchMotoVoiceNormal.MouseState = MaterialSkin.MouseState.HOVER;
@@ -492,7 +429,7 @@
             this.materialSwitchAmazonShop.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchAmazonShop.Depth = 0;
             this.materialSwitchAmazonShop.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchAmazonShop.Location = new System.Drawing.Point(500, 236);
+            this.materialSwitchAmazonShop.Location = new System.Drawing.Point(393, 280);
             this.materialSwitchAmazonShop.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchAmazonShop.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchAmazonShop.MouseState = MaterialSkin.MouseState.HOVER;
@@ -512,7 +449,7 @@
             this.materialSwitchMotoHelp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchMotoHelp.Depth = 0;
             this.materialSwitchMotoHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchMotoHelp.Location = new System.Drawing.Point(385, 88);
+            this.materialSwitchMotoHelp.Location = new System.Drawing.Point(393, 132);
             this.materialSwitchMotoHelp.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchMotoHelp.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchMotoHelp.MouseState = MaterialSkin.MouseState.HOVER;
@@ -532,7 +469,7 @@
             this.materialSwitchMotoCamera.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchMotoCamera.Depth = 0;
             this.materialSwitchMotoCamera.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchMotoCamera.Location = new System.Drawing.Point(385, 51);
+            this.materialSwitchMotoCamera.Location = new System.Drawing.Point(393, 95);
             this.materialSwitchMotoCamera.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchMotoCamera.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchMotoCamera.MouseState = MaterialSkin.MouseState.HOVER;
@@ -552,7 +489,7 @@
             this.materialSwitchMotoAppBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchMotoAppBox.Depth = 0;
             this.materialSwitchMotoAppBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchMotoAppBox.Location = new System.Drawing.Point(385, 14);
+            this.materialSwitchMotoAppBox.Location = new System.Drawing.Point(191, 282);
             this.materialSwitchMotoAppBox.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchMotoAppBox.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchMotoAppBox.MouseState = MaterialSkin.MouseState.HOVER;
@@ -572,7 +509,7 @@
             this.materialSwitchMotoFaceUnlock.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchMotoFaceUnlock.Depth = 0;
             this.materialSwitchMotoFaceUnlock.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchMotoFaceUnlock.Location = new System.Drawing.Point(543, 125);
+            this.materialSwitchMotoFaceUnlock.Location = new System.Drawing.Point(556, 206);
             this.materialSwitchMotoFaceUnlock.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchMotoFaceUnlock.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchMotoFaceUnlock.MouseState = MaterialSkin.MouseState.HOVER;
@@ -592,7 +529,7 @@
             this.materialSwitchMotoModsStore.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchMotoModsStore.Depth = 0;
             this.materialSwitchMotoModsStore.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchMotoModsStore.Location = new System.Drawing.Point(543, 14);
+            this.materialSwitchMotoModsStore.Location = new System.Drawing.Point(556, 95);
             this.materialSwitchMotoModsStore.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchMotoModsStore.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchMotoModsStore.MouseState = MaterialSkin.MouseState.HOVER;
@@ -612,7 +549,7 @@
             this.materialSwitchMotoNotifications.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchMotoNotifications.Depth = 0;
             this.materialSwitchMotoNotifications.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchMotoNotifications.Location = new System.Drawing.Point(543, 88);
+            this.materialSwitchMotoNotifications.Location = new System.Drawing.Point(556, 169);
             this.materialSwitchMotoNotifications.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchMotoNotifications.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchMotoNotifications.MouseState = MaterialSkin.MouseState.HOVER;
@@ -632,7 +569,7 @@
             this.materialSwitchMotoVoice.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchMotoVoice.Depth = 0;
             this.materialSwitchMotoVoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchMotoVoice.Location = new System.Drawing.Point(543, 51);
+            this.materialSwitchMotoVoice.Location = new System.Drawing.Point(556, 132);
             this.materialSwitchMotoVoice.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchMotoVoice.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchMotoVoice.MouseState = MaterialSkin.MouseState.HOVER;
@@ -650,7 +587,7 @@
             this.materialSwitchGooglePlayMovies.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchGooglePlayMovies.Depth = 0;
             this.materialSwitchGooglePlayMovies.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchGooglePlayMovies.Location = new System.Drawing.Point(6, 88);
+            this.materialSwitchGooglePlayMovies.Location = new System.Drawing.Point(10, 132);
             this.materialSwitchGooglePlayMovies.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchGooglePlayMovies.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchGooglePlayMovies.MouseState = MaterialSkin.MouseState.HOVER;
@@ -668,7 +605,7 @@
             this.materialSwitchGoogleInputmethod.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchGoogleInputmethod.Depth = 0;
             this.materialSwitchGoogleInputmethod.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchGoogleInputmethod.Location = new System.Drawing.Point(183, 51);
+            this.materialSwitchGoogleInputmethod.Location = new System.Drawing.Point(191, 95);
             this.materialSwitchGoogleInputmethod.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchGoogleInputmethod.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchGoogleInputmethod.MouseState = MaterialSkin.MouseState.HOVER;
@@ -686,7 +623,7 @@
             this.materialSwitchGoogleTalkback.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchGoogleTalkback.Depth = 0;
             this.materialSwitchGoogleTalkback.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchGoogleTalkback.Location = new System.Drawing.Point(6, 199);
+            this.materialSwitchGoogleTalkback.Location = new System.Drawing.Point(10, 243);
             this.materialSwitchGoogleTalkback.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchGoogleTalkback.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchGoogleTalkback.MouseState = MaterialSkin.MouseState.HOVER;
@@ -704,7 +641,7 @@
             this.materialSwitchGoogleChrome.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchGoogleChrome.Depth = 0;
             this.materialSwitchGoogleChrome.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchGoogleChrome.Location = new System.Drawing.Point(6, 125);
+            this.materialSwitchGoogleChrome.Location = new System.Drawing.Point(10, 169);
             this.materialSwitchGoogleChrome.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchGoogleChrome.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchGoogleChrome.MouseState = MaterialSkin.MouseState.HOVER;
@@ -722,7 +659,7 @@
             this.materialSwitchGoogleDocs.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchGoogleDocs.Depth = 0;
             this.materialSwitchGoogleDocs.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchGoogleDocs.Location = new System.Drawing.Point(6, 162);
+            this.materialSwitchGoogleDocs.Location = new System.Drawing.Point(10, 206);
             this.materialSwitchGoogleDocs.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchGoogleDocs.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchGoogleDocs.MouseState = MaterialSkin.MouseState.HOVER;
@@ -740,7 +677,7 @@
             this.materialSwitchGoogleArCore.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchGoogleArCore.Depth = 0;
             this.materialSwitchGoogleArCore.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchGoogleArCore.Location = new System.Drawing.Point(3, 51);
+            this.materialSwitchGoogleArCore.Location = new System.Drawing.Point(9, 95);
             this.materialSwitchGoogleArCore.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchGoogleArCore.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchGoogleArCore.MouseState = MaterialSkin.MouseState.HOVER;
@@ -758,7 +695,7 @@
             this.materialSwitchGoogleLens.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchGoogleLens.Depth = 0;
             this.materialSwitchGoogleLens.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchGoogleLens.Location = new System.Drawing.Point(183, 88);
+            this.materialSwitchGoogleLens.Location = new System.Drawing.Point(191, 132);
             this.materialSwitchGoogleLens.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchGoogleLens.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchGoogleLens.MouseState = MaterialSkin.MouseState.HOVER;
@@ -776,7 +713,7 @@
             this.materialSwitchGoogleMusic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchGoogleMusic.Depth = 0;
             this.materialSwitchGoogleMusic.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchGoogleMusic.Location = new System.Drawing.Point(183, 125);
+            this.materialSwitchGoogleMusic.Location = new System.Drawing.Point(191, 169);
             this.materialSwitchGoogleMusic.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchGoogleMusic.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchGoogleMusic.MouseState = MaterialSkin.MouseState.HOVER;
@@ -794,7 +731,7 @@
             this.materialSwitchGoogleDuo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchGoogleDuo.Depth = 0;
             this.materialSwitchGoogleDuo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchGoogleDuo.Location = new System.Drawing.Point(183, 162);
+            this.materialSwitchGoogleDuo.Location = new System.Drawing.Point(191, 206);
             this.materialSwitchGoogleDuo.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchGoogleDuo.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchGoogleDuo.MouseState = MaterialSkin.MouseState.HOVER;
@@ -806,28 +743,13 @@
             this.materialSwitchGoogleDuo.UseVisualStyleBackColor = true;
             this.materialSwitchGoogleDuo.CheckedChanged += new System.EventHandler(this.materialSwitchGoogleDuo_CheckedChanged);
             // 
-            // materialLabel13
-            // 
-            this.materialLabel13.AutoSize = true;
-            this.materialLabel13.Depth = 0;
-            this.materialLabel13.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel13.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabel13.HighEmphasis = true;
-            this.materialLabel13.Location = new System.Drawing.Point(7, 12);
-            this.materialLabel13.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel13.Name = "materialLabel13";
-            this.materialLabel13.Size = new System.Drawing.Size(122, 24);
-            this.materialLabel13.TabIndex = 4;
-            this.materialLabel13.Text = "Moto Debloat";
-            this.materialLabel13.UseAccent = true;
-            // 
             // materialSwitchGoogleTranslate
             // 
             this.materialSwitchGoogleTranslate.AutoSize = true;
             this.materialSwitchGoogleTranslate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchGoogleTranslate.Depth = 0;
             this.materialSwitchGoogleTranslate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchGoogleTranslate.Location = new System.Drawing.Point(183, 199);
+            this.materialSwitchGoogleTranslate.Location = new System.Drawing.Point(191, 243);
             this.materialSwitchGoogleTranslate.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchGoogleTranslate.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchGoogleTranslate.MouseState = MaterialSkin.MouseState.HOVER;
@@ -845,7 +767,7 @@
             this.materialSwitchGoogleYouTube.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSwitchGoogleYouTube.Depth = 0;
             this.materialSwitchGoogleYouTube.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialSwitchGoogleYouTube.Location = new System.Drawing.Point(93, 236);
+            this.materialSwitchGoogleYouTube.Location = new System.Drawing.Point(10, 280);
             this.materialSwitchGoogleYouTube.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitchGoogleYouTube.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitchGoogleYouTube.MouseState = MaterialSkin.MouseState.HOVER;
@@ -859,34 +781,14 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.label1);
+            this.tabPage3.Controls.Add(this.panelMoveFilesToTWRP);
             this.tabPage3.Controls.Add(this.TextBox2);
-            this.tabPage3.Controls.Add(this.FileDragLabel);
-            this.tabPage3.Controls.Add(this.materialLabel7);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(1001, 419);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Move Files To TWRP";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.BackColor = System.Drawing.Color.White;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(4, 46);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(989, 51);
-            this.label1.TabIndex = 66;
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TextBox2
             // 
@@ -897,31 +799,13 @@
             this.TextBox2.Cursor = System.Windows.Forms.Cursors.Default;
             this.TextBox2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TextBox2.ForeColor = System.Drawing.Color.Black;
-            this.TextBox2.Location = new System.Drawing.Point(3, 100);
+            this.TextBox2.Location = new System.Drawing.Point(3, 189);
             this.TextBox2.Multiline = true;
             this.TextBox2.Name = "TextBox2";
             this.TextBox2.ReadOnly = true;
-            this.TextBox2.Size = new System.Drawing.Size(990, 80);
+            this.TextBox2.Size = new System.Drawing.Size(990, 83);
             this.TextBox2.TabIndex = 65;
             this.TextBox2.Text = "Drag a file here!";
-            // 
-            // FileDragLabel
-            // 
-            this.FileDragLabel.AllowDrop = true;
-            this.FileDragLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.FileDragLabel.BackColor = System.Drawing.Color.White;
-            this.FileDragLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.FileDragLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.FileDragLabel.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FileDragLabel.ForeColor = System.Drawing.Color.Black;
-            this.FileDragLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.FileDragLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.FileDragLabel.Location = new System.Drawing.Point(5, 183);
-            this.FileDragLabel.Name = "FileDragLabel";
-            this.FileDragLabel.Size = new System.Drawing.Size(988, 48);
-            this.FileDragLabel.TabIndex = 64;
-            this.FileDragLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // materialLabel7
             // 
@@ -930,7 +814,7 @@
             this.materialLabel7.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel7.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
             this.materialLabel7.HighEmphasis = true;
-            this.materialLabel7.Location = new System.Drawing.Point(5, 3);
+            this.materialLabel7.Location = new System.Drawing.Point(8, 10);
             this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel7.Name = "materialLabel7";
             this.materialLabel7.Size = new System.Drawing.Size(186, 24);
@@ -988,6 +872,53 @@
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label2.UseAccent = true;
             // 
+            // panelMoveFilesToTWRP
+            // 
+            this.panelMoveFilesToTWRP.Controls.Add(this.consoleMFTT);
+            this.panelMoveFilesToTWRP.Controls.Add(this.materialLabel7);
+            this.panelMoveFilesToTWRP.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelMoveFilesToTWRP.Location = new System.Drawing.Point(0, 0);
+            this.panelMoveFilesToTWRP.Name = "panelMoveFilesToTWRP";
+            this.panelMoveFilesToTWRP.Size = new System.Drawing.Size(1001, 183);
+            this.panelMoveFilesToTWRP.TabIndex = 66;
+            // 
+            // consoleMFTT
+            // 
+            this.consoleMFTT.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.consoleMFTT.Location = new System.Drawing.Point(3, 37);
+            this.consoleMFTT.Name = "consoleMFTT";
+            this.consoleMFTT.ReadOnly = true;
+            this.consoleMFTT.Size = new System.Drawing.Size(990, 146);
+            this.consoleMFTT.TabIndex = 59;
+            this.consoleMFTT.Text = "";
+            // 
+            // consoleDebloat
+            // 
+            this.consoleDebloat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.consoleDebloat.Location = new System.Drawing.Point(10, 37);
+            this.consoleDebloat.Name = "consoleDebloat";
+            this.consoleDebloat.ReadOnly = true;
+            this.consoleDebloat.Size = new System.Drawing.Size(981, 61);
+            this.consoleDebloat.TabIndex = 171;
+            this.consoleDebloat.Text = "";
+            // 
+            // materialLabel13
+            // 
+            this.materialLabel13.AutoSize = true;
+            this.materialLabel13.Depth = 0;
+            this.materialLabel13.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel13.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.materialLabel13.HighEmphasis = true;
+            this.materialLabel13.Location = new System.Drawing.Point(8, 10);
+            this.materialLabel13.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel13.Name = "materialLabel13";
+            this.materialLabel13.Size = new System.Drawing.Size(122, 24);
+            this.materialLabel13.TabIndex = 170;
+            this.materialLabel13.Text = "Moto Debloat";
+            this.materialLabel13.UseAccent = true;
+            // 
             // MotoFlashVisual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1019,6 +950,8 @@
             this.materialCard1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.panelMoveFilesToTWRP.ResumeLayout(false);
+            this.panelMoveFilesToTWRP.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1033,7 +966,6 @@
         private MaterialSkin.Controls.MaterialTabControl materialTabControl2;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private MaterialSkin.Controls.MaterialLabel materialLabel13;
         private System.Windows.Forms.TabPage tabPage3;
         private MaterialSkin.Controls.MaterialLabel materialLabel7;
         private MaterialSkin.Controls.MaterialLabel materialLabel26;
@@ -1062,19 +994,17 @@
         private MaterialSkin.Controls.MaterialSwitch materialSwitchMotoModsStore;
         private MaterialSkin.Controls.MaterialSwitch materialSwitchMotoNotifications;
         private MaterialSkin.Controls.MaterialSwitch materialSwitchMotoVoice;
-        private MaterialSkin.Controls.MaterialLabel materialLabelDebugDebloat;
-        private MaterialSkin.Controls.MaterialLabel materialLabelDebug;
-        private MaterialSkin.Controls.MaterialLabel materialLabel2;
-        private MaterialSkin.Controls.MaterialLabel labelDebloat;
         private MaterialSkin.Controls.MaterialButton materialButtonDebloatOthers;
-        public System.Windows.Forms.Label label1;
         public System.Windows.Forms.TextBox TextBox2;
-        public System.Windows.Forms.Label FileDragLabel;
         private System.Windows.Forms.Panel panelMotoFlash;
         private MaterialSkin.Controls.MaterialCard materialCardFlashTool;
         private MaterialSkin.Controls.MaterialButton materialButtonMotoFlash;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private MaterialSkin.Controls.MaterialLabel materialLabel8;
         private MaterialSkin.Controls.MaterialLabel materialLabel9;
+        private System.Windows.Forms.Panel panelMoveFilesToTWRP;
+        private System.Windows.Forms.RichTextBox consoleMFTT;
+        private System.Windows.Forms.RichTextBox consoleDebloat;
+        private MaterialSkin.Controls.MaterialLabel materialLabel13;
     }
 }

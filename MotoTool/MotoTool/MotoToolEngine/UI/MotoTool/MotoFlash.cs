@@ -1,8 +1,16 @@
+
+using AndroidCtrl;
+using AndroidCtrl.ADB;
+using AndroidCtrl.Fastboot;
+using AndroidCtrl.Tools;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Franco28Tool.Engine
@@ -11,6 +19,8 @@ namespace Franco28Tool.Engine
     {
         private readonly MaterialSkinManager materialSkinManager;
         private SettingsMng oConfigMng = new SettingsMng();
+        ArrayList devicecheck = new ArrayList();
+        IDDeviceState state = General.CheckDeviceState(ADB.Instance().DeviceID);
 
         public bool FlashAll { get; private set; }
         public bool FlashAllExceptModem { get; private set; }
@@ -42,42 +52,87 @@ namespace Franco28Tool.Engine
             SetRefresh();
         }
 
-        public void DeviceisConnected()
-        {/*
-            if (android.HasConnectedDevices)
+        public void cAppend(string message)
+        {
+            this.Invoke((Action)delegate
             {
-                serial = android.ConnectedDevices[0];
-                device = android.GetConnectedDevice(serial);
-                decimal temp = device.Battery.Temperature;
-                ArrayList devicecheck = new ArrayList();
-                devicecheck.Add(" Device: Online!");
-                devicecheck.Add(" Device Codename: " + LoadDeviceServer.devicecodename);
-                devicecheck.Add(" Mode: USB debugging");
-                devicecheck.Add(" Serial Number: " + serial);
-                devicecheck.Add("  -------------------------");
-                devicecheck.Add(" Battery: " + device.Battery.Status.ToString() + " " + device.Battery.Level.ToString() + System.Environment.NewLine + "%");
-                devicecheck.Add(" Battery Temperature: " + temp + System.Environment.NewLine + " °C");
-                devicecheck.Add(" Battery Health: " + device.Battery.Health.ToString() + System.Environment.NewLine);
-                listBoxDeviceStatus.DataSource = devicecheck;
-                return;
-            } */
+                consoleMotoFlash.AppendText(string.Format("\n{0} : {1}", DateTime.Now, message));
+                consoleMotoFlash.ScrollToCaret();
+            });
         }
 
-        private void reload()
+        private void SetDeviceList()
         {
-            this.Controls.Clear();
-            this.Refresh();
-            SetRefresh();
-            InitializeComponent();
-            Label.Text = "Moto Firmware Flash BETA";
-            DeviceisConnected();
+            string active = String.Empty;
+            
+            this.Invoke((Action)delegate
+            {
+                devicecheck.Clear();
+            });
+
+            List<DataModelDevicesItem> adbDevices = ADB.Devices();
+            List<DataModelDevicesItem> fastbootDevices = Fastboot.Devices();
+
+            foreach (DataModelDevicesItem device in adbDevices)
+            {
+                this.Invoke((Action)delegate
+                {
+                    cAppend("Device adb connected!");
+                    devicecheck.Add(" Device: Online! - ADB");
+                    devicecheck.Add(" Device Codename: " + LoadDeviceServer.devicecodename);
+                    devicecheck.Add(" Mode: " + state);
+                    listBoxDeviceStatus.DataSource = devicecheck;
+                });
+            }
+            foreach (DataModelDevicesItem device in fastbootDevices)
+            {
+                this.Invoke((Action)delegate
+                {
+                    cAppend("Device fastboot connected!");
+                    devicecheck.Add(" Device: Online! - FASTBOOT");
+                    devicecheck.Add(" Device Codename: " + LoadDeviceServer.devicecodename);
+                    devicecheck.Add(" Mode: " + state);
+                    listBoxDeviceStatus.DataSource = devicecheck;
+                });
+            }
+            ADB.SelectDevice();
+            Fastboot.SelectDevice();
         }
 
-        private void MotoFlash_Load(object sender, EventArgs e)
+        private void DeviceDetectionService()
         {
-            DeviceisConnected();
+            ADB.Start();
+            Fastboot.Instance();
+
+            if (Fastboot.ConnectionMonitor.Start())
+            {
+                Fastboot.ConnectionMonitor.Callback += ConnectionMonitorCallback;
+
+                if (ADB.IsStarted)
+                {
+                    SetDeviceList();
+
+                    if (ADB.ConnectionMonitor.Start())
+                    {
+                        ADB.ConnectionMonitor.Callback += ConnectionMonitorCallback;
+                    }
+                }
+            }
+        }
+
+        public void ConnectionMonitorCallback(object sender, ConnectionMonitorArgs e)
+        {
+            this.Invoke((Action)delegate
+            {
+                SetDeviceList();
+            });
+        }
+
+        private async void MotoFlash_Load(object sender, EventArgs e)
+        {
             oConfigMng.LoadConfig();
-
+            cAppend("STARTING MOTO FLASH: Detecting device...");
+            await Task.Run(() => DeviceDetectionService());
             if (oConfigMng.Config.ToolTheme == "light")
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
@@ -88,7 +143,7 @@ namespace Franco28Tool.Engine
             }
             if (oConfigMng.Config.DeviceCodenmae == "")
             {
-                Label.Text = "Please connect your device, so MotoTool can check your device!";
+                cAppend("STARTING MOTO FLASH: Please connect your device, so MotoTool can check your device!");
                 Dialogs.WarningDialog("MotoFlash", "Please connect your device, so MotoTool can check your device!");
                 materialButtonDowngradeMoto.Enabled = false;
                 materialButtonFlashMoto.Enabled = false;
@@ -102,7 +157,7 @@ namespace Franco28Tool.Engine
                 oConfigMng.Config.DeviceCodenmae != "potter" &&
                 oConfigMng.Config.DeviceCodenmae != "ocean")
             {
-                Label.Text = "MotoFlash: Device not compatible yet! Current device: " + oConfigMng.Config.DeviceCodenmae;
+                cAppend("STARTING MOTO FLASH: Device not compatible yet! Current device: " + oConfigMng.Config.DeviceCodenmae);
                 materialButtonDowngradeMoto.Enabled = false;
                 materialButtonFlashMoto.Enabled = false;
                 groupBox1.Enabled = false;
@@ -130,1012 +185,200 @@ namespace Franco28Tool.Engine
             }
         }
 
-        private void flash_Click(object sender, EventArgs e)
+        public async void FFlash(string command)
+        {
+            List<String> devices = await Task.Run(() => Fastboot.Instance().Execute("fastboot " + command)); ;
+            devices.ToString();
+            var devices1 = String.Join("", devices.ToArray());
+            cAppend("MOTO FLASH: Flashing... {" + devices1 + "}");
+        }
+
+        private async void flash_Click(object sender, EventArgs e)
         {
             try
             {
-                DeviceisConnected();
                 if (materialSwitchFlashAll.Checked == false && materialSwitchFlashAllExceptModem.Checked == false)
                 {
+                    cAppend("MOTO FLASH: Please select an option!");
                     Dialogs.WarningDialog("Moto Flash", "Please select an option!");
                     return;
                 }
 
                 string firmwarepath = @"C:\\adb\\Firmware\\" + oConfigMng.Config.DeviceFirmware + oConfigMng.Config.DeviceFirmwareInfo;
                 Thread.Sleep(3000);
-                Label.Text = "Checking device connection...";
-                /*
-                if (android.HasConnectedDevices)
+
+                if (state == IDDeviceState.FASTBOOT || state == IDDeviceState.BOOTLOADER)
                 {
                     try
                     {
-                        Label.Text = "Checking device connection... OK!";
+                        cAppend("MOTO FLASH: Settings firmware path: " + firmwarepath);
                         Directory.SetCurrentDirectory(firmwarepath);
-                        Adb.FastbootExecuteCommand("adb.exe ", "reboot bootloader");
+                        cAppend("MOTO FLASH: Waiting for device...");
+                        await Task.Run(() => ADB.WaitForDevice());
+                        cAppend("MOTO FLASH: Rebooting into bootloader mode.");
+                        await Task.Run(() => ADB.Instance().Reboot(IDBoot.BOOTLOADER));
                         if (materialSwitchFlashAll.Checked == true)
                         {
-                            Label.Text = "Detecting device...";
-                            string devices = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.devices));
-                            Label.Text = devices;
-                            Logs.DebugLogs(devices);
+                            cAppend("Device Info: Waiting for device...");
+                            await Task.Run(() => ADB.WaitForDevice());
 
                             if (oConfigMng.Config.DeviceCodenmae == "doha" && oConfigMng.Config.DeviceCodenmae == "ocean" && oConfigMng.Config.DeviceCodenmae == "evert")
                             {
-                                string set_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.set_a));
-                                Label.Text = set_a;
-                                Logs.DebugLogs(set_a);
+                                FFlash(FirmwareFlashRead.set_a);
                             }
 
-                            string getvar = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.getvar));
-                            Label.Text = getvar;
-                            Logs.DebugLogs(getvar);
-
-                            string oem = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oem));
-                            Label.Text = oem;
-                            Logs.DebugLogs(oem);
-
-                            string gpt = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.gpt));
-                            Label.Text = gpt;
-                            Logs.DebugLogs(gpt);
-
-                            string bootloader = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.bootloader));
-                            Label.Text = bootloader;
-                            Logs.DebugLogs(bootloader);
+                            FFlash(FirmwareFlashRead.getvar);
+                            FFlash(FirmwareFlashRead.oem);
+                            FFlash(FirmwareFlashRead.gpt);
+                            FFlash(FirmwareFlashRead.bootloader);
 
                             if (oConfigMng.Config.DeviceCodenmae == "sanders")
                             {
-                                FirmwareFlashRead.ReadFirmwareFlashN(oConfigMng.Config.DeviceCodenmae);
-                                string fsg_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.fsg_a));
-                                Label.Text = fsg_a;
-                                Logs.DebugLogs(fsg_a);
-
-                                string modemst1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.modemst1));
-                                Label.Text = modemst1;
-                                Logs.DebugLogs(modemst1);
-
-                                string modemst2 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.modemst2));
-                                Label.Text = modemst2;
-                                Logs.DebugLogs(modemst2);
-
-                                string bluetooth_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.bluetooth_a));
-                                Label.Text = bluetooth_a;
-                                Logs.DebugLogs(bluetooth_a);
-
-                                string dsp_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dsp_a));
-                                Label.Text = dsp_a;
-                                Logs.DebugLogs(dsp_a);
-
-                                string logo_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.logo_a));
-                                Label.Text = logo_a;
-                                Logs.DebugLogs(logo_a);
-
-                                string boot_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.boot_a));
-                                Label.Text = boot_a;
-                                Logs.DebugLogs(boot_a);
-
-                                string system_a_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_0));
-                                Label.Text = system_a_0;
-                                Logs.DebugLogs(system_a_0);
-
-                                string system_a_1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_1));
-                                Label.Text = system_a_1;
-                                Logs.DebugLogs(system_a_1);
-
-                                string system_a_2 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_2));
-                                Label.Text = system_a_2;
-                                Logs.DebugLogs(system_a_2);
-
-                                string system_a_3 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_3));
-                                Label.Text = system_a_3;
-                                Logs.DebugLogs(system_a_3);
-
-                                string system_a_4 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_4));
-                                Label.Text = system_a_4;
-                                Logs.DebugLogs(system_a_4);
-
-                                string system_a_5 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_5));
-                                Label.Text = system_a_5;
-                                Logs.DebugLogs(system_a_5);
-
-                                string system_a_6 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_6));
-                                Label.Text = system_a_6;
-                                Logs.DebugLogs(system_a_6);
-
-                                string system_a_7 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_7));
-                                Label.Text = system_a_7;
-                                Logs.DebugLogs(system_a_7);
-
-                                string system_a_8 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_8));
-                                Label.Text = system_a_8;
-                                Logs.DebugLogs(system_a_8);
-
-                                string system_a_9 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_9));
-                                Label.Text = system_a_9;
-                                Logs.DebugLogs(system_a_9);
-
-                                string system_a_10 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_10));
-                                Label.Text = system_a_10;
-                                Logs.DebugLogs(system_a_10);
-
-                                string oem_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oem_a));
-                                Label.Text = oem_a;
-                                Logs.DebugLogs(oem_a);
+                                FFlash(FirmwareFlashRead.fsg_a);
+                                FFlash(FirmwareFlashRead.modemst1);
+                                FFlash(FirmwareFlashRead.modemst2);
+                                FFlash(FirmwareFlashRead.bluetooth_a);
+                                FFlash(FirmwareFlashRead.dsp_a);
+                                FFlash(FirmwareFlashRead.logo_a);
+                                FFlash(FirmwareFlashRead.boot_a);
+                                FFlash(FirmwareFlashRead.system_a_0);
+                                FFlash(FirmwareFlashRead.system_a_1);
+                                FFlash(FirmwareFlashRead.system_a_2);
+                                FFlash(FirmwareFlashRead.system_a_3); 
+                                FFlash(FirmwareFlashRead.system_a_4);
+                                FFlash(FirmwareFlashRead.system_a_5);
+                                FFlash(FirmwareFlashRead.system_a_6);
+                                FFlash(FirmwareFlashRead.system_a_7);
+                                FFlash(FirmwareFlashRead.system_a_8);
+                                FFlash(FirmwareFlashRead.system_a_9);
+                                FFlash(FirmwareFlashRead.system_a_10);
+                                FFlash(FirmwareFlashRead.oem_a);
                             }
                             if (oConfigMng.Config.DeviceCodenmae == "potter")
                             {
-                                FirmwareFlashRead.ReadFirmwareFlashN(oConfigMng.Config.DeviceCodenmae);
-                                string fsg_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.fsg_a));
-                                Label.Text = fsg_a;
-                                Logs.DebugLogs(fsg_a);
-
-                                string modemst1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.modemst1));
-                                Label.Text = modemst1;
-                                Logs.DebugLogs(modemst1);
-
-                                string modemst2 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.modemst2));
-                                Label.Text = modemst2;
-                                Logs.DebugLogs(modemst2);
-
-                                string bluetooth_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.bluetooth_a));
-                                Label.Text = bluetooth_a;
-                                Logs.DebugLogs(bluetooth_a);
-
-                                string dsp_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dsp_a));
-                                Label.Text = dsp_a;
-                                Logs.DebugLogs(dsp_a);
-
-                                string logo_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.logo_a));
-                                Label.Text = logo_a;
-                                Logs.DebugLogs(logo_a);
-
-                                string boot_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.boot_a));
-                                Label.Text = boot_a;
-                                Logs.DebugLogs(boot_a);
-
-                                string system_a_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_0));
-                                Label.Text = system_a_0;
-                                Logs.DebugLogs(system_a_0);
-
-                                string system_a_1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_1));
-                                Label.Text = system_a_1;
-                                Logs.DebugLogs(system_a_1);
-
-                                string system_a_2 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_2));
-                                Label.Text = system_a_2;
-                                Logs.DebugLogs(system_a_2);
-
-                                string system_a_3 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_3));
-                                Label.Text = system_a_3;
-                                Logs.DebugLogs(system_a_3);
-
-                                string system_a_4 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_4));
-                                Label.Text = system_a_4;
-                                Logs.DebugLogs(system_a_4);
-
-                                string system_a_5 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_5));
-                                Label.Text = system_a_5;
-                                Logs.DebugLogs(system_a_5);
-
-                                string system_a_6 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_6));
-                                Label.Text = system_a_6;
-                                Logs.DebugLogs(system_a_6);
-
-                                string system_a_7 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_7));
-                                Label.Text = system_a_7;
-                                Logs.DebugLogs(system_a_7);
-
-                                string system_a_8 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_8));
-                                Label.Text = system_a_8;
-                                Logs.DebugLogs(system_a_8);
-
-                                string oem_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oem_a));
-                                Label.Text = oem_a;
-                                Logs.DebugLogs(oem_a);
+                                FFlash(FirmwareFlashRead.fsg_a);
+                                FFlash(FirmwareFlashRead.modemst1);
+                                FFlash(FirmwareFlashRead.modemst2);
+                                FFlash(FirmwareFlashRead.bluetooth_a);
+                                FFlash(FirmwareFlashRead.dsp_a);
+                                FFlash(FirmwareFlashRead.logo_a);
+                                FFlash(FirmwareFlashRead.boot_a);
+                                FFlash(FirmwareFlashRead.system_a_0);
+                                FFlash(FirmwareFlashRead.system_a_1);
+                                FFlash(FirmwareFlashRead.system_a_2);
+                                FFlash(FirmwareFlashRead.system_a_3);
+                                FFlash(FirmwareFlashRead.system_a_4);
+                                FFlash(FirmwareFlashRead.system_a_5);
+                                FFlash(FirmwareFlashRead.system_a_6);
+                                FFlash(FirmwareFlashRead.system_a_7);
+                                FFlash(FirmwareFlashRead.system_a_8);
+                                FFlash(FirmwareFlashRead.oem_a);
                             }
                             if (oConfigMng.Config.DeviceCodenmae == "ocean")
                             {
-                                FirmwareFlashRead.ReadFirmwareFlashAB(oConfigMng.Config.DeviceCodenmae);
-                                string modem_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.modem_a));
-                                Label.Text = modem_a;
-                                Logs.DebugLogs(modem_a);
-
-                                string modem_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.modem_b));
-                                Label.Text = modem_b;
-                                Logs.DebugLogs(modem_b);
-
-                                string fsg_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.fsg_a));
-                                Label.Text = fsg_a;
-                                Logs.DebugLogs(fsg_a);
-
-                                string fsg_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.fsg_b));
-                                Label.Text = fsg_b;
-                                Logs.DebugLogs(fsg_b);
-
-                                string modemst1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.modemst1));
-                                Label.Text = modemst1;
-                                Logs.DebugLogs(modemst1);
-
-                                string modemst2 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.modemst2));
-                                Label.Text = modemst2;
-                                Logs.DebugLogs(modemst2);
-
-                                string dsp_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dsp_a));
-                                Label.Text = dsp_a;
-                                Logs.DebugLogs(dsp_a);
-
-                                string dsp_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dsp_b));
-                                Label.Text = dsp_b;
-                                Logs.DebugLogs(dsp_b);
-
-                                string logo_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.logo_a));
-                                Label.Text = logo_a;
-                                Logs.DebugLogs(logo_a);
-
-                                string logo_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.logo_b));
-                                Label.Text = logo_b;
-                                Logs.DebugLogs(logo_b);
-
-                                string boot_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.boot_a));
-                                Label.Text = boot_a;
-                                Logs.DebugLogs(boot_a);
-
-                                string boot_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.boot_b));
-                                Label.Text = boot_b;
-                                Logs.DebugLogs(boot_b);
-
-                                string dtbo_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dtbo_a));
-                                Label.Text = dtbo_a;
-                                Logs.DebugLogs(dtbo_a);
-
-                                string dtbo_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dtbo_b));
-                                Label.Text = dtbo_b;
-                                Logs.DebugLogs(dtbo_b);
-
-                                string system_a_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_0));
-                                Label.Text = system_a_0;
-                                Logs.DebugLogs(system_a_0);
-
-                                string system_a_1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_1));
-                                Label.Text = system_a_1;
-                                Logs.DebugLogs(system_a_1);
-
-                                string system_a_2 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_2));
-                                Label.Text = system_a_2;
-                                Logs.DebugLogs(system_a_2);
-
-                                string system_a_3 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_3));
-                                Label.Text = system_a_3;
-                                Logs.DebugLogs(system_a_3);
-
-                                string system_a_4 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_4));
-                                Label.Text = system_a_4;
-                                Logs.DebugLogs(system_a_4);
-
-                                string system_a_5 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_5));
-                                Label.Text = system_a_5;
-                                Logs.DebugLogs(system_a_5);
-
-                                string system_a_6 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_6));
-                                Label.Text = system_a_6;
-                                Logs.DebugLogs(system_a_6);
-
-                                string system_a_7 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_7));
-                                Label.Text = system_a_7;
-                                Logs.DebugLogs(system_a_7);
-
-                                string system_a_8 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_8));
-                                Label.Text = system_a_8;
-                                Logs.DebugLogs(system_a_8);
-
-                                string system_a_9 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_9));
-                                Label.Text = system_a_9;
-                                Logs.DebugLogs(system_a_9);
-
-                                string system_b_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_b_0));
-                                Label.Text = system_b_0;
-                                Logs.DebugLogs(system_b_0);
-
-                                string system_b_1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_b_1));
-                                Label.Text = system_b_1;
-                                Logs.DebugLogs(system_b_1);
-
-                                string system_b_2 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_b_2));
-                                Label.Text = system_b_2;
-                                Logs.DebugLogs(system_b_2);
-
-                                string vendor_a_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vendor_a_0));
-                                Label.Text = vendor_a_0;
-                                Logs.DebugLogs(vendor_a_0);
-
-                                string vendor_a_1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vendor_a_1));
-                                Label.Text = vendor_a_1;
-                                Logs.DebugLogs(vendor_a_1);
-
-                                string vendor_b_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vendor_b_0));
-                                Label.Text = vendor_b_0;
-                                Logs.DebugLogs(vendor_b_0);
-
-                                string vendor_b_1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vendor_b_1));
-                                Label.Text = vendor_b_1;
-                                Logs.DebugLogs(vendor_b_1);
-
-                                string oem_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oem_a));
-                                Label.Text = oem_a;
-                                Logs.DebugLogs(oem_a);
-
-                                string oem_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oem_b));
-                                Label.Text = oem_b;
-                                Logs.DebugLogs(oem_b);
+                                FFlash(FirmwareFlashRead.modem_a);
+                                FFlash(FirmwareFlashRead.modem_b);
+                                FFlash(FirmwareFlashRead.fsg_a);
+                                FFlash(FirmwareFlashRead.fsg_b);
+                                FFlash(FirmwareFlashRead.modemst1);
+                                FFlash(FirmwareFlashRead.modemst2);
+                                FFlash(FirmwareFlashRead.dsp_a);
+                                FFlash(FirmwareFlashRead.dsp_b);
+                                FFlash(FirmwareFlashRead.logo_a);
+                                FFlash(FirmwareFlashRead.logo_b);
+                                FFlash(FirmwareFlashRead.boot_a);
+                                FFlash(FirmwareFlashRead.boot_b);
+                                FFlash(FirmwareFlashRead.dtbo_a);
+                                FFlash(FirmwareFlashRead.dtbo_b);
+                                FFlash(FirmwareFlashRead.system_a_0);
+                                FFlash(FirmwareFlashRead.system_a_1);
+                                FFlash(FirmwareFlashRead.system_a_2);
+                                FFlash(FirmwareFlashRead.system_a_3);
+                                FFlash(FirmwareFlashRead.system_a_4);
+                                FFlash(FirmwareFlashRead.system_a_5);
+                                FFlash(FirmwareFlashRead.system_a_6);
+                                FFlash(FirmwareFlashRead.system_a_7);
+                                FFlash(FirmwareFlashRead.system_a_8);
+                                FFlash(FirmwareFlashRead.system_a_9);
+                                FFlash(FirmwareFlashRead.system_b_0);
+                                FFlash(FirmwareFlashRead.system_b_1);
+                                FFlash(FirmwareFlashRead.system_b_2);
+                                FFlash(FirmwareFlashRead.vendor_a_0);
+                                FFlash(FirmwareFlashRead.vendor_a_1);
+                                FFlash(FirmwareFlashRead.vendor_b_0);
+                                FFlash(FirmwareFlashRead.vendor_b_1);
+                                FFlash(FirmwareFlashRead.oem_a);
+                                FFlash(FirmwareFlashRead.oem_b);
                             }
                             if (oConfigMng.Config.DeviceCodenmae == "doha")
                             {
                                 FirmwareFlashRead.ReadFirmwareFlashAB(oConfigMng.Config.DeviceCodenmae);
-                                string vbmeta_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vbmeta_a));
-                                Label.Text = vbmeta_a;
-                                Logs.DebugLogs(vbmeta_a);
-
-                                string vbmeta_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vbmeta_b));
-                                Label.Text = vbmeta_b;
-                                Logs.DebugLogs(vbmeta_b);
-
-                                string modem_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.modem_a));
-                                Label.Text = modem_a;
-                                Logs.DebugLogs(modem_a);
-
-                                string modem_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.modem_b));
-                                Label.Text = modem_b;
-                                Logs.DebugLogs(modem_b);
-
-                                string fsg_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.fsg_a));
-                                Label.Text = fsg_a;
-                                Logs.DebugLogs(fsg_a);
-
-                                string fsg_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.fsg_b));
-                                Label.Text = fsg_b;
-                                Logs.DebugLogs(fsg_b);
-
-                                string modemst1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.modemst1));
-                                Label.Text = modemst1;
-                                Logs.DebugLogs(modemst1);
-
-                                string modemst2 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.modemst2));
-                                Label.Text = modemst2;
-                                Logs.DebugLogs(modemst2);
-
-                                string bluetooth_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.bluetooth_a));
-                                Label.Text = bluetooth_a;
-                                Logs.DebugLogs(bluetooth_a);
-
-                                string bluetooth_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.bluetooth_b));
-                                Label.Text = bluetooth_b;
-                                Logs.DebugLogs(bluetooth_b);
-
-                                string dsp_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dsp_a));
-                                Label.Text = dsp_a;
-                                Logs.DebugLogs(dsp_a);
-
-                                string dsp_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dsp_b));
-                                Label.Text = dsp_b;
-                                Logs.DebugLogs(dsp_b);
-
-                                string logo_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.logo_a));
-                                Label.Text = logo_a;
-                                Logs.DebugLogs(logo_a);
-
-                                string logo_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.logo_b));
-                                Label.Text = logo_b;
-                                Logs.DebugLogs(logo_b);
-
-                                string boot_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.boot_a));
-                                Label.Text = boot_a;
-                                Logs.DebugLogs(boot_a);
-
-                                string boot_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.boot_b));
-                                Label.Text = boot_b;
-                                Logs.DebugLogs(boot_b);
-
-                                string dtbo_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dtbo_a));
-                                Label.Text = dtbo_a;
-                                Logs.DebugLogs(dtbo_a);
-
-                                string dtbo_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dtbo_b));
-                                Label.Text = dtbo_b;
-                                Logs.DebugLogs(dtbo_b);
-
-                                string system_a_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_0));
-                                Label.Text = system_a_0;
-                                Logs.DebugLogs(system_a_0);
-
-                                string system_a_1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_1));
-                                Label.Text = system_a_1;
-                                Logs.DebugLogs(system_a_1);
-
-                                string system_a_2 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_2));
-                                Label.Text = system_a_2;
-                                Logs.DebugLogs(system_a_2);
-
-                                string system_a_3 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_3));
-                                Label.Text = system_a_3;
-                                Logs.DebugLogs(system_a_3);
-
-                                string system_a_4 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_4));
-                                Label.Text = system_a_4;
-                                Logs.DebugLogs(system_a_4);
-
-                                string system_a_5 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_5));
-                                Label.Text = system_a_5;
-                                Logs.DebugLogs(system_a_5);
-
-                                string system_b_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_b_0));
-                                Label.Text = system_b_0;
-                                Logs.DebugLogs(system_b_0);
-
-                                string system_b_1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_b_1));
-                                Label.Text = system_b_1;
-                                Logs.DebugLogs(system_b_1);
-
-                                string oem_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oem_a));
-                                Label.Text = oem_a;
-                                Logs.DebugLogs(oem_a);
-
-                                string oem_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oem_b));
-                                Label.Text = oem_b;
-                                Logs.DebugLogs(oem_b);
-
-                                string vendor_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vendor_a));
-                                Label.Text = vendor_a;
-                                Logs.DebugLogs(vendor_a);
-
-                                string vendor_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vendor_b));
-                                Label.Text = vendor_b;
-                                Logs.DebugLogs(vendor_b);
-
+                                FFlash(FirmwareFlashRead.vbmeta_a);
+                                FFlash(FirmwareFlashRead.vbmeta_b);
+                                FFlash(FirmwareFlashRead.modem_a);
+                                FFlash(FirmwareFlashRead.modem_b);
+                                FFlash(FirmwareFlashRead.fsg_a);
+                                FFlash(FirmwareFlashRead.fsg_b);
+                                FFlash(FirmwareFlashRead.modemst1);
+                                FFlash(FirmwareFlashRead.modemst2);
+                                FFlash(FirmwareFlashRead.bluetooth_a);
+                                FFlash(FirmwareFlashRead.bluetooth_b);
+                                FFlash(FirmwareFlashRead.dsp_a);
+                                FFlash(FirmwareFlashRead.dsp_b);
+                                FFlash(FirmwareFlashRead.logo_a);
+                                FFlash(FirmwareFlashRead.logo_b);
+                                FFlash(FirmwareFlashRead.boot_a);
+                                FFlash(FirmwareFlashRead.boot_b);
+                                FFlash(FirmwareFlashRead.dtbo_a);
+                                FFlash(FirmwareFlashRead.dtbo_b);
+                                FFlash(FirmwareFlashRead.system_a_0);
+                                FFlash(FirmwareFlashRead.system_a_1);
+                                FFlash(FirmwareFlashRead.system_a_2);
+                                FFlash(FirmwareFlashRead.system_a_3);
+                                FFlash(FirmwareFlashRead.system_a_4);
+                                FFlash(FirmwareFlashRead.system_a_5);
+                                FFlash(FirmwareFlashRead.system_b_0);
+                                FFlash(FirmwareFlashRead.system_b_1);
+                                FFlash(FirmwareFlashRead.oem_a);
+                                FFlash(FirmwareFlashRead.oem_b);
+                                FFlash(FirmwareFlashRead.vendor_a);
+                                FFlash(FirmwareFlashRead.vendor_b);
                             }
                             if (oConfigMng.Config.DeviceCodenmae == "beckham")
                             {
                                 FirmwareFlashRead.ReadFirmwareFlashAB(oConfigMng.Config.DeviceCodenmae);
-                                string modem_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.modem_a));
-                                Label.Text = modem_a;
-                                Logs.DebugLogs(modem_a);
-
-                                string fsg_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.fsg_a));
-                                Label.Text = fsg_a;
-                                Logs.DebugLogs(fsg_a);
-
-                                string modemst1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.modemst1));
-                                Label.Text = modemst1;
-                                Logs.DebugLogs(modemst1);
-
-                                string modemst2 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.modemst2));
-                                Label.Text = modemst2;
-                                Logs.DebugLogs(modemst2);
-
-                                string bluetooth_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.bluetooth_a));
-                                Label.Text = bluetooth_a;
-                                Logs.DebugLogs(bluetooth_a);
-
-                                string dsp_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dsp_a));
-                                Label.Text = dsp_a;
-                                Logs.DebugLogs(dsp_a);
-
-                                string logo_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.logo_a));
-                                Label.Text = logo_a;
-                                Logs.DebugLogs(logo_a);
-
-                                string boot_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.boot_a));
-                                Label.Text = boot_a;
-                                Logs.DebugLogs(boot_a);
-
-                                string system_a_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_0));
-                                Label.Text = system_a_0;
-                                Logs.DebugLogs(system_a_0);
-
-                                string system_a_1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_1));
-                                Label.Text = system_a_1;
-                                Logs.DebugLogs(system_a_1);
-
-                                string system_a_2 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_2));
-                                Label.Text = system_a_2;
-                                Logs.DebugLogs(system_a_2);
-
-                                string system_a_3 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_3));
-                                Label.Text = system_a_3;
-                                Logs.DebugLogs(system_a_3);
-
-                                string system_a_4 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_4));
-                                Label.Text = system_a_4;
-                                Logs.DebugLogs(system_a_4);
-
-                                string system_a_5 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_5));
-                                Label.Text = system_a_5;
-                                Logs.DebugLogs(system_a_5);
-
-                                string system_b_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_b_0));
-                                Label.Text = system_b_0;
-                                Logs.DebugLogs(system_b_0);
-
-                                string oem_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oem_a));
-                                Label.Text = oem_a;
-                                Logs.DebugLogs(oem_a);
-
-                                string oem_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oem_b));
-                                Label.Text = oem_b;
-                                Logs.DebugLogs(oem_b);
-
-                                string vendor_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vendor_a));
-                                Label.Text = vendor_a;
-                                Logs.DebugLogs(vendor_a);
-
-                                string vendor_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vendor_b));
-                                Label.Text = vendor_b;
-                                Logs.DebugLogs(vendor_b);
+                                FFlash(FirmwareFlashRead.modem_a);
+                                FFlash(FirmwareFlashRead.fsg_a);
+                                FFlash(FirmwareFlashRead.modemst1);
+                                FFlash(FirmwareFlashRead.modemst2);
+                                FFlash(FirmwareFlashRead.bluetooth_a);
+                                FFlash(FirmwareFlashRead.dsp_a);
+                                FFlash(FirmwareFlashRead.logo_a);
+                                FFlash(FirmwareFlashRead.boot_a);
+                                FFlash(FirmwareFlashRead.system_a_0);
+                                FFlash(FirmwareFlashRead.system_a_1);
+                                FFlash(FirmwareFlashRead.system_a_2);
+                                FFlash(FirmwareFlashRead.system_a_3);
+                                FFlash(FirmwareFlashRead.system_a_4);
+                                FFlash(FirmwareFlashRead.system_a_5);
+                                FFlash(FirmwareFlashRead.system_b_0);
+                                FFlash(FirmwareFlashRead.oem_a);
+                                FFlash(FirmwareFlashRead.oem_b);
+                                FFlash(FirmwareFlashRead.vendor_a);
+                                FFlash(FirmwareFlashRead.vendor_b);
                             }
-                            string erasecarrier = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.erasecarrier));
-                            Label.Text = erasecarrier;
-                            Logs.DebugLogs(erasecarrier);
-                            string eraseuserdata = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.eraseuserdata));
-                            Label.Text = eraseuserdata;
-                            Logs.DebugLogs(eraseuserdata);
-                            string eraseddr = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.eraseddr));
-                            Label.Text = eraseddr;
-                            Logs.DebugLogs(eraseddr);
-                            string oemclear = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oemclear));
-                            Label.Text = oemclear;
-                            Logs.DebugLogs(oemclear);
-                            string reboot = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.reboot));
-                            Label.Text = reboot;
-                            Logs.DebugLogs(reboot);
-
+                            FFlash(FirmwareFlashRead.erasecarrier);
+                            FFlash(FirmwareFlashRead.eraseuserdata);
+                            FFlash(FirmwareFlashRead.eraseddr);
+                            FFlash(FirmwareFlashRead.oemclear);
+                            FFlash(FirmwareFlashRead.reboot);
                             Dialogs.InfoDialog("FIRMWARE Installed!", "FIRMWARE: " + oConfigMng.Config.DeviceFirmwareInfo + " installed!");
                         }
 
                         // no modem
                         if (materialSwitchFlashAllExceptModem.Checked == true)
                         {
-                            Label.Text = "Detecting device...";
-                            string devices = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.devices));
-                            Label.Text = devices;
-                            Logs.DebugLogs(devices);
-
-                            if (oConfigMng.Config.DeviceCodenmae == "doha" && oConfigMng.Config.DeviceCodenmae == "ocean" && oConfigMng.Config.DeviceCodenmae == "evert")
-                            {
-                                string set_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.set_a));
-                                Label.Text = set_a;
-                                Logs.DebugLogs(set_a);
-                            }
-
-                            string getvar = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.getvar));
-                            Label.Text = getvar;
-                            Logs.DebugLogs(getvar);
-
-                            string oem = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oem));
-                            Label.Text = oem;
-                            Logs.DebugLogs(oem);
-
-                            string gpt = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.gpt));
-                            Label.Text = gpt;
-                            Logs.DebugLogs(gpt);
-
-                            string bootloader = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.bootloader));
-                            Label.Text = bootloader;
-                            Logs.DebugLogs(bootloader);
-
-                            if (oConfigMng.Config.DeviceCodenmae == "sanders")
-                            {
-                                FirmwareFlashRead.ReadFirmwareFlashN(oConfigMng.Config.DeviceCodenmae);
-
-                                string bluetooth_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.bluetooth_a));
-                                Label.Text = bluetooth_a;
-                                Logs.DebugLogs(bluetooth_a);
-
-                                string dsp_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dsp_a));
-                                Label.Text = dsp_a;
-                                Logs.DebugLogs(dsp_a);
-
-                                string logo_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.logo_a));
-                                Label.Text = logo_a;
-                                Logs.DebugLogs(logo_a);
-
-                                string boot_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.boot_a));
-                                Label.Text = boot_a;
-                                Logs.DebugLogs(boot_a);
-
-                                string system_a_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_0));
-                                Label.Text = system_a_0;
-                                Logs.DebugLogs(system_a_0);
-
-                                string system_a_1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_1));
-                                Label.Text = system_a_1;
-                                Logs.DebugLogs(system_a_1);
-
-                                string system_a_2 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_2));
-                                Label.Text = system_a_2;
-                                Logs.DebugLogs(system_a_2);
-
-                                string system_a_3 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_3));
-                                Label.Text = system_a_3;
-                                Logs.DebugLogs(system_a_3);
-
-                                string system_a_4 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_4));
-                                Label.Text = system_a_4;
-                                Logs.DebugLogs(system_a_4);
-
-                                string system_a_5 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_5));
-                                Label.Text = system_a_5;
-                                Logs.DebugLogs(system_a_5);
-
-                                string system_a_6 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_6));
-                                Label.Text = system_a_6;
-                                Logs.DebugLogs(system_a_6);
-
-                                string system_a_7 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_7));
-                                Label.Text = system_a_7;
-                                Logs.DebugLogs(system_a_7);
-
-                                string system_a_8 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_8));
-                                Label.Text = system_a_8;
-                                Logs.DebugLogs(system_a_8);
-
-                                string system_a_9 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_9));
-                                Label.Text = system_a_9;
-                                Logs.DebugLogs(system_a_9);
-
-                                string system_a_10 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_10));
-                                Label.Text = system_a_10;
-                                Logs.DebugLogs(system_a_10);
-
-                                string oem_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oem_a));
-                                Label.Text = oem_a;
-                                Logs.DebugLogs(oem_a);
-                            }
-                            if (oConfigMng.Config.DeviceCodenmae == "potter")
-                            {
-                                FirmwareFlashRead.ReadFirmwareFlashN(oConfigMng.Config.DeviceCodenmae);
-                                string bluetooth_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.bluetooth_a));
-                                Label.Text = bluetooth_a;
-                                Logs.DebugLogs(bluetooth_a);
-
-                                string dsp_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dsp_a));
-                                Label.Text = dsp_a;
-                                Logs.DebugLogs(dsp_a);
-
-                                string logo_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.logo_a));
-                                Label.Text = logo_a;
-                                Logs.DebugLogs(logo_a);
-
-                                string boot_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.boot_a));
-                                Label.Text = boot_a;
-                                Logs.DebugLogs(boot_a);
-
-                                string system_a_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_0));
-                                Label.Text = system_a_0;
-                                Logs.DebugLogs(system_a_0);
-
-                                string system_a_1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_1));
-                                Label.Text = system_a_1;
-                                Logs.DebugLogs(system_a_1);
-
-                                string system_a_2 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_2));
-                                Label.Text = system_a_2;
-                                Logs.DebugLogs(system_a_2);
-
-                                string system_a_3 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_3));
-                                Label.Text = system_a_3;
-                                Logs.DebugLogs(system_a_3);
-
-                                string system_a_4 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_4));
-                                Label.Text = system_a_4;
-                                Logs.DebugLogs(system_a_4);
-
-                                string system_a_5 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_5));
-                                Label.Text = system_a_5;
-                                Logs.DebugLogs(system_a_5);
-
-                                string system_a_6 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_6));
-                                Label.Text = system_a_6;
-                                Logs.DebugLogs(system_a_6);
-
-                                string system_a_7 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_7));
-                                Label.Text = system_a_7;
-                                Logs.DebugLogs(system_a_7);
-
-                                string system_a_8 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_8));
-                                Label.Text = system_a_8;
-                                Logs.DebugLogs(system_a_8);
-
-                                string oem_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oem_a));
-                                Label.Text = oem_a;
-                                Logs.DebugLogs(oem_a);
-                            }
-                            if (oConfigMng.Config.DeviceCodenmae == "ocean")
-                            {
-                                FirmwareFlashRead.ReadFirmwareFlashAB(oConfigMng.Config.DeviceCodenmae);
-                                string dsp_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dsp_a));
-                                Label.Text = dsp_a;
-                                Logs.DebugLogs(dsp_a);
-
-                                string dsp_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dsp_b));
-                                Label.Text = dsp_b;
-                                Logs.DebugLogs(dsp_b);
-
-                                string logo_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.logo_a));
-                                Label.Text = logo_a;
-                                Logs.DebugLogs(logo_a);
-
-                                string logo_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.logo_b));
-                                Label.Text = logo_b;
-                                Logs.DebugLogs(logo_b);
-
-                                string boot_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.boot_a));
-                                Label.Text = boot_a;
-                                Logs.DebugLogs(boot_a);
-
-                                string boot_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.boot_b));
-                                Label.Text = boot_b;
-                                Logs.DebugLogs(boot_b);
-
-                                string dtbo_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dtbo_a));
-                                Label.Text = dtbo_a;
-                                Logs.DebugLogs(dtbo_a);
-
-                                string dtbo_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dtbo_b));
-                                Label.Text = dtbo_b;
-                                Logs.DebugLogs(dtbo_b);
-
-                                string system_a_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_0));
-                                Label.Text = system_a_0;
-                                Logs.DebugLogs(system_a_0);
-
-                                string system_a_1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_1));
-                                Label.Text = system_a_1;
-                                Logs.DebugLogs(system_a_1);
-
-                                string system_a_2 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_2));
-                                Label.Text = system_a_2;
-                                Logs.DebugLogs(system_a_2);
-
-                                string system_a_3 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_3));
-                                Label.Text = system_a_3;
-                                Logs.DebugLogs(system_a_3);
-
-                                string system_a_4 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_4));
-                                Label.Text = system_a_4;
-                                Logs.DebugLogs(system_a_4);
-
-                                string system_a_5 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_5));
-                                Label.Text = system_a_5;
-                                Logs.DebugLogs(system_a_5);
-
-                                string system_a_6 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_6));
-                                Label.Text = system_a_6;
-                                Logs.DebugLogs(system_a_6);
-
-                                string system_a_7 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_7));
-                                Label.Text = system_a_7;
-                                Logs.DebugLogs(system_a_7);
-
-                                string system_a_8 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_8));
-                                Label.Text = system_a_8;
-                                Logs.DebugLogs(system_a_8);
-
-                                string system_a_9 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_9));
-                                Label.Text = system_a_9;
-                                Logs.DebugLogs(system_a_9);
-
-                                string system_b_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_b_0));
-                                Label.Text = system_b_0;
-                                Logs.DebugLogs(system_b_0);
-
-                                string system_b_1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_b_1));
-                                Label.Text = system_b_1;
-                                Logs.DebugLogs(system_b_1);
-
-                                string system_b_2 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_b_2));
-                                Label.Text = system_b_2;
-                                Logs.DebugLogs(system_b_2);
-
-                                string vendor_a_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vendor_a_0));
-                                Label.Text = vendor_a_0;
-                                Logs.DebugLogs(vendor_a_0);
-
-                                string vendor_a_1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vendor_a_1));
-                                Label.Text = vendor_a_1;
-                                Logs.DebugLogs(vendor_a_1);
-
-                                string vendor_b_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vendor_b_0));
-                                Label.Text = vendor_b_0;
-                                Logs.DebugLogs(vendor_b_0);
-
-                                string vendor_b_1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vendor_b_1));
-                                Label.Text = vendor_b_1;
-                                Logs.DebugLogs(vendor_b_1);
-
-                                string oem_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oem_a));
-                                Label.Text = oem_a;
-                                Logs.DebugLogs(oem_a);
-
-                                string oem_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oem_b));
-                                Label.Text = oem_b;
-                                Logs.DebugLogs(oem_b);
-                            }
-                            if (oConfigMng.Config.DeviceCodenmae == "doha")
-                            {
-                                FirmwareFlashRead.ReadFirmwareFlashAB(oConfigMng.Config.DeviceCodenmae);
-                                string vbmeta_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vbmeta_a));
-                                Label.Text = vbmeta_a;
-                                Logs.DebugLogs(vbmeta_a);
-
-                                string vbmeta_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vbmeta_b));
-                                Label.Text = vbmeta_b;
-                                Logs.DebugLogs(vbmeta_b);
-
-                                string bluetooth_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.bluetooth_a));
-                                Label.Text = bluetooth_a;
-                                Logs.DebugLogs(bluetooth_a);
-
-                                string bluetooth_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.bluetooth_b));
-                                Label.Text = bluetooth_b;
-                                Logs.DebugLogs(bluetooth_b);
-
-                                string dsp_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dsp_a));
-                                Label.Text = dsp_a;
-                                Logs.DebugLogs(dsp_a);
-
-                                string dsp_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dsp_b));
-                                Label.Text = dsp_b;
-                                Logs.DebugLogs(dsp_b);
-
-                                string logo_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.logo_a));
-                                Label.Text = logo_a;
-                                Logs.DebugLogs(logo_a);
-
-                                string logo_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.logo_b));
-                                Label.Text = logo_b;
-                                Logs.DebugLogs(logo_b);
-
-                                string boot_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.boot_a));
-                                Label.Text = boot_a;
-                                Logs.DebugLogs(boot_a);
-
-                                string boot_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.boot_b));
-                                Label.Text = boot_b;
-                                Logs.DebugLogs(boot_b);
-
-                                string dtbo_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dtbo_a));
-                                Label.Text = dtbo_a;
-                                Logs.DebugLogs(dtbo_a);
-
-                                string dtbo_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dtbo_b));
-                                Label.Text = dtbo_b;
-                                Logs.DebugLogs(dtbo_b);
-
-                                string system_a_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_0));
-                                Label.Text = system_a_0;
-                                Logs.DebugLogs(system_a_0);
-
-                                string system_a_1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_1));
-                                Label.Text = system_a_1;
-                                Logs.DebugLogs(system_a_1);
-
-                                string system_a_2 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_2));
-                                Label.Text = system_a_2;
-                                Logs.DebugLogs(system_a_2);
-
-                                string system_a_3 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_3));
-                                Label.Text = system_a_3;
-                                Logs.DebugLogs(system_a_3);
-
-                                string system_a_4 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_4));
-                                Label.Text = system_a_4;
-                                Logs.DebugLogs(system_a_4);
-
-                                string system_a_5 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_5));
-                                Label.Text = system_a_5;
-                                Logs.DebugLogs(system_a_5);
-
-                                string system_b_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_b_0));
-                                Label.Text = system_b_0;
-                                Logs.DebugLogs(system_b_0);
-
-                                string system_b_1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_b_1));
-                                Label.Text = system_b_1;
-                                Logs.DebugLogs(system_b_1);
-
-                                string oem_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oem_a));
-                                Label.Text = oem_a;
-                                Logs.DebugLogs(oem_a);
-
-                                string oem_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oem_b));
-                                Label.Text = oem_b;
-                                Logs.DebugLogs(oem_b);
-
-                                string vendor_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vendor_a));
-                                Label.Text = vendor_a;
-                                Logs.DebugLogs(vendor_a);
-
-                                string vendor_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vendor_b));
-                                Label.Text = vendor_b;
-                                Logs.DebugLogs(vendor_b);
-                            }
-                            if (oConfigMng.Config.DeviceCodenmae == "beckham")
-                            {
-                                FirmwareFlashRead.ReadFirmwareFlashAB(oConfigMng.Config.DeviceCodenmae);
-                                string bluetooth_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.bluetooth_a));
-                                Label.Text = bluetooth_a;
-                                Logs.DebugLogs(bluetooth_a);
-
-                                string dsp_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.dsp_a));
-                                Label.Text = dsp_a;
-                                Logs.DebugLogs(dsp_a);
-
-                                string logo_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.logo_a));
-                                Label.Text = logo_a;
-                                Logs.DebugLogs(logo_a);
-
-                                string boot_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.boot_a));
-                                Label.Text = boot_a;
-                                Logs.DebugLogs(boot_a);
-
-                                string system_a_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_0));
-                                Label.Text = system_a_0;
-                                Logs.DebugLogs(system_a_0);
-
-                                string system_a_1 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_1));
-                                Label.Text = system_a_1;
-                                Logs.DebugLogs(system_a_1);
-
-                                string system_a_2 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_2));
-                                Label.Text = system_a_2;
-                                Logs.DebugLogs(system_a_2);
-
-                                string system_a_3 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_3));
-                                Label.Text = system_a_3;
-                                Logs.DebugLogs(system_a_3);
-
-                                string system_a_4 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_4));
-                                Label.Text = system_a_4;
-                                Logs.DebugLogs(system_a_4);
-
-                                string system_a_5 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_a_5));
-                                Label.Text = system_a_5;
-                                Logs.DebugLogs(system_a_5);
-
-                                string system_b_0 = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.system_b_0));
-                                Label.Text = system_b_0;
-                                Logs.DebugLogs(system_b_0);
-
-                                string oem_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oem_a));
-                                Label.Text = oem_a;
-                                Logs.DebugLogs(oem_a);
-
-                                string oem_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oem_b));
-                                Label.Text = oem_b;
-                                Logs.DebugLogs(oem_b);
-
-                                string vendor_a = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vendor_a));
-                                Label.Text = vendor_a;
-                                Logs.DebugLogs(vendor_a);
-
-                                string vendor_b = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.vendor_b));
-                                Label.Text = vendor_b;
-                                Logs.DebugLogs(vendor_b);
-                            }
-                            string erasecarrier = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.erasecarrier));
-                            Label.Text = erasecarrier;
-                            Logs.DebugLogs(erasecarrier);
-                            string eraseuserdata = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.eraseuserdata));
-                            Label.Text = eraseuserdata;
-                            Logs.DebugLogs(eraseuserdata);
-                            string eraseddr = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.eraseddr));
-                            Label.Text = eraseddr;
-                            Logs.DebugLogs(eraseddr);
-                            string oemclear = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.oemclear));
-                            Label.Text = oemclear;
-                            Logs.DebugLogs(oemclear);
-                            string reboot = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot " + FirmwareFlashRead.reboot));
-                            Label.Text = reboot;
-                            Logs.DebugLogs(reboot);
-                            Dialogs.InfoDialog("FIRMWARE Installed!", "FIRMWARE: " + oConfigMng.Config.DeviceFirmwareInfo + " installed!");
+                          
                         }
                     }
                     catch (Exception er)
@@ -1146,10 +389,8 @@ namespace Franco28Tool.Engine
                 }
                 else
                 {
-                    Label.Text = "Please connect your device...";
                     Dialogs.WarningDialog("Moto Flash", "Please plug your device! Remember to plug your phone on Fastboot Mode!");
-                    reload();
-                } */
+                } 
             }
             catch (Exception er)
             {
@@ -1173,6 +414,27 @@ namespace Franco28Tool.Engine
         private void materialSwitchFlashAllExceptModem_CheckedChanged(object sender, EventArgs e)
         {
             FlashAllExceptModem = materialSwitchFlashAllExceptModem.Checked;
+        }
+
+        private void materialButtonExit_Click(object sender, EventArgs e)
+        {
+            if (oConfigMng.Config.Autosavelogs == "true")
+            {
+                cAppend("EXIT: Saving MotoFlash logs...");
+                try
+                {
+                    string filePath = @"C:\adb\.settings\Logs\MotoFlash.txt";
+                    cAppend("EXIT: Saving MotoFlash logs... {OK}");
+                    consoleMotoFlash.SaveFile(filePath, RichTextBoxStreamType.PlainText);
+                }
+                catch (Exception ex)
+                {
+                    Logs.DebugErrorLogs(ex);
+                    cAppend("EXIT: Saving MotoFlash logs... {ERROR}");
+                    Dialogs.ErrorDialog("An error has occured while attempting to save the output...", ex.ToString());
+                }
+            }
+            this.Dispose();
         }
     }
 }

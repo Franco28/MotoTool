@@ -51,7 +51,7 @@ namespace Franco28Tool.Engine
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             }
-            materialLabel38.Text = "" +
+            materialLabel38.Text =
                 "1. Boot your device into TWRP \n " +
                 "2. Go to backup option and select Persist and EFS \n " +
                 "3. Then slide it and it's done!";

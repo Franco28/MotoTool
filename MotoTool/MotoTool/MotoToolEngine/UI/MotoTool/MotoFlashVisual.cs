@@ -1,8 +1,14 @@
-﻿using MaterialSkin;
+﻿
+using AndroidCtrl;
+using AndroidCtrl.ADB;
+using AndroidCtrl.Fastboot;
+using AndroidCtrl.Tools;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Text;
+using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Franco28Tool.Engine
@@ -13,6 +19,7 @@ namespace Franco28Tool.Engine
         private SettingsMng oConfigMng = new SettingsMng();
         private int AppIndex;
         public Form activeForm = null;
+        IDDeviceState state = General.CheckDeviceState(ADB.Instance().DeviceID);
 
         #region MotoDebloatVar
         public bool AmazonShopp { get; private set; }
@@ -53,29 +60,27 @@ namespace Franco28Tool.Engine
             TextBox2.DragDrop += new DragEventHandler(TextBox2_DragDrop);
         }
 
-        private delegate void SetRefreshCallback();
-
-        private void SetRefresh()
+        public void cAppend(string message)
         {
-            if (this.InvokeRequired)
+            this.Invoke((Action)delegate
             {
-                SetRefreshCallback d = new SetRefreshCallback(SetRefresh);
-                base.Invoke(d);
-            }
-            else
-                base.Refresh();
+                consoleMFTT.AppendText(string.Format("\n{0} : {1}", DateTime.Now, message));
+                consoleMFTT.ScrollToCaret();
+            });
         }
 
-        public new void Refresh()
+        public void cAppendDebloat(string message)
         {
-            SetRefresh();
+            this.Invoke((Action)delegate
+            {
+                consoleDebloat.AppendText(string.Format("\n{0} : {1}", DateTime.Now, message));
+                consoleDebloat.ScrollToCaret();
+            });
         }
 
-        private void MotoFlashVisual_Load(object sender, EventArgs e)
+        private async void MotoFlashVisual_Load(object sender, EventArgs e)
         {
-            SetRefresh();
             oConfigMng.LoadConfig();
-
             if (oConfigMng.Config.ToolTheme == "light")
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
@@ -84,17 +89,93 @@ namespace Franco28Tool.Engine
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             }
+            cAppend("STARTING FLASH TOOL: Detecting device...");
+            cAppendDebloat("STARTING FLASH TOOL: Detecting device...");
+            await Task.Run(() => DeviceDetectionService());
         }
 
-        public void ReLoad()
+        private void SetDeviceList()
         {
-            SetRefresh();
-            this.Controls.Clear();
-            InitializeComponent();
+            string active = String.Empty;
+
+            List<DataModelDevicesItem> adbDevices = ADB.Devices();
+            List<DataModelDevicesItem> fastbootDevices = Fastboot.Devices();
+
+            foreach (DataModelDevicesItem device in adbDevices)
+            {
+                this.Invoke((Action)delegate
+                {
+                    cAppend("Device: Online! - ADB");
+                    cAppend("Device Codename: " + LoadDeviceServer.devicecodename);
+                    cAppend("Mode: " + state);
+                    cAppendDebloat("Device: Online! - ADB");
+                    cAppendDebloat("Device Codename: " + LoadDeviceServer.devicecodename);
+                    cAppendDebloat("Mode: " + state);
+                });
+            }
+            foreach (DataModelDevicesItem device in fastbootDevices)
+            {
+                this.Invoke((Action)delegate
+                {
+                    cAppend("Device: Online! - FASTBOOT");
+                    cAppend("Device Codename: " + LoadDeviceServer.devicecodename);
+                    cAppend("Mode: " + state);
+                    cAppendDebloat("Device: Online! - FASTBOOT");
+                    cAppendDebloat("Device Codename: " + LoadDeviceServer.devicecodename);
+                    cAppendDebloat("Mode: " + state);
+                });
+            }
+            ADB.SelectDevice();
+            Fastboot.SelectDevice();
+        }
+
+        private void DeviceDetectionService()
+        {
+            ADB.Start();
+            Fastboot.Instance();
+
+            if (Fastboot.ConnectionMonitor.Start())
+            {
+                Fastboot.ConnectionMonitor.Callback += ConnectionMonitorCallback;
+
+                if (ADB.IsStarted)
+                {
+                    SetDeviceList();
+
+                    if (ADB.ConnectionMonitor.Start())
+                    {
+                        ADB.ConnectionMonitor.Callback += ConnectionMonitorCallback;
+                    }
+                }
+            }
+        }
+
+        public void ConnectionMonitorCallback(object sender, ConnectionMonitorArgs e)
+        {
+            this.Invoke((Action)delegate
+            {
+                SetDeviceList();
+            });
         }
 
         private void MaterialButtonClose_Click(object sender, EventArgs e)
         {
+            if (oConfigMng.Config.Autosavelogs == "true")
+            {
+                cAppend("EXIT: Saving FlashTool logs...");
+                try
+                {
+                    string filePath = @"C:\adb\.settings\Logs\FlashTool.txt";
+                    cAppend("EXIT: Saving FlashTool logs... {OK}");
+                    consoleMFTT.SaveFile(filePath, RichTextBoxStreamType.PlainText);
+                }
+                catch (Exception ex)
+                {
+                    Logs.DebugErrorLogs(ex);
+                    cAppend("EXIT: Saving FlashTool logs... {ERROR}");
+                    Dialogs.ErrorDialog("An error has occured while attempting to save the output...", ex.ToString());
+                }
+            }
             this.Dispose();
         }
 
@@ -147,43 +228,29 @@ namespace Franco28Tool.Engine
                 AppIndex = 0;
         }
 
-        public void RemoveApp(string appname)
+        public async void RemoveApp(string appname)
         {
             if (AppIndex == 0)
             {
-                labelDebloat.Text = "Please select an app!";
+                cAppendDebloat("MOTO DEBLOAT: Please select an app!");
                 Dialogs.WarningDialog("Moto Debloat", "Please select an app!");
-                labelDebloat.Text = "";
                 Invalidate();
             }
             else
-            { /*
-                if (android.HasConnectedDevices)
+            {
+                if (IDDeviceState.DEVICE == state)
                 {
-                    var builder = new StringBuilder("Debloat Apps Report:\n\n");
-                    materialLabel2.Text = "Removing App";
-                    labelDebloat.Text = appname;
-                    materialLabelDebugDebloat.Text = "Detecting device...";
-                    Thread.Sleep(3000);
-                    string devicesdetect = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot devices"));
-                    builder.AppendFormat(" -Task {Detect} " + devicesdetect);
-                    materialLabelDebugDebloat.Text = "Detecting device..." + devicesdetect;
-                    labelDebloat.Text = "Removing: " + appname + " - App: N°" + AppIndex;
-                    string debloatingapp = RegawMOD.Android.Adb.ExecuteAdbCommand(RegawMOD.Android.Adb.FormAdbCommand("shell pm uninstall -k --user 0 " + appname));
-                    builder.AppendFormat(" -Task {Debloat} " + debloatingapp);
-                    labelDebloat.Text = "Removing: " + appname + " - App: N°" + AppIndex + " OK!";
-                    builder.AppendFormat(" - App debloated: " + appname +  "Operation completed sucessfully.\n", AppIndex);
-                    var batchOperationResults = builder.ToString();
-                    var mresult = MaterialMessageBox.Show(batchOperationResults, "Debloat App Operation");
+                    cAppendDebloat("MOTO DEBLOAT: Removing app: " + appname + "...");
+                    await Task.Run(() => ADB.Instance().Execute("shell pm uninstall -k --user 0 " + appname));
+                    cAppendDebloat("MOTO DEBLOAT: Removing app: " + appname + " {OK}");
                 } 
                 else
                 {
+                    cAppendDebloat("MOTO DEBLOAT: Your device is in the wrong state. " + state);
                     Strings.MSGBOXBootloaderWarning();
                     Invalidate();
-                } */
+                } 
             }
-            labelDebloat.Text = "";
-            materialLabel2.Text = "App";
             Invalidate();
         }
 
@@ -199,7 +266,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Amazon Shop";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Amazon Shop");
             }
         }
 
@@ -214,7 +281,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Google Play Movies";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Google Play Movies");
             }
         }
 
@@ -233,7 +300,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Google Input method";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Google Input method (korean, zhuyin, pinyin, japanese and latin)");
             }
         }
 
@@ -248,7 +315,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Google Talkback";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Google Talkback");
             }
         }
 
@@ -263,7 +330,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Google Chrome";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Google Chrome");
             }
         }
 
@@ -278,7 +345,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Google Docs";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Google Docs and Google Drive");
             }
         }
 
@@ -293,7 +360,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Google ArCore";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Google ArCore");
             }
         }
 
@@ -308,7 +375,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Google Lens";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Google Lens");
             }
         }
 
@@ -323,7 +390,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Google Music";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Google Music");
             }
         }
 
@@ -338,7 +405,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Google Duo";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Google Duo");
             }
         }
 
@@ -353,7 +420,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Google Translate";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Google Translate");
             }
         }
 
@@ -368,7 +435,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Google YouTube";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Google YouTube");
             }
         }
 
@@ -383,7 +450,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Moto PRIP";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Moto PRIP");
             }
         }
 
@@ -398,7 +465,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Moto OTA";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Moto OTA");
             }
         }
 
@@ -413,7 +480,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Moto Photo Editor";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Moto Photo Editor");
             }
         }
 
@@ -428,7 +495,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Moto AR Stickers";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Moto AR Stickers");
             }
         }
 
@@ -443,7 +510,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Moto Voice";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Moto Voice");
             }
         }
 
@@ -458,7 +525,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Moto Help";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Moto Help");
             }
         }
 
@@ -473,7 +540,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Moto Camera";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Moto Camera");
             }
         }
 
@@ -488,7 +555,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Moto App Box";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Moto App Box");
             }
         }
 
@@ -503,7 +570,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Moto Face Unlock";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Moto Face Unlock");
             }
         }
 
@@ -518,7 +585,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Moto Mods Store";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Moto Mods Store");
             }
         }
 
@@ -533,7 +600,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Moto Notifications";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Moto Notifications");
             }
         }
 
@@ -548,7 +615,7 @@ namespace Franco28Tool.Engine
             else
             {
                 dincrease();
-                labelDebloat.Text = "Unselected App: Moto Voice";
+                cAppendDebloat("MOTO DEBLOAT UNSELECTED APP: Moto Voice");
             }
         }
 
@@ -567,7 +634,7 @@ namespace Franco28Tool.Engine
                 e.Effect = DragDropEffects.None;
         }
 
-        private void TextBox2_DragDrop(object sender, DragEventArgs e)
+        private async void TextBox2_DragDrop(object sender, DragEventArgs e)
         {
             string[] FileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             string s = "";
@@ -576,21 +643,19 @@ namespace Franco28Tool.Engine
                 s = s + " " + File;
             TextBox2.Text = s;
 
-            FileDragLabel.Text = "Checking device connection...";
-/*
-            if (android.HasConnectedDevices)
+            if (IDDeviceState.RECOVERY == state)
             {
-                FileDragLabel.Text = "Checking device connection... OK";
-                FileDragLabel.Text = "Copying " + " " + s + " " + " to /sdcard...";
-                device.PushFile(s, "/sdcard");
+                cAppend("Copying " + " " + s + " " + " to /sdcard...");
+                await Task.Run(() => ADB.Instance().Push(s, "/sdcard"));
                 Dialogs.InfoDialog("Move Files: Info", "File copied" + " " + s + " " + " into /sdcard!");
             }
             else
             {
-                FileDragLabel.Text = "Please plug your device on booted TWRP!";
+                Thread.Sleep(1000);
+                cAppend("MOVE FILES TO TWRP: Your device is in the wrong state. Please put your device in recovery mode.\n");
                 Dialogs.WarningDialog("Move Files: " + s, "Please plug your device on booted TWRP!");
                 Invalidate();
-            } */
+            } 
         }
         #endregion MoveFilesToTWRP
     }
