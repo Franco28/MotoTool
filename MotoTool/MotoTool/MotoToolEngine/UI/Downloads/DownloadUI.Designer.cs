@@ -13,44 +13,16 @@ namespace Franco28Tool.Engine
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DownloadUI));
-            this.label7 = new System.Windows.Forms.Label();
-            this.ProgressBar1 = new MaterialSkin.Controls.MaterialProgressBar();
             this.materialButton10 = new MaterialSkin.Controls.MaterialButton();
-            this.labelDownloaded = new MaterialSkin.Controls.MaterialLabel();
-            this.labelSpeed = new MaterialSkin.Controls.MaterialLabel();
-            this.labelPerc = new MaterialSkin.Controls.MaterialLabel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.labeltitle = new MaterialSkin.Controls.MaterialLabel();
+            this.ProgressBar1 = new MaterialSkin.Controls.MaterialProgressBar();
+            this.label7 = new System.Windows.Forms.Label();
+            this.console = new System.Windows.Forms.RichTextBox();
+            this.labelPerc = new MaterialSkin.Controls.MaterialLabel();
+            this.labelspeed = new MaterialSkin.Controls.MaterialLabel();
+            this.labelfilesize = new MaterialSkin.Controls.MaterialLabel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label7.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label7.Image = ((System.Drawing.Image)(resources.GetObject("label7.Image")));
-            this.label7.Location = new System.Drawing.Point(2, 113);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(39, 41);
-            this.label7.TabIndex = 113;
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // ProgressBar1
-            // 
-            this.ProgressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ProgressBar1.BackColor = System.Drawing.Color.White;
-            this.ProgressBar1.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            this.ProgressBar1.Depth = 0;
-            this.ProgressBar1.Location = new System.Drawing.Point(47, 140);
-            this.ProgressBar1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.ProgressBar1.Name = "ProgressBar1";
-            this.ProgressBar1.Size = new System.Drawing.Size(837, 5);
-            this.ProgressBar1.TabIndex = 121;
-            this.ProgressBar1.Value = 1;
             // 
             // materialButton10
             // 
@@ -73,65 +45,108 @@ namespace Franco28Tool.Engine
             this.materialButton10.UseVisualStyleBackColor = true;
             this.materialButton10.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // labelDownloaded
+            // panel1
             // 
-            this.labelDownloaded.Depth = 0;
-            this.labelDownloaded.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelDownloaded.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.labelDownloaded.Location = new System.Drawing.Point(6, 69);
-            this.labelDownloaded.MouseState = MaterialSkin.MouseState.HOVER;
-            this.labelDownloaded.Name = "labelDownloaded";
-            this.labelDownloaded.Size = new System.Drawing.Size(509, 38);
-            this.labelDownloaded.TabIndex = 125;
-            this.labelDownloaded.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.panel1.Controls.Add(this.labelfilesize);
+            this.panel1.Controls.Add(this.labelspeed);
+            this.panel1.Controls.Add(this.labelPerc);
+            this.panel1.Controls.Add(this.console);
+            this.panel1.Controls.Add(this.ProgressBar1);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.materialButton10);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(926, 112);
+            this.panel1.TabIndex = 128;
             // 
-            // labelSpeed
+            // ProgressBar1
             // 
-            this.labelSpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelSpeed.Depth = 0;
-            this.labelSpeed.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelSpeed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.labelSpeed.Location = new System.Drawing.Point(537, 69);
-            this.labelSpeed.MouseState = MaterialSkin.MouseState.HOVER;
-            this.labelSpeed.Name = "labelSpeed";
-            this.labelSpeed.Size = new System.Drawing.Size(432, 38);
-            this.labelSpeed.TabIndex = 126;
-            this.labelSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ProgressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ProgressBar1.BackColor = System.Drawing.Color.White;
+            this.ProgressBar1.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.ProgressBar1.Depth = 0;
+            this.ProgressBar1.Location = new System.Drawing.Point(7, 97);
+            this.ProgressBar1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.ProgressBar1.Name = "ProgressBar1";
+            this.ProgressBar1.Size = new System.Drawing.Size(907, 5);
+            this.ProgressBar1.TabIndex = 131;
+            this.ProgressBar1.Value = 1;
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label7.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label7.Image = ((System.Drawing.Image)(resources.GetObject("label7.Image")));
+            this.label7.Location = new System.Drawing.Point(3, 39);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(70, 52);
+            this.label7.TabIndex = 130;
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // console
+            // 
+            this.console.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.console.Location = new System.Drawing.Point(80, 6);
+            this.console.Name = "console";
+            this.console.ReadOnly = true;
+            this.console.Size = new System.Drawing.Size(843, 60);
+            this.console.TabIndex = 132;
+            this.console.Text = "";
             // 
             // labelPerc
             // 
-            this.labelPerc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelPerc.BackColor = System.Drawing.Color.Transparent;
             this.labelPerc.Depth = 0;
-            this.labelPerc.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelPerc.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelPerc.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
             this.labelPerc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.labelPerc.Location = new System.Drawing.Point(890, 119);
+            this.labelPerc.HighEmphasis = true;
+            this.labelPerc.Location = new System.Drawing.Point(79, 69);
             this.labelPerc.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelPerc.Name = "labelPerc";
-            this.labelPerc.Size = new System.Drawing.Size(79, 35);
-            this.labelPerc.TabIndex = 127;
-            this.labelPerc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelPerc.Size = new System.Drawing.Size(250, 25);
+            this.labelPerc.TabIndex = 133;
+            this.labelPerc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelPerc.UseAccent = true;
             // 
-            // panel1
+            // labelspeed
             // 
-            this.panel1.Controls.Add(this.labeltitle);
-            this.panel1.Controls.Add(this.materialButton10);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(974, 66);
-            this.panel1.TabIndex = 128;
+            this.labelspeed.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labelspeed.BackColor = System.Drawing.Color.Transparent;
+            this.labelspeed.Depth = 0;
+            this.labelspeed.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelspeed.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
+            this.labelspeed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.labelspeed.HighEmphasis = true;
+            this.labelspeed.Location = new System.Drawing.Point(371, 69);
+            this.labelspeed.MouseState = MaterialSkin.MouseState.HOVER;
+            this.labelspeed.Name = "labelspeed";
+            this.labelspeed.Size = new System.Drawing.Size(250, 25);
+            this.labelspeed.TabIndex = 134;
+            this.labelspeed.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelspeed.UseAccent = true;
             // 
-            // labeltitle
+            // labelfilesize
             // 
-            this.labeltitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labeltitle.Depth = 0;
-            this.labeltitle.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labeltitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.labeltitle.Location = new System.Drawing.Point(74, 6);
-            this.labeltitle.MouseState = MaterialSkin.MouseState.HOVER;
-            this.labeltitle.Name = "labeltitle";
-            this.labeltitle.Size = new System.Drawing.Size(895, 49);
-            this.labeltitle.TabIndex = 129;
+            this.labelfilesize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelfilesize.BackColor = System.Drawing.Color.Transparent;
+            this.labelfilesize.Depth = 0;
+            this.labelfilesize.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelfilesize.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
+            this.labelfilesize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.labelfilesize.HighEmphasis = true;
+            this.labelfilesize.Location = new System.Drawing.Point(664, 69);
+            this.labelfilesize.MouseState = MaterialSkin.MouseState.HOVER;
+            this.labelfilesize.Name = "labelfilesize";
+            this.labelfilesize.Size = new System.Drawing.Size(250, 25);
+            this.labelfilesize.TabIndex = 135;
+            this.labelfilesize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelfilesize.UseAccent = true;
             // 
             // DownloadUI
             // 
@@ -139,14 +154,9 @@ namespace Franco28Tool.Engine
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(974, 157);
+            this.ClientSize = new System.Drawing.Size(926, 112);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.labelPerc);
-            this.Controls.Add(this.labelSpeed);
-            this.Controls.Add(this.labelDownloaded);
-            this.Controls.Add(this.ProgressBar1);
-            this.Controls.Add(this.label7);
             this.ForeColor = System.Drawing.Color.Black;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -166,13 +176,13 @@ namespace Franco28Tool.Engine
         }
 
         #endregion
-        public System.Windows.Forms.Label label7;
-        public MaterialSkin.Controls.MaterialProgressBar ProgressBar1;
         private MaterialSkin.Controls.MaterialButton materialButton10;
-        private MaterialSkin.Controls.MaterialLabel labelDownloaded;
-        private MaterialSkin.Controls.MaterialLabel labelSpeed;
-        private MaterialSkin.Controls.MaterialLabel labelPerc;
         private System.Windows.Forms.Panel panel1;
-        private MaterialSkin.Controls.MaterialLabel labeltitle;
+        public MaterialSkin.Controls.MaterialProgressBar ProgressBar1;
+        public System.Windows.Forms.Label label7;
+        private System.Windows.Forms.RichTextBox console;
+        private MaterialSkin.Controls.MaterialLabel labelPerc;
+        private MaterialSkin.Controls.MaterialLabel labelspeed;
+        private MaterialSkin.Controls.MaterialLabel labelfilesize;
     }
 }

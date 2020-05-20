@@ -47,7 +47,16 @@ namespace Franco28Tool.Engine
                 this.Dispose();
             }
         }
-        
+
+        public void cAppend(string message)
+        {
+            this.Invoke((Action)delegate
+            {
+                console.AppendText(string.Format("\n{0} : {1}", DateTime.Now, message));
+                console.ScrollToCaret();
+            });
+        }
+
         private void DownloadUI_Load(object sender, EventArgs e)
         {
             oConfigMng.LoadConfig();
@@ -61,7 +70,7 @@ namespace Franco28Tool.Engine
                 materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             }
 
-            labeltitle.Text = "Downloading " + DownloadsMng.filename;
+            cAppend("Downloading " + DownloadsMng.filename);
             DownloadsMng.SAVEPath = DownloadsMng.SAVEPathname;
             DownloadFile(DownloadsMng.DOWNLOADPath, DownloadsMng.SAVEPath);
         }
@@ -98,25 +107,25 @@ namespace Franco28Tool.Engine
 
         private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            labelSpeed.Text = string.Format("{0} kb/s", (e.BytesReceived / 1024d / sw.Elapsed.TotalSeconds).ToString("0.00"));
-            ProgressBar1.Value = e.ProgressPercentage;
+            labelspeed.Text = string.Format("{0} kb/s", (e.BytesReceived / 1024d / sw.Elapsed.TotalSeconds).ToString("0.00"));
             labelPerc.Text = e.ProgressPercentage.ToString() + "%";
-            labelDownloaded.Text = string.Format("{0} MB's / {1} MB's",
+            labelfilesize.Text = string.Format("{0} MB's / {1} MB's",
                 (e.BytesReceived / 1024d / 1024d).ToString("0.00"),
                 (e.TotalBytesToReceive / 1024d / 1024d).ToString("0.00"));
+            ProgressBar1.Value = e.ProgressPercentage;
         }
 
         public void Completed(object sender, AsyncCompletedEventArgs e)
         {
             sw.Reset();
-            labelDownloaded.Text = "0 MB's / 0 MB's";
-            labelPerc.Text = "0%";
-            labelSpeed.Text = "0 kb/s";
+            cAppend("Download completed!");
+        
             ProgressBar1.Value = 0;
 
             // Here if its cancelled by the button, this will show a messagge and erase broken file
             if (e.Cancelled == true)
             {
+                cAppend("Download has been canceled: " + DownloadsMng.filename);
                 Dialogs.InfoDialog("Download has been canceled", DownloadsMng.filename);
                 killandclose();
                 return;
@@ -139,6 +148,7 @@ namespace Franco28Tool.Engine
                                 string fullName = foundFile.FullName;
                                 if (fullName == DownloadsMng.SAVEPathname)
                                 {
+                                    cAppend(DownloadsMng.filename + " Info" + "\nDownload complete, " + DownloadsMng.filename + "is located at: " + Environment.NewLine + "'" + DownloadsMng.SAVEPath + "'.");
                                     Dialogs.InfoDialog(DownloadsMng.filename + " Info", "Download complete, " + DownloadsMng.filename + "is located at: " + Environment.NewLine + "'" + DownloadsMng.SAVEPath + "'.");
                                     closeform();
                                     return;
@@ -152,6 +162,7 @@ namespace Franco28Tool.Engine
                         }
 
                         // If its zip file, show this general messagge
+                        cAppend(DownloadsMng.filename + " Info" + "\nDownload complete, " + DownloadsMng.filename + "is located at: " + Environment.NewLine + "'" + DownloadsMng.SAVEPath + "'.");
                         Dialogs.InfoDialog(DownloadsMng.filename + " Info", "Download complete, " + DownloadsMng.filename + "is located at: " + Environment.NewLine + "'" + DownloadsMng.SAVEPath + "'.");
                         this.Hide();
 
@@ -202,6 +213,22 @@ namespace Franco28Tool.Engine
 
         private void killandclose()
         {
+            if (oConfigMng.Config.Autosavelogs == "true")
+            {
+                cAppend("EXIT: Saving Download logs...");
+                try
+                {
+                    string filePath = @"C:\adb\.settings\Logs\DownloadLogs.txt";
+                    cAppend("EXIT: Saving Download logs... {OK}");
+                    console.SaveFile(filePath, RichTextBoxStreamType.PlainText);
+                }
+                catch (Exception ex)
+                {
+                    Logs.DebugErrorLogs(ex);
+                    cAppend("EXIT: Saving Download logs... {ERROR}");
+                    Dialogs.ErrorDialog("An error has occured while attempting to save the output...", ex.ToString());
+                }
+            }
             webClient.CancelAsync();
             webClient.Dispose();
             webClient.CancelAsync();
