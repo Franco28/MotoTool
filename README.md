@@ -19,7 +19,7 @@
 - Windows 8+ 64 Bits
 
 ## Install
-- Start the "MotoTool_v2.0.0.0_Setup.exe"
+- Start the "MotoTool_v2.0.0.1_Setup.exe"
 - The installer will create a desktop shortcut and in Windows app will create a folder with the tool inside. 
 - When the installer ends, will ask you ~~if you want to launch the Tool and~~ if you want to isntall MotoDrivers. **Please if you dont have _MotoDrivers installed_ or you dont know, _dont uncheck the option_ and let the install do it ~~(WARNING: Uncheck Launch Tool!)~~**
 ~~NOTE Setup: if you check the box "Launch MotoTool" the Tool will be executed, but setup wont be closed, so restart the Tool for now~~
@@ -99,7 +99,7 @@ _**If you see this screen, please wait, i'm working with your device firmwares_*
 
 ### Tool Settings
 ![Tool Settings](https://github.com/Franco28/MotoTool/blob/master/Screens/ToolSettings.png "Tool Settings")
-![Tool Settings](https://github.com/Franco28/MotoTool/blob/master/Screens/Tool2SettingsTheme.png "Tool Settings")
+![Tool Settings](https://github.com/Franco28/MotoTool/blob/master/Screens/ToolSettingsTheme.png "Tool Settings")
 
 
 #
