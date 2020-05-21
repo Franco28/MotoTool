@@ -38,15 +38,20 @@ namespace Franco28Tool.Engine
             materialSkinManager.EnforceBackcolorOnAllComponents = true;
             materialSkinManager.AddFormToManage(this);
             InitializeComponent();
+            InitializeRAMCounter();
+            InitialiseCPUCounter();
             oConfigMng.LoadConfig();
             oConfigMng.Config.ToolVersion = ToolVer;
             this.Text = "MotoTool v" + oConfigMng.Config.ToolVersion;
             cAppend("STARTING: Checking MotoTool updates.");
             cehck4updates();
             cAppend("STARTING: Loading tool... Please wait...");
-            ADB.PATH_DIRECTORY = @"C:\adb\";
-            Fastboot.PATH_DIRECTORY = @"C:\adb\";
+            oConfigMng.Config.ADBPath = @"C:\adb\";
+            updateTimer_Tick();
+            oConfigMng.SaveConfig();
             cAppend("STARTING: Settings adb & fastboot path... Please wait...");
+            ADB.PATH_DIRECTORY = oConfigMng.Config.ADBPath;
+            Fastboot.PATH_DIRECTORY = oConfigMng.Config.ADBPath;
             cAppend("STARTING: Checking MotoDrivers...");
             if (File.Exists(@"C:\Program Files (x86)\Motorola Mobility\Motorola Device Manager\uninstall.exe"))
             {
@@ -71,9 +76,6 @@ namespace Franco28Tool.Engine
                 CheckMotoDrivers.MotoDrivers();
             }
             updateColorLoad();
-            InitializeRAMCounter();
-            InitialiseCPUCounter();
-            updateTimer_Tick();
         }
 
         public void CheckandDeploy()
@@ -185,8 +187,8 @@ namespace Franco28Tool.Engine
             }
             cAppend("STARTING: Applying MotoTool settings... {OK}");
             oConfigMng.SaveConfig();
-            cAppend("----------------------------------");
-            cAppend("MotoTool was loaded!");
+            cAppend("-------------------------------------------------");
+            cAppend("MotoTool v" + ToolVer + " was loaded!");
         }
 
         private void InitialiseCPUCounter()
@@ -202,7 +204,7 @@ namespace Franco28Tool.Engine
         private void updateTimer_Tick()
         {
             Timer timer = new Timer();
-            timer.Interval = (1 * 5000);
+            timer.Interval = (1 * 1000);
             timer.Tick += new EventHandler(timer_Tick);
             AvoidFlick();
             timer.Start();
@@ -1133,7 +1135,6 @@ namespace Franco28Tool.Engine
             oConfigMng.SaveConfig();
             cAppend("REMOVE DEVICE DATA: Clearing old device info... {OK}");
             Dialogs.InfoDialog("MotoTool: Device data", "All device data removed!");
-            this.Text = "MotoTool v" + oConfigMng.Config.ToolVersion + " - " + oConfigMng.Config.DeviceCodenmae + " - " + oConfigMng.Config.DeviceFirmware;
         }
 
         private void materialSwitchAutoSaveLogs_CheckedChanged(object sender, EventArgs e)

@@ -1136,7 +1136,7 @@ namespace Franco28Tool.Engine
             this.materialButtonUninstall.Depth = 0;
             this.materialButtonUninstall.DrawShadows = true;
             this.materialButtonUninstall.HighEmphasis = false;
-            this.materialButtonUninstall.Icon = global::Franco28Tool.Engine.Properties.Resources.unins;
+            this.materialButtonUninstall.Icon = ((System.Drawing.Image)(resources.GetObject("materialButtonUninstall.Icon")));
             this.materialButtonUninstall.Location = new System.Drawing.Point(206, 44);
             this.materialButtonUninstall.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonUninstall.MouseState = MaterialSkin.MouseState.HOVER;
@@ -1157,7 +1157,7 @@ namespace Franco28Tool.Engine
             this.materialButtonCMD.Depth = 0;
             this.materialButtonCMD.DrawShadows = true;
             this.materialButtonCMD.HighEmphasis = false;
-            this.materialButtonCMD.Icon = global::Franco28Tool.Engine.Properties.Resources.icons8_consola_16;
+            this.materialButtonCMD.Icon = ((System.Drawing.Image)(resources.GetObject("materialButtonCMD.Icon")));
             this.materialButtonCMD.Location = new System.Drawing.Point(17, 92);
             this.materialButtonCMD.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonCMD.MouseState = MaterialSkin.MouseState.HOVER;
@@ -1256,17 +1256,18 @@ namespace Franco28Tool.Engine
             // 
             // MaterialButtonChangeColor
             // 
+            this.MaterialButtonChangeColor.AutoSize = false;
             this.MaterialButtonChangeColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.MaterialButtonChangeColor.Cursor = System.Windows.Forms.Cursors.Hand;
             this.MaterialButtonChangeColor.Depth = 0;
             this.MaterialButtonChangeColor.DrawShadows = true;
             this.MaterialButtonChangeColor.HighEmphasis = true;
-            this.MaterialButtonChangeColor.Icon = null;
+            this.MaterialButtonChangeColor.Icon = ((System.Drawing.Image)(resources.GetObject("MaterialButtonChangeColor.Icon")));
             this.MaterialButtonChangeColor.Location = new System.Drawing.Point(17, 126);
             this.MaterialButtonChangeColor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.MaterialButtonChangeColor.MouseState = MaterialSkin.MouseState.HOVER;
             this.MaterialButtonChangeColor.Name = "MaterialButtonChangeColor";
-            this.MaterialButtonChangeColor.Size = new System.Drawing.Size(140, 36);
+            this.MaterialButtonChangeColor.Size = new System.Drawing.Size(170, 36);
             this.MaterialButtonChangeColor.TabIndex = 64;
             this.MaterialButtonChangeColor.Text = "Change Colors";
             this.MaterialButtonChangeColor.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -1332,17 +1333,18 @@ namespace Franco28Tool.Engine
             // 
             // materialButtonChangeTheme
             // 
+            this.materialButtonChangeTheme.AutoSize = false;
             this.materialButtonChangeTheme.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialButtonChangeTheme.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialButtonChangeTheme.Depth = 0;
             this.materialButtonChangeTheme.DrawShadows = true;
             this.materialButtonChangeTheme.HighEmphasis = true;
-            this.materialButtonChangeTheme.Icon = null;
+            this.materialButtonChangeTheme.Icon = ((System.Drawing.Image)(resources.GetObject("materialButtonChangeTheme.Icon")));
             this.materialButtonChangeTheme.Location = new System.Drawing.Point(17, 44);
             this.materialButtonChangeTheme.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonChangeTheme.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonChangeTheme.Name = "materialButtonChangeTheme";
-            this.materialButtonChangeTheme.Size = new System.Drawing.Size(133, 36);
+            this.materialButtonChangeTheme.Size = new System.Drawing.Size(170, 36);
             this.materialButtonChangeTheme.TabIndex = 63;
             this.materialButtonChangeTheme.Text = "Change Theme";
             this.materialButtonChangeTheme.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;

@@ -493,6 +493,16 @@ namespace Franco28Tool.Engine.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_cmyk_1055088 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_cmyk_1055088", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iconfinder_Grid_1031514 {
             get {
                 object obj = ResourceManager.GetObject("iconfinder_Grid_1031514", resourceCulture);
@@ -513,6 +523,26 @@ namespace Franco28Tool.Engine.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_minus_1645995 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_minus_1645995", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_plus_1646001 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_plus_1646001", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iconfinder_settings_115801 {
             get {
                 object obj = ResourceManager.GetObject("iconfinder_settings_115801", resourceCulture);
@@ -523,9 +553,49 @@ namespace Franco28Tool.Engine.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_smartphone_1054975 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_smartphone_1054975", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iconfinder_social_56_1591869 {
             get {
                 object obj = ResourceManager.GetObject("iconfinder_social_56_1591869", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_software_update_available_118955 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_software_update_available_118955", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_Terminal_566022 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_Terminal_566022", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_themes_1646005 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_themes_1646005", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

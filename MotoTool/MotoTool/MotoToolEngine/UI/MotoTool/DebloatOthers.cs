@@ -41,7 +41,7 @@ namespace Franco28Tool.Engine
         private void DebloatOthers_Load(object sender, EventArgs e)
         {
             oConfigMng.LoadConfig();
-
+            cAppendDebloat("MOTO DEBLOAT: Please, write the app package like this: -com.google.android.apps.translate-");
             if (oConfigMng.Config.ToolTheme == "light")
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;

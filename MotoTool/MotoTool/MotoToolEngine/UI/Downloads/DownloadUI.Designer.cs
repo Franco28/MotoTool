@@ -168,7 +168,6 @@ namespace Franco28Tool.Engine
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Download Engine";
             this.TopMost = true;
-            this.Closed += new System.EventHandler(this.DownloadUI_Close);
             this.Load += new System.EventHandler(this.DownloadUI_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

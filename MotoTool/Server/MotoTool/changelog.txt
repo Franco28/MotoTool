@@ -10,9 +10,12 @@ v2.0.0.1
 - Changed the way to use Fastboot and ADB
 - Fixed lot of internal errors
 - Fixe UI bugs
+- Fixed cancel download Tool crash
 - Added new console panel
 - Added new settings (auto save logs, add new device, remove device data)
 - Added new device: Sofiar
+- Added new check file size, so this will remove broken file
+- Removed more unnecesary code 
 
 --------------
 v2.0.0.0

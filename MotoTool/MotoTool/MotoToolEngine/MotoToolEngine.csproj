@@ -435,6 +435,27 @@
   <ItemGroup>
     <None Include="Resources\rt1.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_Terminal_566022.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_plus_1646001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_smartphone_1054975.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_software-update-available_118955.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_minus_1645995.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_cmyk_1055088.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_themes_1646005.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

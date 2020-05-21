@@ -28,24 +28,33 @@ namespace Franco28Tool.Engine
 
         public void KillAsync()
         {
-            webClient.Dispose();
             webClient.CancelAsync();
-            return;
         }
 
         public void closeform()
         {
+            oConfigMng.LoadConfig();
             if (this.webClient != null)
             {
-                ProgressBar1.Hide();
-                this.webClient.CancelAsync();
+                if (oConfigMng.Config.Autosavelogs == "true")
+                {
+                    cAppend("EXIT: Saving Download logs...");
+                    try
+                    {
+                        string filePath = @"C:\adb\.settings\Logs\DownloadLogs.txt";
+                        cAppend("EXIT: Saving Download logs... {OK}");
+                        console.SaveFile(filePath, RichTextBoxStreamType.PlainText);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logs.DebugErrorLogs(ex);
+                        cAppend("EXIT: Saving Download logs... {ERROR}");
+                        Dialogs.ErrorDialog("An error has occured while attempting to save the output...", ex.ToString());
+                    }
+                }
                 KillAsync();
-                this.Dispose();
             }
-            else
-            {
-                this.Dispose();
-            }
+            return;
         }
 
         public void cAppend(string message)
@@ -120,135 +129,99 @@ namespace Franco28Tool.Engine
 
         public void Completed(object sender, AsyncCompletedEventArgs e)
         {
-            sw.Reset();
-            cAppend("Download completed!");
-        
-            ProgressBar1.Value = 0;
-
-            // Here if its cancelled by the button, this will show a messagge and erase broken file
+            // Here if its cancelled by the button, this will show a messagge
             if (e.Cancelled == true)
             {
                 cAppend("Download has been canceled: " + DownloadsMng.filename);
-                Dialogs.InfoDialog("Download has been canceled", DownloadsMng.filename);
-                killandclose();
+                Dialogs.InfoDialog(DownloadsMng.filename, "Download has been canceled");
                 return;
             }
-            else
+
+            sw.Reset();
+            cAppend("Download completed!");        
+            ProgressBar1.Value = 0;
+
+            try
             {
-                try
+                if (Path.GetExtension(DownloadsMng.SAVEPathname).Equals(".zip"))
                 {
-                    if (Path.GetExtension(DownloadsMng.SAVEPathname).Equals(".zip"))
+                    // Check TWRP Installer
+                    try
                     {
-                        // Check TWRP Installer
-                        try
-                        {
-                            string partialName = "twrp";
-                            DirectoryInfo hdDirectoryInWhichToSearch = new DirectoryInfo(@"C:\adb\TWRP\");
-                            FileInfo[] filesInDir = hdDirectoryInWhichToSearch.GetFiles("*" + partialName + "*.*");
+                        string partialName = "twrp";
+                        DirectoryInfo hdDirectoryInWhichToSearch = new DirectoryInfo(@"C:\adb\TWRP\");
+                        FileInfo[] filesInDir = hdDirectoryInWhichToSearch.GetFiles("*" + partialName + "*.*");
 
-                            foreach (FileInfo foundFile in filesInDir)
+                        foreach (FileInfo foundFile in filesInDir)
+                        {
+                            string fullName = foundFile.FullName;
+                            if (fullName == DownloadsMng.SAVEPathname)
                             {
-                                string fullName = foundFile.FullName;
-                                if (fullName == DownloadsMng.SAVEPathname)
-                                {
-                                    cAppend(DownloadsMng.filename + " Info" + "\nDownload complete, " + DownloadsMng.filename + "is located at: " + Environment.NewLine + "'" + DownloadsMng.SAVEPath + "'.");
-                                    Dialogs.InfoDialog(DownloadsMng.filename + " Info", "Download complete, " + DownloadsMng.filename + "is located at: " + Environment.NewLine + "'" + DownloadsMng.SAVEPath + "'.");
-                                    closeform();
-                                    return;
-                                }
-                            }
-                        }
-                        catch (Exception er)
-                        {
-                            Logs.DebugErrorLogs(er);
-                            Dialogs.ErrorDialog("ERROR: Verify TWRP INSTALLER", "Error: " + er);
-                        }
-
-                        // If its zip file, show this general messagge
-                        cAppend(DownloadsMng.filename + " Info" + "\nDownload complete, " + DownloadsMng.filename + "is located at: " + Environment.NewLine + "'" + DownloadsMng.SAVEPath + "'.");
-                        Dialogs.InfoDialog(DownloadsMng.filename + " Info", "Download complete, " + DownloadsMng.filename + "is located at: " + Environment.NewLine + "'" + DownloadsMng.SAVEPath + "'.");
-                        this.Hide();
-
-                        // here if xml reader firmware exctrated equals to 0, this will extract the downloaded zip!
-                        try
-                        {
-                            if (oConfigMng.Config.FirmwareExtracted == "0")
-                            {
-                                DirectoryInfo di = Directory.CreateDirectory(DownloadsMng.filename);
-                                var unzip = new UnzipUI();
-                                unzip.textBox_FilePath.Text = DownloadsMng.SAVEPathname;
-                                unzip.textBox_ExtractionFolder.Text = DownloadsMng.filepath + DownloadsMng.filename;
-                                unzip.Text = "Unzip: " + DownloadsMng.filename;
-                                if (unzip.textBox_FilePath.Text != string.Empty && unzip.textBox_ExtractionFolder.Text != string.Empty)
-                                    unzip.extractFile.RunWorkerAsync();
-                                else
-                                    Strings.MsgBoxUnzippyAlert();
-                                unzip.Show();
-                                if (File.Exists(DownloadsMng.SAVEPathname))
-                                {
-                                    File.Delete(DownloadsMng.SAVEPathname);
-                                }
+                                cAppend(DownloadsMng.filename + " Info" + "\nDownload complete, " + DownloadsMng.filename + "is located at: " + Environment.NewLine + "'" + DownloadsMng.SAVEPath + "'.");
+                                Dialogs.InfoDialog(DownloadsMng.filename + " Info", "Download complete, " + DownloadsMng.filename + "is located at: " + Environment.NewLine + "'" + DownloadsMng.SAVEPath + "'.");
                                 closeform();
                                 return;
                             }
                         }
-                        catch (Exception er)
-                        {
-                            Logs.DebugErrorLogs(er);
-                            Dialogs.ErrorDialog("ERROR: Unzip File", "Error: " + er);
-                        }
-                        closeform();
-                        return;
                     }
-                    else
+                    catch (Exception er)
                     {
-                        closeform();
-                        return;
+                        Logs.DebugErrorLogs(er);
+                        Dialogs.ErrorDialog("ERROR: Verify TWRP INSTALLER", "Error: " + er);
                     }
+
+                    // If its zip file, show this general messagge
+                    cAppend(DownloadsMng.filename + " Info" + "\nDownload complete, " + DownloadsMng.filename + "is located at: " + Environment.NewLine + "'" + DownloadsMng.SAVEPath + "'.");
+                    Dialogs.InfoDialog(DownloadsMng.filename + " Info", "Download complete, " + DownloadsMng.filename + "is located at: " + Environment.NewLine + "'" + DownloadsMng.SAVEPath + "'.");
+                    this.Hide();
+
+                    // here if xml reader firmware exctrated equals to 0, this will extract the downloaded zip!
+                    try
+                    {
+                        if (oConfigMng.Config.FirmwareExtracted == "0")
+                        {
+                            DirectoryInfo di = Directory.CreateDirectory(DownloadsMng.filename);
+                            var unzip = new UnzipUI();
+                            unzip.textBox_FilePath.Text = DownloadsMng.SAVEPathname;
+                            unzip.textBox_ExtractionFolder.Text = DownloadsMng.filepath + DownloadsMng.filename;
+                            unzip.Text = "Unzip: " + DownloadsMng.filename;
+                            if (unzip.textBox_FilePath.Text != string.Empty && unzip.textBox_ExtractionFolder.Text != string.Empty)
+                                unzip.extractFile.RunWorkerAsync();
+                            else
+                                Strings.MsgBoxUnzippyAlert();
+                            unzip.Show();
+                            if (File.Exists(DownloadsMng.SAVEPathname))
+                            {
+                                File.Delete(DownloadsMng.SAVEPathname);
+                            }
+                            closeform();
+                            return;
+                        }
+                    }
+                    catch (Exception er)
+                    {
+                        Logs.DebugErrorLogs(er);
+                        Dialogs.ErrorDialog("ERROR: Unzip File", "Error: " + er);
+                    }
+                    closeform();
+                    return;
                 }
-                catch (Exception er)
+                else
                 {
-                    Logs.DebugErrorLogs(er);
-                    Dialogs.ErrorDialog("ERROR: Verify ZIP files", "Error: " + er);
+                    closeform();
+                    return;
                 }
             }
-        }
-
-        private void killandclose()
-        {
-            if (oConfigMng.Config.Autosavelogs == "true")
+            catch (Exception er)
             {
-                cAppend("EXIT: Saving Download logs...");
-                try
-                {
-                    string filePath = @"C:\adb\.settings\Logs\DownloadLogs.txt";
-                    cAppend("EXIT: Saving Download logs... {OK}");
-                    console.SaveFile(filePath, RichTextBoxStreamType.PlainText);
-                }
-                catch (Exception ex)
-                {
-                    Logs.DebugErrorLogs(ex);
-                    cAppend("EXIT: Saving Download logs... {ERROR}");
-                    Dialogs.ErrorDialog("An error has occured while attempting to save the output...", ex.ToString());
-                }
+                Logs.DebugErrorLogs(er);
+                Dialogs.ErrorDialog("ERROR: Verify ZIP files", "Error: " + er);
             }
-            webClient.CancelAsync();
-            webClient.Dispose();
-            webClient.CancelAsync();
-            webClient.Dispose();
-            webClient.CancelAsync();
-            webClient.Dispose();
-            this.Dispose();
-        }
-
-        private void DownloadUI_Close(object sender, EventArgs e)
-        {
-            killandclose();
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            killandclose();
+            closeform();
         }
     }
 }

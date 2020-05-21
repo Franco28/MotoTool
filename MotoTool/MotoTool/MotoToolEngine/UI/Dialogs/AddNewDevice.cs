@@ -32,7 +32,7 @@ namespace Franco28Tool.Engine
         private void AddNewDevice_Load(object sender, EventArgs e)
         {
             oConfigMng.LoadConfig();
-
+            cAppend("Add new device with device channel...");
             if (oConfigMng.Config.ToolTheme == "light")
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
@@ -48,11 +48,11 @@ namespace Franco28Tool.Engine
             oConfigMng.LoadConfig();
             if (textBoxCodename.Text != string.Empty || textBoxChannel.Text != string.Empty)
             {
-                oConfigMng.Config.DeviceCodenmae = textBoxCodename.Text;
-                oConfigMng.Config.DeviceFirmware = textBoxChannel.Text;
+                oConfigMng.Config.DeviceCodenmae = textBoxCodename.Text.ToLower();
+                oConfigMng.Config.DeviceFirmware = textBoxChannel.Text.ToUpper();
                 oConfigMng.SaveConfig();
-                cAppend("Add New Device Codename " + oConfigMng.Config.DeviceCodenmae);
-                cAppend("Add New Device Channel: " + oConfigMng.Config.DeviceFirmware);
+                cAppend("Added new device codename: " + oConfigMng.Config.DeviceCodenmae);
+                cAppend("Added new device channel: " + oConfigMng.Config.DeviceFirmware);
             }
             else
             {

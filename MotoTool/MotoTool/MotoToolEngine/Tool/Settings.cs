@@ -30,6 +30,13 @@ namespace Franco28Tool.Engine
         private System.String m_oDeviceFirmwareInfo;
         private System.String m_oDeviceTWPRInfo;
         private System.String m_oDownloadFileSize;
+        private System.String m_oADBPath;
+
+        public System.String ADBPath
+        {
+            get { return m_oADBPath; }
+            set { m_oADBPath = value; }
+        }
 
         public System.String ToolLang
         {

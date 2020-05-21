@@ -383,13 +383,13 @@ namespace Franco28Tool.Engine
             var dld = new DownloadUI();
             try
             {
-                long length = new FileInfo(firmwarezip).Length;
-                string vIn = oConfigMng.Config.DownloadFileSize;
-                long vOut = Convert.ToInt64(vIn);
                 cAppend("FIRMWARE DOWNLOAD: Checking firmware files...");
                 if (File.Exists(firmwarezip) && oConfigMng.Config.FirmwareExtracted == "0")
                 {
-                    if (length < vOut)
+                    long length = new FileInfo(firmwarezip).Length;
+                    string vIn = oConfigMng.Config.DownloadFileSize;
+                    long vOut = Convert.ToInt64(vIn);
+                    if (length > vOut)
                     {  
                         cAppend("FIRMWARE DOWNLOAD: Firmware already exist, now it will be exctracted");
                         DirectoryInfo di = Directory.CreateDirectory(DownloadsMng.filename);
@@ -419,15 +419,14 @@ namespace Franco28Tool.Engine
                         Strings.MSGBOXFileCorrupted();
                         cAppend(@"FIRMWARE DOWNLOAD: File is corrupted \:  " + DownloadsMng.SAVEPathname);
                         File.Delete(DownloadsMng.SAVEPathname);
+                        oConfigMng.Config.DeviceFirmwareInfo = DownloadsMng.filename;
+                        oConfigMng.Config.FirmwareExtracted = "0";
+                        oConfigMng.SaveConfig();
+                        openChildForm(dld);
                         return;
                     }
                 }
-                else
-                {
-                    cAppend(@"FIRMWARE DOWNLOAD: File is corrupted \:  " + DownloadsMng.SAVEPathname);
-                    File.Delete(DownloadsMng.SAVEPathname);
-                }
-                if (oConfigMng.Config.FirmwareExtracted == "1")
+                else if (oConfigMng.Config.FirmwareExtracted == "1")
                 {
                     cAppend("FIRMWARE DOWNLOAD: Firmware already " + DownloadsMng.SAVEPathname);
                     return;
@@ -484,6 +483,7 @@ namespace Franco28Tool.Engine
                     cAppend("Firmware is on maintenance!");
                     openChildForm(main);
                 }
+
                 cAppend("Selected Device Channel: {" + oConfigMng.Config.DeviceFirmware + "}" + "\nDownloading " + oConfigMng.Config.DeviceFirmware + " Firmware");
                 Dialogs.InfoDialog("Device Channel", "Selected Device Channel: {" + oConfigMng.Config.DeviceFirmware + "}" + "\nDownloading " + oConfigMng.Config.DeviceFirmware + " Firmware");
                 oConfigMng.Config.FirmwareExtracted = "0";
