@@ -29,6 +29,7 @@ namespace Franco28Tool.Engine
         private System.String m_oDeviceBlankFlash;
         private System.String m_oDeviceFirmwareInfo;
         private System.String m_oDeviceTWPRInfo;
+        private System.String m_oDownloadFileSize;
 
         public System.String ToolLang
         {
@@ -148,6 +149,12 @@ namespace Franco28Tool.Engine
         {
             get { return m_oFirmwareExtracted; }
             set { m_oFirmwareExtracted = value; }
+        }
+
+        public System.String DownloadFileSize
+        {
+            get { return m_oDownloadFileSize; }
+            set { m_oDownloadFileSize = value; }
         }
     }
 }

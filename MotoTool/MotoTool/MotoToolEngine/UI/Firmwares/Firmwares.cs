@@ -127,6 +127,7 @@ namespace Franco28Tool.Engine
                 } 
                 else
                 {
+                    materialButtonFirmwareServer.Enabled = true;
                     cAppend("FIRMWARE STARTING: Checking server... {OK}");
                 }
             }
@@ -337,7 +338,7 @@ namespace Franco28Tool.Engine
         {
             oConfigMng.LoadConfig();
 
-            if (oConfigMng.Config.DeviceFirmware == "---" && oConfigMng.Config.DeviceFirmware == null)
+            if (oConfigMng.Config.DeviceFirmware == "---" && oConfigMng.Config.DeviceFirmware == "")
             {
                 return;
             }
@@ -356,7 +357,6 @@ namespace Franco28Tool.Engine
             cAppend("FIRMWARE: Opening " + oConfigMng.Config.DeviceFirmware + " firmware server...");
             if (oConfigMng.Config.DeviceFirmware == oConfigMng.Config.DeviceFirmware)
             {
-                materialButtonFirmwareServer.Enabled = true;
                 MotoFirmware.FirmwareServer(oConfigMng.Config.DeviceCodenmae + "/official/", oConfigMng.Config.DeviceFirmware);
                 cAppend("FIRMWARE: Opening " + oConfigMng.Config.DeviceFirmware + " firmware server... {OK}");
             }
@@ -383,32 +383,50 @@ namespace Franco28Tool.Engine
             var dld = new DownloadUI();
             try
             {
+                long length = new FileInfo(firmwarezip).Length;
+                string vIn = oConfigMng.Config.DownloadFileSize;
+                long vOut = Convert.ToInt64(vIn);
                 cAppend("FIRMWARE DOWNLOAD: Checking firmware files...");
                 if (File.Exists(firmwarezip) && oConfigMng.Config.FirmwareExtracted == "0")
                 {
-                    cAppend("FIRMWARE DOWNLOAD: Firmware already exist, now it will be exctracted");
-                    DirectoryInfo di = Directory.CreateDirectory(DownloadsMng.filename);
-                    var unzip = new UnzipUI();
-                    unzip.textBox_FilePath.Text = DownloadsMng.SAVEPathname;
-                    unzip.textBox_ExtractionFolder.Text = firmwarepath;
-                    unzip.Text = "Unzip: " + DownloadsMng.filename;
-                    cAppend("FIRMWARE DOWNLOAD EXTRACTING: Firmware " + DownloadsMng.filename);
-                    if (unzip.textBox_FilePath.Text != string.Empty && unzip.textBox_ExtractionFolder.Text != string.Empty)
-                    {
-                        unzip.extractFile.RunWorkerAsync();
+                    if (length < vOut)
+                    {  
+                        cAppend("FIRMWARE DOWNLOAD: Firmware already exist, now it will be exctracted");
+                        DirectoryInfo di = Directory.CreateDirectory(DownloadsMng.filename);
+                        var unzip = new UnzipUI();
+                        unzip.textBox_FilePath.Text = DownloadsMng.SAVEPathname;
+                        unzip.textBox_ExtractionFolder.Text = firmwarepath;
+                        unzip.Text = "Unzip: " + DownloadsMng.filename;
+                        cAppend("FIRMWARE DOWNLOAD EXTRACTING: Firmware " + DownloadsMng.filename);
+                        if (unzip.textBox_FilePath.Text != string.Empty && unzip.textBox_ExtractionFolder.Text != string.Empty)
+                        {
+                            unzip.extractFile.RunWorkerAsync();
+                        }
+                        else
+                        {
+                            Strings.MsgBoxUnzippyAlert();
+                        }
+                        unzip.Show();
+                        if (File.Exists(DownloadsMng.SAVEPathname))
+                        {
+                            cAppend("FIRMWARE DOWNLOAD: Removing " + DownloadsMng.SAVEPathname);
+                            File.Delete(DownloadsMng.SAVEPathname);
+                        }
+                        return;
                     }
                     else
                     {
-                        Strings.MsgBoxUnzippyAlert();
-                    }
-                    unzip.Show();
-                    if (File.Exists(DownloadsMng.SAVEPathname))
-                    {
-                        cAppend("FIRMWARE DOWNLOAD: Removing " + DownloadsMng.SAVEPathname);
+                        Strings.MSGBOXFileCorrupted();
+                        cAppend(@"FIRMWARE DOWNLOAD: File is corrupted \:  " + DownloadsMng.SAVEPathname);
                         File.Delete(DownloadsMng.SAVEPathname);
+                        return;
                     }
-                    return;
-                }                
+                }
+                else
+                {
+                    cAppend(@"FIRMWARE DOWNLOAD: File is corrupted \:  " + DownloadsMng.SAVEPathname);
+                    File.Delete(DownloadsMng.SAVEPathname);
+                }
                 if (oConfigMng.Config.FirmwareExtracted == "1")
                 {
                     cAppend("FIRMWARE DOWNLOAD: Firmware already " + DownloadsMng.SAVEPathname);
@@ -419,7 +437,9 @@ namespace Franco28Tool.Engine
             {
                 Logs.DebugErrorLogs(er);
                 Dialogs.ErrorDialog("ERROR: Unzip File", "Error: " + er);
+                return;
             }
+
             if (Directory.Exists(firmwarepath))
             {
                 DirectoryInfo files = new DirectoryInfo(firmwarepath + @"\");

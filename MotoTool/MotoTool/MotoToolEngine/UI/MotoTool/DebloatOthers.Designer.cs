@@ -37,6 +37,7 @@ namespace Franco28Tool.Engine
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.TextBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.console = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,6 +45,7 @@ namespace Franco28Tool.Engine
             // 
             this.panel1.AutoSize = true;
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel1.Controls.Add(this.console);
             this.panel1.Controls.Add(this.materialButtonChangeTheme);
             this.panel1.Controls.Add(this.materialLabel6);
             this.panel1.Controls.Add(this.materialButton23);
@@ -53,7 +55,7 @@ namespace Franco28Tool.Engine
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(979, 219);
+            this.panel1.Size = new System.Drawing.Size(979, 319);
             this.panel1.TabIndex = 0;
             // 
             // materialButtonChangeTheme
@@ -66,7 +68,7 @@ namespace Franco28Tool.Engine
             this.materialButtonChangeTheme.DrawShadows = true;
             this.materialButtonChangeTheme.HighEmphasis = false;
             this.materialButtonChangeTheme.Icon = ((System.Drawing.Image)(resources.GetObject("materialButtonChangeTheme.Icon")));
-            this.materialButtonChangeTheme.Location = new System.Drawing.Point(3, 167);
+            this.materialButtonChangeTheme.Location = new System.Drawing.Point(4, 261);
             this.materialButtonChangeTheme.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonChangeTheme.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonChangeTheme.Name = "materialButtonChangeTheme";
@@ -102,7 +104,7 @@ namespace Franco28Tool.Engine
             this.materialButton23.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialButton23.Depth = 0;
             this.materialButton23.DrawShadows = true;
-            this.materialButton23.HighEmphasis = true;
+            this.materialButton23.HighEmphasis = false;
             this.materialButton23.Icon = ((System.Drawing.Image)(resources.GetObject("materialButton23.Icon")));
             this.materialButton23.Location = new System.Drawing.Point(4, 6);
             this.materialButton23.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
@@ -124,7 +126,7 @@ namespace Franco28Tool.Engine
             this.textBox3.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox3.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox3.ForeColor = System.Drawing.Color.Black;
-            this.textBox3.Location = new System.Drawing.Point(4, 45);
+            this.textBox3.Location = new System.Drawing.Point(4, 139);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
@@ -141,7 +143,7 @@ namespace Franco28Tool.Engine
             this.TextBox2.Cursor = System.Windows.Forms.Cursors.Default;
             this.TextBox2.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TextBox2.ForeColor = System.Drawing.Color.Black;
-            this.TextBox2.Location = new System.Drawing.Point(3, 123);
+            this.TextBox2.Location = new System.Drawing.Point(3, 217);
             this.TextBox2.Multiline = true;
             this.TextBox2.Name = "TextBox2";
             this.TextBox2.ReadOnly = true;
@@ -156,11 +158,22 @@ namespace Franco28Tool.Engine
             this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.ForeColor = System.Drawing.Color.Black;
-            this.textBox1.Location = new System.Drawing.Point(3, 83);
+            this.textBox1.Location = new System.Drawing.Point(4, 177);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(973, 34);
             this.textBox1.TabIndex = 132;
+            // 
+            // console
+            // 
+            this.console.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.console.Location = new System.Drawing.Point(3, 51);
+            this.console.Name = "console";
+            this.console.ReadOnly = true;
+            this.console.Size = new System.Drawing.Size(971, 82);
+            this.console.TabIndex = 199;
+            this.console.Text = "";
             // 
             // DebloatOthers
             // 
@@ -168,7 +181,7 @@ namespace Franco28Tool.Engine
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(979, 219);
+            this.ClientSize = new System.Drawing.Size(979, 319);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -197,5 +210,6 @@ namespace Franco28Tool.Engine
         private System.Windows.Forms.TextBox textBox1;
         private MaterialSkin.Controls.MaterialLabel materialLabel6;
         private MaterialSkin.Controls.MaterialButton materialButtonChangeTheme;
+        private System.Windows.Forms.RichTextBox console;
     }
 }

@@ -1,8 +1,14 @@
+
+using AndroidCtrl;
+using AndroidCtrl.ADB;
+using AndroidCtrl.Fastboot;
+using AndroidCtrl.Tools;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Text;
+using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Franco28Tool.Engine
@@ -12,6 +18,7 @@ namespace Franco28Tool.Engine
 
         private SettingsMng oConfigMng = new SettingsMng();
         private readonly MaterialSkinManager materialSkinManager;
+        IDDeviceState state = General.CheckDeviceState(ADB.Instance().DeviceID);
 
         public DebloatOthers()
         {
@@ -22,6 +29,14 @@ namespace Franco28Tool.Engine
             InitializeComponent();
         }
 
+        public void cAppendDebloat(string message)
+        {
+            this.Invoke((Action)delegate
+            {
+                console.AppendText(string.Format("\n{0} : {1}", DateTime.Now, message));
+                console.ScrollToCaret();
+            });
+        }
 
         private void DebloatOthers_Load(object sender, EventArgs e)
         {
@@ -38,31 +53,84 @@ namespace Franco28Tool.Engine
             textBox3.Text = "Please, write the app package like this: -com.google.android.apps.translate-";
         }
 
-        private void debloatrom_Click(object sender, EventArgs e)
+        private void SetDeviceList()
+        {
+            string active = String.Empty;
+
+            List<DataModelDevicesItem> adbDevices = ADB.Devices();
+            List<DataModelDevicesItem> fastbootDevices = Fastboot.Devices();
+
+            foreach (DataModelDevicesItem device in adbDevices)
+            {
+                this.Invoke((Action)delegate
+                {
+                    cAppendDebloat("Device: Online! - ADB");
+                    cAppendDebloat("Device Codename: " + LoadDeviceServer.devicecodename);
+                    cAppendDebloat("Mode: " + state);
+                });
+            }
+            foreach (DataModelDevicesItem device in fastbootDevices)
+            {
+                this.Invoke((Action)delegate
+                {
+                    cAppendDebloat("Device: Online! - FASTBOOT");
+                    cAppendDebloat("Device Codename: " + LoadDeviceServer.devicecodename);
+                    cAppendDebloat("Mode: " + state);
+                });
+            }
+            ADB.SelectDevice();
+            Fastboot.SelectDevice();
+        }
+
+        private void DeviceDetectionService()
+        {
+            ADB.Start();
+            Fastboot.Instance();
+
+            if (Fastboot.ConnectionMonitor.Start())
+            {
+                Fastboot.ConnectionMonitor.Callback += ConnectionMonitorCallback;
+
+                if (ADB.IsStarted)
+                {
+                    SetDeviceList();
+
+                    if (ADB.ConnectionMonitor.Start())
+                    {
+                        ADB.ConnectionMonitor.Callback += ConnectionMonitorCallback;
+                    }
+                }
+            }
+        }
+
+        public void ConnectionMonitorCallback(object sender, ConnectionMonitorArgs e)
+        {
+            this.Invoke((Action)delegate
+            {
+                SetDeviceList();
+            });
+        }
+
+        private async void debloatrom_Click(object sender, EventArgs e)
         {
             if (textBox1.Text != string.Empty)
             {
-              /*  if (android.HasConnectedDevices)
+                if (IDDeviceState.DEVICE == state)
                 {
-                    var builder = new StringBuilder("Debloat Apps Report:\n\n");
-                    textBox3.Text = "Detecting device...";
-                    Thread.Sleep(3000);
-                    string devicesdetect = RegawMOD.Android.Fastboot.ExecuteFastbootCommand(RegawMOD.Android.Fastboot.FormFastbootCommand("fastboot devices"));
-                    builder.AppendFormat(" -Task {Detect} " + devicesdetect);
-                    textBox3.Text = "Detecting device..." + devicesdetect;
-                    TextBox2.Text = "Removing App: " + textBox1.Text;
-                    string debloatingapp = RegawMOD.Android.Adb.ExecuteAdbCommand(RegawMOD.Android.Adb.FormAdbCommand("shell pm uninstall -k --user 0 " + textBox1.Text));
-                    builder.AppendFormat(" -Task {Debloat} " + debloatingapp);
-                    TextBox2.Text = "Removing  App: " + textBox1.Text +  " OK!";
-                    builder.AppendFormat(" - App debloated: " + textBox1.Text + "Operation completed sucessfully.\n");
-                    var batchOperationResults = builder.ToString();
-                    var mresult = MaterialMessageBox.Show(batchOperationResults, "Debloat App Operation");
+                    await Task.Run(() => DeviceDetectionService());
+                    cAppendDebloat("MOTO DEBLOAT: Waiting for device...");
+                    await Task.Run(() => ADB.WaitForDevice());
+                    cAppendDebloat("MOTO DEBLOAT: Removing app: " + textBox1.Text + "...");
+                    await Task.Run(() => ADB.Instance().Execute("shell pm uninstall -k --user 0 " + textBox1.Text));
+                    cAppendDebloat("MOTO DEBLOAT: Removing app: " + textBox1.Text + " {OK}");
                 }
                 else
                 {
+                    Thread.Sleep(1000);
                     Strings.MSGBOXBootloaderWarning();
+                    cAppendDebloat("MOTO DEBLOAT: Please, write the app package like this: -com.google.android.apps.translate -");
                     textBox3.Text = "Please, write the app package like this: -com.google.android.apps.translate-";
-                } */
+                }
             }
             else
             {

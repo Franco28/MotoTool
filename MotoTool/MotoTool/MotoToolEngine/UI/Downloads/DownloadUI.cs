@@ -113,6 +113,9 @@ namespace Franco28Tool.Engine
                 (e.BytesReceived / 1024d / 1024d).ToString("0.00"),
                 (e.TotalBytesToReceive / 1024d / 1024d).ToString("0.00"));
             ProgressBar1.Value = e.ProgressPercentage;
+            oConfigMng.LoadConfig();
+            oConfigMng.Config.DownloadFileSize = e.TotalBytesToReceive.ToString("");
+            oConfigMng.SaveConfig();
         }
 
         public void Completed(object sender, AsyncCompletedEventArgs e)
@@ -235,10 +238,6 @@ namespace Franco28Tool.Engine
             webClient.Dispose();
             webClient.CancelAsync();
             webClient.Dispose();
-            if (File.Exists(DownloadsMng.SAVEPath))
-            {
-                File.Delete(DownloadsMng.SAVEPath);
-            }
             this.Dispose();
         }
 

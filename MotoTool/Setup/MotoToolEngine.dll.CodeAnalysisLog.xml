@@ -10,126 +10,126 @@
        <Types>
         <Type Name="AddNewDevice" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-20 20:11:11Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-21 01:29:07Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'AddNewDevice' está marcado como ComVisible(true) pero tiene los siguientes tipos ComVisible(false) en su jerarquía de objetos: 'MaterialForm'</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="ClearAllFolders" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-20 20:11:11Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-21 01:29:07Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'ClearAllFolders' está marcado como ComVisible(true) pero tiene los siguientes tipos ComVisible(false) en su jerarquía de objetos: 'MaterialForm'</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="DebloatOthers" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-20 20:11:11Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-21 01:29:07Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'DebloatOthers' está marcado como ComVisible(true) pero tiene los siguientes tipos ComVisible(false) en su jerarquía de objetos: 'MaterialForm'</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="DownloadUI" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-20 20:11:11Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-21 01:29:07Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'DownloadUI' está marcado como ComVisible(true) pero tiene los siguientes tipos ComVisible(false) en su jerarquía de objetos: 'MaterialForm'</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="Firmwares" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-20 20:11:11Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-21 01:29:07Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'Firmwares' está marcado como ComVisible(true) pero tiene los siguientes tipos ComVisible(false) en su jerarquía de objetos: 'MaterialForm'</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="Help" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-20 20:11:11Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-21 01:29:07Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'Help' está marcado como ComVisible(true) pero tiene los siguientes tipos ComVisible(false) en su jerarquía de objetos: 'MaterialForm'</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="MainForm" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-20 20:11:11Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-21 01:29:07Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'MainForm' está marcado como ComVisible(true) pero tiene los siguientes tipos ComVisible(false) en su jerarquía de objetos: 'MaterialForm'</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="MotoFlash" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-20 20:11:11Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-21 01:29:07Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'MotoFlash' está marcado como ComVisible(true) pero tiene los siguientes tipos ComVisible(false) en su jerarquía de objetos: 'MaterialForm'</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="MotoFlashVisual" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-20 20:11:11Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-21 01:29:07Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'MotoFlashVisual' está marcado como ComVisible(true) pero tiene los siguientes tipos ComVisible(false) en su jerarquía de objetos: 'MaterialForm'</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="NotiPanel" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-20 20:11:11Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-21 01:29:07Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'NotiPanel' está marcado como ComVisible(true) pero tiene los siguientes tipos ComVisible(false) en su jerarquía de objetos: 'MaterialForm'</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="OkError" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-20 20:11:11Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-21 01:29:07Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'OkError' está marcado como ComVisible(true) pero tiene los siguientes tipos ComVisible(false) en su jerarquía de objetos: 'MaterialForm'</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="OkInfo" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-20 20:11:11Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-21 01:29:07Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'OkInfo' está marcado como ComVisible(true) pero tiene los siguientes tipos ComVisible(false) en su jerarquía de objetos: 'MaterialForm'</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="OkWarn" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-20 20:11:11Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-21 01:29:07Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'OkWarn' está marcado como ComVisible(true) pero tiene los siguientes tipos ComVisible(false) en su jerarquía de objetos: 'MaterialForm'</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="ToolMaintenance" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-20 20:11:11Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-21 01:29:07Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'ToolMaintenance' está marcado como ComVisible(true) pero tiene los siguientes tipos ComVisible(false) en su jerarquía de objetos: 'MaterialForm'</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="TWRPBackup" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-20 20:11:11Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-21 01:29:07Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'TWRPBackup' está marcado como ComVisible(true) pero tiene los siguientes tipos ComVisible(false) en su jerarquía de objetos: 'MaterialForm'</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="TWRPPermanent" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-20 20:11:11Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-21 01:29:07Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'TWRPPermanent' está marcado como ComVisible(true) pero tiene los siguientes tipos ComVisible(false) en su jerarquía de objetos: 'MaterialForm'</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="Uninstall" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-20 20:11:11Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-21 01:29:07Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'Uninstall' está marcado como ComVisible(true) pero tiene los siguientes tipos ComVisible(false) en su jerarquía de objetos: 'MaterialForm'</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="UnzipUI" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-20 20:11:11Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2020-05-21 01:29:07Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'UnzipUI' está marcado como ComVisible(true) pero tiene los siguientes tipos ComVisible(false) en su jerarquía de objetos: 'MaterialForm'</Issue>
           </Message>
          </Messages>

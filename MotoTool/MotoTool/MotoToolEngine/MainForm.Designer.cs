@@ -191,7 +191,7 @@ namespace Franco28Tool.Engine
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(0, 0);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(1015, 397);
+            this.panelMain.Size = new System.Drawing.Size(1015, 414);
             this.panelMain.TabIndex = 66;
             // 
             // panelDownload
@@ -260,7 +260,7 @@ namespace Franco28Tool.Engine
             this.materialLabel12.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel12.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
             this.materialLabel12.HighEmphasis = true;
-            this.materialLabel12.Location = new System.Drawing.Point(826, 245);
+            this.materialLabel12.Location = new System.Drawing.Point(826, 262);
             this.materialLabel12.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel12.Name = "materialLabel12";
             this.materialLabel12.Size = new System.Drawing.Size(61, 24);
@@ -276,7 +276,7 @@ namespace Franco28Tool.Engine
             this.materialLabel11.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel11.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
             this.materialLabel11.HighEmphasis = true;
-            this.materialLabel11.Location = new System.Drawing.Point(578, 245);
+            this.materialLabel11.Location = new System.Drawing.Point(578, 262);
             this.materialLabel11.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel11.Name = "materialLabel11";
             this.materialLabel11.Size = new System.Drawing.Size(64, 24);
@@ -291,7 +291,7 @@ namespace Franco28Tool.Engine
             this.materialLabel5.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel5.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
             this.materialLabel5.HighEmphasis = true;
-            this.materialLabel5.Location = new System.Drawing.Point(272, 245);
+            this.materialLabel5.Location = new System.Drawing.Point(272, 262);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
             this.materialLabel5.Size = new System.Drawing.Size(83, 24);
@@ -306,7 +306,7 @@ namespace Franco28Tool.Engine
             this.materialLabel3.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel3.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
             this.materialLabel3.HighEmphasis = true;
-            this.materialLabel3.Location = new System.Drawing.Point(20, 245);
+            this.materialLabel3.Location = new System.Drawing.Point(20, 262);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
             this.materialLabel3.Size = new System.Drawing.Size(99, 24);
@@ -324,7 +324,7 @@ namespace Franco28Tool.Engine
             this.materialButtonFlashLogo.DrawShadows = true;
             this.materialButtonFlashLogo.HighEmphasis = false;
             this.materialButtonFlashLogo.Icon = global::Franco28Tool.Engine.Properties.Resources.File_Types_IMG_icon;
-            this.materialButtonFlashLogo.Location = new System.Drawing.Point(830, 335);
+            this.materialButtonFlashLogo.Location = new System.Drawing.Point(830, 369);
             this.materialButtonFlashLogo.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonFlashLogo.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonFlashLogo.Name = "materialButtonFlashLogo";
@@ -346,7 +346,7 @@ namespace Franco28Tool.Engine
             this.materialButtonBlankFlash.DrawShadows = true;
             this.materialButtonBlankFlash.HighEmphasis = false;
             this.materialButtonBlankFlash.Icon = global::Franco28Tool.Engine.Properties.Resources.hdd;
-            this.materialButtonBlankFlash.Location = new System.Drawing.Point(830, 284);
+            this.materialButtonBlankFlash.Location = new System.Drawing.Point(830, 301);
             this.materialButtonBlankFlash.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonBlankFlash.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonBlankFlash.Name = "materialButtonBlankFlash";
@@ -368,7 +368,7 @@ namespace Franco28Tool.Engine
             this.materialButtonRebootRecovery.DrawShadows = true;
             this.materialButtonRebootRecovery.HighEmphasis = false;
             this.materialButtonRebootRecovery.Icon = global::Franco28Tool.Engine.Properties.Resources.Apps_reboot_icon;
-            this.materialButtonRebootRecovery.Location = new System.Drawing.Point(582, 335);
+            this.materialButtonRebootRecovery.Location = new System.Drawing.Point(582, 369);
             this.materialButtonRebootRecovery.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonRebootRecovery.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonRebootRecovery.Name = "materialButtonRebootRecovery";
@@ -390,7 +390,7 @@ namespace Franco28Tool.Engine
             this.materialButtonRebootBootloader.DrawShadows = true;
             this.materialButtonRebootBootloader.HighEmphasis = false;
             this.materialButtonRebootBootloader.Icon = global::Franco28Tool.Engine.Properties.Resources.system_reboot_icon;
-            this.materialButtonRebootBootloader.Location = new System.Drawing.Point(582, 284);
+            this.materialButtonRebootBootloader.Location = new System.Drawing.Point(582, 301);
             this.materialButtonRebootBootloader.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonRebootBootloader.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonRebootBootloader.Name = "materialButtonRebootBootloader";
@@ -412,7 +412,7 @@ namespace Franco28Tool.Engine
             this.materialButtonBootTWRP.DrawShadows = true;
             this.materialButtonBootTWRP.HighEmphasis = false;
             this.materialButtonBootTWRP.Icon = global::Franco28Tool.Engine.Properties.Resources.htc_one_flash_icon;
-            this.materialButtonBootTWRP.Location = new System.Drawing.Point(276, 335);
+            this.materialButtonBootTWRP.Location = new System.Drawing.Point(276, 369);
             this.materialButtonBootTWRP.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonBootTWRP.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonBootTWRP.Name = "materialButtonBootTWRP";
@@ -433,7 +433,7 @@ namespace Franco28Tool.Engine
             this.materialButtonFlashTWRP.DrawShadows = true;
             this.materialButtonFlashTWRP.HighEmphasis = false;
             this.materialButtonFlashTWRP.Icon = global::Franco28Tool.Engine.Properties.Resources.flash;
-            this.materialButtonFlashTWRP.Location = new System.Drawing.Point(276, 284);
+            this.materialButtonFlashTWRP.Location = new System.Drawing.Point(276, 301);
             this.materialButtonFlashTWRP.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonFlashTWRP.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonFlashTWRP.Name = "materialButtonFlashTWRP";
@@ -455,7 +455,7 @@ namespace Franco28Tool.Engine
             this.materialButtonLock.DrawShadows = true;
             this.materialButtonLock.HighEmphasis = false;
             this.materialButtonLock.Icon = global::Franco28Tool.Engine.Properties.Resources.lock_icon;
-            this.materialButtonLock.Location = new System.Drawing.Point(24, 335);
+            this.materialButtonLock.Location = new System.Drawing.Point(24, 369);
             this.materialButtonLock.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonLock.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonLock.Name = "materialButtonLock";
@@ -476,7 +476,7 @@ namespace Franco28Tool.Engine
             this.materialButtonUnlock.DrawShadows = true;
             this.materialButtonUnlock.HighEmphasis = false;
             this.materialButtonUnlock.Icon = global::Franco28Tool.Engine.Properties.Resources.unlock_icon;
-            this.materialButtonUnlock.Location = new System.Drawing.Point(24, 284);
+            this.materialButtonUnlock.Location = new System.Drawing.Point(24, 301);
             this.materialButtonUnlock.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonUnlock.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonUnlock.Name = "materialButtonUnlock";
@@ -499,9 +499,9 @@ namespace Franco28Tool.Engine
             this.panelDebug.Controls.Add(this.labelFreeRam);
             this.panelDebug.Controls.Add(this.labelUserName);
             this.panelDebug.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelDebug.Location = new System.Drawing.Point(0, 397);
+            this.panelDebug.Location = new System.Drawing.Point(0, 414);
             this.panelDebug.Name = "panelDebug";
-            this.panelDebug.Size = new System.Drawing.Size(1015, 123);
+            this.panelDebug.Size = new System.Drawing.Size(1015, 106);
             this.panelDebug.TabIndex = 55;
             // 
             // TextBoxDebug
@@ -511,10 +511,10 @@ namespace Franco28Tool.Engine
             this.TextBoxDebug.Depth = 0;
             this.TextBoxDebug.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.TextBoxDebug.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
-            this.TextBoxDebug.Location = new System.Drawing.Point(536, 83);
+            this.TextBoxDebug.Location = new System.Drawing.Point(536, 49);
             this.TextBoxDebug.MouseState = MaterialSkin.MouseState.HOVER;
             this.TextBoxDebug.Name = "TextBoxDebug";
-            this.TextBoxDebug.Size = new System.Drawing.Size(476, 36);
+            this.TextBoxDebug.Size = new System.Drawing.Size(476, 53);
             this.TextBoxDebug.TabIndex = 80;
             this.TextBoxDebug.Click += new System.EventHandler(this.HowToBackupEfsAndPersist);
             // 
@@ -524,10 +524,10 @@ namespace Franco28Tool.Engine
             this.TextBoxDebugInfo.Depth = 0;
             this.TextBoxDebugInfo.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.TextBoxDebugInfo.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
-            this.TextBoxDebugInfo.Location = new System.Drawing.Point(536, 6);
+            this.TextBoxDebugInfo.Location = new System.Drawing.Point(536, 3);
             this.TextBoxDebugInfo.MouseState = MaterialSkin.MouseState.HOVER;
             this.TextBoxDebugInfo.Name = "TextBoxDebugInfo";
-            this.TextBoxDebugInfo.Size = new System.Drawing.Size(476, 41);
+            this.TextBoxDebugInfo.Size = new System.Drawing.Size(476, 46);
             this.TextBoxDebugInfo.TabIndex = 79;
             this.TextBoxDebugInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -540,10 +540,10 @@ namespace Franco28Tool.Engine
             this.labelFreeSpace.Image = ((System.Drawing.Image)(resources.GetObject("labelFreeSpace.Image")));
             this.labelFreeSpace.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelFreeSpace.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelFreeSpace.Location = new System.Drawing.Point(2, 83);
+            this.labelFreeSpace.Location = new System.Drawing.Point(3, 66);
             this.labelFreeSpace.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelFreeSpace.Name = "labelFreeSpace";
-            this.labelFreeSpace.Size = new System.Drawing.Size(529, 36);
+            this.labelFreeSpace.Size = new System.Drawing.Size(289, 36);
             this.labelFreeSpace.TabIndex = 48;
             this.labelFreeSpace.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -556,10 +556,10 @@ namespace Franco28Tool.Engine
             this.labelCPUusage.Image = ((System.Drawing.Image)(resources.GetObject("labelCPUusage.Image")));
             this.labelCPUusage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelCPUusage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelCPUusage.Location = new System.Drawing.Point(327, 3);
+            this.labelCPUusage.Location = new System.Drawing.Point(296, 3);
             this.labelCPUusage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelCPUusage.Name = "labelCPUusage";
-            this.labelCPUusage.Size = new System.Drawing.Size(204, 36);
+            this.labelCPUusage.Size = new System.Drawing.Size(236, 36);
             this.labelCPUusage.TabIndex = 50;
             this.labelCPUusage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -573,10 +573,10 @@ namespace Franco28Tool.Engine
             this.labelFreeRam.Image = ((System.Drawing.Image)(resources.GetObject("labelFreeRam.Image")));
             this.labelFreeRam.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelFreeRam.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelFreeRam.Location = new System.Drawing.Point(3, 3);
+            this.labelFreeRam.Location = new System.Drawing.Point(4, 3);
             this.labelFreeRam.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelFreeRam.Name = "labelFreeRam";
-            this.labelFreeRam.Size = new System.Drawing.Size(320, 36);
+            this.labelFreeRam.Size = new System.Drawing.Size(288, 36);
             this.labelFreeRam.TabIndex = 47;
             this.labelFreeRam.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -591,10 +591,10 @@ namespace Franco28Tool.Engine
             this.labelUserName.Image = ((System.Drawing.Image)(resources.GetObject("labelUserName.Image")));
             this.labelUserName.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelUserName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelUserName.Location = new System.Drawing.Point(2, 47);
+            this.labelUserName.Location = new System.Drawing.Point(295, 66);
             this.labelUserName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelUserName.Name = "labelUserName";
-            this.labelUserName.Size = new System.Drawing.Size(1010, 36);
+            this.labelUserName.Size = new System.Drawing.Size(236, 36);
             this.labelUserName.TabIndex = 49;
             this.labelUserName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 

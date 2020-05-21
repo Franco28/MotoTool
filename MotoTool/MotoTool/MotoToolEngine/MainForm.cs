@@ -202,7 +202,7 @@ namespace Franco28Tool.Engine
         private void updateTimer_Tick()
         {
             Timer timer = new Timer();
-            timer.Interval = (1 * 1000);
+            timer.Interval = (1 * 5000);
             timer.Tick += new EventHandler(timer_Tick);
             AvoidFlick();
             timer.Start();
@@ -363,7 +363,7 @@ namespace Franco28Tool.Engine
             if (oConfigMng.Config.DeviceFirmware == "" || oConfigMng.Config.DeviceCodenmae == "")
             {
                 cAppend("Device Info: Getting device codename and carrier...");
-                if (IDDeviceState.UNKNOWN == state)
+                if (IDDeviceState.DEVICE == state)
                 {
                     cAppend("Device Info: Waiting for device...");
                     await Task.Run(() => ADB.WaitForDevice());
@@ -1133,6 +1133,7 @@ namespace Franco28Tool.Engine
             oConfigMng.SaveConfig();
             cAppend("REMOVE DEVICE DATA: Clearing old device info... {OK}");
             Dialogs.InfoDialog("MotoTool: Device data", "All device data removed!");
+            this.Text = "MotoTool v" + oConfigMng.Config.ToolVersion + " - " + oConfigMng.Config.DeviceCodenmae + " - " + oConfigMng.Config.DeviceFirmware;
         }
 
         private void materialSwitchAutoSaveLogs_CheckedChanged(object sender, EventArgs e)
