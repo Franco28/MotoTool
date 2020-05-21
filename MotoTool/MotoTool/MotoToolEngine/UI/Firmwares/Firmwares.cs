@@ -387,7 +387,7 @@ namespace Franco28Tool.Engine
                 if (File.Exists(firmwarezip) && oConfigMng.Config.FirmwareExtracted == "0")
                 {
                     long length = new FileInfo(firmwarezip).Length;
-                    string vIn = oConfigMng.Config.DownloadFileSize;
+                    string vIn = oConfigMng.Config.DownloadFileSizeFirmware;
                     long vOut = Convert.ToInt64(vIn);
                     if (length == vOut)
                     {  
@@ -412,7 +412,7 @@ namespace Franco28Tool.Engine
                     else
                     {
                         Strings.MSGBOXFileCorrupted();
-                        oConfigMng.Config.DownloadFileSize = "";
+                        oConfigMng.Config.DownloadFileSizeFirmware = "";
                         cAppend(@"FIRMWARE DOWNLOAD: File is corrupted \:  " + DownloadsMng.SAVEPathname);
                         File.Delete(DownloadsMng.SAVEPathname);
                         oConfigMng.Config.DeviceFirmwareInfo = DownloadsMng.filename;

@@ -29,8 +29,36 @@ namespace Franco28Tool.Engine
         private System.String m_oDeviceBlankFlash;
         private System.String m_oDeviceFirmwareInfo;
         private System.String m_oDeviceTWPRInfo;
-        private System.String m_oDownloadFileSize;
+        private System.String m_oDeviceTWPRPermanentInfo;
+        private System.String m_oDownloadFileSizeTWRP;
+        private System.String m_oDownloadFileSizeTWRPPermanent;
+        private System.String m_oDownloadFileSizeFirmware;
+        private System.String m_oDownloadFileSizeBlankFlash;
         private System.String m_oADBPath;
+
+        public System.String DownloadFileSizeBlankFlash
+        {
+            get { return m_oDownloadFileSizeBlankFlash; }
+            set { m_oDownloadFileSizeBlankFlash = value; }
+        }
+
+        public System.String DownloadFileSizeTWRP
+        {
+            get { return m_oDownloadFileSizeTWRP; }
+            set { m_oDownloadFileSizeTWRP = value; }
+        }
+
+        public System.String DownloadFileSizeTWRPPermanent
+        {
+            get { return m_oDownloadFileSizeTWRPPermanent; }
+            set { m_oDownloadFileSizeTWRPPermanent = value; }
+        }
+
+        public System.String DownloadFileSizeFirmware
+        {
+            get { return m_oDownloadFileSizeFirmware; }
+            set { m_oDownloadFileSizeFirmware = value; }
+        }
 
         public System.String ADBPath
         {
@@ -48,6 +76,12 @@ namespace Franco28Tool.Engine
         {
             get { return m_oDeviceTWPRInfo; }
             set { m_oDeviceTWPRInfo = value; }
+        }
+
+        public System.String DeviceTWPRPermanentInfo
+        {
+            get { return m_oDeviceTWPRPermanentInfo; }
+            set { m_oDeviceTWPRPermanentInfo = value; }
         }
 
         public System.String DeviceFirmwareInfo
@@ -156,12 +190,6 @@ namespace Franco28Tool.Engine
         {
             get { return m_oFirmwareExtracted; }
             set { m_oFirmwareExtracted = value; }
-        }
-
-        public System.String DownloadFileSize
-        {
-            get { return m_oDownloadFileSize; }
-            set { m_oDownloadFileSize = value; }
         }
     }
 }

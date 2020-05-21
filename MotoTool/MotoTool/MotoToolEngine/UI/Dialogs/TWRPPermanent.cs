@@ -46,7 +46,7 @@ namespace Franco28Tool.Engine
             if (File.Exists(fileName))
             {
                 long length = new FileInfo(fileName).Length;
-                string vIn = oConfigMng.Config.DownloadFileSize;
+                string vIn = oConfigMng.Config.DownloadFileSizeTWRPPermanent;
                 long vOut = Convert.ToInt64(vIn);
                 if (length == vOut)
                 {
@@ -57,7 +57,7 @@ namespace Franco28Tool.Engine
                 }
                 else
                 {
-                    oConfigMng.Config.DownloadFileSize = "";
+                    oConfigMng.Config.DownloadFileSizeTWRPPermanent = "";
                     label1.Text = "Hey! " + LoadDeviceServer.twrpinstallername + " it's already downloaded but file is corrupted!, download again please!";
                     download.Enabled = true;
                     return;
@@ -75,7 +75,7 @@ namespace Franco28Tool.Engine
             activeForm = childForm;
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Top;
+            childForm.Dock = DockStyle.Fill;
             this.Controls.Add(childForm);
             this.Tag = childForm;
             childForm.BringToFront();
@@ -86,7 +86,7 @@ namespace Franco28Tool.Engine
         {
             var call = new DownloadUI();
             DownloadsMng.TOOLDOWNLOAD(oConfigMng.Config.DeviceCodenmae, xmlname, xmlpath);
-            oConfigMng.Config.DeviceTWPRInfo = DownloadsMng.filename;
+            oConfigMng.Config.DownloadFileSizeTWRPPermanent = DownloadsMng.filename;
             oConfigMng.SaveConfig();
             openChildForm2(call);
         }

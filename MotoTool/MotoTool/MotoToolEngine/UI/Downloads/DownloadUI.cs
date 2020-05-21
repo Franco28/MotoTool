@@ -24,6 +24,7 @@ namespace Franco28Tool.Engine
             materialSkinManager.EnforceBackcolorOnAllComponents = true;
             materialSkinManager.AddFormToManage(this);
             InitializeComponent();
+            materialButton23.Enabled = false;
         }
 
         public void KillAsync()
@@ -69,6 +70,11 @@ namespace Franco28Tool.Engine
         private void DownloadUI_Load(object sender, EventArgs e)
         {
             oConfigMng.LoadConfig();
+
+            labelspeed.Text = "{0} kb/s";
+            labelPerc.Text = "0%";
+            labelfilesize.Text = "{0} MB's / {1} MB's";
+            ProgressBar1.Value = 0;
 
             if (oConfigMng.Config.ToolTheme == "light")
             {
@@ -122,9 +128,39 @@ namespace Franco28Tool.Engine
                 (e.BytesReceived / 1024d / 1024d).ToString("0.00"),
                 (e.TotalBytesToReceive / 1024d / 1024d).ToString("0.00"));
             ProgressBar1.Value = e.ProgressPercentage;
-            oConfigMng.LoadConfig();
-            oConfigMng.Config.DownloadFileSize = e.TotalBytesToReceive.ToString("");
-            oConfigMng.SaveConfig();
+
+            try
+            {
+                oConfigMng.LoadConfig();
+                if (DownloadsMng.filename == oConfigMng.Config.DeviceFirmwareInfo)
+                {
+                    oConfigMng.Config.DownloadFileSizeFirmware = e.TotalBytesToReceive.ToString("");
+                    oConfigMng.SaveConfig();
+                }
+
+                if (DownloadsMng.filename == oConfigMng.Config.DeviceTWPRInfo)
+                {
+                    oConfigMng.Config.DownloadFileSizeTWRP = e.TotalBytesToReceive.ToString("");
+                    oConfigMng.SaveConfig();
+                }
+
+                if (DownloadsMng.filename == oConfigMng.Config.DownloadFileSizeTWRPPermanent)
+                {
+                    oConfigMng.Config.DownloadFileSizeTWRPPermanent = e.TotalBytesToReceive.ToString("");
+                    oConfigMng.SaveConfig();
+                }
+
+                if (DownloadsMng.filename == oConfigMng.Config.DeviceBlankFlash)
+                {
+                    oConfigMng.Config.DownloadFileSizeBlankFlash = e.TotalBytesToReceive.ToString("");
+                    oConfigMng.SaveConfig();
+                }
+            }
+            catch (Exception er)
+            {
+                Logs.DebugErrorLogs(er);
+                Dialogs.ErrorDialog("ERROR: Saving file sizes", "Error: " + er);
+            }
         }
 
         public void Completed(object sender, AsyncCompletedEventArgs e)
@@ -133,7 +169,35 @@ namespace Franco28Tool.Engine
             if (e.Cancelled == true)
             {
                 cAppend("Download has been canceled: " + DownloadsMng.filename);
+                materialButton10.Enabled = false;
+                materialButton23.Enabled = true;
                 Dialogs.InfoDialog(DownloadsMng.filename, "Download has been canceled");
+                try
+                {
+                    oConfigMng.LoadConfig();
+                    if (DownloadsMng.filename == oConfigMng.Config.DeviceFirmwareInfo)
+                    {
+                        oConfigMng.Config.DownloadFileSizeFirmware = "";
+                        oConfigMng.SaveConfig();
+                    }
+
+                    if (DownloadsMng.filename == oConfigMng.Config.DeviceTWPRInfo)
+                    {
+                        oConfigMng.Config.DownloadFileSizeTWRP = "";
+                        oConfigMng.SaveConfig();
+                    }
+
+                    if (DownloadsMng.filename == oConfigMng.Config.DownloadFileSizeTWRPPermanent)
+                    {
+                        oConfigMng.Config.DownloadFileSizeTWRPPermanent = "";
+                        oConfigMng.SaveConfig();
+                    }
+                }
+                catch (Exception er)
+                {
+                    Logs.DebugErrorLogs(er);
+                    Dialogs.ErrorDialog("ERROR: Removing file sizes", "Error: " + er);
+                }
                 return;
             }
 
@@ -160,6 +224,7 @@ namespace Franco28Tool.Engine
                                 cAppend(DownloadsMng.filename + " Info" + "\nDownload complete, " + DownloadsMng.filename + "is located at: " + Environment.NewLine + "'" + DownloadsMng.SAVEPath + "'.");
                                 Dialogs.InfoDialog(DownloadsMng.filename + " Info", "Download complete, " + DownloadsMng.filename + "is located at: " + Environment.NewLine + "'" + DownloadsMng.SAVEPath + "'.");
                                 closeform();
+                                this.Dispose();
                                 return;
                             }
                         }
@@ -195,6 +260,7 @@ namespace Franco28Tool.Engine
                                 File.Delete(DownloadsMng.SAVEPathname);
                             }
                             closeform();
+                            this.Dispose();
                             return;
                         }
                     }
@@ -204,6 +270,7 @@ namespace Franco28Tool.Engine
                         Dialogs.ErrorDialog("ERROR: Unzip File", "Error: " + er);
                     }
                     closeform();
+                    this.Dispose();
                     return;
                 }
                 else
@@ -222,6 +289,11 @@ namespace Franco28Tool.Engine
         private void buttonClose_Click(object sender, EventArgs e)
         {
             closeform();
+        }
+
+        private void materialButton23_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

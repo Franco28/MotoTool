@@ -28,7 +28,7 @@
 - The installation will create a "MotoTool" shortcut on desktop
 - When you launch the Tool on the first time this will:
 
--- unpack on "C:\adb\" fastboot&adb
+-- unpack on "C:\adb\" fastboot & adb
 
 -- launch a batch file like this
 ![Tool Batch](https://github.com/Franco28/MotoTool/blob/master/Screens/remove.png "Tool Batch")
@@ -36,18 +36,17 @@ _**You must accept this, because will remove unnecesary Moto Device Manager to s
 
 -- create neccesary folders
 
--- generate a settings for the Tool. _Be careful with this, if you clear the folders, you will lost, TWRP, Firmware, and the Tool settings_!
+-- generate a settings for the Tool. _Be careful with this, if you clear the folders, you will lost, TWRP, Firmware, and the Tool settings with logs_!
 
 - You must have to be enable usb debugging on your device so the Tool can work!, and **_IMPORTANT have Bootloader unlocked_** to use the options like Boot TWRP or flash any Firmware!
 
 - Then you can use any option, remember if you want to download any file, this will check internet connection, if it´s null the tool will reset and restart the Tool!
-![Tool Red Error](https://github.com/Franco28/MotoTool/blob/master/Screens/rederror.png "Tool Red Error")
 
 - If you want to boot TWRP, this will be downloaded **_(when download finish, click again the option!)_** and flashed, but remember to _put your device on Bootloader mode_!
 
-- Themes, the default style it´s dark, so the Tool on the first start will be by default dark, if you want to change it go to "Tool Extras" and select light screen, _but be carefoul with your eyes! light Theme it´s so brightness_!
+- Themes, the default style it´s light, so the Tool on the first start will be by default light, if you want to change it go to "Settings and Theme Tool"
 
-- New OTA´s! Now you can update the Tool! This is beta and i´m testing this yet! but should work for now
+- New OTA´s! now you can update the Tool!
 
 - Firmware option, here Tool will load a tone of firmwares of your device, you can select your device channel. This will download the firmware, dont go back to main Tool screen, because download will be stopped, and firmware deleted. When firmware download finish, this will be extracted into a folder and ready to be flashable! remember to go to MotoFlash option, boot your device into bootloader mode and plug it!, Tool will do everything for you!
 
@@ -55,6 +54,13 @@ _**You must accept this, because will remove unnecesary Moto Device Manager to s
 _**If you see this screen, please wait, i'm working with your device firmwares_**
 
 - If your device its A/B like doha, evert... etc. now you can use the flash twrp otpion and download TWRP-INSTALLER, then if you want to flash it, go to boot twrp option, plug your device, and in new option "Move files to TWRP" you can drag installer and drop it, this will copy the installer into your device internal storage
+
+- If you have any problem with your internet connection when you are downloading a file or file download wrong, this will be downloaded again!
+
+- If you see this screen, be patient, im on a free server, sometimes goes down :(
+![Tool 404](https://github.com/Franco28/MotoTool/blob/master/Screens/404.png "Tool 404")
+
+_**All Tool actions will be saved in C:\adb\.settings\Logs. If you have any problem you can send me all logs!_**
 
 ## Uninstall
 - You can uninstall it now from the Tool, but ensure that all files were removed on "C:\Program Files\MotoTool\" _(I noticed that Tool won´t be removed)_
@@ -84,6 +90,9 @@ _**If you see this screen, please wait, i'm working with your device firmwares_*
 
 ### Downloads
 ![Downloads](https://github.com/Franco28/MotoTool/blob/master/Screens/Download.png "Downloads")
+![Downloads](https://github.com/Franco28/MotoTool/blob/master/Screens/DownloadGeneral.png "Downloads")
+![Downloads](https://github.com/Franco28/MotoTool/blob/master/Screens/DownloadTWRPPermanent.png "Downloads")
+![Downloads](https://github.com/Franco28/MotoTool/blob/master/Screens/DownloadTWRPPermanent2.png "Downloads")
 
 ### Move files to TWRP 
 ![MoveFilesToTWRP](https://github.com/Franco28/MotoTool/blob/master/Screens/MoveFilesToTWRP.png "MoveFilesToTWRP")
@@ -100,6 +109,7 @@ _**If you see this screen, please wait, i'm working with your device firmwares_*
 ### Tool Settings
 ![Tool Settings](https://github.com/Franco28/MotoTool/blob/master/Screens/ToolSettings.png "Tool Settings")
 ![Tool Settings](https://github.com/Franco28/MotoTool/blob/master/Screens/ToolSettingsTheme.png "Tool Settings")
+![Tool Settings](https://github.com/Franco28/MotoTool/blob/master/Screens/AddNewDeviceManual.png "Tool Settings")
 
 
 #

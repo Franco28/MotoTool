@@ -791,7 +791,7 @@ namespace Franco28Tool.Engine
 
         private async void materialButtonFlashTWRP_Click(object sender, EventArgs e)
         {
-            string fileName = @"C:\adb\TWRP\" + LoadDeviceServer.twrpname;
+            oConfigMng.LoadConfig();
             if (oConfigMng.Config.DeviceCodenmae == "doha" ||
                 oConfigMng.Config.DeviceCodenmae == "river" ||
                 oConfigMng.Config.DeviceCodenmae == "beckham" ||
@@ -817,19 +817,35 @@ namespace Franco28Tool.Engine
                 Dialogs.WarningDialog("FLASH: TWRP", "Please connect your device, so MotoTool can check your device!");
                 return;
             }
-            if (oConfigMng.Config.DeviceCodenmae == oConfigMng.Config.DeviceCodenmae)
-            {
-                cAppend("FLASH TWRP: Loading server for... {" + oConfigMng.Config.DeviceCodenmae + "}");
-                LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
-            }
+
+            cAppend("FLASH TWRP: Loading server for... {" + oConfigMng.Config.DeviceCodenmae + "}");
+            LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
+            string fileName = @"C:\adb\TWRP\" + LoadDeviceServer.twrpname;
+
             if (!File.Exists(fileName))
             {
                 cAppend("FLASH TWRP: Downloading TWRP for... {" + oConfigMng.Config.DeviceCodenmae + "}" + " TWRP: " + fileName);
                 downloadcall("/TWRP.xml", "TWRP");
+                oConfigMng.Config.DeviceTWPRPermanentInfo = LoadDeviceServer.twrpname;
+                oConfigMng.SaveConfig();
                 return;
             }
             else
             {
+                long length = new FileInfo(fileName).Length;
+                string vIn = oConfigMng.Config.DownloadFileSizeTWRPPermanent;
+                long vOut = Convert.ToInt64(vIn);
+
+                if (length != vOut)
+                {
+                    Strings.MSGBOXFileCorrupted();
+                    cAppend("FLASH TWRP: TWRP it's corrupeted, downloading again for... {" + oConfigMng.Config.DeviceCodenmae + "}" + " TWRP: " + fileName);
+                    downloadcall("/TWRP.xml", "TWRP");
+                    oConfigMng.Config.DeviceTWPRPermanentInfo = LoadDeviceServer.twrpname;
+                    oConfigMng.SaveConfig();
+                    return;
+                }
+
                 if (state == IDDeviceState.DEVICE)
                 {
                     cAppend("FLASH TWRP: Waiting for device...");
@@ -860,6 +876,8 @@ namespace Franco28Tool.Engine
 
         private async void materialButtonBootTWRP_Click(object sender, EventArgs e)
         {
+            oConfigMng.LoadConfig();
+
             if (oConfigMng.Config.DeviceCodenmae == "lima" || oConfigMng.Config.DeviceCodenmae == "sofiar" || oConfigMng.Config.DeviceCodenmae == "sofia")
             {
                 cAppend("BOOT TWRP: Hey this device doesn't have twrp yet! :(");
@@ -872,20 +890,34 @@ namespace Franco28Tool.Engine
                 Dialogs.WarningDialog("BOOT: TWRP", "Please connect your device, so MotoTool can check your device!");
                 return;
             }
-            if (oConfigMng.Config.DeviceCodenmae == oConfigMng.Config.DeviceCodenmae)
-            {
-                cAppend("BOOT TWRP: Loading server for... {" + oConfigMng.Config.DeviceCodenmae + "}");
-                LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
-            }
+
+            cAppend("BOOT TWRP: Loading server for... {" + oConfigMng.Config.DeviceCodenmae + "}");
+            LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
             string fileName = @"C:\adb\TWRP\" + LoadDeviceServer.twrpname;
+
             if (!File.Exists(fileName))
             {
                 cAppend("BOOT TWRP: Downloading TWRP for... {" + oConfigMng.Config.DeviceCodenmae + "}" + " TWRP: " + fileName);
                 downloadcall("/TWRP.xml", "TWRP");
+                oConfigMng.Config.DeviceTWPRInfo = LoadDeviceServer.twrpname;
+                oConfigMng.SaveConfig();
                 return;
             }
             else
             {
+                long length = new FileInfo(fileName).Length;
+                string vIn = oConfigMng.Config.DownloadFileSizeTWRP;
+                long vOut = Convert.ToInt64(vIn);
+
+                if (length != vOut)
+                {
+                    Strings.MSGBOXFileCorrupted();
+                    cAppend("BOOT TWRP: TWRP it's corrupeted, downloading again for... {" + oConfigMng.Config.DeviceCodenmae + "}" + " TWRP: " + fileName);
+                    downloadcall("/TWRP.xml", "TWRP");
+                    oConfigMng.Config.DeviceTWPRInfo = LoadDeviceServer.twrpname;
+                    oConfigMng.SaveConfig();
+                    return;
+                }
                 if (state == IDDeviceState.DEVICE)
                 {
                     cAppend("BOOT TWRP: Waiting for device...");
@@ -966,11 +998,9 @@ namespace Franco28Tool.Engine
                 Dialogs.WarningDialog("BLANKFLASH: " + oConfigMng.Config.DeviceCodenmae, "Please connect your device, so MotoTool can check your device!");
                 return;
             }
-            if (oConfigMng.Config.DeviceCodenmae == oConfigMng.Config.DeviceCodenmae)
-            {
-                cAppend("BLANKFLASH: Loading device server for... {" + oConfigMng.Config.DeviceCodenmae + "}");
-                LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
-            }
+
+            cAppend("BLANKFLASH: Loading device server for... {" + oConfigMng.Config.DeviceCodenmae + "}");
+            LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
             string blankflashfilepath = @"C:\adb\Others\" + LoadDeviceServer.unbrickname;
             if (!File.Exists(blankflashfilepath) &&
                 !Directory.Exists(@"C:\adb\Others\" + oConfigMng.Config.DeviceBlankFlash))
@@ -983,6 +1013,19 @@ namespace Franco28Tool.Engine
             }
             else
             {
+                long length = new FileInfo(blankflashfilepath).Length;
+                string vIn = oConfigMng.Config.DownloadFileSizeBlankFlash;
+                long vOut = Convert.ToInt64(vIn);
+
+                if (length != vOut)
+                {
+                    Strings.MSGBOXFileCorrupted();
+                    cAppend("Blankflash: Blankflash it's corrupeted, downloading again for... {" + oConfigMng.Config.DeviceCodenmae + "}" + " Blankflash: " + blankflashfilepath);
+                    downloadcall("/BLANKFLASH.xml", "BLANKFLASH");
+                    oConfigMng.Config.DeviceBlankFlash = LoadDeviceServer.unbrickname;
+                    oConfigMng.SaveConfig();
+                    return;
+                }
                 Thread.Sleep(1000);
                 cAppend("Blankflash info: " + oConfigMng.Config.DeviceBlankFlash);
                 cAppend("Botting into Bootloader mode...");
