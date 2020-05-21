@@ -40,42 +40,42 @@
             // 
             this.console.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.console.Location = new System.Drawing.Point(12, 72);
+            this.console.Location = new System.Drawing.Point(2, 72);
             this.console.Name = "console";
             this.console.ReadOnly = true;
-            this.console.Size = new System.Drawing.Size(618, 127);
+            this.console.Size = new System.Drawing.Size(636, 82);
             this.console.TabIndex = 133;
             this.console.Text = "";
             // 
             // materialLabel13
             // 
-            this.materialLabel13.AutoSize = true;
             this.materialLabel13.Depth = 0;
             this.materialLabel13.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel13.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
             this.materialLabel13.HighEmphasis = true;
-            this.materialLabel13.Location = new System.Drawing.Point(12, 214);
+            this.materialLabel13.Location = new System.Drawing.Point(2, 165);
             this.materialLabel13.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel13.Name = "materialLabel13";
-            this.materialLabel13.Size = new System.Drawing.Size(162, 24);
+            this.materialLabel13.Size = new System.Drawing.Size(236, 24);
             this.materialLabel13.TabIndex = 134;
             this.materialLabel13.Text = "Device Codename";
+            this.materialLabel13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.materialLabel13.UseAccent = true;
             // 
             // materialLabel1
             // 
             this.materialLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
             this.materialLabel1.HighEmphasis = true;
-            this.materialLabel1.Location = new System.Drawing.Point(400, 214);
+            this.materialLabel1.Location = new System.Drawing.Point(404, 165);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(139, 24);
+            this.materialLabel1.Size = new System.Drawing.Size(234, 24);
             this.materialLabel1.TabIndex = 135;
             this.materialLabel1.Text = "Device Channel";
+            this.materialLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.materialLabel1.UseAccent = true;
             // 
             // textBoxCodename
@@ -83,10 +83,10 @@
             this.textBoxCodename.BackColor = System.Drawing.Color.White;
             this.textBoxCodename.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxCodename.ForeColor = System.Drawing.Color.Black;
-            this.textBoxCodename.Location = new System.Drawing.Point(12, 256);
+            this.textBoxCodename.Location = new System.Drawing.Point(2, 192);
             this.textBoxCodename.Multiline = true;
             this.textBoxCodename.Name = "textBoxCodename";
-            this.textBoxCodename.Size = new System.Drawing.Size(226, 34);
+            this.textBoxCodename.Size = new System.Drawing.Size(236, 34);
             this.textBoxCodename.TabIndex = 136;
             // 
             // textBoxChannel
@@ -95,10 +95,10 @@
             this.textBoxChannel.BackColor = System.Drawing.Color.White;
             this.textBoxChannel.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxChannel.ForeColor = System.Drawing.Color.Black;
-            this.textBoxChannel.Location = new System.Drawing.Point(404, 256);
+            this.textBoxChannel.Location = new System.Drawing.Point(404, 192);
             this.textBoxChannel.Multiline = true;
             this.textBoxChannel.Name = "textBoxChannel";
-            this.textBoxChannel.Size = new System.Drawing.Size(226, 34);
+            this.textBoxChannel.Size = new System.Drawing.Size(234, 36);
             this.textBoxChannel.TabIndex = 137;
             // 
             // materialButtonAdd
@@ -111,7 +111,7 @@
             this.materialButtonAdd.DrawShadows = true;
             this.materialButtonAdd.HighEmphasis = true;
             this.materialButtonAdd.Icon = null;
-            this.materialButtonAdd.Location = new System.Drawing.Point(245, 255);
+            this.materialButtonAdd.Location = new System.Drawing.Point(245, 192);
             this.materialButtonAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonAdd.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonAdd.Name = "materialButtonAdd";
@@ -128,7 +128,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(642, 301);
+            this.ClientSize = new System.Drawing.Size(642, 236);
             this.Controls.Add(this.materialButtonAdd);
             this.Controls.Add(this.textBoxChannel);
             this.Controls.Add(this.textBoxCodename);

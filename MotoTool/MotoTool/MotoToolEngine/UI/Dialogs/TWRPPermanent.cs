@@ -45,10 +45,23 @@ namespace Franco28Tool.Engine
             string fileName = @"C:\adb\TWRP\" + LoadDeviceServer.twrpinstallername;
             if (File.Exists(fileName))
             {
-                DownloadsMng.TOOLDOWNLOAD(oConfigMng.Config.DeviceCodenmae, "/TWRPINSTALLER.xml", "TWRP");
-                label1.Text = "Hey! "+ LoadDeviceServer.twrpinstallername + " its already downloaded, first you need to boot TWRP and then flash it!";
-                cancel.Text = "OK";
-                return;
+                long length = new FileInfo(fileName).Length;
+                string vIn = oConfigMng.Config.DownloadFileSize;
+                long vOut = Convert.ToInt64(vIn);
+                if (length == vOut)
+                {
+                    DownloadsMng.TOOLDOWNLOAD(oConfigMng.Config.DeviceCodenmae, "/TWRPINSTALLER.xml", "TWRP");
+                    label1.Text = "Hey! " + LoadDeviceServer.twrpinstallername + " it's already downloaded, first you need to boot TWRP and then flash it!";
+                    cancel.Text = "OK";
+                    return;
+                }
+                else
+                {
+                    oConfigMng.Config.DownloadFileSize = "";
+                    label1.Text = "Hey! " + LoadDeviceServer.twrpinstallername + " it's already downloaded but file is corrupted!, download again please!";
+                    download.Enabled = true;
+                    return;
+                }
             }
             else
             {
@@ -62,7 +75,7 @@ namespace Franco28Tool.Engine
             activeForm = childForm;
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Fill;
+            childForm.Dock = DockStyle.Top;
             this.Controls.Add(childForm);
             this.Tag = childForm;
             childForm.BringToFront();
@@ -84,51 +97,18 @@ namespace Franco28Tool.Engine
             {
                 LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
             }
-            string fileName = @"C:\adb\TWRP\" + LoadDeviceServer.twrpinstallername;
-            if (!File.Exists(fileName))
-            {
-                download.Enabled = true;
-                downloadcall("/TWRPINSTALLER.xml", "TWRP");
-                return;
-            }
-            else
-            {
-                DownloadsMng.TOOLDOWNLOAD(oConfigMng.Config.DeviceCodenmae, "/TWRPINSTALLER.xml", "TWRP");
-                Dialogs.InfoDialog("TWRP Permanent", @"The file its already download at: " + DownloadsMng.SAVEPathname);
-                return;
-            }
+            download.Enabled = true;
+            downloadcall("/TWRPINSTALLER.xml", "TWRP");
         }
 
         private void OK_Click(object sender, EventArgs e)
         {
-            var download = new DownloadUI();
-            if (download.webClient != null)
-            {
-                download.ProgressBar1.Hide();
-                download.webClient.CancelAsync();
-                download.closeform();
-                this.Dispose();
-            }
-            else
-            {
-                this.Dispose();
-            }
+            this.Dispose();
         }
 
         private void exit(object sender, FormClosedEventArgs e)
         {
-            var download = new DownloadUI();
-            if (download.webClient != null)
-            {
-                download.ProgressBar1.Hide();
-                download.webClient.CancelAsync();
-                download.closeform();
-                this.Dispose();
-            }
-            else
-            {
-                this.Dispose();
-            }
+            this.Dispose();
         }
     }
 }

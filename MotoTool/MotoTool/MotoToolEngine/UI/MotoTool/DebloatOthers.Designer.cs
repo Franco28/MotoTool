@@ -31,19 +31,18 @@ namespace Franco28Tool.Engine
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DebloatOthers));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.console = new System.Windows.Forms.RichTextBox();
             this.materialButtonChangeTheme = new MaterialSkin.Controls.MaterialButton();
             this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
             this.materialButton23 = new MaterialSkin.Controls.MaterialButton();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.TextBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.console = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.AutoSize = true;
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel1.Controls.Add(this.console);
             this.panel1.Controls.Add(this.materialButtonChangeTheme);
@@ -55,24 +54,35 @@ namespace Franco28Tool.Engine
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(979, 319);
+            this.panel1.Size = new System.Drawing.Size(666, 319);
             this.panel1.TabIndex = 0;
+            // 
+            // console
+            // 
+            this.console.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.console.Location = new System.Drawing.Point(3, 51);
+            this.console.Name = "console";
+            this.console.ReadOnly = true;
+            this.console.Size = new System.Drawing.Size(659, 82);
+            this.console.TabIndex = 199;
+            this.console.Text = "";
             // 
             // materialButtonChangeTheme
             // 
-            this.materialButtonChangeTheme.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.materialButtonChangeTheme.AutoSize = false;
             this.materialButtonChangeTheme.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialButtonChangeTheme.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialButtonChangeTheme.Depth = 0;
+            this.materialButtonChangeTheme.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.materialButtonChangeTheme.DrawShadows = true;
-            this.materialButtonChangeTheme.HighEmphasis = false;
+            this.materialButtonChangeTheme.HighEmphasis = true;
             this.materialButtonChangeTheme.Icon = ((System.Drawing.Image)(resources.GetObject("materialButtonChangeTheme.Icon")));
-            this.materialButtonChangeTheme.Location = new System.Drawing.Point(4, 261);
+            this.materialButtonChangeTheme.Location = new System.Drawing.Point(0, 273);
             this.materialButtonChangeTheme.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonChangeTheme.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonChangeTheme.Name = "materialButtonChangeTheme";
-            this.materialButtonChangeTheme.Size = new System.Drawing.Size(146, 36);
+            this.materialButtonChangeTheme.Size = new System.Drawing.Size(666, 46);
             this.materialButtonChangeTheme.TabIndex = 137;
             this.materialButtonChangeTheme.Text = "Debloat App";
             this.materialButtonChangeTheme.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -113,7 +123,7 @@ namespace Franco28Tool.Engine
             this.materialButton23.Size = new System.Drawing.Size(42, 36);
             this.materialButton23.TabIndex = 135;
             this.materialButton23.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButton23.UseAccentColor = true;
+            this.materialButton23.UseAccentColor = false;
             this.materialButton23.UseVisualStyleBackColor = true;
             this.materialButton23.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -130,7 +140,7 @@ namespace Franco28Tool.Engine
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(973, 32);
+            this.textBox3.Size = new System.Drawing.Size(658, 32);
             this.textBox3.TabIndex = 134;
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -147,7 +157,7 @@ namespace Franco28Tool.Engine
             this.TextBox2.Multiline = true;
             this.TextBox2.Name = "TextBox2";
             this.TextBox2.ReadOnly = true;
-            this.TextBox2.Size = new System.Drawing.Size(973, 35);
+            this.TextBox2.Size = new System.Drawing.Size(659, 35);
             this.TextBox2.TabIndex = 133;
             this.TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -161,19 +171,8 @@ namespace Franco28Tool.Engine
             this.textBox1.Location = new System.Drawing.Point(4, 177);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(973, 34);
+            this.textBox1.Size = new System.Drawing.Size(658, 34);
             this.textBox1.TabIndex = 132;
-            // 
-            // console
-            // 
-            this.console.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.console.Location = new System.Drawing.Point(3, 51);
-            this.console.Name = "console";
-            this.console.ReadOnly = true;
-            this.console.Size = new System.Drawing.Size(971, 82);
-            this.console.TabIndex = 199;
-            this.console.Text = "";
             // 
             // DebloatOthers
             // 
@@ -181,7 +180,7 @@ namespace Franco28Tool.Engine
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(979, 319);
+            this.ClientSize = new System.Drawing.Size(666, 319);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -197,7 +196,6 @@ namespace Franco28Tool.Engine
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

@@ -46,11 +46,17 @@ namespace Franco28Tool.Engine
         private void ExtractFile_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             //Set the maximum vaue to int.MaxValue because the process is completed
+            oConfigMng.LoadConfig();
             progressBar_Individual.Value = int.MaxValue;
             progressBar_Total.Value = int.MaxValue;
             Dialogs.InfoDialog("INFO: Unzip", "The zip has been extracted well!");
             oConfigMng.Config.FirmwareExtracted = "1";
             oConfigMng.SaveConfig();
+            LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
+            if (File.Exists(DownloadsMng.SAVEPathname))
+            {
+                File.Delete(DownloadsMng.SAVEPathname);
+            }
             this.Dispose();
         }
 
@@ -138,6 +144,20 @@ namespace Franco28Tool.Engine
                 Logs.DebugErrorLogs(er);
                 Dialogs.ErrorDialog("Error: Exit Process", "Exit failed: {UnzipUI} " + er.Message);
             }
-        }      
+        }
+
+        private void UnzipUI_Load(object sender, EventArgs e)
+        {
+            oConfigMng.LoadConfig();
+
+            if (oConfigMng.Config.ToolTheme == "light")
+            {
+                materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            }
+            if (oConfigMng.Config.ToolTheme == "dark")
+            {
+                materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            }
+        }
     }
 }

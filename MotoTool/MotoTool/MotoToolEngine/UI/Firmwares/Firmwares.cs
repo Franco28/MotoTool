@@ -389,7 +389,7 @@ namespace Franco28Tool.Engine
                     long length = new FileInfo(firmwarezip).Length;
                     string vIn = oConfigMng.Config.DownloadFileSize;
                     long vOut = Convert.ToInt64(vIn);
-                    if (length > vOut)
+                    if (length == vOut)
                     {  
                         cAppend("FIRMWARE DOWNLOAD: Firmware already exist, now it will be exctracted");
                         DirectoryInfo di = Directory.CreateDirectory(DownloadsMng.filename);
@@ -407,16 +407,12 @@ namespace Franco28Tool.Engine
                             Strings.MsgBoxUnzippyAlert();
                         }
                         unzip.Show();
-                        if (File.Exists(DownloadsMng.SAVEPathname))
-                        {
-                            cAppend("FIRMWARE DOWNLOAD: Removing " + DownloadsMng.SAVEPathname);
-                            File.Delete(DownloadsMng.SAVEPathname);
-                        }
                         return;
                     }
                     else
                     {
                         Strings.MSGBOXFileCorrupted();
+                        oConfigMng.Config.DownloadFileSize = "";
                         cAppend(@"FIRMWARE DOWNLOAD: File is corrupted \:  " + DownloadsMng.SAVEPathname);
                         File.Delete(DownloadsMng.SAVEPathname);
                         oConfigMng.Config.DeviceFirmwareInfo = DownloadsMng.filename;
@@ -465,6 +461,10 @@ namespace Franco28Tool.Engine
 
         public void DCSelected()
         {
+            if (activeForm != null)
+            {
+                activeForm.Dispose();                
+            }
             if (oConfigMng.Config.DeviceCodenmae == "")
             {
                 cAppend("Please connect your device to read firmwares!");

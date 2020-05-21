@@ -238,6 +238,7 @@ namespace Franco28Tool.Engine
             this.Text = "Unzippy";
             this.TopMost = true;
             this.Closed += new System.EventHandler(this.UnzipUI_Closed);
+            this.Load += new System.EventHandler(this.UnzipUI_Load);
             this.ResumeLayout(false);
 
         }

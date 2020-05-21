@@ -60,7 +60,7 @@
             this.cancel.DrawShadows = true;
             this.cancel.HighEmphasis = true;
             this.cancel.Icon = null;
-            this.cancel.Location = new System.Drawing.Point(664, 157);
+            this.cancel.Location = new System.Drawing.Point(653, 156);
             this.cancel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.cancel.MouseState = MaterialSkin.MouseState.HOVER;
             this.cancel.Name = "cancel";
@@ -81,7 +81,7 @@
             this.download.DrawShadows = true;
             this.download.HighEmphasis = true;
             this.download.Icon = null;
-            this.download.Location = new System.Drawing.Point(488, 157);
+            this.download.Location = new System.Drawing.Point(472, 156);
             this.download.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.download.MouseState = MaterialSkin.MouseState.HOVER;
             this.download.Name = "download";

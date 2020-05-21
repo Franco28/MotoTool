@@ -204,7 +204,7 @@ namespace Franco28Tool.Engine
         private void updateTimer_Tick()
         {
             Timer timer = new Timer();
-            timer.Interval = (1 * 1000);
+            timer.Interval = (1 * 2000);
             timer.Tick += new EventHandler(timer_Tick);
             AvoidFlick();
             timer.Start();

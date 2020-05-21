@@ -31,6 +31,7 @@ namespace Franco28Tool.Engine
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MotoFlash));
             this.panelMain = new System.Windows.Forms.Panel();
+            this.progressBar_Total = new MaterialSkin.Controls.MaterialProgressBar();
             this.materialButtonExit = new MaterialSkin.Controls.MaterialButton();
             this.listBoxDeviceStatus = new System.Windows.Forms.ListBox();
             this.consoleMotoFlash = new System.Windows.Forms.RichTextBox();
@@ -41,6 +42,7 @@ namespace Franco28Tool.Engine
             this.materialSwitchFlashAllExceptModem = new MaterialSkin.Controls.MaterialSwitch();
             this.materialButtonFlashMoto = new MaterialSkin.Controls.MaterialButton();
             this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.panelMain.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -50,6 +52,7 @@ namespace Franco28Tool.Engine
             this.panelMain.AutoSize = true;
             this.panelMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelMain.BackColor = System.Drawing.Color.White;
+            this.panelMain.Controls.Add(this.progressBar_Total);
             this.panelMain.Controls.Add(this.materialButtonExit);
             this.panelMain.Controls.Add(this.listBoxDeviceStatus);
             this.panelMain.Controls.Add(this.consoleMotoFlash);
@@ -63,6 +66,17 @@ namespace Franco28Tool.Engine
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(995, 413);
             this.panelMain.TabIndex = 0;
+            // 
+            // progressBar_Total
+            // 
+            this.progressBar_Total.BackColor = System.Drawing.Color.White;
+            this.progressBar_Total.Depth = 0;
+            this.progressBar_Total.Location = new System.Drawing.Point(57, 244);
+            this.progressBar_Total.MouseState = MaterialSkin.MouseState.HOVER;
+            this.progressBar_Total.Name = "progressBar_Total";
+            this.progressBar_Total.Size = new System.Drawing.Size(926, 5);
+            this.progressBar_Total.TabIndex = 132;
+            this.progressBar_Total.Value = 1;
             // 
             // materialButtonExit
             // 
@@ -125,7 +139,7 @@ namespace Franco28Tool.Engine
             this.materialButtonDowngradeMoto.DrawShadows = true;
             this.materialButtonDowngradeMoto.HighEmphasis = true;
             this.materialButtonDowngradeMoto.Icon = null;
-            this.materialButtonDowngradeMoto.Location = new System.Drawing.Point(7, 320);
+            this.materialButtonDowngradeMoto.Location = new System.Drawing.Point(7, 362);
             this.materialButtonDowngradeMoto.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonDowngradeMoto.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonDowngradeMoto.Name = "materialButtonDowngradeMoto";
@@ -155,13 +169,12 @@ namespace Franco28Tool.Engine
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.AutoSize = true;
             this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox1.Controls.Add(this.materialSwitchFlashAll);
             this.groupBox1.Controls.Add(this.materialSwitchFlashAllExceptModem);
-            this.groupBox1.Location = new System.Drawing.Point(215, 247);
+            this.groupBox1.Location = new System.Drawing.Point(172, 277);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(234, 112);
+            this.groupBox1.Size = new System.Drawing.Size(811, 97);
             this.groupBox1.TabIndex = 87;
             this.groupBox1.TabStop = false;
             // 
@@ -210,7 +223,7 @@ namespace Franco28Tool.Engine
             this.materialButtonFlashMoto.DrawShadows = true;
             this.materialButtonFlashMoto.HighEmphasis = true;
             this.materialButtonFlashMoto.Icon = null;
-            this.materialButtonFlashMoto.Location = new System.Drawing.Point(7, 247);
+            this.materialButtonFlashMoto.Location = new System.Drawing.Point(4, 277);
             this.materialButtonFlashMoto.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonFlashMoto.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonFlashMoto.Name = "materialButtonFlashMoto";
@@ -236,6 +249,12 @@ namespace Franco28Tool.Engine
             this.materialLabel9.TabIndex = 83;
             this.materialLabel9.Text = "Moto Flash";
             this.materialLabel9.UseAccent = true;
+            // 
+            // backgroundWorker
+            // 
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
             // MotoFlash
             // 
@@ -276,5 +295,7 @@ namespace Franco28Tool.Engine
         private System.Windows.Forms.RichTextBox consoleMotoFlash;
         private System.Windows.Forms.ListBox listBoxDeviceStatus;
         private MaterialSkin.Controls.MaterialButton materialButtonExit;
+        private MaterialSkin.Controls.MaterialProgressBar progressBar_Total;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }

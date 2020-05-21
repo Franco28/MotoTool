@@ -33,4 +33,3 @@ C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoTool\MotoToolEngine\obj\x6
 C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoTool\MotoToolEngine\obj\x64\Debug\MotoToolEngine.pdb
 C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoTool\MotoToolEngine\obj\x64\Debug\Franco28Tool.Engine.TWRPBackup.resources
 C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoTool\MotoToolEngine\obj\x64\Debug\Franco28Tool.Engine.AddNewDevice.resources
-C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoTool\MotoToolEngine\obj\x64\Debug\MotoToolEngine.csprojAssemblyReference.cache

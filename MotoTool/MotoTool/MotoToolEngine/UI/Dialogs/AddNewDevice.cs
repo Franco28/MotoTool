@@ -45,14 +45,25 @@ namespace Franco28Tool.Engine
 
         private void materialButtonAdd_Click(object sender, EventArgs e)
         {
-            oConfigMng.LoadConfig();
             if (textBoxCodename.Text != string.Empty || textBoxChannel.Text != string.Empty)
             {
-                oConfigMng.Config.DeviceCodenmae = textBoxCodename.Text.ToLower();
-                oConfigMng.Config.DeviceFirmware = textBoxChannel.Text.ToUpper();
-                oConfigMng.SaveConfig();
-                cAppend("Added new device codename: " + oConfigMng.Config.DeviceCodenmae);
-                cAppend("Added new device channel: " + oConfigMng.Config.DeviceFirmware);
+                try
+                {
+                    oConfigMng.LoadConfig();
+                    oConfigMng.Config.DeviceCodenmae = textBoxCodename.Text.ToLower().Trim();
+                    oConfigMng.Config.DeviceFirmware = textBoxChannel.Text.ToUpper().Trim();
+                    cAppend("Added new device codename: " + oConfigMng.Config.DeviceCodenmae);
+                    cAppend("Added new device channel: " + oConfigMng.Config.DeviceFirmware);
+                    oConfigMng.SaveConfig();
+                    cAppend("Added new device codename: " + oConfigMng.Config.DeviceCodenmae + "{OK}");
+                    cAppend("Added new device channel: " + oConfigMng.Config.DeviceFirmware + "{OK}");
+                }
+                catch (Exception er)
+                {
+                    Dialogs.ErrorDialog("ERROR adding new device", er.ToString());
+                    cAppend("Added new device codename: " + oConfigMng.Config.DeviceCodenmae + "{ERROR} " + er);
+                    cAppend("Added new device channel: " + oConfigMng.Config.DeviceFirmware + "{ERROR} " + er);
+                }
             }
             else
             {

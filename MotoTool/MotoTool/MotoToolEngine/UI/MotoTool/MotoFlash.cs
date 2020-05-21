@@ -8,6 +8,7 @@ using MaterialSkin.Controls;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace Franco28Tool.Engine
 
         public bool FlashAll { get; private set; }
         public bool FlashAllExceptModem { get; private set; }
+        public bool WorkerReportsProgress { get; private set; }
 
         public MotoFlash()
         {
@@ -193,8 +195,37 @@ namespace Franco28Tool.Engine
             devices.ToString();
             var devices1 = String.Join("", devices.ToArray());
             cAppend("MOTO FLASH: Flashing... {" + devices1 + "}");
+            if (backgroundWorker == null)
+            {
+                backgroundWorker.RunWorkerAsync();
+            }
         }
 
+        private void Calculate(int i)
+        {
+            double pow = Math.Pow(i, i);
+        }
+
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            WorkerReportsProgress = true;
+            var backgroundWorker = sender as BackgroundWorker;
+            for (int j = 0; j < 100000; j++)
+            {
+                Calculate(j);
+                backgroundWorker.ReportProgress((j * 100) / 100000);
+            }
+        }
+
+        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar_Total.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            progressBar_Total.Value = 100;
+        }
 
         private async void flash_Click(object sender, EventArgs e)
         {
