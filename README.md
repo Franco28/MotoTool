@@ -63,8 +63,8 @@ _**If you see this screen, please wait, i'm working with your device firmwares_*
 _**All Tool actions will be saved in C:\adb\.settings\Logs. If you have any problem you can send me all logs!_**
 
 ## Uninstall
-- You can uninstall it now from the Tool, but ensure that all files were removed on "C:\Program Files\MotoTool\" _(I noticed that Tool won´t be removed)_
-- Go to Control Panel and look for the MotoTool, select it and uninstall it! **_Be careful with this, because will ask you at the end if you want to remove MotorolaDeviceManager_2.5.4_!** 
+- You can uninstall it now from the MotoTool, but ensure that all files were removed on "C:\Program Files\MotoTool\" _(I noticed that Tool won't be removed)_
+- Go to Control Panel and look for the MotoTool, select it and uninstall it! **_This won't be removed MotorolaDeviceManager_2.5.4_!** 
 
 
 ## Downloads
