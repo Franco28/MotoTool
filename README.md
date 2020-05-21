@@ -10,6 +10,7 @@
 ### I'm not going to support firmwares like this:
 - "XT1684_POTTER_RETEU_**SS**_8.1.0_OPS28.85-17-6-2_cid50_subsidy-DEFAULT_regulatory-DEFAULT_CFC"
 - "XT1685_POTTER_RETEU_**DS**_8.1.0_OPS28.85-17-6-2_cid50_subsidy-DEFAULT_regulatory-DEFAULT_CFC"
+- Or weird channels 
 
 #### * [Downloads](https://github.com/Franco28/MotoTool#downloads-1) 
 #### * [Contact](https://github.com/Franco28/MotoTool#contact) 
@@ -21,8 +22,7 @@
 ## Install
 - Start the "MotoTool_v2.0.0.1_Setup.exe"
 - The installer will create a desktop shortcut and in Windows app will create a folder with the tool inside. 
-- When the installer ends, will ask you ~~if you want to launch the Tool and~~ if you want to isntall MotoDrivers. **Please if you dont have _MotoDrivers installed_ or you dont know, _dont uncheck the option_ and let the install do it ~~(WARNING: Uncheck Launch Tool!)~~**
-~~NOTE Setup: if you check the box "Launch MotoTool" the Tool will be executed, but setup wont be closed, so restart the Tool for now~~
+- When the installer ends, will ask you if you want to isntall MotoDrivers. **Please if you don´t have _MotoDrivers installed_ or you don´t know, _dont uncheck the option_ and let the installer do it**
 
 ## How it works
 - The installation will create a "MotoTool" shortcut on desktop
