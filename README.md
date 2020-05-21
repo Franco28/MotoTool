@@ -62,7 +62,7 @@ _**If you see this screen, please wait, i'm working with your device firmwares_*
 
 
 ## Downloads
-#### Download MotoTool v2.0.0.1 - Beta (20-05-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/v2.0.0.1) 
+#### Download MotoTool v2.0.0.1 - Beta (21-05-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/v2.0.0.1) 
 #### Changelog * [Changelog](https://MotoToolEngine.000webhostapp.com/MotoTool/changelog.txt) 
 
 
@@ -112,3 +112,4 @@ _**If you see this screen, please wait, i'm working with your device firmwares_*
 #### Thanks to [k1ll3r8e](https://forum.xda-developers.com/showthread.php?t=2772502) for this Android lib!
 #### Thanks to [rbsoft](https://github.com/ravibpatel/AutoUpdater.NET) for this Update lib!
 #### Thanks to [leocb](https://github.com/leocb/MaterialSkin) for this MaterialSkin lib!
+#### Thanks to [iconfinder](https://www.iconfinder.com/) for this awesome icons!
