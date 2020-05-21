@@ -28,6 +28,10 @@
 - The installation will create a "MotoTool" shortcut on desktop
 - When you launch the Tool on the first time this will:
 
+-- First at all, if MotoTool opens like this: is because im working on internal files
+![Tool Main](https://github.com/Franco28/MotoTool/blob/master/Screens/ToolMain.png "Tool Main")
+
+
 -- unpack on "C:\adb\" fastboot & adb
 
 -- launch a batch file like this
