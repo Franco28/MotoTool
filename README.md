@@ -127,3 +127,4 @@ _**All Tool actions will be saved in C:\adb\.settings\Logs. If you have any prob
 #### Thanks to [rbsoft](https://github.com/ravibpatel/AutoUpdater.NET) for this Update lib!
 #### Thanks to [leocb](https://github.com/leocb/MaterialSkin) for this MaterialSkin lib!
 #### Thanks to [iconfinder](https://www.iconfinder.com/) for this awesome icons!
+#### Thanks to [https://mirrors.lolinet.com/firmware/moto/](https://mirrors.lolinet.com/firmware/moto/) for firmwares!
