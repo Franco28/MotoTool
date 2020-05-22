@@ -16,6 +16,7 @@ using AndroidCtrl.Fastboot;
 using System.Collections.Generic;
 using AndroidCtrl.Tools;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Franco28Tool.Engine
 {
@@ -30,6 +31,7 @@ namespace Franco28Tool.Engine
         public Form activeForm = null;
         ArrayList devicecheck = new ArrayList();
         IDDeviceState state = General.CheckDeviceState(ADB.Instance().DeviceID);
+        Timer timer = new Timer();
 
         public MainForm()
         {
@@ -203,7 +205,6 @@ namespace Franco28Tool.Engine
 
         private void updateTimer_Tick()
         {
-            Timer timer = new Timer();
             timer.Interval = (1 * 2000);
             timer.Tick += new EventHandler(timer_Tick);
             AvoidFlick();
@@ -237,14 +238,11 @@ namespace Franco28Tool.Engine
             {
                 this.Text = "MotoTool v" + oConfigMng.Config.ToolVersion + " - " + oConfigMng.Config.DeviceCodenmae + " - " + oConfigMng.Config.DeviceFirmware;
                 TextBoxDebugInfo.Text = "Device Channel: " + oConfigMng.Config.DeviceFirmware;
+                DeviceCompatible();
                 materialButtonBlankFlash.Enabled = true;
                 materialButtonFlashLogo.Enabled = true;
                 materialButtonFlashTWRP.Enabled = true;
                 materialButtonBootTWRP.Enabled = true;
-                if (oConfigMng.Config.DeviceCodenmae == oConfigMng.Config.DeviceCodenmae)
-                {
-                    LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
-                }
             }
         }
 
@@ -261,34 +259,64 @@ namespace Franco28Tool.Engine
             childForm.Show();
         }
 
-        public async void canceltoolload()
+        public void canceltoolload()
         {
-            cAppend("MotoTool: DEVICE NOT COMPATIBLE: " + oConfigMng.Config.DeviceCodenmae + "Device " + oConfigMng.Config.DeviceCodenmae + " is not compatible. This MotoTool works with: " + " \nBeckham, Doha, Lake, Evert, Potter, Sanders, River, Ocean, Lima, Sofiar, Sofia");
-            await Task.Run(() => Dialogs.WarningDialog("MotoTool: DEVICE NOT COMPATIBLE: " + oConfigMng.Config.DeviceCodenmae, "Device " + oConfigMng.Config.DeviceCodenmae + " is not compatible. This MotoTool works with: " + " \nBeckham, Doha, Lake, Evert, Potter, Sanders, River, Ocean, Lima, Sofiar, Sofia"));
+            timer.Stop();
+            cAppend("MotoTool: Tool monitor was stopped!");
+            cAppend("MotoTool: DEVICE NOT COMPATIBLE: " + oConfigMng.Config.DeviceCodenmae + "\nDevice " + oConfigMng.Config.DeviceCodenmae + " is not compatible. This MotoTool works with: " + " \nBeckham, Doha, Lake, Evert, Potter, Sanders, River, Ocean, Lima, Sofiar, Sofia");
+            Dialogs.WarningDialog("MotoTool: DEVICE NOT COMPATIBLE: " + oConfigMng.Config.DeviceCodenmae, "Device " + oConfigMng.Config.DeviceCodenmae + " is not compatible. This MotoTool works with: " + " \nBeckham, Doha, Lake, Evert, Potter, Sanders, River, Ocean, Lima, Sofiar, Sofia");
+            oConfigMng.Config.DeviceCodenmae = "";
+            oConfigMng.Config.DeviceFirmware = "";
+            oConfigMng.SaveConfig();
+            Application.ExitThread();
             KillWhenExit();
         }
 
         public void DeviceCompatible()
         {
             oConfigMng.LoadConfig();
-            if (oConfigMng.Config.DeviceCodenmae == "")
+            string dc = oConfigMng.Config.DeviceCodenmae;
+            if (dc.ToString().Contains("doha") == true ||
+                dc.ToString().Contains("evert") == true ||
+                dc.ToString().Contains("lake") == true ||
+                dc.ToString().Contains("lima") == true ||
+                dc.ToString().Contains("river") == true ||
+                dc.ToString().Contains("potter") == true ||
+                dc.ToString().Contains("ocean") == true ||
+                dc.ToString().Contains("sanders") == true ||
+                dc.ToString().Contains("sofiar") == true ||
+                dc.ToString().Contains("sofia") == true ||
+                dc.ToString().Contains("beckham") == true)
             {
-                TextBoxDebug.Text = "Please connect your device, so MotoTool can check your device!";
+
             }
-            if (oConfigMng.Config.DeviceCodenmae != "beckham" ||
-                oConfigMng.Config.DeviceCodenmae != "doha" ||
-                oConfigMng.Config.DeviceCodenmae != "evert" ||
-                oConfigMng.Config.DeviceCodenmae != "lake" ||
-                oConfigMng.Config.DeviceCodenmae != "lima" ||
-                oConfigMng.Config.DeviceCodenmae != "river" ||
-                oConfigMng.Config.DeviceCodenmae != "potter" ||
-                oConfigMng.Config.DeviceCodenmae != "ocean" ||
-                oConfigMng.Config.DeviceCodenmae != "sanders" ||
-                oConfigMng.Config.DeviceCodenmae != "sofiar" ||
-                oConfigMng.Config.DeviceCodenmae == "sofia" ||
-                oConfigMng.Config.DeviceCodenmae == "ginkgo")
+            else
             {
                 canceltoolload();
+                return;
+            }
+        }
+
+        public void DeviceConnected(string adborfastbootmsg)
+        {
+            cAppend("Device " + adborfastbootmsg + " connected!");
+            devicecheck.Add(" Device: Online! - " + adborfastbootmsg);
+            devicecheck.Add(" Mode: " + state);
+            listBoxDeviceStatus.DataSource = devicecheck;
+            GetProp();
+            DeviceCompatible();
+            try
+            {
+                cAppend("Connecting to server device... " + oConfigMng.Config.DeviceCodenmae);
+                if (oConfigMng.Config.DeviceCodenmae == oConfigMng.Config.DeviceCodenmae)
+                {
+                    LoadDeviceServer.CheckDevice(oConfigMng.Config.DeviceCodenmae + ".xml", oConfigMng.Config.DeviceCodenmae);
+                    cAppend("Connecting to server device... " + oConfigMng.Config.DeviceCodenmae + " {OK}");
+                }
+            }
+            catch (Exception er)
+            {
+                cAppend("Connecting to server device... " + oConfigMng.Config.DeviceCodenmae + " {ERROR} " + er.ToString());
             }
         }
 
@@ -308,22 +336,14 @@ namespace Franco28Tool.Engine
             {
                 this.Invoke((Action)delegate
                 {
-                    cAppend("Device adb connected!");
-                    devicecheck.Add(" Device: Online! - ADB");
-                    devicecheck.Add(" Mode: " + state);
-                    listBoxDeviceStatus.DataSource = devicecheck;
-                    GetProp();
+                    DeviceConnected("ADB");
                 });
             }
             foreach (DataModelDevicesItem device in fastbootDevices)
             {
                 this.Invoke((Action)delegate
                 {
-                    cAppend("Device fastboot connected!");
-                    devicecheck.Add(" Device: Online! - FASTBOOT");
-                    devicecheck.Add(" Mode: " + state);
-                    listBoxDeviceStatus.DataSource = devicecheck;
-                    GetProp();
+                    DeviceConnected("FASTBOOT");
                 });
             }
             ADB.SelectDevice();
@@ -365,7 +385,7 @@ namespace Franco28Tool.Engine
             if (oConfigMng.Config.DeviceFirmware == "" || oConfigMng.Config.DeviceCodenmae == "")
             {
                 cAppend("Device Info: Getting device codename and carrier...");
-                if (IDDeviceState.DEVICE == state)
+                if (IDDeviceState.UNKNOWN == state || IDDeviceState.DEVICE == state)
                 {
                     cAppend("Device Info: Waiting for device...");
                     await Task.Run(() => ADB.WaitForDevice());
@@ -378,13 +398,15 @@ namespace Franco28Tool.Engine
                     var result2 = String.Join("", getcarrier.ToArray());
                     oConfigMng.Config.DeviceCodenmae = result;
                     oConfigMng.Config.DeviceFirmware = result2;
+                    oConfigMng.SaveConfig();
+                    cAppend("Device Info: Device added:  " + oConfigMng.Config.DeviceCodenmae + "\nChannel: "  + oConfigMng.Config.DeviceFirmware);
+                    Application.ExitThread();
+                    Application.Restart();
                 }
                 else
                 {
-                    cAppend("Device Info: Your device is in the wrong state. Please connect your device.\n");
+                    cAppend("Device Info: Your device is in the wrong state. Please connect your device. " + state);
                 }
-                oConfigMng.SaveConfig();
-                DeviceCompatible();
             }
             else
             {
@@ -792,25 +814,36 @@ namespace Franco28Tool.Engine
         private async void materialButtonFlashTWRP_Click(object sender, EventArgs e)
         {
             oConfigMng.LoadConfig();
-            if (oConfigMng.Config.DeviceCodenmae == "doha" ||
-                oConfigMng.Config.DeviceCodenmae == "river" ||
-                oConfigMng.Config.DeviceCodenmae == "beckham" ||
-                oConfigMng.Config.DeviceCodenmae == "ocean")
+            string dc = oConfigMng.Config.DeviceCodenmae;
+            if (dc.ToString().Contains("doha") == true ||
+                dc.ToString().Contains("river") == true ||
+                dc.ToString().Contains("ocean") == true ||
+                dc.ToString().Contains("beckham") == true)
+            {
+
+            }
+            else
             {
                 cAppend("FLASH TWRP: Hey! This option is not for A/B devices!, but you can download TWRP installer and flash it! first you need to boot TWRP!");
                 Dialogs.TWRPPermanent("FLASH: TWRP", "Hey! This option is not for A/B devices!, but you can download TWRP installer and flash it! first you need to boot TWRP!");
                 return;
             }
-            if (oConfigMng.Config.DeviceCodenmae == "evert" ||
-                oConfigMng.Config.DeviceCodenmae == "lake" ||
-                oConfigMng.Config.DeviceCodenmae == "lima" ||
-                oConfigMng.Config.DeviceCodenmae == "sofiar" ||
-                oConfigMng.Config.DeviceCodenmae == "sofia")
+
+            if (dc.ToString().Contains("evert") == true ||
+                dc.ToString().Contains("lake") == true ||
+                dc.ToString().Contains("lima") == true ||
+                dc.ToString().Contains("sofiar") == true ||
+                dc.ToString().Contains("sofia") == true)
+            {
+
+            }
+            else
             {
                 cAppend("FLASH TWRP: Hey! This option is not for A/B devices!, check the Boot option!");
                 Dialogs.InfoDialog("FLASH: TWRP", "Hey! This option is not for A/B devices!, check the Boot option!");
                 return;
             }
+
             if (oConfigMng.Config.DeviceCodenmae == "")
             {
                 cAppend("FLASH TWRP: Please connect your device, so MotoTool can check your device!");
@@ -846,7 +879,7 @@ namespace Franco28Tool.Engine
                     return;
                 }
 
-                if (state == IDDeviceState.DEVICE)
+                if (state == IDDeviceState.DEVICE || state == IDDeviceState.UNKNOWN)
                 {
                     cAppend("FLASH TWRP: Waiting for device...");
                     await Task.Run(() => ADB.WaitForDevice());
@@ -877,13 +910,20 @@ namespace Franco28Tool.Engine
         private async void materialButtonBootTWRP_Click(object sender, EventArgs e)
         {
             oConfigMng.LoadConfig();
+            string dc = oConfigMng.Config.DeviceCodenmae;
+            if (dc.ToString().Contains("lima") == true ||
+                dc.ToString().Contains("sofiar") == true ||
+                dc.ToString().Contains("sofia") == true)
+            {
 
-            if (oConfigMng.Config.DeviceCodenmae == "lima" || oConfigMng.Config.DeviceCodenmae == "sofiar" || oConfigMng.Config.DeviceCodenmae == "sofia")
+            }
+            else
             {
                 cAppend("BOOT TWRP: Hey this device doesn't have twrp yet! :(");
                 Dialogs.InfoDialog("BOOT: TWRP", "Hey this device doesn't have twrp yet! :(");
                 return;
             }
+
             if (oConfigMng.Config.DeviceCodenmae == "")
             {
                 cAppend("BOOT TWRP: Please connect your device, so MotoTool can check your device!");
@@ -918,7 +958,7 @@ namespace Franco28Tool.Engine
                     oConfigMng.SaveConfig();
                     return;
                 }
-                if (state == IDDeviceState.DEVICE)
+                if (state == IDDeviceState.DEVICE || state == IDDeviceState.UNKNOWN)
                 {
                     cAppend("BOOT TWRP: Waiting for device...");
                     await Task.Run(() => ADB.WaitForDevice());
@@ -948,7 +988,7 @@ namespace Franco28Tool.Engine
 
         private async void materialButtonRebootBootloader_Click(object sender, EventArgs e)
         {
-            if (IDDeviceState.DEVICE == state)
+            if (IDDeviceState.DEVICE == state || IDDeviceState.UNKNOWN == state)
             {
                 cAppend("REBOOT BOOTLOADER: Waiting for device...");
                 await Task.Run(() => ADB.WaitForDevice());
@@ -965,7 +1005,7 @@ namespace Franco28Tool.Engine
 
         private async void materialButtonRebootRecovery_Click(object sender, EventArgs e)
         {
-            if (IDDeviceState.DEVICE == state)
+            if (IDDeviceState.DEVICE == state || IDDeviceState.UNKNOWN == state)
             {
                 cAppend("REBOOT RECOVERY: Waiting for device...");
                 await Task.Run(() => ADB.WaitForDevice());
@@ -982,16 +1022,23 @@ namespace Franco28Tool.Engine
 
         private async void materialButtonBlankFlash_Click(object sender, EventArgs e)
         {
-            if (oConfigMng.Config.DeviceCodenmae == "lima" ||
-                oConfigMng.Config.DeviceCodenmae == "potter" ||
-                oConfigMng.Config.DeviceCodenmae == "sanders" ||
-                oConfigMng.Config.DeviceCodenmae == "sofiar" ||
-                oConfigMng.Config.DeviceCodenmae == "sofia")
+            oConfigMng.LoadConfig();
+            string dc = oConfigMng.Config.DeviceCodenmae;
+            if (dc.ToString().Contains("lima") == true ||
+                dc.ToString().Contains("sofiar") == true ||
+                dc.ToString().Contains("sofia") == true ||
+                dc.ToString().Contains("potter") == true ||
+                dc.ToString().Contains("sanders") == true)
+            {
+
+            }
+            else
             {
                 cAppend("BLANKFLASH: " + oConfigMng.Config.DeviceCodenmae + " Hey this device doesn't have blankflash yet! :(. If you know about an existing blankflash you can contact me and i'll add it!");
                 Dialogs.InfoDialog("BLANKFLASH: " + oConfigMng.Config.DeviceCodenmae, "Hey this device doesn't have blankflash yet! :(. If you know about an existing blankflash you can contact me and i'll add it!");
                 return;
             }
+
             if (oConfigMng.Config.DeviceCodenmae == "")
             {
                 cAppend("BLANKFLASH: " + oConfigMng.Config.DeviceCodenmae + "Please connect your device, so MotoTool can check your device!");
@@ -1053,7 +1100,7 @@ namespace Franco28Tool.Engine
             }
             else
             {
-                if (state == IDDeviceState.DEVICE || state == IDDeviceState.FASTBOOT || state == IDDeviceState.BOOTLOADER)
+                if (state == IDDeviceState.DEVICE || state == IDDeviceState.FASTBOOT || state == IDDeviceState.BOOTLOADER || state == IDDeviceState.UNKNOWN)
                 {
                     cAppend("FLASH LOGO: Waiting for device...");
                     await Task.Run(() => ADB.WaitForDevice());
