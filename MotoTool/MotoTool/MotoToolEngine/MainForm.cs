@@ -16,7 +16,6 @@ using AndroidCtrl.Fastboot;
 using System.Collections.Generic;
 using AndroidCtrl.Tools;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace Franco28Tool.Engine
 {
@@ -45,11 +44,11 @@ namespace Franco28Tool.Engine
             oConfigMng.LoadConfig();
             oConfigMng.Config.ToolVersion = ToolVer;
             this.Text = "MotoTool v" + oConfigMng.Config.ToolVersion;
+            oConfigMng.Config.ToolCompiled = Utils.GetLinkerDateTime(Assembly.GetEntryAssembly(), null).ToString();
             cAppend("STARTING: Checking MotoTool updates.");
             cehck4updates();
             cAppend("STARTING: Loading tool... Please wait...");
             oConfigMng.Config.ADBPath = @"C:\adb\";
-            updateTimer_Tick();
             oConfigMng.SaveConfig();
             cAppend("STARTING: Settings adb & fastboot path... Please wait...");
             ADB.PATH_DIRECTORY = oConfigMng.Config.ADBPath;
@@ -88,7 +87,7 @@ namespace Franco28Tool.Engine
             }
             if (Fastboot.IntegrityCheck() == false)
             {
-                Deploy.Fastboot();
+                Deploy.Fastboot();               
             }
             if (ADB.IsStarted)
             {
@@ -117,7 +116,6 @@ namespace Franco28Tool.Engine
             await Task.Run(() => CheckandDeploy());
             await Task.Run(() => DeviceDetectionService());
             cAppend("STARTING: Deploying adb & fastboot... {OK}");
-            oConfigMng.Config.ToolCompiled = Utils.GetLinkerDateTime(Assembly.GetEntryAssembly(), null).ToString();
             cAppend("STARTING: Checking MotoTool ver: " + ToolVer);
             if (oConfigMng.Config.ToolTheme == null || oConfigMng.Config.ToolTheme == "")
             {
@@ -191,6 +189,7 @@ namespace Franco28Tool.Engine
             oConfigMng.SaveConfig();
             cAppend("-------------------------------------------------");
             cAppend("MotoTool v" + ToolVer + " was loaded!");
+            updateTimer_Tick();
         }
 
         private void InitialiseCPUCounter()
@@ -205,7 +204,7 @@ namespace Franco28Tool.Engine
 
         private void updateTimer_Tick()
         {
-            timer.Interval = (1 * 2000);
+            timer.Interval = (1 * 500);
             timer.Tick += new EventHandler(timer_Tick);
             AvoidFlick();
             timer.Start();
@@ -233,16 +232,16 @@ namespace Franco28Tool.Engine
                 materialButtonFlashLogo.Enabled = false;
                 materialButtonFlashTWRP.Enabled = false;
                 materialButtonBootTWRP.Enabled = false;
-            }
+            }           
             else
             {
                 this.Text = "MotoTool v" + oConfigMng.Config.ToolVersion + " - " + oConfigMng.Config.DeviceCodenmae + " - " + oConfigMng.Config.DeviceFirmware;
                 TextBoxDebugInfo.Text = "Device Channel: " + oConfigMng.Config.DeviceFirmware;
-                DeviceCompatible();
                 materialButtonBlankFlash.Enabled = true;
                 materialButtonFlashLogo.Enabled = true;
                 materialButtonFlashTWRP.Enabled = true;
                 materialButtonBootTWRP.Enabled = true;
+                DeviceCompatible();
             }
         }
 
@@ -276,17 +275,17 @@ namespace Franco28Tool.Engine
         {
             oConfigMng.LoadConfig();
             string dc = oConfigMng.Config.DeviceCodenmae;
-            if (dc.ToString().Contains("doha") == true ||
-                dc.ToString().Contains("evert") == true ||
-                dc.ToString().Contains("lake") == true ||
-                dc.ToString().Contains("lima") == true ||
-                dc.ToString().Contains("river") == true ||
-                dc.ToString().Contains("potter") == true ||
-                dc.ToString().Contains("ocean") == true ||
-                dc.ToString().Contains("sanders") == true ||
-                dc.ToString().Contains("sofiar") == true ||
-                dc.ToString().Contains("sofia") == true ||
-                dc.ToString().Contains("beckham") == true)
+            if (dc.Contains("doha") == true ||
+                dc.Contains("evert") == true ||
+                dc.Contains("lake") == true ||
+                dc.Contains("lima") == true ||
+                dc.Contains("river") == true ||
+                dc.Contains("potter") == true ||
+                dc.Contains("ocean") == true ||
+                dc.Contains("sanders") == true ||
+                dc.Contains("sofiar") == true ||
+                dc.Contains("sofia") == true ||
+                dc.Contains("beckham") == true)
             {
 
             }
@@ -820,10 +819,6 @@ namespace Franco28Tool.Engine
                 dc.ToString().Contains("ocean") == true ||
                 dc.ToString().Contains("beckham") == true)
             {
-
-            }
-            else
-            {
                 cAppend("FLASH TWRP: Hey! This option is not for A/B devices!, but you can download TWRP installer and flash it! first you need to boot TWRP!");
                 Dialogs.TWRPPermanent("FLASH: TWRP", "Hey! This option is not for A/B devices!, but you can download TWRP installer and flash it! first you need to boot TWRP!");
                 return;
@@ -834,10 +829,6 @@ namespace Franco28Tool.Engine
                 dc.ToString().Contains("lima") == true ||
                 dc.ToString().Contains("sofiar") == true ||
                 dc.ToString().Contains("sofia") == true)
-            {
-
-            }
-            else
             {
                 cAppend("FLASH TWRP: Hey! This option is not for A/B devices!, check the Boot option!");
                 Dialogs.InfoDialog("FLASH: TWRP", "Hey! This option is not for A/B devices!, check the Boot option!");
@@ -914,10 +905,6 @@ namespace Franco28Tool.Engine
             if (dc.ToString().Contains("lima") == true ||
                 dc.ToString().Contains("sofiar") == true ||
                 dc.ToString().Contains("sofia") == true)
-            {
-
-            }
-            else
             {
                 cAppend("BOOT TWRP: Hey this device doesn't have twrp yet! :(");
                 Dialogs.InfoDialog("BOOT: TWRP", "Hey this device doesn't have twrp yet! :(");
@@ -1029,10 +1016,6 @@ namespace Franco28Tool.Engine
                 dc.ToString().Contains("sofia") == true ||
                 dc.ToString().Contains("potter") == true ||
                 dc.ToString().Contains("sanders") == true)
-            {
-
-            }
-            else
             {
                 cAppend("BLANKFLASH: " + oConfigMng.Config.DeviceCodenmae + " Hey this device doesn't have blankflash yet! :(. If you know about an existing blankflash you can contact me and i'll add it!");
                 Dialogs.InfoDialog("BLANKFLASH: " + oConfigMng.Config.DeviceCodenmae, "Hey this device doesn't have blankflash yet! :(. If you know about an existing blankflash you can contact me and i'll add it!");
@@ -1251,17 +1234,21 @@ namespace Franco28Tool.Engine
             KillWhenExit();
         }
 
-        public void KillWhenExit()
+        public async void KillWhenExit()
         {
             cAppend("EXIT: Stopping adb, fastboot and callback monitor...");
+            Application.ExitThread();
+            ADB.Stop();
+            ADB.Stop(true);
+            ADB.Dispose();
+            cAppend("EXIT: Stopping adb... {OK}");
             ADB.ConnectionMonitor.Stop();
             ADB.ConnectionMonitor.Callback -= ConnectionMonitorCallback;
-            ADB.Stop();
+            cAppend("EXIT: Stopping callback monitor... {OK}");
             Fastboot.ForceStop();
             Fastboot.Dispose();
-            ADB.Dispose();
+            cAppend("EXIT: Stopping fastboot... {OK}");
             oConfigMng.LoadConfig();
-            cAppend("EXIT: Stopping adb, fastboot and callback monitor... {OK}");
             if (oConfigMng.Config.Autosavelogs == "true")
             {
                 cAppend("EXIT: Saving MotoTool logs...");

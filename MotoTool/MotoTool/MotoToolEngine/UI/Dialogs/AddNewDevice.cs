@@ -55,14 +55,14 @@ namespace Franco28Tool.Engine
                     cAppend("Added new device codename: " + oConfigMng.Config.DeviceCodenmae);
                     cAppend("Added new device channel: " + oConfigMng.Config.DeviceFirmware);
                     oConfigMng.SaveConfig();
-                    cAppend("Added new device codename: " + oConfigMng.Config.DeviceCodenmae + "{OK}");
-                    cAppend("Added new device channel: " + oConfigMng.Config.DeviceFirmware + "{OK}");
+                    cAppend("Added new device codename: " + oConfigMng.Config.DeviceCodenmae + " {OK}");
+                    cAppend("Added new device channel: " + oConfigMng.Config.DeviceFirmware + " {OK}");
                 }
                 catch (Exception er)
                 {
                     Dialogs.ErrorDialog("ERROR adding new device", er.ToString());
-                    cAppend("Added new device codename: " + oConfigMng.Config.DeviceCodenmae + "{ERROR} " + er);
-                    cAppend("Added new device channel: " + oConfigMng.Config.DeviceFirmware + "{ERROR} " + er);
+                    cAppend("Added new device codename: " + oConfigMng.Config.DeviceCodenmae + " {ERROR} " + er);
+                    cAppend("Added new device channel: " + oConfigMng.Config.DeviceFirmware + " {ERROR} " + er);
                 }
             }
             else
