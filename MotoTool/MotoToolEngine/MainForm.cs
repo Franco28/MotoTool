@@ -442,7 +442,7 @@ namespace Franco28Tool.Engine
             };
             timer.Elapsed += delegate
             {
-                AutoUpdater.Start("https://raw.githubusercontent.com/Franco28/MotoTool/master/MotoTool/Server/Update.xml");
+                AutoUpdater.Start("https://raw.githubusercontent.com/Franco28/MotoTool/master/Server/Update.xml");
             };
             timer.Start();
         }

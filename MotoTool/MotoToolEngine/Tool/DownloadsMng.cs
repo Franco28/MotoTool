@@ -13,8 +13,7 @@ namespace Franco28Tool.Engine
         public static string filepathname = "";
         public static string SAVEPath = "";
         public static string SAVEPathname = "";
-        // public static string xmlUrl = "https://mototoolengine.000webhostapp.com/MotoTool/Devices/";
-        public static string xmlUrl = "https://raw.githubusercontent.com/Franco28/MotoTool/master/MotoTool/Server/Devices/";
+        public static string xmlUrl = "https://raw.githubusercontent.com/Franco28/MotoTool/master/Server/Devices/";
         public static XmlTextReader reader = null;
 
         public static void TOOLDOWNLOAD(string serverpath, string serverpath2, string fchannelname)

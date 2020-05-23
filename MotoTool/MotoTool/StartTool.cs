@@ -8,9 +8,7 @@ namespace MotoTool
     public class StartTool
     {
 
-        //public static string xmlUrl = "https://mototoolengine.000webhostapp.com/MotoTool/Maintenance.xml";
-        public static string xmlUrl = "https://raw.githubusercontent.com/Franco28/MotoTool/master/MotoTool/Server/MotoTool/Maintenance.xml";
-
+        public static string xmlUrl = "https://raw.githubusercontent.com/Franco28/MotoTool/master/Server/Maintenance.xml";
         public static string Maintenanceok = "";
         public static XmlTextReader reader = null;
 
