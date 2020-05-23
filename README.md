@@ -73,7 +73,7 @@ _**All Tool actions will be saved in C:\adb\.settings\Logs. If you have any prob
 
 ## Downloads
 #### Download MotoTool v2.0.0.2 - Beta (22-05-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/v2.0.0.2) 
-#### Changelog * [Changelog](https://MotoToolEngine.000webhostapp.com/MotoTool/changelog.txt) 
+#### Changelog * [Changelog](https://raw.githubusercontent.com/Franco28/MotoTool/master/CHANGELOG) 
 
 
 #
