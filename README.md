@@ -20,7 +20,7 @@
 - Windows 8+ 64 Bits
 
 ## Install
-- Start the "MotoTool_v2.0.0.1_Setup.exe"
+- Start the "MotoTool_v2.0.0.2_Setup.exe"
 - The installer will create a desktop shortcut and in Windows app will create a folder with the tool inside. 
 - When the installer ends, will ask you if you want to isntall MotoDrivers. **Please if you don´t have _MotoDrivers installed_ or you don´t know, _dont uncheck the option_ and let the installer do it**
 
@@ -72,7 +72,7 @@ _**All Tool actions will be saved in C:\adb\.settings\Logs. If you have any prob
 
 
 ## Downloads
-#### Download MotoTool v2.0.0.1 - Beta (22-05-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/v2.0.0.1) 
+#### Download MotoTool v2.0.0.2 - Beta (22-05-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/v2.0.0.2) 
 #### Changelog * [Changelog](https://MotoToolEngine.000webhostapp.com/MotoTool/changelog.txt) 
 
 
