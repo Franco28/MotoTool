@@ -90,10 +90,10 @@ namespace Franco28Tool.Engine
             this.labelfilesize.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
             this.labelfilesize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.labelfilesize.HighEmphasis = true;
-            this.labelfilesize.Location = new System.Drawing.Point(664, 69);
+            this.labelfilesize.Location = new System.Drawing.Point(645, 69);
             this.labelfilesize.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelfilesize.Name = "labelfilesize";
-            this.labelfilesize.Size = new System.Drawing.Size(250, 25);
+            this.labelfilesize.Size = new System.Drawing.Size(278, 39);
             this.labelfilesize.TabIndex = 135;
             this.labelfilesize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelfilesize.UseAccent = true;
@@ -107,10 +107,10 @@ namespace Franco28Tool.Engine
             this.labelspeed.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
             this.labelspeed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.labelspeed.HighEmphasis = true;
-            this.labelspeed.Location = new System.Drawing.Point(371, 69);
+            this.labelspeed.Location = new System.Drawing.Point(336, 69);
             this.labelspeed.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelspeed.Name = "labelspeed";
-            this.labelspeed.Size = new System.Drawing.Size(250, 25);
+            this.labelspeed.Size = new System.Drawing.Size(303, 39);
             this.labelspeed.TabIndex = 134;
             this.labelspeed.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelspeed.UseAccent = true;
@@ -123,10 +123,10 @@ namespace Franco28Tool.Engine
             this.labelPerc.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
             this.labelPerc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.labelPerc.HighEmphasis = true;
-            this.labelPerc.Location = new System.Drawing.Point(80, 69);
+            this.labelPerc.Location = new System.Drawing.Point(81, 69);
             this.labelPerc.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelPerc.Name = "labelPerc";
-            this.labelPerc.Size = new System.Drawing.Size(249, 25);
+            this.labelPerc.Size = new System.Drawing.Size(249, 39);
             this.labelPerc.TabIndex = 133;
             this.labelPerc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelPerc.UseAccent = true;
@@ -149,7 +149,7 @@ namespace Franco28Tool.Engine
             this.ProgressBar1.BackColor = System.Drawing.Color.White;
             this.ProgressBar1.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.ProgressBar1.Depth = 0;
-            this.ProgressBar1.Location = new System.Drawing.Point(80, 104);
+            this.ProgressBar1.Location = new System.Drawing.Point(80, 111);
             this.ProgressBar1.MouseState = MaterialSkin.MouseState.HOVER;
             this.ProgressBar1.Name = "ProgressBar1";
             this.ProgressBar1.Size = new System.Drawing.Size(834, 5);
@@ -164,9 +164,9 @@ namespace Franco28Tool.Engine
             this.label7.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label7.Image = ((System.Drawing.Image)(resources.GetObject("label7.Image")));
-            this.label7.Location = new System.Drawing.Point(3, 87);
+            this.label7.Location = new System.Drawing.Point(3, 90);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(71, 22);
+            this.label7.Size = new System.Drawing.Size(71, 20);
             this.label7.TabIndex = 130;
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 

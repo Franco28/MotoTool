@@ -338,7 +338,7 @@ namespace Franco28Tool.Engine
         {
             oConfigMng.LoadConfig();
 
-            if (oConfigMng.Config.DeviceFirmware == "---" && oConfigMng.Config.DeviceFirmware == "")
+            if (oConfigMng.Config.DeviceFirmware == "")
             {
                 return;
             }
@@ -383,11 +383,12 @@ namespace Franco28Tool.Engine
             var dld = new DownloadUI();
             try
             {
+                oConfigMng.LoadConfig();
+                string vIn = oConfigMng.Config.DownloadFileSizeFirmware;
                 cAppend("FIRMWARE DOWNLOAD: Checking firmware files...");
-                if (File.Exists(firmwarezip) && oConfigMng.Config.FirmwareExtracted == "0")
+                if (File.Exists(firmwarezip) && oConfigMng.Config.FirmwareExtracted == "0" && vIn != "")
                 {
                     long length = new FileInfo(firmwarezip).Length;
-                    string vIn = oConfigMng.Config.DownloadFileSizeFirmware;
                     long vOut = Convert.ToInt64(vIn);
                     if (length == vOut)
                     {  
@@ -412,7 +413,7 @@ namespace Franco28Tool.Engine
                     else
                     {
                         Strings.MSGBOXFileCorrupted();
-                        oConfigMng.Config.DownloadFileSizeFirmware = "";
+                        oConfigMng.Config.DownloadFileSizeFirmware = "0";
                         cAppend(@"FIRMWARE DOWNLOAD: File is corrupted \:  " + DownloadsMng.SAVEPathname);
                         File.Delete(DownloadsMng.SAVEPathname);
                         oConfigMng.Config.DeviceFirmwareInfo = DownloadsMng.filename;
@@ -431,7 +432,7 @@ namespace Franco28Tool.Engine
             catch (Exception er)
             {
                 Logs.DebugErrorLogs(er);
-                Dialogs.ErrorDialog("ERROR: Unzip File", "Error: " + er);
+                Dialogs.ErrorDialog("ERROR: Verifying file", "Error: " + er);
                 return;
             }
 

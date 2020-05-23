@@ -47,7 +47,7 @@ namespace Franco28Tool.Engine
             this.recoverylabel.Location = new System.Drawing.Point(2, 67);
             this.recoverylabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.recoverylabel.Name = "recoverylabel";
-            this.recoverylabel.Size = new System.Drawing.Size(69, 135);
+            this.recoverylabel.Size = new System.Drawing.Size(69, 125);
             this.recoverylabel.TabIndex = 53;
             this.recoverylabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -61,7 +61,7 @@ namespace Franco28Tool.Engine
             this.OK.DrawShadows = true;
             this.OK.HighEmphasis = true;
             this.OK.Icon = null;
-            this.OK.Location = new System.Drawing.Point(489, 208);
+            this.OK.Location = new System.Drawing.Point(489, 198);
             this.OK.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.OK.MouseState = MaterialSkin.MouseState.HOVER;
             this.OK.Name = "OK";
@@ -85,7 +85,7 @@ namespace Franco28Tool.Engine
             this.label1.Location = new System.Drawing.Point(76, 67);
             this.label1.MouseState = MaterialSkin.MouseState.HOVER;
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(594, 135);
+            this.label1.Size = new System.Drawing.Size(581, 125);
             this.label1.TabIndex = 64;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 

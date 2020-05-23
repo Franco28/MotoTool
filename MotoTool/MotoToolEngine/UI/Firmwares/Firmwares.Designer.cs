@@ -144,9 +144,9 @@ namespace Franco28Tool.Engine
             // panelDownload
             // 
             this.panelDownload.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelDownload.Location = new System.Drawing.Point(0, 403);
+            this.panelDownload.Location = new System.Drawing.Point(0, 400);
             this.panelDownload.Name = "panelDownload";
-            this.panelDownload.Size = new System.Drawing.Size(926, 112);
+            this.panelDownload.Size = new System.Drawing.Size(926, 115);
             this.panelDownload.TabIndex = 135;
             // 
             // materialTabSelector3
@@ -161,12 +161,13 @@ namespace Franco28Tool.Engine
             this.materialTabSelector3.Margin = new System.Windows.Forms.Padding(0);
             this.materialTabSelector3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialTabSelector3.Name = "materialTabSelector3";
-            this.materialTabSelector3.Size = new System.Drawing.Size(926, 33);
+            this.materialTabSelector3.Size = new System.Drawing.Size(926, 22);
             this.materialTabSelector3.TabIndex = 133;
             // 
             // materialTabControl4
             // 
-            this.materialTabControl4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.materialTabControl4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.materialTabControl4.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.materialTabControl4.Controls.Add(this.tabPageAM);
@@ -174,12 +175,12 @@ namespace Franco28Tool.Engine
             this.materialTabControl4.Controls.Add(this.tabPageTEF);
             this.materialTabControl4.Controls.Add(this.tabPageOTHERS);
             this.materialTabControl4.Depth = 0;
-            this.materialTabControl4.Location = new System.Drawing.Point(0, 72);
+            this.materialTabControl4.Location = new System.Drawing.Point(0, 61);
             this.materialTabControl4.Margin = new System.Windows.Forms.Padding(0);
             this.materialTabControl4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialTabControl4.Name = "materialTabControl4";
             this.materialTabControl4.SelectedIndex = 0;
-            this.materialTabControl4.Size = new System.Drawing.Size(926, 329);
+            this.materialTabControl4.Size = new System.Drawing.Size(926, 336);
             this.materialTabControl4.TabIndex = 132;
             // 
             // tabPageAM
@@ -375,7 +376,7 @@ namespace Franco28Tool.Engine
             this.tabPageRET.Location = new System.Drawing.Point(4, 25);
             this.tabPageRET.Name = "tabPageRET";
             this.tabPageRET.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRET.Size = new System.Drawing.Size(918, 309);
+            this.tabPageRET.Size = new System.Drawing.Size(918, 307);
             this.tabPageRET.TabIndex = 1;
             this.tabPageRET.Text = "RET";
             // 
@@ -698,7 +699,7 @@ namespace Franco28Tool.Engine
             this.tabPageTEF.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tabPageTEF.Location = new System.Drawing.Point(4, 25);
             this.tabPageTEF.Name = "tabPageTEF";
-            this.tabPageTEF.Size = new System.Drawing.Size(918, 309);
+            this.tabPageTEF.Size = new System.Drawing.Size(918, 300);
             this.tabPageTEF.TabIndex = 2;
             this.tabPageTEF.Text = "TEF";
             this.tabPageTEF.UseVisualStyleBackColor = true;
@@ -861,7 +862,7 @@ namespace Franco28Tool.Engine
             this.tabPageOTHERS.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tabPageOTHERS.Location = new System.Drawing.Point(4, 25);
             this.tabPageOTHERS.Name = "tabPageOTHERS";
-            this.tabPageOTHERS.Size = new System.Drawing.Size(918, 309);
+            this.tabPageOTHERS.Size = new System.Drawing.Size(918, 297);
             this.tabPageOTHERS.TabIndex = 3;
             this.tabPageOTHERS.Text = "Others";
             this.tabPageOTHERS.UseVisualStyleBackColor = true;

@@ -99,19 +99,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>al6olVLI5HMABLT2j3d8YNoX9gw/3DMA82wXtLItR1o=</dsig:DigestValue>
+        <dsig:DigestValue>7L6YRqeUVMLxxpwYwNiteQkgyDyY/I+ktTEYXU7citQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MotoToolEngine.dll" size="6287872">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MotoToolEngine.dll" size="6288384">
       <assemblyIdentity name="MotoToolEngine" version="2.0.0.3" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>x8VyLkX1zMSBCnWNgstxDeFzpC1gVzY4Zb74ifHqtwo=</dsig:DigestValue>
+        <dsig:DigestValue>woo14a7SchYG0517nI/220sIgZ/MqGTYAQayd7FFwsA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

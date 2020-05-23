@@ -134,25 +134,25 @@ namespace Franco28Tool.Engine
                 oConfigMng.LoadConfig();
                 if (DownloadsMng.filename == oConfigMng.Config.DeviceFirmwareInfo)
                 {
-                    oConfigMng.Config.DownloadFileSizeFirmware = e.TotalBytesToReceive.ToString("");
+                    oConfigMng.Config.DownloadFileSizeFirmware = e.TotalBytesToReceive.ToString();
                     oConfigMng.SaveConfig();
                 }
 
                 if (DownloadsMng.filename == oConfigMng.Config.DeviceTWPRInfo)
                 {
-                    oConfigMng.Config.DownloadFileSizeTWRP = e.TotalBytesToReceive.ToString("");
+                    oConfigMng.Config.DownloadFileSizeTWRP = e.TotalBytesToReceive.ToString();
                     oConfigMng.SaveConfig();
                 }
 
                 if (DownloadsMng.filename == oConfigMng.Config.DownloadFileSizeTWRPPermanent)
                 {
-                    oConfigMng.Config.DownloadFileSizeTWRPPermanent = e.TotalBytesToReceive.ToString("");
+                    oConfigMng.Config.DownloadFileSizeTWRPPermanent = e.TotalBytesToReceive.ToString();
                     oConfigMng.SaveConfig();
                 }
 
                 if (DownloadsMng.filename == oConfigMng.Config.DeviceBlankFlash)
                 {
-                    oConfigMng.Config.DownloadFileSizeBlankFlash = e.TotalBytesToReceive.ToString("");
+                    oConfigMng.Config.DownloadFileSizeBlankFlash = e.TotalBytesToReceive.ToString();
                     oConfigMng.SaveConfig();
                 }
             }
@@ -160,6 +160,7 @@ namespace Franco28Tool.Engine
             {
                 Logs.DebugErrorLogs(er);
                 Dialogs.ErrorDialog("ERROR: Saving file sizes", "Error: " + er);
+                return;
             }
         }
 
@@ -172,37 +173,10 @@ namespace Franco28Tool.Engine
                 materialButton10.Enabled = false;
                 materialButton23.Enabled = true;
                 Dialogs.InfoDialog(DownloadsMng.filename, "Download has been canceled");
-                try
-                {
-                    oConfigMng.LoadConfig();
-                    if (DownloadsMng.filename == oConfigMng.Config.DeviceFirmwareInfo)
-                    {
-                        oConfigMng.Config.DownloadFileSizeFirmware = "";
-                        oConfigMng.SaveConfig();
-                    }
-
-                    if (DownloadsMng.filename == oConfigMng.Config.DeviceTWPRInfo)
-                    {
-                        oConfigMng.Config.DownloadFileSizeTWRP = "";
-                        oConfigMng.SaveConfig();
-                    }
-
-                    if (DownloadsMng.filename == oConfigMng.Config.DownloadFileSizeTWRPPermanent)
-                    {
-                        oConfigMng.Config.DownloadFileSizeTWRPPermanent = "";
-                        oConfigMng.SaveConfig();
-                    }
-                }
-                catch (Exception er)
-                {
-                    Logs.DebugErrorLogs(er);
-                    Dialogs.ErrorDialog("ERROR: Removing file sizes", "Error: " + er);
-                }
                 return;
             }
 
             sw.Reset();
-            cAppend("Download completed!");        
             ProgressBar1.Value = 0;
 
             try
@@ -275,7 +249,30 @@ namespace Franco28Tool.Engine
                 }
                 else
                 {
-                    closeform();
+                    oConfigMng.LoadConfig();
+                    cAppend(DownloadsMng.filename + " Info" + "\nDownload complete, " + DownloadsMng.filename + "is located at: " + Environment.NewLine + "'" + DownloadsMng.SAVEPath + "'.");
+                    if (this.webClient != null)
+                    {
+                        if (oConfigMng.Config.Autosavelogs == "true")
+                        {
+                            cAppend("EXIT: Saving Download logs...");
+                            try
+                            {
+                                string filePath = @"C:\adb\.settings\Logs\DownloadLogs.txt";
+                                cAppend("EXIT: Saving Download logs... {OK}");
+                                console.SaveFile(filePath, RichTextBoxStreamType.PlainText);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logs.DebugErrorLogs(ex);
+                                cAppend("EXIT: Saving Download logs... {ERROR}");
+                                Dialogs.ErrorDialog("An error has occured while attempting to save the output...", ex.ToString());
+                            }
+                        }
+                        KillAsync();
+                    }
+                    Dialogs.InfoDialog(DownloadsMng.filename + " Info", "Download complete, " + DownloadsMng.filename + "is located at: " + Environment.NewLine + "'" + DownloadsMng.SAVEPath + "'.");
+                    this.Dispose();
                     return;
                 }
             }
@@ -283,6 +280,7 @@ namespace Franco28Tool.Engine
             {
                 Logs.DebugErrorLogs(er);
                 Dialogs.ErrorDialog("ERROR: Verify ZIP files", "Error: " + er);
+                return;
             }
         }
 

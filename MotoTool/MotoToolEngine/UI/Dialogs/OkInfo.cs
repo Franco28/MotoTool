@@ -2,6 +2,7 @@
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
+using System.Drawing;
 using System.Media;
 using System.Windows.Forms;
 
@@ -39,6 +40,12 @@ namespace Franco28Tool.Engine
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             }
+            Graphics gfx = this.label1.CreateGraphics();
+            Font stringFont = new Font("Roboto Medium", 20, FontStyle.Bold);
+            SizeF stringSize = new SizeF();
+            stringSize = gfx.MeasureString(this.label1.Text, stringFont);
+            this.label1.Size = new Size((int)stringSize.Width, (int)stringSize.Height);
+            this.label1.TextAlign = ContentAlignment.MiddleLeft;
         }
     }
 }
