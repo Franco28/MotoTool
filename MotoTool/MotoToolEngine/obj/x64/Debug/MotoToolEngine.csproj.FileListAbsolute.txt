@@ -28,3 +28,4 @@ C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoToolEngine\obj\x64\Debug\M
 C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoToolEngine\obj\x64\Debug\MotoToolEngine.csproj.CopyComplete
 C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoToolEngine\obj\x64\Debug\MotoToolEngine.dll
 C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoToolEngine\obj\x64\Debug\MotoToolEngine.pdb
+C:\Users\gabri\Documents\GitHub\MotoTool\MotoTool\MotoToolEngine\obj\x64\Debug\MotoToolEngine.csprojAssemblyReference.cache

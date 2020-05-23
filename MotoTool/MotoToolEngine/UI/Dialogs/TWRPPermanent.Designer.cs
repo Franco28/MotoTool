@@ -47,7 +47,7 @@
             this.recoverylabel.Location = new System.Drawing.Point(2, 65);
             this.recoverylabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.recoverylabel.Name = "recoverylabel";
-            this.recoverylabel.Size = new System.Drawing.Size(99, 139);
+            this.recoverylabel.Size = new System.Drawing.Size(99, 85);
             this.recoverylabel.TabIndex = 61;
             this.recoverylabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 

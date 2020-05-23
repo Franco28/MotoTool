@@ -3,6 +3,14 @@ CHANGELOG
 ----------------
 
 --------------
+v2.0.0.3
+--------------
+- Improve Tool Stability
+- Fixed on dialogs icon sizes
+- Changed the order to load tool
+- Added new text box to indentify device codename on main tool
+
+--------------
 v2.0.0.2
 --------------
 - Improve Tool Stability

@@ -603,6 +603,16 @@ namespace Franco28Tool.Engine.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_x_298889 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_x_298889", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_consola_16 {
             get {
                 object obj = ResourceManager.GetObject("icons8_consola_16", resourceCulture);

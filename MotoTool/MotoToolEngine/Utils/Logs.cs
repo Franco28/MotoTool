@@ -6,7 +6,6 @@ namespace Franco28Tool.Engine
 {
     public class Logs
     {
-
         public static void DebugErrorLogs(Exception er)
         {
             string filePath = @"C:\adb\.settings\Logs\error.txt";

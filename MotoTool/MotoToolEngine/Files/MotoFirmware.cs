@@ -41,6 +41,7 @@ namespace Franco28Tool.Engine
                 {
                     Logs.DebugErrorLogs(er);
                     Dialogs.ErrorDialog("ERROR: Creating Folders", "Error: " + er);
+                    return;
                 }
             }
         }
@@ -55,6 +56,7 @@ namespace Franco28Tool.Engine
             {
                 Logs.DebugErrorLogs(er);
                 Dialogs.ErrorDialog("ERROR: Open Folder", "Error: " + er);
+                return;
             }
         }
 

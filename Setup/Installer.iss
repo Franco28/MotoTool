@@ -3,7 +3,7 @@
 
 [Setup]
 AppName=MotoTool
-AppVersion=2.0.0.2
+AppVersion=2.0.0.3
 ArchitecturesAllowed=x64
 ArchitecturesInstallIn64BitMode=x64
 AppContact=Support
@@ -20,9 +20,9 @@ InternalCompressLevel=ultra
 InfoBeforeFile=changelog.txt
 LicenseFile=license.txt
 OutputDir=C:\adb\
-OutputBaseFilename=MotoTool_v2.0.0.2_Setup
+OutputBaseFilename=MotoTool_v2.0.0.3_Setup
 SolidCompression=yes
-TouchDate=2020-05-22
+TouchDate=2020-05-23
 UninstallDisplayIcon={app}\moto.ico
 UserInfoPage=no
 WizardStyle=modern

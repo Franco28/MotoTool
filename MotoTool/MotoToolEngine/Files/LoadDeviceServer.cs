@@ -81,6 +81,7 @@ namespace Franco28Tool.Engine
                     {
                         Logs.DebugErrorLogs(ex);
                         Dialogs.ErrorDialog(Strings.DeviceServerErrorTitle, ex.Message);
+                        return;
                     }
                     finally
                     {
@@ -91,11 +92,13 @@ namespace Franco28Tool.Engine
                 else
                 {
                     Dialogs.ErrorDialog("SERVER IS DOWN", "Please MotoTool will be back when server returns back!");
+                    return;
                 }
             }
             else
             {
                 Strings.MSGBOXServerNetworkLost();
+                return;
             }
         }
     }

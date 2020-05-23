@@ -9,6 +9,7 @@ namespace MotoTool
 {
     static class Program
     {
+        private static SettingsMng oConfigMng = new SettingsMng();
 
         [Serializable]
         public class MyException : Exception
@@ -20,8 +21,6 @@ namespace MotoTool
               System.Runtime.Serialization.SerializationInfo info,
               System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
         }
-
-        private static SettingsMng oConfigMng = new SettingsMng();
 
         [STAThread]
         static void Main()
@@ -51,17 +50,20 @@ namespace MotoTool
                 Logs.DebugErrorLogs(er);
                 Dialogs.ErrorDialog(@"FATAL ERROR: You can see logs on C:\adb\.settings\logs\", "Error: " + er);
                 PanicKill();
+                return;
             }
         }
 
         public static void PanicKill()
         {
+            Application.ExitThread();
             oConfigMng.SaveConfig();
             ADB.ConnectionMonitor.Stop();
             ADB.Stop();
+            ADB.Stop(true);
+            Fastboot.ForceStop();
             Fastboot.Dispose();
             ADB.Dispose();
-            Application.ExitThread();
             Application.Exit();
         }
     }

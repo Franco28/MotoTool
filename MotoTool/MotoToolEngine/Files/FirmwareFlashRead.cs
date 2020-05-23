@@ -262,6 +262,7 @@ namespace Franco28Tool.Engine
             {
                 Logs.DebugErrorLogs(ex);
                 Dialogs.ErrorDialog("Firmware Read: ERROR", ex.Message);
+                return;
             }
             finally
             {
@@ -395,6 +396,7 @@ namespace Franco28Tool.Engine
             {
                 Logs.DebugErrorLogs(ex);
                 Dialogs.ErrorDialog("Firmware Read: ERROR", ex.Message);
+                return;
             }
             finally
             {

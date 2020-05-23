@@ -161,7 +161,7 @@ namespace Franco28Tool.Engine
             this.labelDebugLogo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.labelDebugLogo.Location = new System.Drawing.Point(3, 36);
             this.labelDebugLogo.Name = "labelDebugLogo";
-            this.labelDebugLogo.Size = new System.Drawing.Size(48, 202);
+            this.labelDebugLogo.Size = new System.Drawing.Size(48, 213);
             this.labelDebugLogo.TabIndex = 88;
             this.labelDebugLogo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 

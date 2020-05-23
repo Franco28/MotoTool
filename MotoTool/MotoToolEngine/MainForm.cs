@@ -35,17 +35,17 @@ namespace Franco28Tool.Engine
 
         public MainForm()
         {
+            oConfigMng.LoadConfig();
+            oConfigMng.Config.ToolVersion = ToolVer;
+            this.Text = "MotoTool v" + oConfigMng.Config.ToolVersion;
             Control.CheckForIllegalCrossThreadCalls = false;
             materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.EnforceBackcolorOnAllComponents = true;
             materialSkinManager.AddFormToManage(this);
             InitializeComponent();
+            oConfigMng.Config.ToolCompiled = Utils.GetLinkerDateTime(Assembly.GetEntryAssembly(), null).ToString();
             InitializeRAMCounter();
             InitialiseCPUCounter();
-            oConfigMng.LoadConfig();
-            oConfigMng.Config.ToolVersion = ToolVer;
-            this.Text = "MotoTool v" + oConfigMng.Config.ToolVersion;
-            oConfigMng.Config.ToolCompiled = Utils.GetLinkerDateTime(Assembly.GetEntryAssembly(), null).ToString();
             cAppend("STARTING: Checking MotoTool updates.");
             cehck4updates();
             cAppend("STARTING: Loading tool... Please wait...");
@@ -70,11 +70,11 @@ namespace Franco28Tool.Engine
                         int ExitCode = proc.ExitCode;
                     }
                 }
-                cAppend("STARTING: Checking MotoDrivers... OK");
+                cAppend("STARTING: Checking MotoDrivers... {OK}");
             }
             else
             {
-                cAppend("STARTING: Checking MotoDrivers... ERROR");
+                cAppend("STARTING: Checking MotoDrivers... {ERROR}");
                 CheckMotoDrivers.MotoDrivers();
             }
             updateColorLoad();
@@ -99,6 +99,10 @@ namespace Franco28Tool.Engine
             {
                 ADB.Start();
             }
+            if (Fastboot.IsStarted)
+            {
+                Fastboot.ForceStop();
+            }
         }
 
         public void cAppend(string message)
@@ -113,10 +117,6 @@ namespace Franco28Tool.Engine
         private async void MainForm_LoadAsync(object sender, EventArgs e)
         {
             oConfigMng.LoadConfig();
-            cAppend("STARTING: Deploying adb & fastboot...");
-            await Task.Run(() => CheckandDeploy());
-            await Task.Run(() => DeviceDetectionService());
-            cAppend("STARTING: Deploying adb & fastboot... {OK}");
             cAppend("STARTING: Checking MotoTool ver: " + ToolVer);
             if (oConfigMng.Config.ToolTheme == null || oConfigMng.Config.ToolTheme == "")
             {
@@ -186,11 +186,15 @@ namespace Franco28Tool.Engine
             {
                 AutoSaveLogs = materialSwitchAutoSaveLogs.Checked = false;
             }
-            cAppend("STARTING: Applying MotoTool settings... {OK}");
             oConfigMng.SaveConfig();
+            updateTimer_Tick();
+            cAppend("STARTING: Applying MotoTool settings... {OK}");
+            cAppend("STARTING: Deploying adb & fastboot, please wait until this finish...");
+            await Task.Run(() => CheckandDeploy());
+            await Task.Run(() => DeviceDetectionService());
+            cAppend("STARTING: Deploying adb & fastboot... {OK}");
             cAppend("-------------------------------------------------");
             cAppend("MotoTool v" + ToolVer + " was loaded!");
-            updateTimer_Tick();
         }
 
         private void InitialiseCPUCounter()
@@ -228,7 +232,8 @@ namespace Franco28Tool.Engine
             TextBoxDebug.Text = "Remember to always Backup your efs and persist folders! How? Click me!";
             if (oConfigMng.Config.DeviceCodenmae == "" || oConfigMng.Config.DeviceFirmware == "")
             {
-                TextBoxDebugInfo.Text = "Device Channel: ---";
+                TextBoxDebugInfo.Text = "Channel: ---";
+                TextBoxDebugInfo2.Text = "Device: ---";
                 materialButtonBlankFlash.Enabled = false;
                 materialButtonFlashLogo.Enabled = false;
                 materialButtonFlashTWRP.Enabled = false;
@@ -243,7 +248,8 @@ namespace Franco28Tool.Engine
             else
             {
                 this.Text = "MotoTool v" + oConfigMng.Config.ToolVersion + " - " + oConfigMng.Config.DeviceCodenmae + " - " + oConfigMng.Config.DeviceFirmware;
-                TextBoxDebugInfo.Text = "Device Channel: " + oConfigMng.Config.DeviceFirmware;
+                TextBoxDebugInfo.Text = "Channel: " + oConfigMng.Config.DeviceFirmware;
+                TextBoxDebugInfo2.Text = "Device: " + oConfigMng.Config.DeviceCodenmae;
                 materialButtonBlankFlash.Enabled = true;
                 materialButtonFlashLogo.Enabled = true;
                 materialButtonFlashTWRP.Enabled = true;

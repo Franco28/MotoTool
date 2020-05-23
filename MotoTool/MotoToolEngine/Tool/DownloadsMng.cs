@@ -65,6 +65,7 @@ namespace Franco28Tool.Engine
                 {
                     Logs.DebugErrorLogs(ex);
                     Dialogs.ErrorDialog("Download Error", ex.Message);
+                    return;
                 }
                 finally
                 {
@@ -75,6 +76,7 @@ namespace Franco28Tool.Engine
             else
             {
                 Dialogs.ErrorDialog("Network Lost", "Network lost... Please check your internet connection!");
+                return;
             }
         }
     }

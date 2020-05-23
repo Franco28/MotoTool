@@ -29,6 +29,41 @@ namespace Franco28Tool.Engine
             });
         }
 
+        public void DeviceCompatible()
+        {
+            oConfigMng.LoadConfig();
+            string dc = textBoxCodename.Text;
+            if (dc.Contains("doha") == true ||
+                dc.Contains("evert") == true ||
+                dc.Contains("lake") == true ||
+                dc.Contains("lima") == true ||
+                dc.Contains("river") == true ||
+                dc.Contains("potter") == true ||
+                dc.Contains("ocean") == true ||
+                dc.Contains("sanders") == true ||
+                dc.Contains("sofiar") == true ||
+                dc.Contains("sofia") == true ||
+                dc.Contains("beckham") == true)
+            {
+                oConfigMng.Config.DeviceCodenmae = textBoxCodename.Text.ToLower().Trim();
+                oConfigMng.Config.DeviceFirmware = textBoxChannel.Text.ToUpper().Trim();
+                cAppend("Added new device codename: " + oConfigMng.Config.DeviceCodenmae + " {OK}");
+                cAppend("Added new device channel: " + oConfigMng.Config.DeviceFirmware + " {OK}");
+                oConfigMng.SaveConfig();
+                Dialogs.InfoDialog("Device " + textBoxCodename.Text, "Added!");
+                return;
+            }
+            else
+            {
+                oConfigMng.Config.DeviceCodenmae = "";
+                oConfigMng.Config.DeviceFirmware = "";
+                Dialogs.ErrorDialog("Device " + textBoxCodename.Text, "Not compatible!");
+                cAppend("Added new device codename: " + textBoxCodename.Text + " {ERROR} ");
+                cAppend("Added new device channel: " + textBoxChannel.Text + " {ERROR} ");
+                oConfigMng.SaveConfig();
+            }
+        }
+
         private void AddNewDevice_Load(object sender, EventArgs e)
         {
             oConfigMng.LoadConfig();
@@ -49,20 +84,14 @@ namespace Franco28Tool.Engine
             {
                 try
                 {
-                    oConfigMng.LoadConfig();
-                    oConfigMng.Config.DeviceCodenmae = textBoxCodename.Text.ToLower().Trim();
-                    oConfigMng.Config.DeviceFirmware = textBoxChannel.Text.ToUpper().Trim();
-                    cAppend("Added new device codename: " + oConfigMng.Config.DeviceCodenmae);
-                    cAppend("Added new device channel: " + oConfigMng.Config.DeviceFirmware);
-                    oConfigMng.SaveConfig();
-                    cAppend("Added new device codename: " + oConfigMng.Config.DeviceCodenmae + " {OK}");
-                    cAppend("Added new device channel: " + oConfigMng.Config.DeviceFirmware + " {OK}");
+                    DeviceCompatible();
                 }
                 catch (Exception er)
                 {
                     Dialogs.ErrorDialog("ERROR adding new device", er.ToString());
                     cAppend("Added new device codename: " + oConfigMng.Config.DeviceCodenmae + " {ERROR} " + er);
                     cAppend("Added new device channel: " + oConfigMng.Config.DeviceFirmware + " {ERROR} " + er);
+                    return;
                 }
             }
             else

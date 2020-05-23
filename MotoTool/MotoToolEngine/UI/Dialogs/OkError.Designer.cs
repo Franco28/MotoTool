@@ -47,7 +47,7 @@ namespace Franco28Tool.Engine
             this.recoverylabel.Location = new System.Drawing.Point(2, 67);
             this.recoverylabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.recoverylabel.Name = "recoverylabel";
-            this.recoverylabel.Size = new System.Drawing.Size(72, 173);
+            this.recoverylabel.Size = new System.Drawing.Size(72, 136);
             this.recoverylabel.TabIndex = 50;
             this.recoverylabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -61,7 +61,7 @@ namespace Franco28Tool.Engine
             this.OK.DrawShadows = true;
             this.OK.HighEmphasis = true;
             this.OK.Icon = null;
-            this.OK.Location = new System.Drawing.Point(490, 199);
+            this.OK.Location = new System.Drawing.Point(489, 209);
             this.OK.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.OK.MouseState = MaterialSkin.MouseState.HOVER;
             this.OK.Name = "OK";
@@ -77,6 +77,7 @@ namespace Franco28Tool.Engine
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Depth = 0;
             this.label1.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.label1.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
@@ -84,7 +85,7 @@ namespace Franco28Tool.Engine
             this.label1.Location = new System.Drawing.Point(79, 67);
             this.label1.MouseState = MaterialSkin.MouseState.HOVER;
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(590, 126);
+            this.label1.Size = new System.Drawing.Size(590, 136);
             this.label1.TabIndex = 64;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 

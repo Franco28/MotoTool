@@ -49,8 +49,9 @@ namespace MotoTool
                     }
                     catch (Exception ex)
                     {
-                        Dialogs.ErrorDialog("Starting MotoTool server: ERROR", ex.Message);
                         Logs.DebugErrorLogs(ex);
+                        Dialogs.ErrorDialog("Starting MotoTool server: ERROR", ex.Message);
+                        return;
                     }
                     finally
                     {
@@ -61,11 +62,13 @@ namespace MotoTool
                 else
                 {
                     Dialogs.ErrorDialog("SERVER IS DOWN", "Please MotoTool will be back when server returns back!");
+                    return;
                 }
             }
             else
             {
                 Strings.MSGBOXServerNetworkLost();
+                return;
             }
         }
     }

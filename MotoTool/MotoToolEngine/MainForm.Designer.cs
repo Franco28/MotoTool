@@ -106,6 +106,7 @@ namespace Franco28Tool.Engine
             this.materialButtonChangeTheme = new MaterialSkin.Controls.MaterialButton();
             this.materialSwitchDrawerHighlightWithAccent = new MaterialSkin.Controls.MaterialSwitch();
             this.materialLabel27 = new MaterialSkin.Controls.MaterialLabel();
+            this.TextBoxDebugInfo2 = new MaterialSkin.Controls.MaterialLabel();
             this.panelChild.SuspendLayout();
             this.materialTabControl1.SuspendLayout();
             this.tabPageHOME.SuspendLayout();
@@ -492,6 +493,7 @@ namespace Franco28Tool.Engine
             // 
             this.panelDebug.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelDebug.BackColor = System.Drawing.Color.White;
+            this.panelDebug.Controls.Add(this.TextBoxDebugInfo2);
             this.panelDebug.Controls.Add(this.TextBoxDebug);
             this.panelDebug.Controls.Add(this.TextBoxDebugInfo);
             this.panelDebug.Controls.Add(this.labelFreeSpace);
@@ -527,7 +529,7 @@ namespace Franco28Tool.Engine
             this.TextBoxDebugInfo.Location = new System.Drawing.Point(536, 3);
             this.TextBoxDebugInfo.MouseState = MaterialSkin.MouseState.HOVER;
             this.TextBoxDebugInfo.Name = "TextBoxDebugInfo";
-            this.TextBoxDebugInfo.Size = new System.Drawing.Size(476, 46);
+            this.TextBoxDebugInfo.Size = new System.Drawing.Size(288, 46);
             this.TextBoxDebugInfo.TabIndex = 79;
             this.TextBoxDebugInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -1385,6 +1387,19 @@ namespace Franco28Tool.Engine
             this.materialLabel27.TabIndex = 62;
             this.materialLabel27.Text = "Tool Settings";
             // 
+            // TextBoxDebugInfo2
+            // 
+            this.TextBoxDebugInfo2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TextBoxDebugInfo2.Depth = 0;
+            this.TextBoxDebugInfo2.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.TextBoxDebugInfo2.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
+            this.TextBoxDebugInfo2.Location = new System.Drawing.Point(830, 3);
+            this.TextBoxDebugInfo2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.TextBoxDebugInfo2.Name = "TextBoxDebugInfo2";
+            this.TextBoxDebugInfo2.Size = new System.Drawing.Size(182, 46);
+            this.TextBoxDebugInfo2.TabIndex = 81;
+            this.TextBoxDebugInfo2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1507,5 +1522,6 @@ namespace Franco28Tool.Engine
         private MaterialLabel materialLabel15;
         private MaterialSwitch materialSwitchAutoSaveLogs;
         private MaterialButton materialButtonAddNewDeviceManual;
+        private MaterialLabel TextBoxDebugInfo2;
     }
 }
