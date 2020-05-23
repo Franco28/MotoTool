@@ -1,20 +1,16 @@
 ; -- MotoTool-Installer.iss  (C) 2019 - 2020 --
 ; -- This is only for Motorola Moto Devices  --
 
-#define appname "MotoTool"
-#define appver "2.0.0.1"
-#define appexename "MotoTool.exe"
-
 [Setup]
 AppName=MotoTool
-AppVersion=2.0.0.1
+AppVersion=2.0.0.2
 ArchitecturesAllowed=x64
 ArchitecturesInstallIn64BitMode=x64
 AppContact=Support
 AppCopyright=Copyright (C) 2019 - 2020 Franco28.
 AppComments=A NET. Tool for Motorola Moto Devices 
 AppPublisher=Franco28
-AppPublisherURL=https://github.com/Franco28/MotoTool#getting-started
+AppPublisherURL=https://github.com/Franco28/MotoTool#getting-started-read-all-please
 ChangesAssociations=yes
 Compression=lzma2/ultra64
 CompressionThreads=2
@@ -24,7 +20,7 @@ InternalCompressLevel=ultra
 InfoBeforeFile=changelog.txt
 LicenseFile=license.txt
 OutputDir=C:\adb\
-OutputBaseFilename=MotoTool_v2.0.0.1_Setup
+OutputBaseFilename=MotoTool_v2.0.0.2_Setup
 SolidCompression=yes
 TouchDate=2020-05-22
 UninstallDisplayIcon={app}\moto.ico
@@ -73,4 +69,4 @@ procedure AfterInstall();
 begin
   DeleteFile(ExpandConstant('{app}\MotorolaDeviceManager_2.5.4.exe'));
   DeleteFile(ExpandConstant('{app}\remove.bat'));
-end;
+end;  

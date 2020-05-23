@@ -2,7 +2,6 @@
 using AutoUpdaterDotNET;
 using MaterialSkin;
 using MaterialSkin.Controls;
-using AndroidCtrl.ADB;
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -11,11 +10,13 @@ using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using AndroidCtrl;
 using AndroidCtrl.Fastboot;
-using System.Collections.Generic;
+using AndroidCtrl.ADB;
 using AndroidCtrl.Tools;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace Franco28Tool.Engine
 {
@@ -232,6 +233,12 @@ namespace Franco28Tool.Engine
                 materialButtonFlashLogo.Enabled = false;
                 materialButtonFlashTWRP.Enabled = false;
                 materialButtonBootTWRP.Enabled = false;
+                materialButtonRebootBootloader.Enabled = false;
+                materialButtonRebootRecovery.Enabled = false;
+                materialButtonBlankFlash.Enabled = false;
+                materialButtonFlashLogo.Enabled = false;
+                materialButtonUnlock.Enabled = false;
+                materialButtonLock.Enabled = false;
             }           
             else
             {
@@ -241,6 +248,12 @@ namespace Franco28Tool.Engine
                 materialButtonFlashLogo.Enabled = true;
                 materialButtonFlashTWRP.Enabled = true;
                 materialButtonBootTWRP.Enabled = true;
+                materialButtonRebootBootloader.Enabled = true;
+                materialButtonRebootRecovery.Enabled = true;
+                materialButtonBlankFlash.Enabled = true;
+                materialButtonFlashLogo.Enabled = true;
+                materialButtonUnlock.Enabled = true;
+                materialButtonLock.Enabled = true;
                 DeviceCompatible();
             }
         }
@@ -429,7 +442,7 @@ namespace Franco28Tool.Engine
             };
             timer.Elapsed += delegate
             {
-                AutoUpdater.Start("https://mototoolengine.000webhostapp.com/MotoTool/Update.xml");
+                AutoUpdater.Start("https://raw.githubusercontent.com/Franco28/MotoTool/master/MotoTool/Server/Update.xml");
             };
             timer.Start();
         }
@@ -1234,20 +1247,22 @@ namespace Franco28Tool.Engine
             KillWhenExit();
         }
 
-        public async void KillWhenExit()
+        public void KillWhenExit()
         {
             cAppend("EXIT: Stopping adb, fastboot and callback monitor...");
+            ADB.ConnectionMonitor.Stop(true);
+            ADB.ConnectionMonitor.Stop();
+            ADB.ConnectionMonitor.Callback -= ConnectionMonitorCallback;
             Application.ExitThread();
+            cAppend("EXIT: Stopping callback monitor... {OK}");
             ADB.Stop();
             ADB.Stop(true);
             ADB.Dispose();
             cAppend("EXIT: Stopping adb... {OK}");
-            ADB.ConnectionMonitor.Stop();
-            ADB.ConnectionMonitor.Callback -= ConnectionMonitorCallback;
-            cAppend("EXIT: Stopping callback monitor... {OK}");
             Fastboot.ForceStop();
             Fastboot.Dispose();
             cAppend("EXIT: Stopping fastboot... {OK}");
+            var MotoToolProcesses = Process.GetProcesses().Where(pr => pr.ProcessName == "MotoTool");
             oConfigMng.LoadConfig();
             if (oConfigMng.Config.Autosavelogs == "true")
             {
@@ -1266,9 +1281,11 @@ namespace Franco28Tool.Engine
                 }
             }
             oConfigMng.SaveConfig();
-            Application.ExitThread();
+            foreach (var process in MotoToolProcesses)
+            {
+                process.Kill();
+            }
             Application.Exit();
-            base.Dispose(Disposing);
         }
     }
 }

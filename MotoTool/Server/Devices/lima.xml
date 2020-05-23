@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lima>
+<devicecodename>lima</devicecodename>
+<boottwrp> </boottwrp>
+<twrpname> </twrpname>
+<retserver>lima/RET/</retserver>
+<tefserver>lima/TEF/</tefserver>
+<othersserver>lima/OTHERS/</othersserver>
+<fserverMaintenance>false</fserverMaintenance>
+</lima>

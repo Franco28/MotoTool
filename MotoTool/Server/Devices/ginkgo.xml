@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ginkgo>
+<devicecodename>ginkgo</devicecodename>
+<blankflashname>unknonwn</blankflashname>
+<twrpname>unknonwn</twrpname>
+<twrpinstallername>unknonwn</twrpinstallername>
+<retserver>ginkgo/RET/</retserver>
+<tefserver>ginkgo/TEF/</tefserver>
+<amserver>ginkgo/AM/</amserver>
+<othersserver>ginkgo/OTHERS/</othersserver>
+<fserverMaintenance>true</fserverMaintenance>
+</ginkgo>

@@ -69,6 +69,7 @@ namespace Franco28Tool.Engine
             {
                 Logs.DebugErrorLogs(er);
                 Dialogs.ErrorDialog(@"FATAL ERROR EXTRACTING ADB-FASTBOOT:", "Error: " + er);
+                return;
             }
         }
     }

@@ -3,6 +3,16 @@ CHANGELOG
 ----------------
 
 --------------
+v2.0.0.2
+--------------
+- Improve Tool Stability
+- Read files from here now, should avoid 404 read device error
+- Fixed strings
+- Fixed device compatible dialog loop
+- Changed the way to load files, should be faster
+- More internal fixes
+
+--------------
 v2.0.0.1
 --------------
 - Improve Tool Stability

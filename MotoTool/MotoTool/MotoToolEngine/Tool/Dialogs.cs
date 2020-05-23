@@ -1,6 +1,5 @@
 
 using System;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace Franco28Tool.Engine
@@ -25,6 +24,7 @@ namespace Franco28Tool.Engine
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1);
+                return;
             }
         }
 
@@ -45,6 +45,7 @@ namespace Franco28Tool.Engine
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1);
+                return;
             }
         }
 
@@ -65,6 +66,7 @@ namespace Franco28Tool.Engine
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1);
+                return;
             }
         }
 
@@ -85,6 +87,7 @@ namespace Franco28Tool.Engine
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1);
+                return;
             }
         }
     }

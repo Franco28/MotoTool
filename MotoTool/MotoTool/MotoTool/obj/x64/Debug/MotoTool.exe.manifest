@@ -4,7 +4,7 @@
   <description asmv2:iconFile="moto.ico" asmv2:publisher="Franco28" co.v1:suiteName="MotoTool" asmv2:product="MotoTool" asmv2:supportUrl="https://github.com/Franco28/MotoTool#getting-started" co.v1:errorReportUrl="https://github.com/Franco28/MotoTool#getting-started" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="MotoTool" version="2.0.0.1" language="neutral" processorArchitecture="amd64" />
+    <assemblyIdentity name="MotoTool" version="2.0.0.2" language="neutral" processorArchitecture="amd64" />
     <commandLine file="MotoTool.exe" parameters="" />
   </entryPoint>
   <co.v1:useManifestForTrust xmlns="urn:schemas-microsoft-com:asm.v1" />
@@ -93,25 +93,25 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MotoTool.exe" size="25600">
-      <assemblyIdentity name="MotoTool" version="2.0.0.1" language="neutral" processorArchitecture="amd64" />
+      <assemblyIdentity name="MotoTool" version="2.0.0.2" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>iNAb/0Z3hhkVepe7xX70pD0hsgNnwQeBk5t56aO87BI=</dsig:DigestValue>
+        <dsig:DigestValue>F3uPloMkB6/jL1lcF53d5ldw0aBH5zIuo4/Gf2pgvUc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MotoToolEngine.dll" size="6286336">
-      <assemblyIdentity name="MotoToolEngine" version="2.0.0.1" language="neutral" processorArchitecture="amd64" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MotoToolEngine.dll" size="6286848">
+      <assemblyIdentity name="MotoToolEngine" version="2.0.0.2" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>DSOhJQvxBXrK3H05QMUOklHs4ZSB8PI8RTxtGJWde9s=</dsig:DigestValue>
+        <dsig:DigestValue>4IM9Y7HeY1VoexcfWZx5SxrsGdwaKGM++JugEby4+sg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

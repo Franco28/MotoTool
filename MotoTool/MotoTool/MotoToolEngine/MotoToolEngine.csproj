@@ -71,7 +71,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AndroidCtrl">
+    <Reference Include="AndroidCtrl, Version=0.0.0.16, Culture=neutral, PublicKeyToken=bd000911f10668f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Setup\AndroidCtrl.dll</HintPath>
     </Reference>
     <Reference Include="AutoUpdater.NET">

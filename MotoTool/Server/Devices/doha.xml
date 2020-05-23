@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doha>
+<devicecodename>doha</devicecodename>
+<blankflashname>blankflash_from_PPI29.22</blankflashname>
+<twrpname>twrp-3.3.1-19-doha-mauronofrio.img</twrpname>
+<twrpinstallername>twrp-3.3.1-19-doha-installer-mauronofrio.zip</twrpinstallername>
+<retserver>doha/RET/</retserver>
+<tefserver>doha/TEF/</tefserver>
+<amserver>doha/AM/</amserver>
+<othersserver>doha/OTHERS/</othersserver>
+<fserverMaintenance>false</fserverMaintenance>
+</doha>

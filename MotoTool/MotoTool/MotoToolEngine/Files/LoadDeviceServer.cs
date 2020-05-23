@@ -6,7 +6,8 @@ namespace Franco28Tool.Engine
 {
     public class LoadDeviceServer
     {
-        public static string FirmwareServerPath = "https://mototoolengine.000webhostapp.com/MotoTool/Devices/";
+        // public static string FirmwareServerPath = "https://mototoolengine.000webhostapp.com/MotoTool/Devices/";
+        public static string FirmwareServerPath = "https://raw.githubusercontent.com/Franco28/MotoTool/master/MotoTool/Server/Devices/";
         public static string amserver = "";
         public static string retserver = "";
         public static string othersserver = "";
