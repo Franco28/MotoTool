@@ -8,5 +8,5 @@
 <tefserver>sofiar/TEF/</tefserver>
 <amserver>sofiar/AM/</amserver>
 <othersserver>sofiar/OTHERS/</othersserver>
-<fserverMaintenance>true</fserverMaintenance>
+<fserverMaintenance>false</fserverMaintenance>
 </sofiar>
