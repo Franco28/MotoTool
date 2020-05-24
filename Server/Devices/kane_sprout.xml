@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kane_sprout>
+<devicecodename>kane_sprout</devicecodename>
+<blankflashname>unknonwn</blankflashname>
+<twrpname>unknonwn</twrpname>
+<twrpinstallername>unknonwn</twrpinstallername>
+<retserver>kane_sprout/RET/</retserver>
+<tefserver>kane_sprout/TEF/</tefserver>
+<amserver>kane_sprout/AM/</amserver>
+<othersserver>kane_sprout/OTHERS/</othersserver>
+<fserverMaintenance>false</fserverMaintenance>
+</kane_sprout>
