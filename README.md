@@ -72,7 +72,7 @@ _**All Tool actions will be saved in C:\adb\.settings\Logs. If you have any prob
 
 
 ## Downloads
-#### Download MotoTool v2.0.0.2 - Beta (22-05-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/2.0.0.2) 
+#### Download MotoTool v2.0.0.3 - Beta (23-05-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/2.0.0.3) 
 #### Changelog * [Changelog](https://raw.githubusercontent.com/Franco28/MotoTool/master/CHANGELOG) 
 
 
@@ -115,6 +115,10 @@ _**All Tool actions will be saved in C:\adb\.settings\Logs. If you have any prob
 ![Tool Settings](https://github.com/Franco28/MotoTool/blob/master/Screens/ToolSettingsTheme.png "Tool Settings")
 ![Tool Settings](https://github.com/Franco28/MotoTool/blob/master/Screens/AddNewDeviceManual.png "Tool Settings")
 
+### Tool Contact and request
+![Tool Contact](https://github.com/Franco28/MotoTool/blob/master/Screens/MotoToolReport.png "Tool Contact")
+![Tool Request](https://github.com/Franco28/MotoTool/blob/master/Screens/MotoToolRequest.png "Tool Request")
+- Now you can send me a report from the Tool! and request a new device or a new firmware update!
 
 #
 

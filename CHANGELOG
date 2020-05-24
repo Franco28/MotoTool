@@ -9,6 +9,9 @@ v2.0.0.3
 - Fixed on dialogs icon sizes
 - Changed the order to load tool
 - Added new text box to indentify device codename on main tool
+- Added request device and firmware
+- Added report messages
+- Fixed check downloaded file sizes
 
 --------------
 v2.0.0.2
