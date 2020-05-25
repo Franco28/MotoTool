@@ -3,6 +3,17 @@ CHANGELOG
 ----------------
 
 --------------
+v2.0.0.4
+--------------
+- Improve Tool Stability
+- Improve send request new device and firmware
+- Added contact option: send message
+- Added new report option: here you can send for now 1 file, i recommend you to save all in a rar file and send it!
+- Fixed MotoFlash check and set downloaded firmware path
+- Fixed other internal strings errors
+- Added device kane_sprout (Motorola One Vision) 
+
+--------------
 v2.0.0.3
 --------------
 - Improve Tool Stability
