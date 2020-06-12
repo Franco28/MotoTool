@@ -2,8 +2,8 @@
 
 ## First of all, im not responsible of any device damage, you are accepting a licence when you install the Tool and you are using this at your own risk!
 
-### MotoTool for Motorola Moto Devices (Beckham, Doha, Lake, River, Evert, Sanders, Potter, Lima, Ocean, Sofiar) - (All variants)
-### Moto Flash and download firmwares (Beckham, Doha, Sanders, Potter, Sofiar) - (All variants)
+### MotoTool for Motorola Moto Devices (Beckham, Doha, Lake, River, Evert, Sanders, Potter, Lima, Ocean, Sofiar, Hannan, Ahannan) - (All variants)
+### Moto Flash and download firmwares (Beckham, Doha, Sanders, Potter, Sofiar, Hannan, Ahannan) - (All variants)
 
 ### if you want a new device or add new firmwares, request it and i'll add it, if not ill drop the device from MotoTool! 
 
@@ -72,7 +72,7 @@ _**All Tool actions will be saved in C:\adb\.settings\Logs. If you have any prob
 
 
 ## Downloads
-#### Download MotoTool v2.0.0.5 - Beta (09-06-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/2.0.0.5) 
+#### Download MotoTool v2.0.0.5 - Beta (12-06-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/2.0.0.5) 
 #### Changelog * [Changelog](https://raw.githubusercontent.com/Franco28/MotoTool/master/CHANGELOG) 
 
 
