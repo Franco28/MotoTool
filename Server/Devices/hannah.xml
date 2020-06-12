@@ -4,8 +4,5 @@
 <blankflashname></blankflashname>
 <twrpname>twrp-3.3.1-0-hannah.img</twrpname>
 <retserver>hannah/RET/</retserver>
-<tefserver>hannah/TEF/</tefserver>
-<amserver>hannah/AM/</amserver>
-<othersserver>hannah/OTHERS/</othersserver>
-<fserverMaintenance>true</fserverMaintenance>
+<fserverMaintenance>false</fserverMaintenance>
 </hannah>
