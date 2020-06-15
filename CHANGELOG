@@ -3,6 +3,14 @@ CHANGELOG
 ----------------
 
 --------------
+v2.0.0.5.1
+--------------
+- Updated android lib
+- New way to check devices connected
+- Now all files were moved to C:\MotoTool
+- Fixed internal errors
+
+--------------
 v2.0.0.5
 --------------
 - Fast and dirty update
