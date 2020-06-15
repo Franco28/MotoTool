@@ -72,7 +72,7 @@ _**All Tool actions will be saved in C:\MotoTool\.settings\Logs. If you have any
 
 
 ## Downloads
-#### Download MotoTool v2.0.0.5.1 - Beta (15-06-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/2.0.0.5.1) 
+#### Download MotoTool v2.0.0.5.1 - Beta (15-06-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/v2.0.0.5.1) 
 #### Changelog * [Changelog](https://raw.githubusercontent.com/Franco28/MotoTool/master/CHANGELOG) 
 
 
