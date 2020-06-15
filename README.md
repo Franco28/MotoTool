@@ -20,7 +20,7 @@
 - Windows 8+ 64 Bits
 
 ## Install
-- Start the "MotoTool_v2.0.0.5_Setup.exe"
+- Start the "MotoTool_v2.0.0.5.1_Setup.exe"
 - The installer will create a desktop shortcut and in Windows app will create a folder with the tool inside. 
 - When the installer ends, will ask you if you want to isntall MotoDrivers. **Please if you don´t have _MotoDrivers installed_ or you don´t know, _dont uncheck the option_ and let the installer do it**
 
@@ -32,7 +32,7 @@
 ![Tool Main](https://github.com/Franco28/MotoTool/blob/master/Screens/ToolMain.png "Tool Main")
 
 
--- unpack on "C:\adb\" fastboot & adb
+-- unpack on "C:\MotoTool\
 
 -- launch a batch file like this
 ![Tool Batch](https://github.com/Franco28/MotoTool/blob/master/Screens/remove.png "Tool Batch")
@@ -64,7 +64,7 @@ _**If you see this screen, please wait, i'm working with your device firmwares_*
 - If you see this screen, be patient, im on a free server, sometimes goes down :(
 ![Tool 404](https://github.com/Franco28/MotoTool/blob/master/Screens/404.png "Tool 404")
 
-_**All Tool actions will be saved in C:\adb\.settings\Logs. If you have any problem you can send me all logs!_**
+_**All Tool actions will be saved in C:\MotoTool\.settings\Logs. If you have any problem you can send me all logs!_**
 
 ## Uninstall
 - You can uninstall it now from the MotoTool, but ensure that all files were removed on "C:\Program Files\MotoTool\" _(I noticed that Tool won't be removed)_
@@ -72,7 +72,7 @@ _**All Tool actions will be saved in C:\adb\.settings\Logs. If you have any prob
 
 
 ## Downloads
-#### Download MotoTool v2.0.0.5 - Beta (12-06-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/2.0.0.5) 
+#### Download MotoTool v2.0.0.5.1 - Beta (15-06-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/2.0.0.5.1) 
 #### Changelog * [Changelog](https://raw.githubusercontent.com/Franco28/MotoTool/master/CHANGELOG) 
 
 
