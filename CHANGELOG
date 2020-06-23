@@ -3,6 +3,15 @@ CHANGELOG
 ----------------
 
 --------------
+v2.0.0.5.2
+--------------
+- Revert: Updated android lib
+- Revert: New way to check devices connected
+- Fixed device state is unknown
+- Other internal fixes
+NOTE: sorry for this kind of bugs and not MotoTool working well!
+
+--------------
 v2.0.0.5.1
 --------------
 - Updated android lib
