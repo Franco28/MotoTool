@@ -20,7 +20,7 @@
 - Windows 8+ 64 Bits
 
 ## Install
-- Start the "MotoTool_v2.0.0.5.1_Setup.exe"
+- Start the "MotoTool_v2.0.0.5.2_Setup.exe"
 - The installer will create a desktop shortcut and in Windows app will create a folder with the tool inside. 
 - When the installer ends, will ask you if you want to isntall MotoDrivers. **Please if you don´t have _MotoDrivers installed_ or you don´t know, _dont uncheck the option_ and let the installer do it**
 
@@ -72,7 +72,7 @@ _**All Tool actions will be saved in C:\MotoTool\.settings\Logs. If you have any
 
 
 ## Downloads
-#### Download MotoTool v2.0.0.5.1 - Beta (15-06-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/v2.0.0.5.1) 
+#### Download MotoTool v2.0.0.5.2 - Beta (23-06-2020) from here * [MotoTool](https://github.com/Franco28/MotoTool/releases/tag/v2.0.0.5.2) 
 #### Changelog * [Changelog](https://raw.githubusercontent.com/Franco28/MotoTool/master/CHANGELOG) 
 
 
