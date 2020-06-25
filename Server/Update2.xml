@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <item>
-<version>2.5.0.0</version>
-<url></url>
+<version>2.7.0.0</version>
+<url>https://raw.githubusercontent.com/Franco28/MotoTool/master/Server/changelog.txt</url>
 <changelog>https://raw.githubusercontent.com/Franco28/MotoTool/master/Server/changelog.txt</changelog>
 <mandatory>true</mandatory>
 </item>
