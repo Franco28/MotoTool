@@ -3,10 +3,20 @@ CHANGELOG
 ----------------
 
 -----------------------------------
-v2.4 - Released Jul 26, 2020
+v2.5 - Released Jul 05, 2020
+-----------------------------------
+- [changed] Disable maximize Tool
+- [changed] Now you must select a logo memory size before you open a new logo, so this will be the default size
+- [fixed] Logo compress but in wrong way, because of logo memory size option
+- [fixed] Visual "bugs"
+
+-----------------------------------
+v2.4 - Released Jun 27, 2020
 -----------------------------------
 - [info] MotoLogoMaker re-born!
-- [new] Added new Moto devices!
+- [misc] Removed all devices, this will work with Custom devices
+- [misc] Changed some form settings
+- [new] Added logo max size option to choose
 
 ------------------------------------
 Version 2.3 - Released Oct 19, 2015
