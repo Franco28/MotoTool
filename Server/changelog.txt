@@ -3,12 +3,16 @@ CHANGELOG
 ----------------
 
 -----------------------------------
-v2.5 - Released Jul 05, 2020
+v2.5 - Released Jul 07, 2020
 -----------------------------------
 - [changed] Disable maximize Tool
 - [changed] Now you must select a logo memory size before you open a new logo, so this will be the default size
 - [fixed] Logo compress but in wrong way, because of logo memory size option
 - [fixed] Visual "bugs"
+- [new] Tool updates, now you can check updates by "Others/Check for updates!"
+- [new] Added language engine! \ NOTE: By default its in english, but you can select spanish too!
+- [new] Added theme engine! now you can choose dark mode!
+- [new] Added Help panel, you can check all Tool info
 
 -----------------------------------
 v2.4 - Released Jun 27, 2020
