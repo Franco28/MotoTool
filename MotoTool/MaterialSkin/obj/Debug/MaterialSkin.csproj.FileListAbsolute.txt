@@ -1,0 +1,11 @@
+C:\Users\gabri\Desktop\MotoToolServer\MotoTool\Setup\MaterialSkin.dll
+C:\Users\gabri\Desktop\MotoToolServer\MotoTool\Setup\MaterialSkin.pdb
+C:\Users\gabri\Desktop\MotoToolServer\MotoTool\MotoTool\MaterialSkin\obj\Debug\MaterialSkin.csprojAssemblyReference.cache
+C:\Users\gabri\Desktop\MotoToolServer\MotoTool\MotoTool\MaterialSkin\obj\Debug\MaterialSkin.Controls.FlexibleMaterialForm.resources
+C:\Users\gabri\Desktop\MotoToolServer\MotoTool\MotoTool\MaterialSkin\obj\Debug\MaterialSkin.Controls.MaterialForm.resources
+C:\Users\gabri\Desktop\MotoToolServer\MotoTool\MotoTool\MaterialSkin\obj\Debug\MaterialSkin.Properties.Resources.resources
+C:\Users\gabri\Desktop\MotoToolServer\MotoTool\MotoTool\MaterialSkin\obj\Debug\MaterialSkin.csproj.GenerateResource.cache
+C:\Users\gabri\Desktop\MotoToolServer\MotoTool\MotoTool\MaterialSkin\obj\Debug\MaterialSkin.csproj.CoreCompileInputs.cache
+C:\Users\gabri\Desktop\MotoToolServer\MotoTool\MotoTool\MaterialSkin\obj\Debug\MaterialSkin.csproj.CopyComplete
+C:\Users\gabri\Desktop\MotoToolServer\MotoTool\MotoTool\MaterialSkin\obj\Debug\MaterialSkin.dll
+C:\Users\gabri\Desktop\MotoToolServer\MotoTool\MotoTool\MaterialSkin\obj\Debug\MaterialSkin.pdb

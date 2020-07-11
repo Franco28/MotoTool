@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Connected" xml:space="preserve">
+    <value>connected!</value>
+  </data>
+  <data name="ConnectingToServer" xml:space="preserve">
+    <value>Connecting to server device...</value>
+  </data>
+  <data name="DeviceInfoWrongState" xml:space="preserve">
+    <value>Your device is in the wrong state. Please connect your device</value>
+  </data>
+  <data name="DeviceInfoWrongStateBootloader" xml:space="preserve">
+    <value>Your device is in the wrong state. Please put your device in bootloader mode</value>
+  </data>
+  <data name="DeviceMode" xml:space="preserve">
+    <value>Mode:</value>
+  </data>
+  <data name="DeviceNotCompatible" xml:space="preserve">
+    <value>MotoTool: DEVICE NOT COMPATIBLE:</value>
+  </data>
+  <data name="DeviceNotCompatible2" xml:space="preserve">
+    <value>is not compatible. This MotoTool works with:</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="DeviceOnline" xml:space="preserve">
+    <value>online</value>
+  </data>
+  <data name="EXITSaveLogs" xml:space="preserve">
+    <value>EXIT: Saving MotoTool logs...</value>
+  </data>
+  <data name="ExitSaveLogsERROR1" xml:space="preserve">
+    <value>An error has occurred while attempting to save the output...</value>
+  </data>
+  <data name="EXITStopADB" xml:space="preserve">
+    <value>EXIT: Stopping adb, fastboot and callback monitor...</value>
+  </data>
+  <data name="FIRMWARESTRING" xml:space="preserve">
+    <value>Download Firmware</value>
+  </data>
+  <data name="GetDeviceInfoCC" xml:space="preserve">
+    <value>Device Info: Getting device codename and carrier...</value>
+  </data>
+  <data name="GetDeviceInfoCCAddedDevice" xml:space="preserve">
+    <value>Device Info: Device added:</value>
+  </data>
+  <data name="GetDeviceInfoCCWaitingDevice" xml:space="preserve">
+    <value>Device Info: Waiting for device...</value>
+  </data>
+  <data name="HOMESTRING" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="LabelChangeThemeBTN" xml:space="preserve">
+    <value>Change Theme</value>
+  </data>
+  <data name="LabelChannel" xml:space="preserve">
+    <value>Channel:</value>
+  </data>
+  <data name="LabelDevice" xml:space="preserve">
+    <value>Device:</value>
+  </data>
+  <data name="LabelFirmwareDownloadCard" xml:space="preserve">
+    <value>Here you will be able to download the firmware that you want for your device!</value>
+  </data>
+  <data name="LabelFirmwareDownloadCardBTN" xml:space="preserve">
+    <value>Deploy</value>
+  </data>
+  <data name="LabelFirmwareDownloadCardText" xml:space="preserve">
+    <value>Click me to deploy menu downloads</value>
+  </data>
+  <data name="LabelFlashToolCard" xml:space="preserve">
+    <value>Here you will be able to flash any firmware, debloat any ROM and move files to TWRP!</value>
+  </data>
+  <data name="LabelFlashToolCardBTN" xml:space="preserve">
+    <value>Deploy</value>
+  </data>
+  <data name="LabelFlashToolCardText" xml:space="preserve">
+    <value>Click me to deploy menu Flash Tool</value>
+  </data>
+  <data name="LabelFreeRAM" xml:space="preserve">
+    <value>Free RAM:</value>
+  </data>
+  <data name="LabelFreeSize" xml:space="preserve">
+    <value>Folder Size:</value>
+  </data>
+  <data name="LabelInfoDebug" xml:space="preserve">
+    <value>Remember to always Backup your efs and persist folders! How? Click me!</value>
+  </data>
+  <data name="LabelLockBL1" xml:space="preserve">
+    <value>LOCK BOOTLOADER: Locking bootloader...</value>
+  </data>
+  <data name="LabelLockBLWrong" xml:space="preserve">
+    <value>LOCK BOOTLOADER: Your device is in the wrong state. Please put your device in the bootloader mode.</value>
+  </data>
+  <data name="LabelLockBootloader" xml:space="preserve">
+    <value>1°: Do you want to Lock the bootloader? This will erase all your data!</value>
+  </data>
+  <data name="LabelLockBootloader2" xml:space="preserve">
+    <value>2°: Are you sure that you want to Lock the bootloader? This will erase all your data!</value>
+  </data>
+  <data name="LabelLockBootloaderReboot" xml:space="preserve">
+    <value>LOCK BOOTLOADER: Rebooting...</value>
+  </data>
+  <data name="LabelLockBootloaderWarning" xml:space="preserve">
+    <value>Try to not UNPLUG THE DEVICE during the process!</value>
+  </data>
+  <data name="LabelLockBootloaderWFD" xml:space="preserve">
+    <value>LOCK BOOTLOADER: Waiting for device...</value>
+  </data>
+  <data name="LabelSettingsToolANDBTN" xml:space="preserve">
+    <value>Add new device</value>
+  </data>
+  <data name="LabelSettingsToolANDMBTN" xml:space="preserve">
+    <value>Add new device manual</value>
+  </data>
+  <data name="LabelSettingsToolCAFBTN" xml:space="preserve">
+    <value>Clear All Folders</value>
+  </data>
+  <data name="LabelSettingsToolCBTN" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="LabelSettingsToolCLBTN" xml:space="preserve">
+    <value>Change Language</value>
+  </data>
+  <data name="LabelSettingsToolCUBTN" xml:space="preserve">
+    <value>Check Updates</value>
+  </data>
+  <data name="LabelSettingsToolDevices" xml:space="preserve">
+    <value>Tool Devices</value>
+  </data>
+  <data name="LabelSettingsToolFolders" xml:space="preserve">
+    <value>Tool Folders</value>
+  </data>
+  <data name="LabelSettingsToolHBTN" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="LabelSettingsToolLATLBTN" xml:space="preserve">
+    <value>Logs - Autosave tool logs</value>
+  </data>
+  <data name="LabelSettingsToolLogs" xml:space="preserve">
+    <value>Tool Logs</value>
+  </data>
+  <data name="LabelSettingsToolOFFBTN" xml:space="preserve">
+    <value>Open Firmware Folder</value>
+  </data>
+  <data name="LabelSettingsToolOTFBTN" xml:space="preserve">
+    <value>Open Tool Folder</value>
+  </data>
+  <data name="LabelSettingsToolQANDFOAND" xml:space="preserve">
+    <value>Request a new device firmware or a new device</value>
+  </data>
+  <data name="LabelSettingsToolRDF" xml:space="preserve">
+    <value>Tool Request: Device - Firmware</value>
+  </data>
+  <data name="LabelSettingsToolRPBTN" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="LabelSettingsToolRTSDDBTN" xml:space="preserve">
+    <value>Remove tool saved device data</value>
+  </data>
+  <data name="LabelSettingsToolSCMDBTN" xml:space="preserve">
+    <value>Start CMD</value>
+  </data>
+  <data name="LabelSettingsToolUNSBTN" xml:space="preserve">
+    <value>Uninstall</value>
+  </data>
+  <data name="LabelToolSettings" xml:space="preserve">
+    <value>Tool Settings</value>
+  </data>
+  <data name="LabelToolSettingsTheme" xml:space="preserve">
+    <value>Tool Theme</value>
+  </data>
+  <data name="LabelToolSystemColors" xml:space="preserve">
+    <value>Tool System Colors</value>
+  </data>
+  <data name="LabelToolSystemColorsDrawerBWA" xml:space="preserve">
+    <value>Drawer - Background with Accent</value>
+  </data>
+  <data name="LabelToolSystemColorsDrawerDIWH" xml:space="preserve">
+    <value>Drawer - Display Icons when hidden</value>
+  </data>
+  <data name="LabelToolSystemColorsDrawerHWA" xml:space="preserve">
+    <value>Drawer - Highlight with Accent</value>
+  </data>
+  <data name="LabelToolSystemColorsDrawerUseColors" xml:space="preserve">
+    <value>Drawer - Use colors</value>
+  </data>
+  <data name="LabelUser" xml:space="preserve">
+    <value>User:</value>
+  </data>
+  <data name="LabelWarning" xml:space="preserve">
+    <value>Warning!</value>
+  </data>
+  <data name="OTHERSSTRING" xml:space="preserve">
+    <value>Others</value>
+  </data>
+  <data name="SETTINGSSTRING" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="STARTINGApplyMTSettings" xml:space="preserve">
+    <value>STARTING: Applying MotoTool settings...</value>
+  </data>
+  <data name="STARTINGCheckingInternetConnection" xml:space="preserve">
+    <value>STARTING: Checking internet connection...</value>
+  </data>
+  <data name="STARTINGCheckingMotoDrivers" xml:space="preserve">
+    <value>STARTING: Checking MotoDrivers...</value>
+  </data>
+  <data name="STARTINGCheckingMotoToolVer" xml:space="preserve">
+    <value>STARTING: Checking MotoTool ver: </value>
+  </data>
+  <data name="STARTINGCheckingSavedDevice" xml:space="preserve">
+    <value>STARTING: Checking saved device...</value>
+  </data>
+  <data name="STARTINGCheckingSavedDeviceCarrier" xml:space="preserve">
+    <value>STARTING: Checking saved device carrier...</value>
+  </data>
+  <data name="STARTINGCheckingSavedDeviceCarrierNOT" xml:space="preserve">
+    <value>STARTING: Checking saved device carrier... {NOT FOUND}</value>
+  </data>
+  <data name="STARTINGCheckingSavedDeviceCarrierOK" xml:space="preserve">
+    <value>STARTING: Checking saved device carrier...</value>
+  </data>
+  <data name="STARTINGCheckingSavedDeviceNOT" xml:space="preserve">
+    <value>STARTING: Checking saved device... {NOT FOUND}</value>
+  </data>
+  <data name="STARTINGCheckingSavedDeviceOK" xml:space="preserve">
+    <value>STARTING: Checking saved device...</value>
+  </data>
+  <data name="STARTINGCheckMotoUpdateString" xml:space="preserve">
+    <value>STARTING: Checking MotoTool updates.</value>
+  </data>
+  <data name="STARTINGDeployingADBFASTBOOT" xml:space="preserve">
+    <value>STARTING: Deploying adb &amp; fastboot, please wait until this finish...</value>
+  </data>
+  <data name="STARTINGFinishLoad" xml:space="preserve">
+    <value> was loaded!</value>
+  </data>
+  <data name="STARTINGLoadingMotoToolString" xml:space="preserve">
+    <value>STARTING: Loading tool... Please wait...</value>
+  </data>
+  <data name="STARTINGSettingFMotoToolTheme" xml:space="preserve">
+    <value>STARTING: Setting first MotoTool Theme... {LIGHT}</value>
+  </data>
+  <data name="STARTINGSettingsADBFASTBOOT" xml:space="preserve">
+    <value>STARTING: Settings adb &amp; fastboot path... Please wait...</value>
+  </data>
+  <data name="StopMonitor" xml:space="preserve">
+    <value>MotoTool: Tool monitor has stopped!</value>
+  </data>
+  <data name="ThemeBTNChangeColors" xml:space="preserve">
+    <value>Change Colors</value>
+  </data>
+</root>
