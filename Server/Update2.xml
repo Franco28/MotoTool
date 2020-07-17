@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <item>
-<version>2.9</version>
-<url>https://master.dl.sourceforge.net/project/teamdeluxe/Tools/MotoBootlogoMaker/Moto_Boot_Logo_Maker_2.9_Setup.exe</url>
+<version>3.0</version>
+<url>https://master.dl.sourceforge.net/project/teamdeluxe/Tools/MotoBootlogoMaker/Moto_Boot_Logo_Maker_3.0_Setup.exe</url>
 <changelog>https://raw.githubusercontent.com/Franco28/MotoBootLogoMaker/master/Setup/changelog.txt</changelog>
 <mandatory>true</mandatory>
 </item>
